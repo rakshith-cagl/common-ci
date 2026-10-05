@@ -1,0 +1,62 @@
+$(document).ready(function() {
+    //apz.CardNumber.formatInput(document.getElementsByClassName("card-number"));
+    var cardObj = document.getElementsByClassName("card-number");
+    for (var i = 0; i < cardObj.length; i++) {
+        if(cardObj[i].defaultValue != ""){
+            apz.CardNumber.formatInput(cardObj[i]);
+        }
+    }
+
+});
+apz.CardNumber = {};
+apz.CardNumber.getObjValue = function(obj) {
+    var value = "";
+    if (obj) {
+        var commonId = obj.id;
+        var tagName = $(obj)[0].tagName;
+        var objRowNo = apz.getObjRowNumber(obj);
+        var id = apz.getObjIdWORowNumber(obj);
+        var rowNo = "";
+        if (objRowNo != -1) {
+            rowNo = "_" + objRowNo;
+        }
+        tagName = $(obj)[0].tagName;
+        if (tagName == 'P') {
+            value = $(obj).text();
+        } else if (tagName == "INPUT") {
+            value = $(obj).val();
+        }
+    }
+    return value;
+};
+apz.CardNumber.setObjValue = function(obj, value) {
+    if (obj) {
+        var commonId = obj.id;
+        var tagName = $(obj)[0].tagName;
+        var objRowNo = apz.getObjRowNumber(obj);
+        var id = apz.getObjIdWORowNumber(obj);
+        var rowNo = "";
+        if (objRowNo != -1) {
+            rowNo = "_" + objRowNo;
+        }
+        tagName = $(obj)[0].tagName;
+        if (tagName == 'P') {
+            $(obj).text(value);
+        } else if (tagName == "INPUT") {
+            $(obj).val(value);
+            apz.CardNumber.formatInput(obj);
+        }
+    }
+};
+apz.CardNumber.formatInput = function(obj) {
+    var cardType = CardJs.cardTypeFromNumber($(obj).val()).toLowerCase().replace(/\s/g, '');
+    var cleanCardNumber = CardJs.numbersOnlyString($(obj).val());
+    $(obj).val(CardJs.applyFormatMask(cleanCardNumber, 'XXXX XXXX XXXX XXXX'));
+    $(obj).siblings("svg").remove()
+    $(obj).after('<svg class="ett-icon icon-' + cardType + ' px24"><use xlink:href="#icon-' + cardType + '"></use></svg>');
+};
+apz.CardNumber.formatInputNumber = function(value) {
+    //var cardType = CardJs.cardTypeFromNumber(value).toLowerCase().replace(/\s/g, '');
+    var cleanCardNumber = CardJs.numbersOnlyString(value);
+    return CardJs.applyFormatMask(cleanCardNumber, 'XXXX XXXX XXXX XXXX');
+}

@@ -1,0 +1,143 @@
+kind: Template
+apiVersion: template.openshift.io/v1
+metadata:
+  name: fluentd-rsyslog-deploy
+  annotations:
+    openshift.io/display-name:  fluentd-deploy template
+    description: A template to deploy your App with a HTTP endpoint
+    iconClass: icon-cube
+objects:
+
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    name: fluentd-rsys
+    namespace: "${NAMESPACE}"
+    labels:
+      k8s-app: fluentd-logging
+      version: v1
+  spec:
+    replicas: "${{REPLICAS}}"
+    selector:
+      matchLabels:
+        k8s-app: fluentd-logging
+        version: v1
+    strategy:
+      rollingUpdate:
+        maxSurge: 1
+        maxUnavailable: 0
+      type: RollingUpdate    
+    template:
+      metadata:
+        labels:
+          k8s-app: fluentd-logging
+          version: v1
+      spec:
+        serviceAccountName: "${SERVICE_ACCOUNT}"
+        containers:
+        - name: fluentd-rsys
+          image: "${IMAGE_REPO}:${APP_TAG}"
+          resources:
+            limits:
+              memory: 200Mi
+            requests:
+              cpu: 100m
+              memory: 200Mi   
+          volumeMounts:
+            - name: config-rsysvolume
+              mountPath: "${ENV_MOUNT_PATH}" 
+            - name: apz-web-server-rsyslogs
+              mountPath: "${LOG_PATH}"
+        terminationGracePeriodSeconds: 30
+        imagePullSecrets:
+              - name: "${ARTIFACTORY_TYPE}-secret"
+        volumes:
+          - name: config-rsysvolume
+            configMap:
+              name: fluentd-rsys-conf         
+          - name: apz-web-server-rsyslogs
+            persistentVolumeClaim:
+              claimName: "${PVC_LOG_NAME}"
+
+- kind: ConfigMap
+  apiVersion: v1
+  metadata:
+    name: fluentd-rsys-conf
+  data:
+    fluent.conf: |
+      <source>
+        @type tail
+        path /var/log/appzillon_logs/WebContainerLogs/WebContainerLogFile.log
+        pos_file /tmp/WebContainerLogFile.log.pos
+        encoding "utf-8"
+        tag WebContainerLogFile.access
+        <parse>
+          @type none
+        </parse>
+      </source>
+      <source>
+        @type tail
+        path /var/log/appzillon_logs/MainLogFile.log
+        pos_file /tmp/MainLogFile.log.pos
+        encoding "utf-8"
+        tag MainLogFile.access
+        <parse>
+          @type none
+        </parse>
+      </source> 
+      <match  WebContainerLogFile.access>
+        @type remote_syslog
+        host 3.19.166.188
+        port 514
+        severity debug
+        program WebContainerLogFile
+        protocol tcp
+      </match>
+      <match  MainLogFile.access>
+        @type remote_syslog
+        host 3.19.166.188
+        port 514
+        severity debug
+        program MainLogFile
+        protocol tcp
+      </match>
+
+parameters:
+- name: IMAGE_REPO
+  displayName: Docker image repository
+  description: The docker repository containing the image to use
+  required: true
+  value: artifactory.appzillon.com:443/docker-dev-local/appzillon-admin
+- name: APP_TAG
+  displayName: App Tag
+  description: The tag of the image to use eg latest.
+  required: true
+- name: ARTIFACTORY_TYPE
+  displayName: Artifactory name
+  description: Artifactory name
+  required: true
+- name: NAMESPACE
+  displayName: project namespace
+  description: project namespace
+  required: true
+- name: SERVICE_ACCOUNT
+  displayName: service account name
+  description: service account name
+  required: true
+- name: REPLICAS
+  displayName: replica no
+  description: no of replicas.
+  required: true
+- name: LOG_PATH
+  displayName: log path for web and server
+  description: log path for web and server
+  required: true 
+- name: ENV_MOUNT_PATH
+  displayName: env mount path
+  description: env mount path
+  required: true
+- name: PVC_LOG_NAME
+  displayName: pvc log name
+  description: pvc log name
+  required: true
+  value: appzillon-web-server-logpvc

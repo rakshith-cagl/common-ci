@@ -1,0 +1,10 @@
+source                     = "./cluster"
+instance_type              = "m5.xlarge"
+cluster_vpc_id             = ""
+cluster_oidc_issuer_url    = ""
+vpc_cidr_block             = "23.0.0.0/16"
+private_subnet_cidr_blocks = ["23.0.1.0/24", "23.0.2.0/24", "23.0.3.0/24"]
+public_subnet_cidr_blocks  = ["23.0.4.0/24", "23.0.5.0/24", "23.0.6.0/24"]
+dashboard_dns              = "eks-dashboard.apzplatforms.com"
+filesystem_id              = ""
+image_repos                = ["appzillon-admin", "appzillon-admin2"]

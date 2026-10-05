@@ -1,0 +1,7 @@
+{{- $appid := .Values.appId -}}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ lower $appid }}-redis-configmap
+data:
+{{ ($.Files.Glob (printf "%s/redis.properties" $appid)).AsConfig | indent 2 }}

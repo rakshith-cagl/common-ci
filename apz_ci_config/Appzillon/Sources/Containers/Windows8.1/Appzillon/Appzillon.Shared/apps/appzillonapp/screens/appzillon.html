@@ -1,0 +1,105 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    APPZILLONCSSFILES
+    <!-- Universal App Related Javascript-->
+    <script src="//Microsoft.WinJS.2.0/js/base.js"></script>
+    <script src="//Microsoft.WinJS.2.0/js/ui.js"></script>
+    <script src="//Microsoft.Phone.WinJS.2.1/js/base.js"></script>
+    <script src="//Microsoft.Phone.WinJS.2.1/js/ui.js"></script>
+    <script src="ms-appx:///Native/default.js"></script>
+    <script type="text/javascript" charset="utf-8" src="ms-appx:///bing.maps.javascript//js/veapicore.js"
+></script>
+    <script type="text/javascript" charset="utf-8" src="ms-
+appx:///bing.maps.javascript//js/veapimodules.js"></script>
+
+</head>
+<body>
+  APPZILLONSVGCONTENT
+    <div id="splashDiv" style="width:100%; height:100%; position:absolute; left:0px; top:0px; 
+z-index:99999; background-color:black;display:block;">
+        <img id="splashImage" src="/images/SplashScreen.png" />
+    </div>
+    <div id="apzloader" class="shownone" style="position:fixed; top:0; left:0; right:0; bottom:0; 
+background-color:#fff; opacity:0.2; z-index:99998">
+        <div id="status" class="fa fa-spin-sp" style="width:200px; height:200px; position:absolute; 
+left:50%; top:50%; background-image: url(APPZILLONLOADERIMG); background-repeat:no-repeat; 
+background-position:center; margin:-100px 0 0 -100px;">
+            &nbsp;
+        </div>
+    </div>
+
+    <div id="pt-main">
+        <div id="page_1"></div>
+        <div id="page_2"></div>
+    </div>
+    
+   
+    <!-- Container Specific javascipt files-->
+	<script src="ms-appx:///SharedPlugins/WinContainer.js"></script>
+	<script src="ms-appx:///SharedPlugins/Logs.js"></script>
+    <script type="text/javascript" charset="utf-8" src="ms-appx:///Native/native.js"></script>
+	 <script src="ms-appx:///constants/command.js"></script>
+    <script src="ms-appx:///constants/errorcode.js"></script>
+    <script src="ms-appx:///constants/jsonkey.js"></script>
+	<!-- Shared Plugins javascipt files-->
+	 <script src="ms-appx:///SharedPlugins/Zip.js"></script>
+	<script src="ms-appx:///SharedPlugins/AcceleroMeter.js"></script>
+    <script src="ms-appx:///SharedPlugins/AppIdleTimeOut.js"></script>
+    <script src="ms-appx:///SharedPlugins/Audio.js"></script>
+    <script src="ms-appx:///SharedPlugins/Compass.js"></script>
+	<script src="ms-appx:///SharedPlugins/Crypto.js"></script>
+	<script src="ms-appx:///SharedPlugins/Device.js"></script>
+    <script src="ms-appx:///SharedPlugins/Facebook.js"></script>
+    <script src="ms-appx:///SharedPlugins/FileOperation.js"></script>
+	<script src="ms-appx:///SharedPlugins/GeoFencing.js"></script>
+	<script src="ms-appx:///SharedPlugins/Gesture.js"></script>
+    <script src="ms-appx:///SharedPlugins/GooglePlus.js"></script>
+	<script src="ms-appx:///SharedPlugins/GPS.js"></script>
+    <script src="ms-appx:///SharedPlugins/LinkedIn.js"></script>
+	<script src="ms-appx:///SharedPlugins/Locale.js"></script>
+    <script src="ms-appx:///SharedPlugins/Mail.js"></script>
+	<script src="ms-appx:///SharedPlugins/Map.js"></script>
+	<script src="ms-appx:///SharedPlugins/NativeService.js"></script>
+	<script src="ms-appx:///SharedPlugins/NFC.js"></script>
+	<script src="ms-appx:///SharedPlugins/Notification.js"></script>
+	<script src="ms-appx:///SharedPlugins/PullDown.js"></script>
+	<script src="ms-appx:///SharedPlugins/Request.js"></script>
+	<script src="ms-appx:///SharedPlugins/Settings.js"></script>
+    <script src="ms-appx:///SharedPlugins/Twitter.js"></script>
+    <script src="ms-appx:///SharedPlugins/WebView.js"></script>
+	<script src="ms-appx:///SharedPlugins/deepLinking.js"></script>
+    
+	<!-- Plugins Javascript file -->
+     <script src="ms-appx:///Plugins/SignaturePad.js"></script>
+    <script src="ms-appx:///Plugins/Barcode.js"></script>
+	  <script src="ms-appx:///Plugins/Battery.js"></script>
+    <script src="ms-appx:///Plugins/Calendar.js"></script>
+    <script src="ms-appx:///Plugins/Camera.js"></script>
+    <script src="ms-appx:///Plugins/Contact.js"></script>
+    <script src="ms-appx:///Plugins/Storage.js"></script>
+	 <script src="ms-appx:///Plugins/VideoRecording.js"></script>
+    <script src="ms-appx:///Plugins/Voice.js"></script>
+    <script src="ms-appx:///Plugins/wl.js"></script>
+	<script src="ms-appx:///Plugins/filebrowser.js"></script>
+	<script src="ms-appx:///Plugins/whatsapp.js"></script>
+	<script src="/Bing.Speech/js/voiceuicontrol.js"></script>
+	 APPZILLONJSFILES
+	 
+APPZILLONADDITIONALJSFILES
+   <script lang="javascript">
+       $(document).ready(function() {
+       //Expose Global Instance
+	  
+       apz = new Apz();
+       apz.appId = "APPZILLONAPPID";
+       apz.deviceOs = "APPZILLONDEVICEOS";
+       apz.loadProject();
+	   WinContainer.start();
+});
+    </script>
+</body>
+</html>

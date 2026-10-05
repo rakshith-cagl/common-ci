@@ -1,0 +1,11 @@
+source 'https://github.com/CocoaPods/Specs.git'
+
+platform :ios, '13.0'
+
+target 'Appzillon' do
+  use_frameworks!
+
+  pod 'Alamofire', '~> 5.4'
+  pod 'CryptoSwift'
+APPZILLONIOSPODDEPENDENCY
+end

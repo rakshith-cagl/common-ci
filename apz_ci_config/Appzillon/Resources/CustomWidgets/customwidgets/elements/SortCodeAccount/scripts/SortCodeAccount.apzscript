@@ -1,0 +1,83 @@
+apz.SortCodeAccount = {};
+apz.SortCodeAccount.getObjValue = function(obj){
+	var value = "";
+	if(obj){
+		var commonId = obj.id;
+	    var tagName = $(obj)[0].tagName;
+	    var objRowNo = apz.getObjRowNumber(obj);
+	    var id = apz.getObjIdWORowNumber(obj);
+	    var rowNo = "";
+	    if (objRowNo!=-1) {
+	        rowNo = "_"+objRowNo;
+	    }
+	    tagName = $(obj).find("#"+id+"_00"+rowNo+"")[0].tagName;
+	    if (tagName == 'P') {
+	        value = $(obj).find("#"+id+"_00"+rowNo+"").text();
+	    } else if (tagName == "INPUT") {
+	        value = $(obj).find("#"+id+"_00"+rowNo+"").val();
+	    }
+	}
+	return value;
+}
+apz.SortCodeAccount.setObjValue = function(obj, value){
+	if(obj){
+		var commonId = obj.id;
+	    var tagName = $(obj)[0].tagName;
+	    var objRowNo = apz.getObjRowNumber(obj);
+	    var id = apz.getObjIdWORowNumber(obj);
+	    var rowNo = "";
+	    if (objRowNo!=-1) {
+	        rowNo = "_"+objRowNo;
+	    }
+	    tagName = $(obj).find("#"+id+"_00"+rowNo+"")[0].tagName;
+	    if (tagName == 'P') {
+	        //if(value.length > 1){
+    	        $(obj).find("#"+id+"_00"+rowNo+"").text(value.substr(0,8));
+    	    //}
+	    } else if (tagName == "INPUT") {
+	        //if(value.length > 1){
+    	        $(obj).find("#"+id+"_00"+rowNo+"").val(value.substr(0,8));
+    	    //}
+	    }
+	}
+}
+apz.SortCodeAccount.validateInput = function(obj,e) {
+    //backspace, tab, delete, Ctrl+A, left, right and numbers are only allowed
+	if ($.inArray(e.keyCode, [46, 9, 8]) !== -1 || (e.shiftKey && e.keyCode == 9) || (e.keyCode === 65 && e.ctrlKey === true) || (e.keyCode == 37 || e.keyCode == 39) || !((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105))) {
+	    var actElmId = apz.getObjIdWORowNumber(obj);
+	    var rowNo = apz.getObjRowNumber(obj);
+        if (rowNo!=-1) {
+            actElmId = actElmId + "_" + rowNo;
+        }
+        if ($(obj).val().length > 7) {
+            if (!($.inArray(e.keyCode, [46, 9, 8]) !== -1 || (e.shiftKey && e.keyCode == 9) || (e.keyCode === 65 && e.ctrlKey === true) || (e.keyCode == 37 || e.keyCode == 39))) {
+                if (window.getSelection().toString()=="") {
+                    $("#"+actElmId).blur();
+                }
+            }
+        }
+        return;
+    } else {
+        e.preventDefault();
+    }
+}
+
+apz.SortCodeAccount.validateObj = function(domObj,obj){
+    var lscrdiv = domObj.id;
+    var errCode = false;
+    if(obj.mand !== "N"){ 
+    $("#" + lscrdiv + " input").each(function(){
+        if(this.value == ""){
+            $(this).addClass("input-error");
+            errCode = "APZ-VAL-001";
+        } else if(this.value.length != 8){
+            $(this).addClass("input-error");
+            errCode = "APZ-CNT-128";
+        }
+    });
+    if (errCode) {
+        $("#"+lscrdiv).addClass('input-error');
+    }
+    }
+    return errCode;
+}

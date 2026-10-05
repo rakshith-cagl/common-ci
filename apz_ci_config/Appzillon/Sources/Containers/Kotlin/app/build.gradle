@@ -1,0 +1,314 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-parcelize'
+    id 'jacoco'
+    id "org.sonarqube"
+}
+apply plugin: 'kotlin-kapt'
+
+
+
+android {
+    compileSdkVersion 33
+    buildToolsVersion "30.0.3"
+
+    buildFeatures {
+        viewBinding = true
+    }
+
+    defaultConfig {
+        applicationId "com.iexceed.appzillonapp"
+        minSdkVersion 28
+        targetSdkVersion 33
+        versionCode ANDVERSIONCODE
+        versionName "APPVERSION"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        //Clear permissions on new launch of test cases - below line is commented 
+        // because we were facing issues generating coverage report with ORCHESTRATOR enabled
+        // testInstrumentationRunnerArguments clearPackageData: 'true'
+    }
+    
+    splits {
+        abi {
+            enable APPZILLONSPLITAPK
+            reset()
+            include APPZILLONSPLITINCLUDE
+            universalApk APPZILLONUNIVERSALAPK
+        }
+    }
+
+    testOptions {
+        animationsDisabled true
+        unitTests.includeAndroidResources = true
+        unitTests.returnDefaultValues = true
+        //For testing Permissions
+        execution 'ANDROIDX_TEST_ORCHESTRATOR'
+        unitTests.all {
+            jacoco {
+                includeNoLocationClasses = true
+            }
+        }
+    }
+	
+	APPZILLONRELEASEKEYS
+
+    buildTypes {
+        debug{
+            testCoverageEnabled true
+        }
+
+        release {
+		APPZILLONSIGNRELEASEKEYS
+            minifyEnabled APPZILLONOBFUSCATION
+            testCoverageEnabled false
+            debuggable false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+dependencies {
+
+    def room_version = '2.5.0'
+    def coroutine_version = '1.6.4'
+    def lifecycle_version = '2.6.0'
+	def daggers_version = '2.45'
+	def retrofit_version = '2.9.0'
+	def espresso_version = '3.5.1'
+	def junit_version = '1.1.5'
+	def camera2_version = '1.3.0-alpha04'
+
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation 'androidx.core:core-ktx:1.7.0'
+    //implementation 'androidx.appcompat:appcompat:1.4.1'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    //splash_screen.xml
+    //implementation 'androidx.constraintlayout:constraintlayout:2.1.3'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
+    //dataSecurity
+    implementation 'androidx.biometric:biometric:1.1.0'
+
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation "androidx.test.ext:junit:$junit_version"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_version"
+    androidTestImplementation "androidx.test.espresso:espresso-intents:$espresso_version"
+
+    //Retrofit
+    //implementation 'com.squareup.retrofit2:retrofit:2.7.0'
+    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
+    //implementation 'com.google.code.gson:gson:2.8.8'
+    implementation 'com.google.code.gson:gson:2.10.1'
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
+    //implementation 'com.squareup.okhttp3:logging-interceptor:4.3.1'
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.10.0'
+
+    //Coroutines
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutine_version"
+
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version"
+
+    //RootBeer Library Updated
+    implementation 'com.scottyab:rootbeer-lib:0.1.0'
+
+    //EncryptionSharedPref do not upgrade version 
+    implementation 'androidx.security:security-crypto:1.1.0-alpha05'
+
+    //RoomDatabase do not upgrade version
+    implementation "androidx.room:room-runtime:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
+
+    //Fused Location
+//    implementation 'com.google.android.gms:play-services-location:19.0.1'
+    implementation 'com.google.android.gms:play-services-location:21.0.1'
+
+	//wifi security
+    implementation "com.google.android.play:core:1.10.3"
+	
+	APPZILLONDEPENDENCIES
+	
+	// Local Unit tests
+    testImplementation "junit:junit:4.13.2"
+    //kaptTest "com.google.dagger:dagger-compiler:$dagger_version"
+    testImplementation "android.arch.core:core-testing:1.1.1"
+    //testImplementation "org.hamcrest:hamcrest-library:2.1"
+    testImplementation "org.hamcrest:hamcrest-library:2.2"
+
+
+    //UI testing
+    //androidTestImplementation "androidx.test:runner:1.4.0"
+    androidTestImplementation "androidx.test:runner:1.5.2"
+    androidTestImplementation "androidx.test.ext:junit:$junit_version"
+
+    androidTestImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutine_version") {
+        // conflicts with mockito due to direct inclusion of byte buddy
+        exclude group: "org.jetbrains.kotlinx", module: "kotlinx-coroutines-debug"
+    }
+    androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_version"
+    androidTestImplementation "androidx.test.espresso:espresso-contrib:$espresso_version"
+    androidTestImplementation "androidx.test.espresso:espresso-intents:$espresso_version"
+//    androidTestImplementation "org.mockito:mockito-core:3.12.4"
+    androidTestImplementation 'org.mockito:mockito-core:3.3.3'
+    androidTestImplementation 'com.linkedin.dexmaker:dexmaker-mockito-inline:2.28.0'
+    androidTestImplementation "org.powermock:powermock-core:2.0.9"
+   // androidTestImplementation "org.powermock:powermock-api-mockito2:2.0.9"
+    androidTestImplementation "org.powermock:powermock-module-junit4:2.0.9"
+    androidTestImplementation "org.powermock:powermock-reflect:2.0.9"
+    //debugImplementation "androidx.fragment:fragment-testing:1.4.1"
+    debugImplementation "androidx.fragment:fragment-testing:1.5.5"
+    androidTestImplementation("androidx.test.espresso:espresso-contrib:$espresso_version") {
+        exclude module: "protobuf-lite"
+    }
+    
+    //Testing Permissions
+    androidTestImplementation 'androidx.test.uiautomator:uiautomator-v18:2.2.0-alpha1'
+//    testImplementation 'junit:junit:4.13.2'
+//    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
+//    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+//    androidTestImplementation 'androidx.test:runner:1.4.0'
+    //androidTestImplementation 'androidx.test:rules:1.4.0'
+    androidTestImplementation 'androidx.test:rules:1.5.0'
+    //androidTestUtil 'androidx.test:orchestrator:1.4.1'
+    androidTestUtil 'androidx.test:orchestrator:1.4.2'
+	
+	// Dagger
+
+    implementation "com.google.dagger:dagger:$daggers_version"
+    kapt "com.google.dagger:dagger-compiler:$daggers_version"
+    annotationProcessor "com.google.dagger:dagger-compiler:$daggers_version"
+    kaptAndroidTest "com.google.dagger:dagger-compiler:$daggers_version"
+
+    // ViewModel
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version")
+    // LiveData
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version")
+    // Lifecycles only (without ViewModel or LiveData)
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version")
+
+    // for fixing the issue, remove later
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutine_version"
+
+    implementation 'com.github.ChickenHook:RestrictionBypass:2.2'
+    // added for StringEscapeUtils, check ServerUtilities
+    //implementation 'org.apache.commons:commons-text:1.9'
+    implementation 'org.apache.commons:commons-text:1.10.0'
+
+    //LoggingInterceptor
+    implementation('com.github.ihsanbal:LoggingInterceptor:3.1.0') {
+        exclude group: 'org.json', module: 'json'
+    }
+
+}
+
+// Map for the version code that gives each ABI a value.
+ext.abiCodes = ['armeabi-v7a':321,'arm64-v8a':641, x86:322, x86_64:642]
+
+// For per-density APKs, create a similar map like this:
+// ext.densityCodes = ['mdpi': 1, 'hdpi': 2, 'xhdpi': 3]
+
+import com.android.build.OutputFile
+
+// For each APK output variant, override versionCode with a combination of
+// ext.abiCodes * 1000 + variant.versionCode. In this example, variant.versionCode
+// is equal to defaultConfig.versionCode. If you configure product flavors that
+// define their own versionCode, variant.versionCode uses that value instead.
+android.applicationVariants.all { variant ->
+
+    // Assigns a different version code for each output APK
+    // other than the universal APK.
+    variant.outputs.each { output ->
+
+        // Stores the value of ext.abiCodes that is associated with the ABI for this variant.
+        def baseAbiVersionCode =
+                // Determines the ABI for this variant and returns the mapped value.
+                project.ext.abiCodes.get(output.getFilter(OutputFile.ABI))
+
+        // Because abiCodes.get() returns null for ABIs that are not mapped by ext.abiCodes,
+        // the following code does not override the version code for universal APKs.
+        // However, because we want universal APKs to have the lowest version code,
+        // this outcome is desirable.
+        if (baseAbiVersionCode != null) {
+
+            // Assigns the new version code to versionCodeOverride, which changes the version code
+            // for only the output APK, not for the variant itself. Skipping this step simply
+            // causes Gradle to use the value of variant.versionCode for the APK.
+            output.versionCodeOverride =
+                     (variant.versionCode * 1000) + baseAbiVersionCode
+        }
+    }
+}
+
+
+// Sonar
+sonarqube {
+
+    properties {
+
+        property "sonar.projectName", "Appzillon_Kotlin"
+        property "sonar.projectKey", "Appzillon_Kotlin"
+        property "sonar.sources", "src/main/java"
+        property "sonar.host.url", "http://localhost:9000"
+        property "sonar.sourceEncoding", "UTF-8"
+        property "sonar.language", "kotlin"
+        property "sonar.login", "sqp_e4f950d9f6137e216d96150946aad020dab91503"
+        property "sonar.android.lint.report", "./build/outputs/lint-results-debug.xml"
+        property "sonar.exclusions", "**/assets/**,**/test/**,**/androidTest/**,**/di/**,**/launchwebview/**,**/multiview/**,**/*UserSettings.kt,**/*FileAccessHelper.kt,**/*ApzPluginBridge.kt,**/security/**,**/autocapturedocument/**,**/*LocationHelper.kt,**/selfiecapture/**,"
+
+    }
+}
+// Jacoco
+jacoco {
+    //toolVersion = '0.8.7'
+    toolVersion = '0.8.8'
+}
+
+tasks.withType(Test) {
+    jacoco.includeNoLocationClasses = true
+    jacoco.excludes = ['jdk.internal.*']
+}
+
+task jacocoTestReport(type: JacocoReport,
+        dependsOn: ['createDebugCoverageReport', 'testDebugUnitTest']) {
+
+    reports {
+        xml.enabled = true
+        html.enabled = true
+        csv.enabled = true
+    }
+
+    def fileFilter = ['**/R.class', '**/R$*.class', '**/BuildConfig.*', '**/Manifest*.*',
+                      '**/*Test*.*', '**/*debug', '**/*databinding','android/**/*.*', '**/Glide*.*',
+                      '**/*$ViewInjector*.*','**/*Realm*','**/*realm*','io/**/*.*']
+    def debugTree = fileTree(
+            // Java generated classes on Android project (debug build)
+            dir: "$buildDir/intermediates/javac/debug",
+            excludes: fileFilter
+    ) + fileTree(
+            // Kotlin generated classes on Android project (debug build)
+            dir: "$buildDir/tmp/kotlin-classes/debug",
+            excludes: fileFilter
+    )
+    def mainSrc = "$project.projectDir/src/main/java"
+
+    sourceDirectories.from = files([mainSrc])
+    classDirectories.from = files([debugTree])
+    additionalSourceDirs.from = files([
+            "${buildDir}/generated/source/buildConfig/debug",
+            "${buildDir}/generated/source/rs/debug"
+    ])
+    executionData.from = fileTree(dir: project.buildDir, includes: [
+            'outputs/code_coverage/debugAndroidTest/connected/*/*.ec'
+    ])
+}

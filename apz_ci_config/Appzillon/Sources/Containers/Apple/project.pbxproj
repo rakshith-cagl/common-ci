@@ -1,0 +1,1952 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+        94675AC72383D2D2000E28D8 /* Speech.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94675AC62383D2D1000E28D8 /* Speech.framework */; };
+		1882486215E7778D0085F836 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1882486015E7776E0085F836 /* MapKit.framework */; };
+		1882486315E777930085F836 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1882485E15E777640085F836 /* CoreLocation.framework */; };
+		1890589B15E363F900DEB733 /* EventKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1890589915E363DC00DEB733 /* EventKit.framework */; };
+		1890589C15E363FE00DEB733 /* EventKitUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1890589715E363D200DEB733 /* EventKitUI.framework */; };
+		18942D0015D907260084F792 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18942CFF15D907260084F792 /* UIKit.framework */; };
+		18942D0215D907260084F792 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18942D0115D907260084F792 /* Foundation.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		18942D0415D907260084F792 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18942D0315D907260084F792 /* CoreGraphics.framework */; };
+		18942D1315D907260084F792 /* AppzillonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18942D1215D907260084F792 /* AppzillonViewController.m */; };
+		18942D1615D907260084F792 /* AppzillonViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18942D1415D907260084F792 /* AppzillonViewController.xib */; };
+		1897F59515DA175C00C457C0 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1897F59415DA175C00C457C0 /* AVFoundation.framework */; };
+		189D8C8D15DE4D3300FD89CC /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 189D8C8C15DE4D3300FD89CC /* Security.framework */; };
+		18B09FB815FF2AB800C19EC0 /* sqlite3.h in Resources */ = {isa = PBXBuildFile; fileRef = 5202C56A15E5FAB700B21D4C /* sqlite3.h */; };
+		18B09FBB15FF2AB800C19EC0 /* AppzillonViewController.h in Resources */ = {isa = PBXBuildFile; fileRef = 18942D1115D907260084F792 /* AppzillonViewController.h */; };
+		5202C56C15E5FB2200B21D4C /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 5202C56B15E5FB2200B21D4C /* libsqlite3.0.dylib */; };
+		52109F5D15E745650011FA91 /* Azuritei_phoneViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 52109F5C15E745650011FA91 /* Azuritei_phoneViewController.xib */; };
+		8406B8E6178570DF008409B1 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8406B8E5178570DF008409B1 /* CoreMotion.framework */; };
+		841D8D971793B509008CE5B4 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 841D8D961793B509008CE5B4 /* CoreMedia.framework */; };
+		841D8D991793B519008CE5B4 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 841D8D981793B519008CE5B4 /* CoreVideo.framework */; };
+		841D8D9B1793B52F008CE5B4 /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 841D8D9A1793B52F008CE5B4 /* libiconv.dylib */; };
+		8468D29E1632EAE600B2B232 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8468D29D1632EAE600B2B232 /* MessageUI.framework */; };
+		8493A17B17F3FB240052288E /* APZPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 8493A17A17F3FB240052288E /* APZPlugin.m */; };
+		84AA19D617DEF25F00D7D892 /* QuickLook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84AA19D517DEF25F00D7D892 /* QuickLook.framework */; };
+		84AA19D817DEF27000D7D892 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84AA19D717DEF27000D7D892 /* MediaPlayer.framework */; };
+        84B70CF019E3B4CB004DF54E /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84B70CEF19E3B4CB004DF54E /* AudioToolbox.framework */; };
+		84BA434B172ABB2E0097AFCE /* Assets in Resources */ = {isa = PBXBuildFile; fileRef = 84BA434A172ABB2E0097AFCE /* Assets */; };
+		84C85C0615E8DD9900A52AE2 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84C85C0515E8DD9800A52AE2 /* CFNetwork.framework */; };
+		84C85C0815E8DD9F00A52AE2 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84C85C0715E8DD9F00A52AE2 /* MobileCoreServices.framework */; };
+		84C85C0A15E8DDB100A52AE2 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84C85C0915E8DDB100A52AE2 /* SystemConfiguration.framework */; };
+		84C85C0C15E8DDC900A52AE2 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84C85C0B15E8DDC900A52AE2 /* QuartzCore.framework */; };
+		84C85C0E15E8DDE500A52AE2 /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 84C85C0D15E8DDE500A52AE2 /* libz.1.2.5.dylib */; };
+        52CA22E71A5180CA002BB84C /* LocalAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84A9FB8E19E2A4B90011C043 /* LocalAuthentication.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		846EACE61A53EF1900F18F26 /* APZOTARefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = 846EACE51A53EF1900F18F26 /* APZOTARefresh.m */; };
+		841D19C21BC544C700100357 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 841D19C11BC544C700100357 /* CoreBluetooth.framework */; };
+		843CA0581BC690D9005B822E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 843CA0571BC690D9005B822E /* Images.xcassets */; };
+		84C26B8D1C046BD700ABFC04 /* ContainerImages in Resources */ = {isa = PBXBuildFile; fileRef = 84C26B8C1C046BD700ABFC04 /* ContainerImages */; };
+		84480F1D1D1A563700C34FED /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84480F1C1D1A563700C34FED /* CoreTelephony.framework */; };
+		84538C641D3DF09A009D75A0 /* containerprops.plist in Resources */ = {isa = PBXBuildFile; fileRef = 84538C631D3DF09A009D75A0 /* containerprops.plist */; };
+		8403D3E81D478D19001527EC /* CallServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 8403D3E71D478D19001527EC /* CallServer.m */; };
+		84565FDE1D4A3E580008D202 /* AppzillonViewController+ServerCalls.m in Sources */ = {isa = PBXBuildFile; fileRef = 84565FDD1D4A3E580008D202 /* AppzillonViewController+ServerCalls.m */; };
+        D5BA38F71E48849000DCAFCD /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5BA38F61E48849000DCAFCD /* CoreImage.framework */; };
+        D5BA38F91E48851A00DCAFCD /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D5BA38F81E48851A00DCAFCD /* libc++.tbd */; };
+		8494B8171E8CFF900024CF9F /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8494B8161E8CFF900024CF9F /* CoreText.framework */; };
+        8431E94E1EAB776A00CDF7B0 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8431E94D1EAB776A00CDF7B0 /* UserNotifications.framework */; };
+        C031D1EE1F44530100B06302 /* playIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = C031D1EB1F4452D200B06302 /* playIcon.png */; };
+        C031D1EF1F44530500B06302 /* nextSong.png in Resources */ = {isa = PBXBuildFile; fileRef = C031D1EC1F4452D200B06302 /* nextSong.png */; };
+        C031D1F01F44530700B06302 /* pauseIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = C031D1EA1F4452D200B06302 /* pauseIcon.png */; };
+        C031D1F11F44530B00B06302 /* previousSong.png in Resources */ = {isa = PBXBuildFile; fileRef = C031D1ED1F4452D200B06302 /* previousSong.png */; };
+        C031D1F31F445C9C00B06302 /* noPhoto.png in Resources */ = {isa = PBXBuildFile; fileRef = C031D1F21F445C9700B06302 /* noPhoto.png */; };
+        27924B9F1FE15F14000381D5 /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27924B9E1FE15F14000381D5 /* SafariServices.framework */; };
+        2718B9BD20258D6400463D4A /* HashUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 2718B9BC20258D6400463D4A /* HashUtility.m */; };
+		271D2A682028328B00CAB0D0 /* CryptoUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 271D2A672028328B00CAB0D0 /* CryptoUtility.m */; };
+		EDEBEDE221197FC1004DBE34 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDEBEDE121197FC1004DBE34 /* ImageIO.framework */; };
+        ED7E852D24728DF800BDE03D /* MyPreviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7E852C24728DF800BDE03D /* MyPreviewController.swift */; };
+        EDB09BA2248F6D4A00159E42 /* AppzillonDocumentVerification.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB09BA1248F6D4A00159E42 /* AppzillonDocumentVerification.swift */; };
+        EDDF15A2232FB5050046AD4B /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDDF15A1232FB5050046AD4B /* WebKit.framework */; };
+        2746082A21AE9B4E0033C270 /* fileBrowserIcons in Resources */ = {isa = PBXBuildFile; fileRef = 2746082921AE9B4D0033C270 /* fileBrowserIcons */; };
+        2746083221AEB0190033C270 /* BarcodeFlashImages in Resources */ = {isa = PBXBuildFile; fileRef = 2746083121AEB0190033C270 /* BarcodeFlashImages */; };
+        94B63F5E23BE3C5500F1C9C9 /* HookClassFromImageScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B63F5D23BE3C5500F1C9C9 /* HookClassFromImageScanner.swift */; };
+        94B63F2123BDD43400F1C9C9 /* ImageScannerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B63EE423BDD43400F1C9C9 /* ImageScannerController.swift */; };
+        94B63F2223BDD43400F1C9C9 /* RectangleFeaturesFunnel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B63EE823BDD43400F1C9C9 /* RectangleFeaturesFunnel.swift */; };
+        94B63F2323BDD43400F1C9C9 /* CaptureSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B63EE923BDD43400F1C9C9 /* CaptureSessionManager.swift */; };
+        94B63F2423BDD43400F1C9C9 /* ShutterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B63EEA23BDD43400F1C9C9 /* ShutterButton.swift */; };
+        94B63F2523BDD43400F1C9C9 /* FocusRectangleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B63EEB23BDD43400F1C9C9 /* FocusRectangleView.swift */; };
+        94B63F2623BDD43400F1C9C9 /* ScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B63EEC23BDD43400F1C9C9 /* ScannerViewController.swift */; };
+        94B63F2723BDD43400F1C9C9 /* AVCaptureVideoOrientation+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B63EEF23BDD43400F1C9C9 /* AVCaptureVideoOrientation+Utils.swift */; };
+        94B63F2823BDD43400F1C9C9 /* CGPoint+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B63EF023BDD43400F1C9C9 /* CGPoint+Utils.swift */; };
+        94B63F2923BDD43400F1C9C9 /* CGSize+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B63EF123BDD43400F1C9C9 /* CGSize+Utils.swift */; };
+        94B63F2A23BDD43400F1C9C9 /* CGImagePropertyOrientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B63EF223BDD43400F1C9C9 /* CGImagePropertyOrientation.swift */; };
+        94B63F2B23BDD43400F1C9C9 /* CIImage+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B63EF323BDD43400F1C9C9 /* CIImage+Utils.swift */; };
+        94B63F2C23BDD43400F1C9C9 /* CGAffineTransform+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B63EF423BDD43400F1C9C9 /* CGAffineTransform+Utils.swift */; };
+        94B63F2D23BDD43400F1C9C9 /* CGRect+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B63EF523BDD43400F1C9C9 /* CGRect+Utils.swift */; };
+        94B63F2E23BDD43400F1C9C9 /* Array+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B63EF623BDD43400F1C9C9 /* Array+Utils.swift */; };
+        94B63F2F23BDD43400F1C9C9 /* UIImage+Orientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B63EF723BDD43400F1C9C9 /* UIImage+Orientation.swift */; };
+        94B63F3023BDD43400F1C9C9 /* UIImage+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B63EF823BDD43400F1C9C9 /* UIImage+Utils.swift */; };
+        94B63F3123BDD43400F1C9C9 /* ZoomGestureController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B63EFB23BDD43400F1C9C9 /* ZoomGestureController.swift */; };
+        94B63F3223BDD43400F1C9C9 /* EditScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B63EFC23BDD43400F1C9C9 /* EditScanViewController.swift */; };
+        94B63F3323BDD43400F1C9C9 /* EditScanCornerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B63EFF23BDD43400F1C9C9 /* EditScanCornerView.swift */; };
+        94B63F3423BDD43400F1C9C9 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B63F0023BDD43400F1C9C9 /* Error.swift */; };
+        94B63F3523BDD43400F1C9C9 /* VisionRectangleDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B63F0123BDD43400F1C9C9 /* VisionRectangleDetector.swift */; };
+        94B63F3623BDD43400F1C9C9 /* CIRectangleDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B63F0223BDD43400F1C9C9 /* CIRectangleDetector.swift */; };
+        94B63F3723BDD43400F1C9C9 /* QuadrilateralView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B63F0323BDD43400F1C9C9 /* QuadrilateralView.swift */; };
+        94B63F3823BDD43400F1C9C9 /* Quadrilateral.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B63F0423BDD43400F1C9C9 /* Quadrilateral.swift */; };
+        94B63F3923BDD43400F1C9C9 /* ReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B63F0623BDD43400F1C9C9 /* ReviewViewController.swift */; };
+        94B63F3A23BDD43400F1C9C9 /* flash.png in Resources */ = {isa = PBXBuildFile; fileRef = 94B63F0B23BDD43400F1C9C9 /* flash.png */; };
+        94B63F3B23BDD43400F1C9C9 /* rotate@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 94B63F0C23BDD43400F1C9C9 /* rotate@3x.png */; };
+        94B63F3C23BDD43400F1C9C9 /* rotate.png in Resources */ = {isa = PBXBuildFile; fileRef = 94B63F0D23BDD43400F1C9C9 /* rotate.png */; };
+        94B63F3D23BDD43400F1C9C9 /* rotate@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 94B63F0E23BDD43400F1C9C9 /* rotate@2x.png */; };
+        94B63F3E23BDD43400F1C9C9 /* flash@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 94B63F0F23BDD43400F1C9C9 /* flash@2x.png */; };
+        94B63F3F23BDD43400F1C9C9 /* flashUnavailable@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 94B63F1023BDD43400F1C9C9 /* flashUnavailable@2x.png */; };
+        94B63F4023BDD43400F1C9C9 /* flashUnavailable.png in Resources */ = {isa = PBXBuildFile; fileRef = 94B63F1123BDD43400F1C9C9 /* flashUnavailable.png */; };
+        94B63F4123BDD43400F1C9C9 /* flashUnavailable@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 94B63F1223BDD43400F1C9C9 /* flashUnavailable@3x.png */; };
+        94B63F4223BDD43400F1C9C9 /* flash@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 94B63F1323BDD43400F1C9C9 /* flash@3x.png */; };
+        94B63F4323BDD43400F1C9C9 /* enhance@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 94B63F1423BDD43400F1C9C9 /* enhance@3x.png */; };
+        94B63F4423BDD43400F1C9C9 /* enhance@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 94B63F1523BDD43400F1C9C9 /* enhance@2x.png */; };
+        94B63F4523BDD43400F1C9C9 /* enhance.png in Resources */ = {isa = PBXBuildFile; fileRef = 94B63F1623BDD43400F1C9C9 /* enhance.png */; };
+        94B63F4623BDD43400F1C9C9 /* CaptureDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B63F1823BDD43400F1C9C9 /* CaptureDevice.swift */; };
+        94B63F4723BDD43400F1C9C9 /* Transformable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B63F1923BDD43400F1C9C9 /* Transformable.swift */; };
+        94B63F4923BDD43400F1C9C9 /* CaptureSession+Flash.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B63F1C23BDD43400F1C9C9 /* CaptureSession+Flash.swift */; };
+        94B63F4A23BDD43400F1C9C9 /* CaptureSession+Orientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B63F1D23BDD43400F1C9C9 /* CaptureSession+Orientation.swift */; };
+        94B63F4B23BDD43400F1C9C9 /* CaptureSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B63F1E23BDD43400F1C9C9 /* CaptureSession.swift */; };
+        94B63F4C23BDD43400F1C9C9 /* CaptureSession+Focus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B63F1F23BDD43400F1C9C9 /* CaptureSession+Focus.swift */; };
+        94B63EDD23BDD42100F1C9C9 /* Appzillon-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "Appzillon-Bridging-Header.h"; path = "Appzillon/Appzillon-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
+        9464EBB7246FD754001E91E5 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9464EBB6246FD754001E91E5 /* MainViewController.swift */; };
+        948A52D223F169C800848D71 /* PreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948A52D023F169C700848D71 /* PreviewViewController.swift */; };
+        948A52D323F169C800848D71 /* MainFaceDetectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948A52D123F169C800848D71 /* MainFaceDetectorViewController.swift */; };
+        F474A1112642B42500120F90 /* CallKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F474A1102642B42500120F90 /* CallKit.framework */; };
+        F4BF80E325DE523A00FAD515 /* Contacts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4BF80E225DE523A00FAD515 /* Contacts.framework */; };
+        F4BF80E525DE524200FAD515 /* ContactsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4BF80E425DE524200FAD515 /* ContactsUI.framework */; };
+        85E99F7626FB457B00B93245 /* APZDeepLinking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85E99F7526FB457B00B93245 /* APZDeepLinking.swift */; };
+        F40B70A2270D9758009A0C03 /* StringConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40B70A1270D9758009A0C03 /* StringConstants.swift */; };
+        F40B70BA270F340C009A0C03 /* APZCalendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40B70B9270F340C009A0C03 /* APZCalendar.swift */; };
+        F40B70BC270F3414009A0C03 /* CalendarHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40B70BB270F3414009A0C03 /* CalendarHelper.swift */; };
+        F40B70BF270F3473009A0C03 /* APZContact.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40B70BE270F3473009A0C03 /* APZContact.swift */; };
+        F40B70C1270F347A009A0C03 /* APZContact+Picker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40B70C0270F347A009A0C03 /* APZContact+Picker.swift */; };
+        F40B70C3270F3480009A0C03 /* ContactHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40B70C2270F3480009A0C03 /* ContactHelper.swift */; };
+        8551CB9A271029270044B63A /* Archive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8551CB91271029270044B63A /* Archive.swift */; };
+        8551CB9B271029270044B63A /* Entry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8551CB92271029270044B63A /* Entry.swift */; };
+        8551CB9C271029270044B63A /* Archive+Writing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8551CB93271029270044B63A /* Archive+Writing.swift */; };
+        8551CB9D271029270044B63A /* Archive+Reading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8551CB94271029270044B63A /* Archive+Reading.swift */; };
+        8551CB9E271029270044B63A /* Archive+MemoryFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8551CB95271029270044B63A /* Archive+MemoryFile.swift */; };
+        8551CB9F271029270044B63A /* APZZip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8551CB96271029270044B63A /* APZZip.swift */; };
+        8551CBA0271029270044B63A /* Data+Compression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8551CB97271029270044B63A /* Data+Compression.swift */; };
+        8551CBA1271029270044B63A /* Data+Serialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8551CB98271029270044B63A /* Data+Serialization.swift */; };
+        8551CBA2271029270044B63A /* FileManager+ZIP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8551CB99271029270044B63A /* FileManager+ZIP.swift */; };
+        F48828B9271058A8001995FD /* APZLocale.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48828B8271058A8001995FD /* APZLocale.swift */; };
+        F4A5396A271E804500F148DF /* APZCamera.swift in Sources */ = {isa = PBXBuildFile; fileRef = F444E31C2716DE2800D3C8E1 /* APZCamera.swift */; };
+        F4A5396B271E815B00F148DF /* Toolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = F444E3202716DE4000D3C8E1 /* Toolbar.swift */; };
+        F4A5396C271E823B00F148DF /* TopBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = F444E3212716DE4000D3C8E1 /* TopBar.swift */; };
+        F4A5396D271E823E00F148DF /* AngleRuler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F444E3222716DE4000D3C8E1 /* AngleRuler.swift */; };
+        F4A5396E271E824000F148DF /* AspectRatioPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F444E3232716DE4000D3C8E1 /* AspectRatioPicker.swift */; };
+        F4A5396F271E832F00F148DF /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F444E3252716DE4000D3C8E1 /* Constants.swift */; };
+        F4A53970271E833800F148DF /* CropBoxEdgeDraggable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F444E3272716DE4000D3C8E1 /* CropBoxEdgeDraggable.swift */; };
+        F4A53971271E833D00F148DF /* StateRestorable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F444E3282716DE4000D3C8E1 /* StateRestorable.swift */; };
+        F4A53972271E834100F148DF /* Stasisable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F444E3292716DE4000D3C8E1 /* Stasisable.swift */; };
+        F4A53973271E834400F148DF /* Flipable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F444E32A2716DE4000D3C8E1 /* Flipable.swift */; };
+        F4A53974271E834700F148DF /* Rotatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F444E32B2716DE4000D3C8E1 /* Rotatable.swift */; };
+        F4A53975271E834A00F148DF /* AngleAssist.swift in Sources */ = {isa = PBXBuildFile; fileRef = F444E32C2716DE4000D3C8E1 /* AngleAssist.swift */; };
+        F4A53976271E834C00F148DF /* AspectRatioSettable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F444E32D2716DE4000D3C8E1 /* AspectRatioSettable.swift */; };
+        F4A53977271E834F00F148DF /* ScrollViewContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F444E32E2716DE4000D3C8E1 /* ScrollViewContainer.swift */; };
+        F4A53978271E835100F148DF /* CropperState.swift in Sources */ = {isa = PBXBuildFile; fileRef = F444E32F2716DE4000D3C8E1 /* CropperState.swift */; };
+        F4A53979271E835400F148DF /* CropperViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F444E3302716DE4000D3C8E1 /* CropperViewController.swift */; };
+        F4A5397A271E835700F148DF /* AspectRatio.swift in Sources */ = {isa = PBXBuildFile; fileRef = F444E3312716DE4000D3C8E1 /* AspectRatio.swift */; };
+        F4A5397B271E85EF00F148DF /* CropBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = F444E3382716DE4000D3C8E1 /* CropBox.swift */; };
+        F4A5397C271E85F600F148DF /* UIImage+Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F444E3332716DE4000D3C8E1 /* UIImage+Helper.swift */; };
+        F4A5397D271E85F800F148DF /* UIView+Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F444E3342716DE4000D3C8E1 /* UIView+Helper.swift */; };
+        F4A5397E271E85FB00F148DF /* UIImage+Cropping.swift in Sources */ = {isa = PBXBuildFile; fileRef = F444E3352716DE4000D3C8E1 /* UIImage+Cropping.swift */; };
+        F4A5397F271E85FD00F148DF /* HelperExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F444E3362716DE4000D3C8E1 /* HelperExtensions.swift */; };
+        F4A53980271E886000F148DF /* Overlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = F444E3392716DE4000D3C8E1 /* Overlay.swift */; };
+        F4A53981271E886300F148DF /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = F444E33A2716DE4000D3C8E1 /* Grid.swift */; };
+        F4A53982271E893500F148DF /* QCropper.check.mark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F444E33C2716DE4000D3C8E1 /* QCropper.check.mark@2x.png */; };
+        F4A53983271E893700F148DF /* QCropper.rotate.right.fill@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F444E33D2716DE4000D3C8E1 /* QCropper.rotate.right.fill@2x.png */; };
+        F4A53984271E893B00F148DF /* QCropper.rotate.right.fill@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = F444E33E2716DE4000D3C8E1 /* QCropper.rotate.right.fill@3x.png */; };
+        F4A53985271E893E00F148DF /* QCropper.check.mark@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = F444E33F2716DE4000D3C8E1 /* QCropper.check.mark@3x.png */; };
+        F4A53986271E894100F148DF /* QCropper.aspectratio.fill@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F444E3402716DE4000D3C8E1 /* QCropper.aspectratio.fill@2x.png */; };
+        F4A53987271E894300F148DF /* QCropper.aspectratio.fill@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = F444E3412716DE4000D3C8E1 /* QCropper.aspectratio.fill@3x.png */; };
+        F4A53988271E894600F148DF /* QCropper.flip.horizontal.fill@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = F444E3422716DE4000D3C8E1 /* QCropper.flip.horizontal.fill@3x.png */; };
+        F4A53989271E894900F148DF /* QCropper.flip.horizontal.fill@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F444E3432716DE4000D3C8E1 /* QCropper.flip.horizontal.fill@2x.png */; };
+        85B379562716ED4800C6BE50 /* SignaturePadHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85B379522716ED4800C6BE50 /* SignaturePadHandler.swift */; };
+        85B379572716ED4800C6BE50 /* SignaturePadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85B379532716ED4800C6BE50 /* SignaturePadViewController.swift */; };
+        85B379582716ED4800C6BE50 /* SignaturePadViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 85B379542716ED4800C6BE50 /* SignaturePadViewController.xib */; };
+        85B379592716ED4800C6BE50 /* SignaturePad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85B379552716ED4800C6BE50 /* SignaturePad.swift */; };
+        85B3795E2716EE6100C6BE50 /* APZSignaturePad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85B3795D2716EE6100C6BE50 /* APZSignaturePad.swift */; };
+        F4A5398B271EA5B300F148DF /* APZBarcode.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A5398A271EA5B300F148DF /* APZBarcode.swift */; };
+        F4A5398D271EA5C900F148DF /* BarCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A5398C271EA5C900F148DF /* BarCodeViewController.swift */; };
+        85E8B56A271D86BE005342FB /* APZFileOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85E8B569271D86BE005342FB /* APZFileOperation.swift */; };
+        F4A5398F272133E200F148DF /* APZBarcodeGallery.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A5398E272133E200F148DF /* APZBarcodeGallery.swift */; };
+        F4218D7C2727CDE0003D8810 /* APZUserLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4218D7B2727CDE0003D8810 /* APZUserLocation.swift */; };
+        F48D0919272946DC00F7A7A1 /* APZBarcodeGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48D0918272946DC00F7A7A1 /* APZBarcodeGenerator.swift */; };
+        F48D091B272BDA8800F7A7A1 /* FileManagerUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48D091A272BDA8800F7A7A1 /* FileManagerUtility.swift */; };
+        ABED6EC5272C1836000514B4 /* APZVibrate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABED6EC4272C1836000514B4 /* APZVibrate.swift */; };
+        F48D092227310C9200F7A7A1 /* VideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48D092127310C9200F7A7A1 /* VideoViewController.swift */; };
+        F4D0B33A273A452E008B0350 /* APZActivityShare.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D0B339273A452E008B0350 /* APZActivityShare.swift */; };
+        F49B6D4D273BA12B008FEFC9 /* VideoGalleryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49B6D4C273BA12B008FEFC9 /* VideoGalleryController.swift */; };
+        ABED6EC72732927D000514B4 /* APZDeleteSubApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABED6EC62732927D000514B4 /* APZDeleteSubApp.swift */; };
+        EDBCBD8D2743C1B800FC5D87 /* APZPullDown.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDBCBD8C2743C1B800FC5D87 /* APZPullDown.swift */; };
+        855B5BB7273E4FBE00BFC8F5 /* APZAudio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 855B5BB6273E4FBE00BFC8F5 /* APZAudio.swift */; };
+        85F0C86E273BC376002E2ED2 /* AudioHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85F0C86D273BC375002E2ED2 /* AudioHelper.swift */; };
+        F4542BAE274E259100F9B58C /* APZDeviceInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4542BAD274E259100F9B58C /* APZDeviceInfo.swift */; };
+        F49CACA02750C9D60017DAB4 /* WindowUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49CAC9F2750C9D60017DAB4 /* WindowUtility.swift */; };
+        9DA5833627564932006020AD /* APZBioAuthentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA5833527564932006020AD /* APZBioAuthentication.swift */; };
+        9DEAFEB42750AED50096B327 /* APZBiometricAvailability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEAFEB32750AED50096B327 /* APZBiometricAvailability.swift */; };
+        F49CACA227574C630017DAB4 /* APZDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49CACA127574C630017DAB4 /* APZDevice.swift */; };
+        ABCE353A27564A8B007BFD78 /* APZWebview.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABCE353927564A8A007BFD78 /* APZWebview.swift */; };
+        ABCE353C27577005007BFD78 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABCE353B27577005007BFD78 /* WebViewController.swift */; };
+        ABCE353E27577033007BFD78 /* APZWebviewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABCE353D27577033007BFD78 /* APZWebviewDelegate.swift */; };
+        855B5BBD2757441500BFC8F5 /* AppzillonViewController+SplashScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 855B5BBC2757441500BFC8F5 /* AppzillonViewController+SplashScreen.swift */; };
+        9D9A4E70275F2BCF00F0C8F7 /* APZGestureRecognizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D9A4E6D275F2BCE00F0C8F7 /* APZGestureRecognizable.swift */; };
+        9D9A4E71275F2BCF00F0C8F7 /* AppzillonViewController+GestureTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D9A4E6F275F2BCE00F0C8F7 /* AppzillonViewController+GestureTimer.swift */; };
+        9D5FB600275F778100B89D6E /* APZAppstoreReview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5FB5FF275F778100B89D6E /* APZAppstoreReview.swift */; };
+        F469F0EE27607F27007FE570 /* UserPreferenceUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = F469F0ED27607F27007FE570 /* UserPreferenceUtility.swift */; };
+        EDE7FCEB276866A1004A126E /* APZMail.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE7FCEA276866A1004A126E /* APZMail.swift */; };
+        F469F0F1276323B1007FE570 /* APZFileSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = F469F0F0276323B1007FE570 /* APZFileSize.swift */; };
+        F469F0F327634B0E007FE570 /* APZOpenFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = F469F0F227634B0E007FE570 /* APZOpenFile.swift */; };
+        ABE1BD27276B123E0047BDF0 /* AppzillonMainUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE1BD26276B123E0047BDF0 /* AppzillonMainUtility.swift */; };
+        858E487D276A018700981DBA /* KeychainUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 858E487C276A018700981DBA /* KeychainUtility.swift */; };
+        9DE5D3312770EEBA00CAB413 /* APZFileDecryption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE5D32F2770EEBA00CAB413 /* APZFileDecryption.swift */; };
+        9DE5D3322770EEBA00CAB413 /* APZFileEncryption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE5D3302770EEBA00CAB413 /* APZFileEncryption.swift */; };
+        85D5696227747DB1009A1615 /* APZEncrypt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D5696127747DB1009A1615 /* APZEncrypt.swift */; };
+        85D5696427747DC3009A1615 /* APZDecrypt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D5696327747DC3009A1615 /* APZDecrypt.swift */; };
+        85D5696027732E11009A1615 /* AppzillonViewController+ViewHandlers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D5695F27732E11009A1615 /* AppzillonViewController+ViewHandlers.swift */; };
+        F4B919AA2772EE4F0069F6D0 /* APZBrowser.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B919A92772EE4F0069F6D0 /* APZBrowser.swift */; };
+        F4B919B02775B6030069F6D0 /* FileOpenUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B919AF2775B6030069F6D0 /* FileOpenUtility.swift */; };
+        ED5598132771EEAB00D909DE /* APZBase64File.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5598122771EEAB00D909DE /* APZBase64File.swift */; };
+        F4D777772787186900C5CE66 /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D777762787186800C5CE66 /* ImageViewController.swift */; };
+        85F493A12786FEB700E51D7E /* APZAppDelegateUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85F493A02786FEB700E51D7E /* APZAppDelegateUtility.swift */; };
+        AB378234278716C0007F466A /* APZNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB378233278716C0007F466A /* APZNetworkManager.swift */; };
+        AB378236278716D5007F466A /* APZNetworkUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB378235278716D5007F466A /* APZNetworkUtility.swift */; };
+        AB378238278D9934007F466A /* APZReachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB378237278D9934007F466A /* APZReachability.swift */; };
+        F4D77779278BF5F600C5CE66 /* FileLocationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D77778278BF5F600C5CE66 /* FileLocationController.swift */; };
+        F47471B2278EDDA8000EE9D9 /* FileLocationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F47471B1278EDDA8000EE9D9 /* FileLocationDelegate.swift */; };
+        9D146ABC2795C23400ECAB5A /* APZProcessImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D146ABB2795C23400ECAB5A /* APZProcessImage.swift */; };
+        ED782196278ECD8900EE2B79 /* AppzillonImageUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED782195278ECD8900EE2B79 /* AppzillonImageUtility.swift */; };
+        9D8BD6A42796A43800F5F2FA /* APZSecureStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D8BD6A32796A43800F5F2FA /* APZSecureStorage.swift */; };
+        F4F34C4027994F3F00284202 /* APZTelephonyUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F34C3F27994F3F00284202 /* APZTelephonyUtil.swift */; };
+        F4F34C44279FF3F000284202 /* FilesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F34C43279FF3F000284202 /* FilesViewController.swift */; };
+        F4F34C46279FF70B00284202 /* FilesViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F34C45279FF70B00284202 /* FilesViewDelegate.swift */; };
+        F4F34C4827A3EB6100284202 /* APZFileBrowser.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F34C4727A3EB6000284202 /* APZFileBrowser.swift */; };
+        85E0F92027AA90AC0096BEC2 /* APZJBDetector.m in Sources */ = {isa = PBXBuildFile; fileRef = 85E0F91F27AA90AC0096BEC2 /* APZJBDetector.m */; };
+        AB68FD8927AD38800050674F /* ImageGalleryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB68FD8827AD38800050674F /* ImageGalleryController.swift */; };
+        AB68FD9027B13E020050674F /* ImageGalleryDoneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB68FD8F27B13E020050674F /* ImageGalleryDoneDelegate.swift */; };
+        F4F34C4A27A926DA00284202 /* AppBrowserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F34C4927A926DA00284202 /* AppBrowserController.swift */; };
+        F4E18F6827B0FB4600341839 /* AppBrowserDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E18F6727B0FB4600341839 /* AppBrowserDelegate.swift */; };
+        ED0223AA27AA649E006FE869 /* MiscellaneousMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED0223A927AA649E006FE869 /* MiscellaneousMethod.swift */; };
+        85E0F94327B151BD0096BEC2 /* Base64.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85E0F94227B151BD0096BEC2 /* Base64.swift */; };
+        F4C9324927B3BA3700637EE8 /* APZLocationPermission.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C9324827B3BA3700637EE8 /* APZLocationPermission.swift */; };
+        F4C9324B27B66A2A00637EE8 /* APZLocationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C9324A27B66A2A00637EE8 /* APZLocationDelegate.swift */; };
+        9D1CE4AC27B5167400862933 /* APZStatusBarColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D1CE4AB27B5167400862933 /* APZStatusBarColor.swift */; };
+        9DAFA1C127BA543200C92461 /* APZUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DAFA1C027BA543100C92461 /* APZUserDefaults.swift */; };
+        ABD6872927BE418C006156A1 /* AppzillonViewController+UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABD6872827BE418C006156A1 /* AppzillonViewController+UserSettings.swift */; };
+        85E2DE1127C4F2B80000D515 /* MusicGalleryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85E2DE1027C4F2B70000D515 /* MusicGalleryController.swift */; };
+        85E2DE1327C62BD30000D515 /* MusicGalleryDoneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85E2DE1227C62BD30000D515 /* MusicGalleryDoneDelegate.swift */; };
+        F4C9324D27BCDEB600637EE8 /* APZGps.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C9324C27BCDEB500637EE8 /* APZGps.swift */; };
+        F4348E0927C751C2004E6D51 /* AppzillonViewController+EventMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4348E0827C751C2004E6D51 /* AppzillonViewController+EventMonitor.swift */; };
+        EDE1810B27C3695100E58BA3 /* AppzillonViewController+KeyBoardListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE1810A27C3695100E58BA3 /* AppzillonViewController+KeyBoardListener.swift */; };
+        9DBBDA5D27CE2A2400D0043A /* APZGpsStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DBBDA5C27CE2A2400D0043A /* APZGpsStatus.swift */; };
+        85E2DE2327DB4AF90000D515 /* AppDelegate+Handlers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85E2DE2227DB4AF90000D515 /* AppDelegate+Handlers.swift */; };
+        ED31AF9D27E7357B00ACD508 /* APZPDFGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED31AF9C27E7357B00ACD508 /* APZPDFGenerator.swift */; };
+        EDB4911227E9AD3C0029CD6F /* APZMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB4911127E9AD3C0029CD6F /* APZMap.swift */; };
+        85F0055727E345580038B8E1 /* AppzillonViewController+PluginCalls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85F0055627E345580038B8E1 /* AppzillonViewController+PluginCalls.swift */; };
+        F4D3F68927E1B4E900F515F8 /* APZSpeechToText.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D3F68827E1B4E900F515F8 /* APZSpeechToText.swift */; };
+        F4A738A927F46279005BCE7F /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A738A827F46279005BCE7F /* UIColor+Extension.swift */; };
+        8533A06327FC1BD60015BE5C /* AppzillonViewController+WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8533A06227FC1BD50015BE5C /* AppzillonViewController+WebView.swift */; };
+        9D7B8F5427FD99F50046D028 /* StringEscapeHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7B8F5327FD99F50046D028 /* StringEscapeHandler.swift */; };
+        AB0D17A027FEA9D100D47562 /* AppDelegate+Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0D179F27FEA9D100D47562 /* AppDelegate+Notifications.swift */; };
+        ED87305B27FC6EE300CDCEA7 /* AppzillonViewController+Orientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED87305A27FC6EE300CDCEA7 /* AppzillonViewController+Orientation.swift */; };
+        ED73714D2806ABEB00FA9578 /* APZBattery.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED73714C2806ABEB00FA9578 /* APZBattery.swift */; };
+        8537D91028115D4900651CA7 /* APZStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8537D90F28115D4900651CA7 /* APZStorage.swift */; };
+        9DF30C93281BC07B007A1D7C /* AppzillonAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DF30C92281BC07B007A1D7C /* AppzillonAppDelegate.swift */; };
+        F4B36BFC281A5D2300B0014F /* AppzillonViewController+Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B36BFB281A5D2300B0014F /* AppzillonViewController+Location.swift */; };
+        F4B36BFE281AA6CE00B0014F /* AppzillonViewController+ServerCalls.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B36BFD281AA6CD00B0014F /* AppzillonViewController+ServerCalls.swift */; };
+        ED7F14F8283F4674008D0C30 /* APZLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7F14F7283F4674008D0C30 /* APZLogger.swift */; };
+        8544C94928586F7100D116EC /* MusicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8544C94828586F7100D116EC /* MusicViewController.swift */; };
+        85C1E6FB285C518100EB437C /* MusicDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C1E6FA285C518100EB437C /* MusicDelegate.swift */; };
+        851B7C89289BD4F90085E93F /* APZMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 851B7C88289BD4F90085E93F /* APZMapViewController.swift */; };
+        851B7C8A28A233FA0085E93F /* APZMapDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APZMapDelegate.swift; sourceTree = "<group>"; };
+        01192AFF28B5FCCE00FF65DF /* APZJsonUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01192AFE28B5FCCE00FF65DF /* APZJsonUtility.swift */; };
+        9DFC3EAE28C0C32B00EF0EAE /* APZAccessDeviceFiles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DFC3EAD28C0C32B00EF0EAE /* APZAccessDeviceFiles.swift */; };
+        A8DB1D8F28F5378A0055B4F6 /* APZClearWebCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8DB1D8E28F5378A0055B4F6 /* APZClearWebCache.swift */; };
+        AB3F1E6729151048004F24E3 /* APZFileDownloadUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3F1E6629151048004F24E3 /* APZFileDownloadUtil.swift */; };
+        AB3F1E6929151059004F24E3 /* APZFileUploadUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3F1E6829151059004F24E3 /* APZFileUploadUtil.swift */; };
+        AB2C680B2949D0F700D41534 /* APZModifyShortCutItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2C680A2949D0F700D41534 /* APZModifyShortCutItems.swift */; };
+        AB7383232966A3A800888F7B /* APZCheckNFCSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB7383222966A3A800888F7B /* APZCheckNFCSupport.swift */; };
+        011305DA2965518C00847569 /* APZCheckNotificationStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011305D92965518C00847569 /* APZCheckNotificationStatus.swift */; };
+        AB7383272967FC1000888F7B /* UIImage+Gif.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB7383262967FC1000888F7B /* UIImage+Gif.swift */; };
+        018E5FDD2967D8320066F0D5 /* APZVision.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018E5FDC2967D8320066F0D5 /* APZVision.swift */; };
+        A8266FC529653CA700C3F214 /* APZFaceDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8266FC429653CA700C3F214 /* APZFaceDetector.swift */; };
+        01FCDDE32996084C00FF115B /* APZGetSimDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FCDDE22996084C00FF115B /* APZGetSimDetails.swift */; };
+        01C6B05529BAFD9E001A372D /* DenyPtrace.c in Sources */ = {isa = PBXBuildFile; fileRef = 01C6B05429BAFD9E001A372D /* DenyPtrace.c */; };
+        01C6B05329BAFD93001A372D /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C6B05229BAFD93001A372D /* main.swift */; };
+        0170A78329ED2A7D006528CD /* NativeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0170A78229ED2A7D006528CD /* NativeService.swift */; };
+        ABEC9CF82A04CE9E000CD788 /* CryptoSwiftManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABEC9CF72A04CE9E000CD788 /* CryptoSwiftManager.swift */; };
+        358E9C092A2720D500D07857 /* APZNetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 358E9C082A2720D500D07857 /* APZNetworkMonitor.swift */; };
+        ABA1B3632A274D7D000544BA /* APZLoginUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA1B3622A274D7D000544BA /* APZLoginUtility.swift */; };
+        ABA1B36B2A2DD99D000544BA /* APZFileDownload.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA1B36A2A2DD99D000544BA /* APZFileDownload.swift */; };
+        ABA1B3692A2DD8ED000544BA /* APZFileUpload.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA1B3682A2DD8ED000544BA /* APZFileUpload.swift */; };
+        358DA9F52A3082D8006809D7 /* CustomNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 358DA9F42A3082D8006809D7 /* CustomNavigationViewController.swift */; };
+        ABA1B36D2A30807D000544BA /* APZInstruction.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA1B36C2A30807D000544BA /* APZInstruction.swift */; };
+        2BF905632A5C0A8400B715BB /* APZRedirectToSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF905622A5C0A8400B715BB /* APZRedirectToSettings.swift */; };
+        APPZILLONSPLASHSCREENGIF1
+        APPZILLONFRAMEWORKBUILDRESOURCE
+		APPZILLONIMPLBUILDRESOURCE
+        APPZILLONDYNAMICLIBBUILDRESOURCE
+        APPZILLONSTATICLIBBUILDRESOURCE
+        APPZILLONEMBDFRMBUILDRESOURCE
+        APZRESOURCEBUILDRESOURCE
+        APPZILLONFIREBASEPLISTBUILDRESOURCE
+        APPZILLONFIREBASEBUNDLEBUILDRESOURCE
+        
+        SHORTCUTFIRSTICON1
+        SHORTCUTSECONDICON1
+        SHORTCUTTHIRDICON1
+        SHORTCUTFOURTHICON1
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		271943181FFDFB1F0092D7E3 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+                 APPZILLONEMBDFRMCOPYFILES
+
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+
+/* Begin PBXFileReference section */
+        94675AC62383D2D1000E28D8 /* Speech.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Speech.framework; path = System/Library/Frameworks/Speech.framework; sourceTree = SDKROOT; };
+		1882485E15E777640085F836 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		1882486015E7776E0085F836 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		188E0175162D581C00635F52 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		1890589715E363D200DEB733 /* EventKitUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKitUI.framework; path = System/Library/Frameworks/EventKitUI.framework; sourceTree = SDKROOT; };
+		1890589915E363DC00DEB733 /* EventKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKit.framework; path = System/Library/Frameworks/EventKit.framework; sourceTree = SDKROOT; };
+		18942CFB15D907260084F792 /* APPZILLONPRODUCTNAME.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "APPZILLONPRODUCTNAME.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		18942CFF15D907260084F792 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		18942D0115D907260084F792 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		18942D0315D907260084F792 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		18942D0715D907260084F792 /* Appzillon-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Appzillon-Info.plist"; sourceTree = "<group>"; };
+		18942D0915D907260084F792 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		18942D0D15D907260084F792 /* Appzillon-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Appzillon-Prefix.pch"; sourceTree = "<group>"; };
+		18942D1115D907260084F792 /* AppzillonViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppzillonViewController.h; sourceTree = "<group>"; };
+		18942D1215D907260084F792 /* AppzillonViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppzillonViewController.m; sourceTree = "<group>"; };
+		18942D1515D907260084F792 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/AppzillonViewController.xib; sourceTree = "<group>"; };
+		1897F59415DA175C00C457C0 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		189D8C8C15DE4D3300FD89CC /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+        D5BA38F61E48849000DCAFCD /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
+		D5BA38F81E48851A00DCAFCD /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		5202C56A15E5FAB700B21D4C /* sqlite3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sqlite3.h; sourceTree = "<group>"; };
+		5202C56B15E5FB2200B21D4C /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
+		52109F5C15E745650011FA91 /* Azuritei_phoneViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Azuritei_phoneViewController.xib; sourceTree = "<group>"; };
+         8406B8E5178570DF008409B1 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
+		841D8D961793B509008CE5B4 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		841D8D981793B519008CE5B4 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
+		841D8D9A1793B52F008CE5B4 /* libiconv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.dylib; path = usr/lib/libiconv.dylib; sourceTree = SDKROOT; };
+		84376CF71772DEF2002B2522 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		8468D29D1632EAE600B2B232 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		8470CDA616007E5C0051D9F1 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		8493A17917F3FB240052288E /* APZPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APZPlugin.h; sourceTree = "<group>"; };
+		8493A17A17F3FB240052288E /* APZPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APZPlugin.m; sourceTree = "<group>"; };
+		84AA19D517DEF25F00D7D892 /* QuickLook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickLook.framework; path = System/Library/Frameworks/QuickLook.framework; sourceTree = SDKROOT; };
+		84AA19D717DEF27000D7D892 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+        84B70CEF19E3B4CB004DF54E /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		84BA434A172ABB2E0097AFCE /* Assets */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Assets; path = Assets; sourceTree = "<group>"; };
+		84C85C0515E8DD9800A52AE2 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		84C85C0715E8DD9F00A52AE2 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		84C85C0915E8DDB100A52AE2 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		84C85C0B15E8DDC900A52AE2 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		84C85C0D15E8DDE500A52AE2 /* libz.1.2.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.5.dylib; path = usr/lib/libz.1.2.5.dylib; sourceTree = SDKROOT; };
+		84A9FB8E19E2A4B90011C043 /* LocalAuthentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LocalAuthentication.framework; path = System/Library/Frameworks/LocalAuthentication.framework; sourceTree = SDKROOT; };
+        846EACE41A53EF1900F18F26 /* APZOTARefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APZOTARefresh.h; sourceTree = "<group>"; };
+        846EACE51A53EF1900F18F26 /* APZOTARefresh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APZOTARefresh.m; sourceTree = "<group>"; };
+		841D19C11BC544C700100357 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
+		843CA0571BC690D9005B822E /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		84C26B8C1C046BD700ABFC04 /* ContainerImages */ = {isa = PBXFileReference; lastKnownFileType = folder; path = ContainerImages; sourceTree = "<group>"; };
+		84480F1C1D1A563700C34FED /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		84538C631D3DF09A009D75A0 /* containerprops.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = containerprops.plist; sourceTree = "<group>"; };
+		8403D3E61D478D19001527EC /* CallServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CallServer.h; sourceTree = "<group>"; };
+		8403D3E71D478D19001527EC /* CallServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CallServer.m; sourceTree = "<group>"; };
+		84565FDC1D4A3E580008D202 /* AppzillonViewController+ServerCalls.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AppzillonViewController+ServerCalls.h"; sourceTree = "<group>"; };
+		84565FDD1D4A3E580008D202 /* AppzillonViewController+ServerCalls.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AppzillonViewController+ServerCalls.m"; sourceTree = "<group>"; };
+		8494B8161E8CFF900024CF9F /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+	    8431E94D1EAB776A00CDF7B0 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
+        C031D1EA1F4452D200B06302 /* pauseIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pauseIcon.png; sourceTree = "<group>"; };
+        C031D1EB1F4452D200B06302 /* playIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playIcon.png; sourceTree = "<group>"; };
+        C031D1EC1F4452D200B06302 /* nextSong.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nextSong.png; sourceTree = "<group>"; };
+        C031D1ED1F4452D200B06302 /* previousSong.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = previousSong.png; sourceTree = "<group>"; };
+        C031D1F21F445C9700B06302 /* noPhoto.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = noPhoto.png; sourceTree = "<group>"; };
+        27924B9E1FE15F14000381D5 /* SafariServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SafariServices.framework; path = System/Library/Frameworks/SafariServices.framework; sourceTree = SDKROOT; };
+        2718B9BB20258D6400463D4A /* HashUtility.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HashUtility.h; sourceTree = "<group>"; };
+		2718B9BC20258D6400463D4A /* HashUtility.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HashUtility.m; sourceTree = "<group>"; };
+		271D2A662028328B00CAB0D0 /* CryptoUtility.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CryptoUtility.h; sourceTree = "<group>"; };
+		271D2A672028328B00CAB0D0 /* CryptoUtility.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CryptoUtility.m; sourceTree = "<group>"; };
+		EDEBEDE121197FC1004DBE34 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
+        ED7E852C24728DF800BDE03D /* MyPreviewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPreviewController.swift; sourceTree = "<group>"; };
+        EDB09BA1248F6D4A00159E42 /* AppzillonDocumentVerification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppzillonDocumentVerification.swift; sourceTree = "<group>"; };
+        EDDF15A1232FB5050046AD4B /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+       2746082921AE9B4D0033C270 /* fileBrowserIcons */ = {isa = PBXFileReference; lastKnownFileType = folder; path = fileBrowserIcons; sourceTree = "<group>"; };
+		2746083121AEB0190033C270 /* BarcodeFlashImages */ = {isa = PBXFileReference; lastKnownFileType = folder; path = BarcodeFlashImages; sourceTree = "<group>"; };
+        94B63F5D23BE3C5500F1C9C9 /* HookClassFromImageScanner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HookClassFromImageScanner.swift; sourceTree = "<group>"; };
+        94B63EE423BDD43400F1C9C9 /* ImageScannerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageScannerController.swift; sourceTree = "<group>"; };
+        94B63EE823BDD43400F1C9C9 /* RectangleFeaturesFunnel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RectangleFeaturesFunnel.swift; sourceTree = "<group>"; };
+        94B63EE923BDD43400F1C9C9 /* CaptureSessionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaptureSessionManager.swift; sourceTree = "<group>"; };
+        94B63EEA23BDD43400F1C9C9 /* ShutterButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShutterButton.swift; sourceTree = "<group>"; };
+        94B63EEB23BDD43400F1C9C9 /* FocusRectangleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FocusRectangleView.swift; sourceTree = "<group>"; };
+        94B63EEC23BDD43400F1C9C9 /* ScannerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScannerViewController.swift; sourceTree = "<group>"; };
+        94B63EEF23BDD43400F1C9C9 /* AVCaptureVideoOrientation+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AVCaptureVideoOrientation+Utils.swift"; sourceTree = "<group>"; };
+        94B63EF023BDD43400F1C9C9 /* CGPoint+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGPoint+Utils.swift"; sourceTree = "<group>"; };
+		94B63EF123BDD43400F1C9C9 /* CGSize+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGSize+Utils.swift"; sourceTree = "<group>"; };
+		94B63EF223BDD43400F1C9C9 /* CGImagePropertyOrientation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGImagePropertyOrientation.swift; sourceTree = "<group>"; };
+		94B63EF323BDD43400F1C9C9 /* CIImage+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CIImage+Utils.swift"; sourceTree = "<group>"; };
+		94B63EF423BDD43400F1C9C9 /* CGAffineTransform+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGAffineTransform+Utils.swift"; sourceTree = "<group>"; };
+		94B63EF523BDD43400F1C9C9 /* CGRect+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGRect+Utils.swift"; sourceTree = "<group>"; };
+		94B63EF623BDD43400F1C9C9 /* Array+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+Utils.swift"; sourceTree = "<group>"; };
+		94B63EF723BDD43400F1C9C9 /* UIImage+Orientation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Orientation.swift"; sourceTree = "<group>"; };
+		94B63EF823BDD43400F1C9C9 /* UIImage+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Utils.swift"; sourceTree = "<group>"; };
+        94B63EFB23BDD43400F1C9C9 /* ZoomGestureController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZoomGestureController.swift; sourceTree = "<group>"; };
+        94B63EFC23BDD43400F1C9C9 /* EditScanViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditScanViewController.swift; sourceTree = "<group>"; };
+        94B63EFF23BDD43400F1C9C9 /* EditScanCornerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditScanCornerView.swift; sourceTree = "<group>"; };
+        94B63F0023BDD43400F1C9C9 /* Error.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
+        94B63F0123BDD43400F1C9C9 /* VisionRectangleDetector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisionRectangleDetector.swift; sourceTree = "<group>"; };
+        94B63F0223BDD43400F1C9C9 /* CIRectangleDetector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CIRectangleDetector.swift; sourceTree = "<group>"; };
+        94B63F0323BDD43400F1C9C9 /* QuadrilateralView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuadrilateralView.swift; sourceTree = "<group>"; };
+        94B63F0423BDD43400F1C9C9 /* Quadrilateral.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Quadrilateral.swift; sourceTree = "<group>"; };
+        94B63F0623BDD43400F1C9C9 /* ReviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviewViewController.swift; sourceTree = "<group>"; };
+        94B63F0B23BDD43400F1C9C9 /* flash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = flash.png; sourceTree = "<group>"; };
+        94B63F0C23BDD43400F1C9C9 /* rotate@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "rotate@3x.png"; sourceTree = "<group>"; };
+        94B63F0D23BDD43400F1C9C9 /* rotate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rotate.png; sourceTree = "<group>"; };
+        94B63F0E23BDD43400F1C9C9 /* rotate@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "rotate@2x.png"; sourceTree = "<group>"; };
+        94B63F0F23BDD43400F1C9C9 /* flash@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "flash@2x.png"; sourceTree = "<group>"; };
+        94B63F1023BDD43400F1C9C9 /* flashUnavailable@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "flashUnavailable@2x.png"; sourceTree = "<group>"; };
+        94B63F1123BDD43400F1C9C9 /* flashUnavailable.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = flashUnavailable.png; sourceTree = "<group>"; };
+        94B63F1223BDD43400F1C9C9 /* flashUnavailable@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "flashUnavailable@3x.png"; sourceTree = "<group>"; };
+        94B63F1323BDD43400F1C9C9 /* flash@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "flash@3x.png"; sourceTree = "<group>"; };
+        94B63F1423BDD43400F1C9C9 /* enhance@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "enhance@3x.png"; sourceTree = "<group>"; };
+        94B63F1523BDD43400F1C9C9 /* enhance@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "enhance@2x.png"; sourceTree = "<group>"; };
+        94B63F1623BDD43400F1C9C9 /* enhance.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = enhance.png; sourceTree = "<group>"; };
+        94B63F1823BDD43400F1C9C9 /* CaptureDevice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaptureDevice.swift; sourceTree = "<group>"; };
+        94B63F1923BDD43400F1C9C9 /* Transformable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Transformable.swift; sourceTree = "<group>"; };
+        94B63F1C23BDD43400F1C9C9 /* CaptureSession+Flash.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CaptureSession+Flash.swift"; sourceTree = "<group>"; };
+        94B63F1D23BDD43400F1C9C9 /* CaptureSession+Orientation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CaptureSession+Orientation.swift"; sourceTree = "<group>"; };
+        94B63F1E23BDD43400F1C9C9 /* CaptureSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaptureSession.swift; sourceTree = "<group>"; };
+        94B63F1F23BDD43400F1C9C9 /* CaptureSession+Focus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CaptureSession+Focus.swift"; sourceTree = "<group>"; };
+        9464EBB6246FD754001E91E5 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+        948A52D023F169C700848D71 /* PreviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewViewController.swift; sourceTree = "<group>"; };
+        948A52D123F169C800848D71 /* MainFaceDetectorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainFaceDetectorViewController.swift; sourceTree = "<group>"; };
+        F474A1102642B42500120F90 /* CallKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CallKit.framework; path = System/Library/Frameworks/CallKit.framework; sourceTree = SDKROOT; };
+        F4BF80E225DE523A00FAD515 /* Contacts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Contacts.framework; path = System/Library/Frameworks/Contacts.framework; sourceTree = SDKROOT; };
+        F4BF80E425DE524200FAD515 /* ContactsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ContactsUI.framework; path = System/Library/Frameworks/ContactsUI.framework; sourceTree = SDKROOT; };
+        85E99F7526FB457B00B93245 /* APZDeepLinking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APZDeepLinking.swift; sourceTree = "<group>"; };
+        F40B70A1270D9758009A0C03 /* StringConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringConstants.swift; sourceTree = "<group>"; };
+        F40B70B9270F340C009A0C03 /* APZCalendar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APZCalendar.swift; sourceTree = "<group>"; };
+        F40B70BB270F3414009A0C03 /* CalendarHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarHelper.swift; sourceTree = "<group>"; };
+        F40B70BE270F3473009A0C03 /* APZContact.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APZContact.swift; sourceTree = "<group>"; };
+        F40B70C0270F347A009A0C03 /* APZContact+Picker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "APZContact+Picker.swift"; sourceTree = "<group>"; };
+        F40B70C2270F3480009A0C03 /* ContactHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactHelper.swift; sourceTree = "<group>"; };
+        8551CB91271029270044B63A /* Archive.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Archive.swift; sourceTree = "<group>"; };
+        8551CB92271029270044B63A /* Entry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Entry.swift; sourceTree = "<group>"; };
+        8551CB93271029270044B63A /* Archive+Writing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Archive+Writing.swift"; sourceTree = "<group>"; };
+        8551CB94271029270044B63A /* Archive+Reading.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Archive+Reading.swift"; sourceTree = "<group>"; };
+        8551CB95271029270044B63A /* Archive+MemoryFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Archive+MemoryFile.swift"; sourceTree = "<group>"; };
+        8551CB96271029270044B63A /* APZZip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APZZip.swift; sourceTree = "<group>"; };
+        8551CB97271029270044B63A /* Data+Compression.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Data+Compression.swift"; sourceTree = "<group>"; };
+        8551CB98271029270044B63A /* Data+Serialization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Data+Serialization.swift"; sourceTree = "<group>"; };
+        8551CB99271029270044B63A /* FileManager+ZIP.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FileManager+ZIP.swift"; sourceTree = "<group>"; };
+        F48828B8271058A8001995FD /* APZLocale.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APZLocale.swift; sourceTree = "<group>"; };
+        F444E31C2716DE2800D3C8E1 /* APZCamera.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APZCamera.swift; sourceTree = "<group>"; };
+        F444E3202716DE4000D3C8E1 /* Toolbar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Toolbar.swift; sourceTree = "<group>"; };
+        F444E3212716DE4000D3C8E1 /* TopBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopBar.swift; sourceTree = "<group>"; };
+        F444E3222716DE4000D3C8E1 /* AngleRuler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AngleRuler.swift; sourceTree = "<group>"; };
+        F444E3232716DE4000D3C8E1 /* AspectRatioPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AspectRatioPicker.swift; sourceTree = "<group>"; };
+        F444E3252716DE4000D3C8E1 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+        F444E3272716DE4000D3C8E1 /* CropBoxEdgeDraggable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CropBoxEdgeDraggable.swift; sourceTree = "<group>"; };
+        F444E3282716DE4000D3C8E1 /* StateRestorable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StateRestorable.swift; sourceTree = "<group>"; };
+        F444E3292716DE4000D3C8E1 /* Stasisable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stasisable.swift; sourceTree = "<group>"; };
+        F444E32A2716DE4000D3C8E1 /* Flipable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Flipable.swift; sourceTree = "<group>"; };
+        F444E32B2716DE4000D3C8E1 /* Rotatable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Rotatable.swift; sourceTree = "<group>"; };
+        F444E32C2716DE4000D3C8E1 /* AngleAssist.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AngleAssist.swift; sourceTree = "<group>"; };
+        F444E32D2716DE4000D3C8E1 /* AspectRatioSettable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AspectRatioSettable.swift; sourceTree = "<group>"; };
+        F444E32E2716DE4000D3C8E1 /* ScrollViewContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollViewContainer.swift; sourceTree = "<group>"; };
+        F444E32F2716DE4000D3C8E1 /* CropperState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CropperState.swift; sourceTree = "<group>"; };
+        F444E3302716DE4000D3C8E1 /* CropperViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CropperViewController.swift; sourceTree = "<group>"; };
+        F444E3312716DE4000D3C8E1 /* AspectRatio.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AspectRatio.swift; sourceTree = "<group>"; };
+        F444E3332716DE4000D3C8E1 /* UIImage+Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Helper.swift"; sourceTree = "<group>"; };
+        F444E3342716DE4000D3C8E1 /* UIView+Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Helper.swift"; sourceTree = "<group>"; };
+        F444E3352716DE4000D3C8E1 /* UIImage+Cropping.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Cropping.swift"; sourceTree = "<group>"; };
+        F444E3362716DE4000D3C8E1 /* HelperExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelperExtensions.swift; sourceTree = "<group>"; };
+        F444E3382716DE4000D3C8E1 /* CropBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CropBox.swift; sourceTree = "<group>"; };
+        F444E3392716DE4000D3C8E1 /* Overlay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Overlay.swift; sourceTree = "<group>"; };
+        F444E33A2716DE4000D3C8E1 /* Grid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Grid.swift; sourceTree = "<group>"; };
+        F444E33C2716DE4000D3C8E1 /* QCropper.check.mark@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "QCropper.check.mark@2x.png"; sourceTree = "<group>"; };
+        F444E33D2716DE4000D3C8E1 /* QCropper.rotate.right.fill@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "QCropper.rotate.right.fill@2x.png"; sourceTree = "<group>"; };
+        F444E33E2716DE4000D3C8E1 /* QCropper.rotate.right.fill@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "QCropper.rotate.right.fill@3x.png"; sourceTree = "<group>"; };
+        F444E33F2716DE4000D3C8E1 /* QCropper.check.mark@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "QCropper.check.mark@3x.png"; sourceTree = "<group>"; };
+        F444E3402716DE4000D3C8E1 /* QCropper.aspectratio.fill@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "QCropper.aspectratio.fill@2x.png"; sourceTree = "<group>"; };
+        F444E3412716DE4000D3C8E1 /* QCropper.aspectratio.fill@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "QCropper.aspectratio.fill@3x.png"; sourceTree = "<group>"; };
+        F444E3422716DE4000D3C8E1 /* QCropper.flip.horizontal.fill@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "QCropper.flip.horizontal.fill@3x.png"; sourceTree = "<group>"; };
+        F444E3432716DE4000D3C8E1 /* QCropper.flip.horizontal.fill@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "QCropper.flip.horizontal.fill@2x.png"; sourceTree = "<group>"; };
+        85B379522716ED4800C6BE50 /* SignaturePadHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignaturePadHandler.swift; sourceTree = "<group>"; };
+        85B379532716ED4800C6BE50 /* SignaturePadViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignaturePadViewController.swift; sourceTree = "<group>"; };
+        85B379542716ED4800C6BE50 /* SignaturePadViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SignaturePadViewController.xib; sourceTree = "<group>"; };
+        85B379552716ED4800C6BE50 /* SignaturePad.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignaturePad.swift; sourceTree = "<group>"; };
+        85B3795D2716EE6100C6BE50 /* APZSignaturePad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APZSignaturePad.swift; sourceTree = "<group>"; };
+        F4A5398A271EA5B300F148DF /* APZBarcode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APZBarcode.swift; sourceTree = "<group>"; };
+        F4A5398C271EA5C900F148DF /* BarCodeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarCodeViewController.swift; sourceTree = "<group>"; };
+        85E8B569271D86BE005342FB /* APZFileOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APZFileOperation.swift; sourceTree = "<group>"; };
+        F4A5398E272133E200F148DF /* APZBarcodeGallery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APZBarcodeGallery.swift; sourceTree = "<group>"; };
+        F4218D7B2727CDE0003D8810 /* APZUserLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APZUserLocation.swift; sourceTree = "<group>"; };
+        F48D0918272946DC00F7A7A1 /* APZBarcodeGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APZBarcodeGenerator.swift; sourceTree = "<group>"; };
+        F48D091A272BDA8800F7A7A1 /* FileManagerUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManagerUtility.swift; sourceTree = "<group>"; };
+        ABED6EC4272C1836000514B4 /* APZVibrate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APZVibrate.swift; sourceTree = "<group>"; };
+        F48D092127310C9200F7A7A1 /* VideoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoViewController.swift; sourceTree = "<group>"; };
+        F4D0B339273A452E008B0350 /* APZActivityShare.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APZActivityShare.swift; sourceTree = "<group>"; };
+        F49B6D4C273BA12B008FEFC9 /* VideoGalleryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoGalleryController.swift; sourceTree = "<group>"; };
+        ABED6EC62732927D000514B4 /* APZDeleteSubApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APZDeleteSubApp.swift; sourceTree = "<group>"; };
+        EDBCBD8C2743C1B800FC5D87 /* APZPullDown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APZPullDown.swift; sourceTree = "<group>"; };
+        855B5BB6273E4FBE00BFC8F5 /* APZAudio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APZAudio.swift; sourceTree = "<group>"; };
+        85F0C86D273BC375002E2ED2 /* AudioHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioHelper.swift; sourceTree = "<group>"; };
+        F4542BAD274E259100F9B58C /* APZDeviceInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APZDeviceInfo.swift; sourceTree = "<group>"; };
+        F49CAC9F2750C9D60017DAB4 /* WindowUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowUtility.swift; sourceTree = "<group>"; };
+        9DA5833527564932006020AD /* APZBioAuthentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APZBioAuthentication.swift; sourceTree = "<group>"; };
+        9DEAFEB32750AED50096B327 /* APZBiometricAvailability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APZBiometricAvailability.swift; sourceTree = "<group>"; };
+        F49CACA127574C630017DAB4 /* APZDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APZDevice.swift; sourceTree = "<group>"; };
+        ABCE353927564A8A007BFD78 /* APZWebview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APZWebview.swift; sourceTree = "<group>"; };
+        ABCE353B27577005007BFD78 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
+        ABCE353D27577033007BFD78 /* APZWebviewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APZWebviewDelegate.swift; sourceTree = "<group>"; };
+        855B5BBC2757441500BFC8F5 /* AppzillonViewController+SplashScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AppzillonViewController+SplashScreen.swift"; sourceTree = "<group>"; };
+        9D9A4E6D275F2BCE00F0C8F7 /* APZGestureRecognizable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APZGestureRecognizable.swift; sourceTree = "<group>"; };
+        9D9A4E6F275F2BCE00F0C8F7 /* AppzillonViewController+GestureTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AppzillonViewController+GestureTimer.swift"; sourceTree = "<group>"; };
+        9D5FB5FF275F778100B89D6E /* APZAppstoreReview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APZAppstoreReview.swift; sourceTree = "<group>"; };
+        F469F0ED27607F27007FE570 /* UserPreferenceUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPreferenceUtility.swift; sourceTree = "<group>"; };
+        EDE7FCEA276866A1004A126E /* APZMail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APZMail.swift; sourceTree = "<group>"; };
+        F469F0F0276323B1007FE570 /* APZFileSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APZFileSize.swift; sourceTree = "<group>"; };
+        F469F0F227634B0E007FE570 /* APZOpenFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APZOpenFile.swift; sourceTree = "<group>"; };
+        ABE1BD26276B123E0047BDF0 /* AppzillonMainUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppzillonMainUtility.swift; sourceTree = "<group>"; };
+        858E487C276A018700981DBA /* KeychainUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainUtility.swift; sourceTree = "<group>"; };
+        9DE5D32F2770EEBA00CAB413 /* APZFileDecryption.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APZFileDecryption.swift; sourceTree = "<group>"; };
+        9DE5D3302770EEBA00CAB413 /* APZFileEncryption.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APZFileEncryption.swift; sourceTree = "<group>"; };
+        85D5696127747DB1009A1615 /* APZEncrypt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APZEncrypt.swift; sourceTree = "<group>"; };
+        85D5696327747DC3009A1615 /* APZDecrypt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APZDecrypt.swift; sourceTree = "<group>"; };
+        85D5695F27732E11009A1615 /* AppzillonViewController+ViewHandlers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppzillonViewController+ViewHandlers.swift"; sourceTree = "<group>"; };
+        F4B919A92772EE4F0069F6D0 /* APZBrowser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APZBrowser.swift; sourceTree = "<group>"; };
+        F4B919AF2775B6030069F6D0 /* FileOpenUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileOpenUtility.swift; sourceTree = "<group>"; };
+        ED5598122771EEAB00D909DE /* APZBase64File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APZBase64File.swift; sourceTree = "<group>"; };
+        F4D777762787186800C5CE66 /* ImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
+        85F493A02786FEB700E51D7E /* APZAppDelegateUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APZAppDelegateUtility.swift; sourceTree = "<group>"; };
+        AB378233278716C0007F466A /* APZNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APZNetworkManager.swift; sourceTree = "<group>"; };
+        AB378235278716D5007F466A /* APZNetworkUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APZNetworkUtility.swift; sourceTree = "<group>"; };
+        AB378237278D9934007F466A /* APZReachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APZReachability.swift; sourceTree = "<group>"; };
+        F4D77778278BF5F600C5CE66 /* FileLocationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileLocationController.swift; sourceTree = "<group>"; };
+        F47471B1278EDDA8000EE9D9 /* FileLocationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileLocationDelegate.swift; sourceTree = "<group>"; };
+        9D146ABB2795C23400ECAB5A /* APZProcessImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APZProcessImage.swift; sourceTree = "<group>"; };
+        ED782195278ECD8900EE2B79 /* AppzillonImageUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppzillonImageUtility.swift; sourceTree = "<group>"; };
+        9D8BD6A32796A43800F5F2FA /* APZSecureStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APZSecureStorage.swift; sourceTree = "<group>"; };
+        F4F34C3F27994F3F00284202 /* APZTelephonyUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APZTelephonyUtil.swift; sourceTree = "<group>"; };
+        F4F34C43279FF3F000284202 /* FilesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilesViewController.swift; sourceTree = "<group>"; };
+        F4F34C45279FF70B00284202 /* FilesViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilesViewDelegate.swift; sourceTree = "<group>"; };
+        F4F34C4727A3EB6000284202 /* APZFileBrowser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APZFileBrowser.swift; sourceTree = "<group>"; };
+        85E0F91F27AA90AC0096BEC2 /* APZJBDetector.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = APZJBDetector.m; sourceTree = "<group>"; };
+        85E0F92127AA90E40096BEC2 /* APZJBDetector.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = APZJBDetector.h; sourceTree = "<group>"; };
+        AB68FD8827AD38800050674F /* ImageGalleryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageGalleryController.swift; sourceTree = "<group>"; };
+        AB68FD8F27B13E020050674F /* ImageGalleryDoneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageGalleryDoneDelegate.swift; sourceTree = "<group>"; };
+        F4F34C4927A926DA00284202 /* AppBrowserController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppBrowserController.swift; sourceTree = "<group>"; };
+        F4E18F6727B0FB4600341839 /* AppBrowserDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppBrowserDelegate.swift; sourceTree = "<group>"; };
+        ED0223A927AA649E006FE869 /* MiscellaneousMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiscellaneousMethod.swift; sourceTree = "<group>"; };
+        85E0F94227B151BD0096BEC2 /* Base64.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Base64.swift; sourceTree = "<group>"; };
+        F4C9324827B3BA3700637EE8 /* APZLocationPermission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APZLocationPermission.swift; sourceTree = "<group>"; };
+        F4C9324A27B66A2A00637EE8 /* APZLocationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APZLocationDelegate.swift; sourceTree = "<group>"; };
+        9D1CE4AB27B5167400862933 /* APZStatusBarColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APZStatusBarColor.swift; sourceTree = "<group>"; };
+        9DAFA1C027BA543100C92461 /* APZUserDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APZUserDefaults.swift; sourceTree = "<group>"; };
+        ABD6872827BE418C006156A1 /* AppzillonViewController+UserSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppzillonViewController+UserSettings.swift"; sourceTree = "<group>"; };
+        85E2DE1027C4F2B70000D515 /* MusicGalleryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicGalleryController.swift; sourceTree = "<group>"; };
+        85E2DE1227C62BD30000D515 /* MusicGalleryDoneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicGalleryDoneDelegate.swift; sourceTree = "<group>"; };
+        F4C9324C27BCDEB500637EE8 /* APZGps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APZGps.swift; sourceTree = "<group>"; };
+        F4348E0827C751C2004E6D51 /* AppzillonViewController+EventMonitor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AppzillonViewController+EventMonitor.swift"; sourceTree = "<group>"; };
+        EDE1810A27C3695100E58BA3 /* AppzillonViewController+KeyBoardListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppzillonViewController+KeyBoardListener.swift"; sourceTree = "<group>"; };
+        9DBBDA5C27CE2A2400D0043A /* APZGpsStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APZGpsStatus.swift; sourceTree = "<group>"; };
+        85E2DE2227DB4AF90000D515 /* AppDelegate+Handlers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDelegate+Handlers.swift"; sourceTree = "<group>"; };
+        ED31AF9C27E7357B00ACD508 /* APZPDFGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APZPDFGenerator.swift; sourceTree = "<group>"; };
+        EDB4911127E9AD3C0029CD6F /* APZMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APZMap.swift; sourceTree = "<group>"; };
+        85F0055627E345580038B8E1 /* AppzillonViewController+PluginCalls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppzillonViewController+PluginCalls.swift"; sourceTree = "<group>"; };
+        F4D3F68827E1B4E900F515F8 /* APZSpeechToText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APZSpeechToText.swift; sourceTree = "<group>"; };
+        F4A738A827F46279005BCE7F /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
+        8533A06227FC1BD50015BE5C /* AppzillonViewController+WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppzillonViewController+WebView.swift"; sourceTree = "<group>"; };
+        9D7B8F5327FD99F50046D028 /* StringEscapeHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringEscapeHandler.swift; sourceTree = "<group>"; };
+        AB0D179F27FEA9D100D47562 /* AppDelegate+Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDelegate+Notifications.swift"; sourceTree = "<group>"; };
+        ED87305A27FC6EE300CDCEA7 /* AppzillonViewController+Orientation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AppzillonViewController+Orientation.swift"; sourceTree = "<group>"; };
+        ED73714C2806ABEB00FA9578 /* APZBattery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APZBattery.swift; sourceTree = "<group>"; };
+        8537D90F28115D4900651CA7 /* APZStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APZStorage.swift; sourceTree = "<group>"; };
+        9DF30C92281BC07B007A1D7C /* AppzillonAppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppzillonAppDelegate.swift; sourceTree = "<group>"; };
+        F4B36BFB281A5D2300B0014F /* AppzillonViewController+Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppzillonViewController+Location.swift"; sourceTree = "<group>"; };
+        F4B36BFD281AA6CD00B0014F /* AppzillonViewController+ServerCalls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppzillonViewController+ServerCalls.swift"; sourceTree = "<group>"; };
+        ED7F14F7283F4674008D0C30 /* APZLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APZLogger.swift; sourceTree = "<group>"; };
+        8544C94828586F7100D116EC /* MusicViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicViewController.swift; sourceTree = "<group>"; };
+        85C1E6FA285C518100EB437C /* MusicDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicDelegate.swift; sourceTree = "<group>"; };
+        ABAFF160287D6E15000BCDBC /* AZPluginDoneDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AZPluginDoneDelegate.h; sourceTree = "<group>"; };
+        851B7C88289BD4F90085E93F /* APZMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APZMapViewController.swift; sourceTree = "<group>"; };
+        851B7C8B28A233FA0085E93F /* APZMapDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 851B7C8A28A233FA0085E93F /* APZMapDelegate.swift */; };
+        01192AFE28B5FCCE00FF65DF /* APZJsonUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APZJsonUtility.swift; sourceTree = "<group>"; };
+        9DFC3EAD28C0C32B00EF0EAE /* APZAccessDeviceFiles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APZAccessDeviceFiles.swift; sourceTree = "<group>"; };
+        A8DB1D8E28F5378A0055B4F6 /* APZClearWebCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APZClearWebCache.swift; sourceTree = "<group>"; };
+        AB3F1E6629151048004F24E3 /* APZFileDownloadUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APZFileDownloadUtil.swift; sourceTree = "<group>"; };
+        AB3F1E6829151059004F24E3 /* APZFileUploadUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APZFileUploadUtil.swift; sourceTree = "<group>"; };
+        AB2C680A2949D0F700D41534 /* APZModifyShortCutItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APZModifyShortCutItems.swift; sourceTree = "<group>"; };
+        AB7383222966A3A800888F7B /* APZCheckNFCSupport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APZCheckNFCSupport.swift; sourceTree = "<group>"; };
+        011305D92965518C00847569 /* APZCheckNotificationStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APZCheckNotificationStatus.swift; sourceTree = "<group>"; };
+        AB7383262967FC1000888F7B /* UIImage+Gif.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Gif.swift"; sourceTree = "<group>"; };
+        018E5FDC2967D8320066F0D5 /* APZVision.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APZVision.swift; sourceTree = "<group>"; };
+        A8266FC429653CA700C3F214 /* APZFaceDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APZFaceDetector.swift; sourceTree = "<group>"; };
+        01FCDDE22996084C00FF115B /* APZGetSimDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APZGetSimDetails.swift; sourceTree = "<group>"; };
+        01C6B05429BAFD9E001A372D /* DenyPtrace.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = DenyPtrace.c; sourceTree = "<group>"; };
+        01C6B05229BAFD93001A372D /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+        0170A78229ED2A7D006528CD /* NativeService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NativeService.swift; sourceTree = "<group>"; };
+        ABEC9CF72A04CE9E000CD788 /* CryptoSwiftManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoSwiftManager.swift; sourceTree = "<group>"; };
+        358E9C082A2720D500D07857 /* APZNetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APZNetworkMonitor.swift; sourceTree = "<group>"; };
+        ABA1B3622A274D7D000544BA /* APZLoginUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APZLoginUtility.swift; sourceTree = "<group>"; };
+        ABA1B36A2A2DD99D000544BA /* APZFileDownload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APZFileDownload.swift; sourceTree = "<group>"; };
+        ABA1B3682A2DD8ED000544BA /* APZFileUpload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APZFileUpload.swift; sourceTree = "<group>"; };
+        358DA9F42A3082D8006809D7 /* CustomNavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationViewController.swift; sourceTree = "<group>"; };
+        ABA1B36C2A30807D000544BA /* APZInstruction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APZInstruction.swift; sourceTree = "<group>"; };
+        2BF905622A5C0A8400B715BB /* APZRedirectToSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APZRedirectToSettings.swift; sourceTree = "<group>"; };
+        APPZILLONNOTIFISTAGEONE
+		APPZILLONHEADREFERENCE APPZILLONIMPLREFERENCE
+         APPZILLONFRAMEWORKBUILDFILEREF
+        APPZILLONDYNAMICLIBFILEREF
+        APPZILLONSTATICLIBFILEREF
+        APPZILLONEMBDFRMBUILDFILEREF
+        APZRESOURCEBUILDFILEREF
+        APPZILLONFIREBASEMODULEMAPFILEREF
+        APPZILLONFIREBASEPLISTFILEREF
+        APPZILLONFIREBASEBUNDLEFILEREF
+        APPZILLONFIREBASEHEADERFILEREF
+        APPZILLONSPLASHSCREENGIF2
+        
+        SHORTCUTFIRSTICON2
+        SHORTCUTSECONDICON2
+        SHORTCUTTHIRDICON2
+        SHORTCUTFOURTHICON2
+/* End PBXFileReference section */
+
+
+
+
+/* Begin PBXFrameworksBuildPhase section */
+		18942CF815D907260084F792 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+                APPZILLONFRAMEWORKBUILDPHASE
+                APPZILLONSTATICLIBBUILDPHASE
+                APPZILLONDYNAMICLIBBUILDPHASE
+                APPZILLONEMBDFRMBUILDPHASE
+                94675AC72383D2D2000E28D8 /* Speech.framework in Frameworks */,
+                EDDF15A2232FB5050046AD4B /* WebKit.framework in Frameworks */,
+                27924B9F1FE15F14000381D5 /* SafariServices.framework in Frameworks */,
+                8431E94E1EAB776A00CDF7B0 /* UserNotifications.framework in Frameworks */,
+                8494B8171E8CFF900024CF9F /* CoreText.framework in Frameworks */,
+                84480F1D1D1A563700C34FED /* CoreTelephony.framework in Frameworks */,
+                841D19C21BC544C700100357 /* CoreBluetooth.framework in Frameworks */,
+                52CA22E71A5180CA002BB84C /* LocalAuthentication.framework in Frameworks */,
+                84B70CF019E3B4CB004DF54E /* AudioToolbox.framework in Frameworks */,
+				84AA19D817DEF27000D7D892 /* MediaPlayer.framework in Frameworks */,
+				84AA19D617DEF25F00D7D892 /* QuickLook.framework in Frameworks */,
+				841D8D9B1793B52F008CE5B4 /* libiconv.dylib in Frameworks */,
+				841D8D991793B519008CE5B4 /* CoreVideo.framework in Frameworks */,
+				841D8D971793B509008CE5B4 /* CoreMedia.framework in Frameworks */,
+				8406B8E6178570DF008409B1 /* CoreMotion.framework in Frameworks */,
+				8468D29E1632EAE600B2B232 /* MessageUI.framework in Frameworks */,
+				84C85C0E15E8DDE500A52AE2 /* libz.1.2.5.dylib in Frameworks */,
+				84C85C0C15E8DDC900A52AE2 /* QuartzCore.framework in Frameworks */,
+				84C85C0615E8DD9900A52AE2 /* CFNetwork.framework in Frameworks */,
+                84C85C0A15E8DDB100A52AE2 /* SystemConfiguration.framework in Frameworks */,
+				84C85C0815E8DD9F00A52AE2 /* MobileCoreServices.framework in Frameworks */,
+				1882486315E777930085F836 /* CoreLocation.framework in Frameworks */,
+				1882486215E7778D0085F836 /* MapKit.framework in Frameworks */,
+				5202C56C15E5FB2200B21D4C /* libsqlite3.0.dylib in Frameworks */,
+				1890589C15E363FE00DEB733 /* EventKitUI.framework in Frameworks */,
+				1890589B15E363F900DEB733 /* EventKit.framework in Frameworks */,
+				1897F59515DA175C00C457C0 /* AVFoundation.framework in Frameworks */,
+				18942D0015D907260084F792 /* UIKit.framework in Frameworks */,
+				18942D0215D907260084F792 /* Foundation.framework in Frameworks */,
+				18942D0415D907260084F792 /* CoreGraphics.framework in Frameworks */,
+				189D8C8D15DE4D3300FD89CC /* Security.framework in Frameworks */,
+                D5BA38F91E48851A00DCAFCD /* libc++.tbd in Frameworks */,
+                D5BA38F71E48849000DCAFCD /* CoreImage.framework in Frameworks */,
+                EDEBEDE221197FC1004DBE34 /* ImageIO.framework in Frameworks */,
+                F474A1112642B42500120F90 /* CallKit.framework in Frameworks */,
+                F4BF80E325DE523A00FAD515 /* Contacts.framework in Frameworks */,
+                F4BF80E525DE524200FAD515 /* ContactsUI.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		18942CF015D907260084F792 = {
+			isa = PBXGroup;
+			children = (
+				18942D0515D907260084F792 /* Appzillon */,
+				18942CFE15D907260084F792 /* Frameworks */,
+                27BF321A20109B02002B97D4 /* Resources */,
+				18942CFC15D907260084F792 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		18942CFC15D907260084F792 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				18942CFB15D907260084F792 /* APPZILLONPRODUCTNAME.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		18942CFE15D907260084F792 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+                APPZILLONFRAMEWORKGROUP
+                APPZILLONSTATICLIBGROUP
+                APPZILLONDYNAMICLIBGROUP
+                APPZILLONEMBDFRMGROUP
+                94675AC62383D2D1000E28D8 /* Speech.framework */,
+                EDDF15A1232FB5050046AD4B /* WebKit.framework */,
+                27924B9E1FE15F14000381D5 /* SafariServices.framework */,
+                8431E94D1EAB776A00CDF7B0 /* UserNotifications.framework */,
+                8494B8161E8CFF900024CF9F /* CoreText.framework */,
+				84AA19D717DEF27000D7D892 /* MediaPlayer.framework */,
+				84AA19D517DEF25F00D7D892 /* QuickLook.framework */,
+                84480F1C1D1A563700C34FED /* CoreTelephony.framework */,
+				841D19C11BC544C700100357 /* CoreBluetooth.framework */,
+                84B70CEF19E3B4CB004DF54E /* AudioToolbox.framework */,
+                84A9FB8E19E2A4B90011C043 /* LocalAuthentication.framework */,
+				841D8D9A1793B52F008CE5B4 /* libiconv.dylib */,
+				841D8D981793B519008CE5B4 /* CoreVideo.framework */,
+				841D8D961793B509008CE5B4 /* CoreMedia.framework */,
+				8406B8E5178570DF008409B1 /* CoreMotion.framework */,
+				8468D29D1632EAE600B2B232 /* MessageUI.framework */,
+				8470CDA616007E5C0051D9F1 /* SenTestingKit.framework */,
+				84C85C0D15E8DDE500A52AE2 /* libz.1.2.5.dylib */,
+				5202C56B15E5FB2200B21D4C /* libsqlite3.0.dylib */,
+				188E0175162D581C00635F52 /* Foundation.framework */,
+				84C85C0B15E8DDC900A52AE2 /* QuartzCore.framework */,
+				84C85C0915E8DDB100A52AE2 /* SystemConfiguration.framework */,
+				84C85C0715E8DD9F00A52AE2 /* MobileCoreServices.framework */,
+				84C85C0515E8DD9800A52AE2 /* CFNetwork.framework */,
+				1882486015E7776E0085F836 /* MapKit.framework */,
+				1882485E15E777640085F836 /* CoreLocation.framework */,
+				1897F59415DA175C00C457C0 /* AVFoundation.framework */,
+				1890589915E363DC00DEB733 /* EventKit.framework */,
+				1890589715E363D200DEB733 /* EventKitUI.framework */,
+				189D8C8C15DE4D3300FD89CC /* Security.framework */,
+				18942CFF15D907260084F792 /* UIKit.framework */,
+				18942D0115D907260084F792 /* Foundation.framework */,
+				18942D0315D907260084F792 /* CoreGraphics.framework */,
+                D5BA38F81E48851A00DCAFCD /* libc++.tbd */,
+                D5BA38F61E48849000DCAFCD /* CoreImage.framework */,
+                EDEBEDE121197FC1004DBE34 /* ImageIO.framework */,
+                F474A1102642B42500120F90 /* CallKit.framework */,
+                F4BF80E425DE524200FAD515 /* ContactsUI.framework */,
+                F4BF80E225DE523A00FAD515 /* Contacts.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+	18942D0515D907260084F792 /* Appzillon */ = {
+			isa = PBXGroup;
+			children = (
+                84BA434A172ABB2E0097AFCE /* Assets */,
+				84538C621D3DF09A009D75A0 /* Plist */,
+				8493A16917F3F70F0052288E /* Plugins */,
+				8493A16817F3F7060052288E /* Util */,
+				8477E3851D4B5AB6005467EC /* MainFiles */,
+				843768E11D7713FC00514B89 /* NativeExtensiblity */,
+				18942D0615D907260084F792 /* Supporting Files */,
+				843CA0571BC690D9005B822E /* Images.xcassets */,
+				84C26B8C1C046BD700ABFC04 /* ContainerImages */,
+			);
+			path = Appzillon;
+			sourceTree = "<group>";
+		};
+		18942D0615D907260084F792 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+                APPZILLONNOTIFISTAGETWO
+                94B63EDD23BDD42100F1C9C9 /* Appzillon-Bridging-Header.h */,
+				18942D0715D907260084F792 /* Appzillon-Info.plist */,
+				18942D0815D907260084F792 /* InfoPlist.strings */,
+				18942D0D15D907260084F792 /* Appzillon-Prefix.pch */,
+                C031D1F21F445C9700B06302 /* noPhoto.png */,
+                C031D1EC1F4452D200B06302 /* nextSong.png */,
+                C031D1EA1F4452D200B06302 /* pauseIcon.png */,
+                C031D1EB1F4452D200B06302 /* playIcon.png */,
+                C031D1ED1F4452D200B06302 /* previousSong.png */,
+                01C6B05429BAFD9E001A372D /* DenyPtrace.c */,
+                01C6B05229BAFD93001A372D /* main.swift */,
+                APPZILLONFIREBASEMODULEMAPGROUP
+                APPZILLONFIREBASEPLISTGROUP
+                APPZILLONFIREBASEBUNDLEGROUP
+                APPZILLONFIREBASEHEADERGROUP
+                SHORTCUTFIRSTICON3
+                SHORTCUTSECONDICON3
+                SHORTCUTTHIRDICON3
+                SHORTCUTFOURTHICON3
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+       27BF321A20109B02002B97D4 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				APZRESOURCEGROUP
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		843768E11D7713FC00514B89 /* NativeExtensiblity */ = {
+			isa = PBXGroup;
+			children = (
+                   0170A78229ED2A7D006528CD /* NativeService.swift */,
+                APPZILLONHEADGROUP APPZILLONIMPLGROUP
+			);
+			name = NativeExtensiblity;
+			sourceTree = "<group>";
+		};
+		84538C621D3DF09A009D75A0 /* Plist */ = {
+			isa = PBXGroup;
+			children = (
+				84538C631D3DF09A009D75A0 /* containerprops.plist */,
+			);
+			name = Plist;
+			path = plist;
+			sourceTree = "<group>";
+		};
+		8477E3851D4B5AB6005467EC /* MainFiles */ = {
+			isa = PBXGroup;
+			children = (
+                9DF30C92281BC07B007A1D7C /* AppzillonAppDelegate.swift */,
+                85E2DE2227DB4AF90000D515 /* AppDelegate+Handlers.swift */,
+                AB0D179F27FEA9D100D47562 /* AppDelegate+Notifications.swift */,
+				8477E3891D4B5F4C005467EC /* AppzillonViewController */,
+				18942D1415D907260084F792 /* AppzillonViewController.xib */,
+				52109F5C15E745650011FA91 /* Azuritei_phoneViewController.xib */,
+			);
+			name = MainFiles;
+			sourceTree = "<group>";
+		};
+		8477E3891D4B5F4C005467EC /* AppzillonViewController */ = {
+			isa = PBXGroup;
+			children = (
+                F469F0EF2760B7CE007FE570 /* AppzillonUtil */,
+				18942D1115D907260084F792 /* AppzillonViewController.h */,
+				18942D1215D907260084F792 /* AppzillonViewController.m */,
+				84565FDC1D4A3E580008D202 /* AppzillonViewController+ServerCalls.h */,
+				84565FDD1D4A3E580008D202 /* AppzillonViewController+ServerCalls.m */,
+                ABAFF160287D6E15000BCDBC /* AZPluginDoneDelegate.h */,
+                855B5BBC2757441500BFC8F5 /* AppzillonViewController+SplashScreen.swift */,
+                9D9A4E6F275F2BCE00F0C8F7 /* AppzillonViewController+GestureTimer.swift */,
+                9D9A4E6D275F2BCE00F0C8F7 /* APZGestureRecognizable.swift */,
+                85D5695F27732E11009A1615 /* AppzillonViewController+ViewHandlers.swift */,
+                ABD6872827BE418C006156A1 /* AppzillonViewController+UserSettings.swift */,
+                F4348E0827C751C2004E6D51 /* AppzillonViewController+EventMonitor.swift */,
+                EDE1810A27C3695100E58BA3 /* AppzillonViewController+KeyBoardListener.swift */,
+                85F0055627E345580038B8E1 /* AppzillonViewController+PluginCalls.swift */,
+                8533A06227FC1BD50015BE5C /* AppzillonViewController+WebView.swift */,
+                ED87305A27FC6EE300CDCEA7 /* AppzillonViewController+Orientation.swift */,
+                F4B36BFB281A5D2300B0014F /* AppzillonViewController+Location.swift */,
+                F4B36BFD281AA6CD00B0014F /* AppzillonViewController+ServerCalls.swift */,
+                APPZILLONSPLASHSCREENGIF3
+			);
+			name = AppzillonViewController;
+			sourceTree = "<group>";
+		};
+		8493A16817F3F7060052288E /* Util */ = {
+			isa = PBXGroup;
+			children = (
+                F444E31E2716DE4000D3C8E1 /* QCropper */,
+                AB378232278716A1007F466A /* Network */,
+				8403D3E61D478D19001527EC /* CallServer.h */,
+				8403D3E71D478D19001527EC /* CallServer.m */,
+				5202C56A15E5FAB700B21D4C /* sqlite3.h */,
+				84376CF71772DEF2002B2522 /* Constants.h */,
+				2718B9BB20258D6400463D4A /* HashUtility.h */,
+				2718B9BC20258D6400463D4A /* HashUtility.m */,
+				271D2A662028328B00CAB0D0 /* CryptoUtility.h */,
+				271D2A672028328B00CAB0D0 /* CryptoUtility.m */,
+                F40B70A1270D9758009A0C03 /* StringConstants.swift */,
+                F48D091A272BDA8800F7A7A1 /* FileManagerUtility.swift */,
+                F49CAC9F2750C9D60017DAB4 /* WindowUtility.swift */,
+                858E487C276A018700981DBA /* KeychainUtility.swift */,
+                F4B919AF2775B6030069F6D0 /* FileOpenUtility.swift */,
+                ED782195278ECD8900EE2B79 /* AppzillonImageUtility.swift */,
+                F4F34C3F27994F3F00284202 /* APZTelephonyUtil.swift */,
+                85E0F92127AA90E40096BEC2 /* APZJBDetector.h */,
+                85E0F91F27AA90AC0096BEC2 /* APZJBDetector.m */,
+                ED0223A927AA649E006FE869 /* MiscellaneousMethod.swift */,
+                85E0F94227B151BD0096BEC2 /* Base64.swift */,
+                F4A738A727F4625A005BCE7F /* Extensions */,
+                ED7F14F7283F4674008D0C30 /* APZLogger.swift */,
+                01192AFE28B5FCCE00FF65DF /* APZJsonUtility.swift */,
+                A8DB1D8E28F5378A0055B4F6 /* APZClearWebCache.swift */,
+                AB7383262967FC1000888F7B /* UIImage+Gif.swift */,
+                ABEC9CF72A04CE9E000CD788 /* CryptoSwiftManager.swift */,
+			);
+			name = Util;
+			sourceTree = "<group>";
+		};
+		8493A16917F3F70F0052288E /* Plugins */ = {
+			isa = PBXGroup;
+			children = (
+				8493A17917F3FB240052288E /* APZPlugin.h */,
+				8493A17A17F3FB240052288E /* APZPlugin.m */,
+                94224C0223C3700100019CDA /* Vision */,
+                948A52CE23F1679900848D71 /* Face-Detector */,
+                85D729C428B8D3030088B1AB /* BarcodeGenerator */,
+                85D729C628B8D4F10088B1AB /* BarcodeScanner */,
+                85D729CC28B8D6A80088B1AB /* Camera */,
+                85D729CE28B8D7C40088B1AB /* Media */,
+                85D729CF28B8D8FC0088B1AB /* File-Download */,
+                85D729D128BCD43A0088B1AB /* File-Upload */,
+				84AA19BD17DEE07E00D7D892 /* File-Browser */,
+				84D2021117C3B2B900A0CA98 /* Map */,
+                84D3B0281A612933001037AD /* OTA */,
+                8493A16A17F3F7180052288E /* Sensor-Plugins */,
+                85E99F7526FB457B00B93245 /* APZDeepLinking.swift */,
+                F40B70BD270F3436009A0C03 /* Contact */,
+                F40B70B8270F33A9009A0C03 /* Calendar */,
+                8551CB90271028F60044B63A /* Zip */,
+                F48828B8271058A8001995FD /* APZLocale.swift */,
+                85E8B55E271D5571005342FB /* SignaturePad */,
+                85E8B569271D86BE005342FB /* APZFileOperation.swift */,
+                F4218D7B2727CDE0003D8810 /* APZUserLocation.swift */,
+                ABED6EC4272C1836000514B4 /* APZVibrate.swift */,
+                F4D0B339273A452E008B0350 /* APZActivityShare.swift */,
+                EDBCBD8C2743C1B800FC5D87 /* APZPullDown.swift */,
+                F4542BAD274E259100F9B58C /* APZDeviceInfo.swift */,
+                9DA5833527564932006020AD /* APZBioAuthentication.swift */,
+                9DEAFEB32750AED50096B327 /* APZBiometricAvailability.swift */,
+                F49CACA127574C630017DAB4 /* APZDevice.swift */,
+                9D5FB5FF275F778100B89D6E /* APZAppstoreReview.swift */,
+                ABCE355F275DDD82007BFD78 /* WebView */,
+                9DE5D32E2770EEBA00CAB413 /* FileCryptography */,
+                EDE7FCEA276866A1004A126E /* APZMail.swift */,
+                F469F0F0276323B1007FE570 /* APZFileSize.swift */,
+                F469F0F227634B0E007FE570 /* APZOpenFile.swift */,
+                85D5696127747DB1009A1615 /* APZEncrypt.swift */,
+                85D5696327747DC3009A1615 /* APZDecrypt.swift */,
+                F4B919A92772EE4F0069F6D0 /* APZBrowser.swift */,
+                ED5598122771EEAB00D909DE /* APZBase64File.swift */,
+                9D146ABB2795C23400ECAB5A /* APZProcessImage.swift */,
+                9D8BD6A32796A43800F5F2FA /* APZSecureStorage.swift */,
+                9D1CE4AB27B5167400862933 /* APZStatusBarColor.swift */,
+                9DBBDA5C27CE2A2400D0043A /* APZGpsStatus.swift */,
+                ED31AF9C27E7357B00ACD508 /* APZPDFGenerator.swift */,
+                F4D3F68827E1B4E900F515F8 /* APZSpeechToText.swift */,
+                8537D90F28115D4900651CA7 /* APZStorage.swift */,
+                9DFC3EAD28C0C32B00EF0EAE /* APZAccessDeviceFiles.swift */,
+                AB2C680A2949D0F700D41534 /* APZModifyShortCutItems.swift */,
+                AB7383222966A3A800888F7B /* APZCheckNFCSupport.swift */,
+                011305D92965518C00847569 /* APZCheckNotificationStatus.swift */,
+                01FCDDE22996084C00FF115B /* APZGetSimDetails.swift */,
+            );
+			name = Plugins;
+			sourceTree = "<group>";
+		};
+		8493A16A17F3F7180052288E /* Sensor-Plugins */ = {
+			isa = PBXGroup;
+			children = (
+                2BF905622A5C0A8400B715BB /* APZRedirectToSettings.swift */,
+                F4C9324827B3BA3700637EE8 /* APZLocationPermission.swift */,
+                F4C9324A27B66A2A00637EE8 /* APZLocationDelegate.swift */,
+                F4C9324C27BCDEB500637EE8 /* APZGps.swift */,
+                ED73714C2806ABEB00FA9578 /* APZBattery.swift */,
+			);
+			name = "Sensor-Plugins";
+			sourceTree = "<group>";
+		};
+		8494D3041E57325400E0613A /* BarcodeScanner */ = {
+			isa = PBXGroup;
+			children = (
+                F4A5398E272133E200F148DF /* APZBarcodeGallery.swift */,
+                F4A5398C271EA5C900F148DF /* BarCodeViewController.swift */,
+                F4A5398A271EA5B300F148DF /* APZBarcode.swift */,
+                2746083121AEB0190033C270 /* BarcodeFlashImages */,
+			);
+			name = BarcodeScanner;
+			sourceTree = "<group>";
+		};
+		84AA19BD17DEE07E00D7D892 /* File-Browser */ = {
+			isa = PBXGroup;
+			children = (
+                F4F34C4727A3EB6000284202 /* APZFileBrowser.swift */,
+				84AA19BF17DEE09900D7D892 /* App-Browser */,
+				84AA19BE17DEE09000D7D892 /* Gallery */,
+                2746082921AE9B4D0033C270 /* fileBrowserIcons */,
+			);
+			name = "File-Browser";
+			sourceTree = "<group>";
+		};
+		84AA19BE17DEE09000D7D892 /* Gallery */ = {
+			isa = PBXGroup;
+			children = (
+                F49B6D4C273BA12B008FEFC9 /* VideoGalleryController.swift */,
+                AB68FD8827AD38800050674F /* ImageGalleryController.swift */,
+                AB68FD8F27B13E020050674F /* ImageGalleryDoneDelegate.swift */,
+                85E2DE1027C4F2B70000D515 /* MusicGalleryController.swift */,
+                85E2DE1227C62BD30000D515 /* MusicGalleryDoneDelegate.swift */,
+            );
+			name = Gallery;
+			sourceTree = "<group>";
+		};
+		84AA19BF17DEE09900D7D892 /* App-Browser */ = {
+			isa = PBXGroup;
+			children = (
+                F4F34C4927A926DA00284202 /* AppBrowserController.swift */,
+                F4E18F6727B0FB4600341839 /* AppBrowserDelegate.swift */,
+                F48D092127310C9200F7A7A1 /* VideoViewController.swift */,
+                F4D777762787186800C5CE66 /* ImageViewController.swift */,
+                F4D77778278BF5F600C5CE66 /* FileLocationController.swift */,
+                F47471B1278EDDA8000EE9D9 /* FileLocationDelegate.swift */,
+                F4F34C43279FF3F000284202 /* FilesViewController.swift */,
+                F4F34C45279FF70B00284202 /* FilesViewDelegate.swift */,
+                8544C94828586F7100D116EC /* MusicViewController.swift */,
+                85C1E6FA285C518100EB437C /* MusicDelegate.swift */,
+			);
+			name = "App-Browser";
+			sourceTree = "<group>";
+		};
+		84D2021117C3B2B900A0CA98 /* Map */ = {
+			isa = PBXGroup;
+			children = (
+                EDB4911127E9AD3C0029CD6F /* APZMap.swift */,
+                851B7C8A28A233FA0085E93F /* APZMapDelegate.swift */,
+                851B7C88289BD4F90085E93F /* APZMapViewController.swift */,
+			);
+			name = Map;
+			sourceTree = "<group>";
+		};
+       84D3B0281A612933001037AD /* OTA */ = {
+           isa = PBXGroup;
+           children = (
+               846EACE41A53EF1900F18F26 /* APZOTARefresh.h */,
+               846EACE51A53EF1900F18F26 /* APZOTARefresh.m */,
+               ABED6EC62732927D000514B4 /* APZDeleteSubApp.swift */,
+                ABA1B36C2A30807D000544BA /* APZInstruction.swift */,
+           );
+           name = OTA;
+           sourceTree = "<group>";
+        };
+         948A52CE23F1679900848D71 /* Face-Detector */ = {
+            isa = PBXGroup;
+            children = (
+                A8266FC429653CA700C3F214 /* APZFaceDetector.swift */,
+                948A52CF23F1699900848D71 /* VNFaceDetector */,
+            );
+            path = "Face-Detector";
+            sourceTree = "<group>";
+        };
+        948A52CF23F1699900848D71 /* VNFaceDetector */ = {
+            isa = PBXGroup;
+            children = (
+                948A52D023F169C700848D71 /* PreviewViewController.swift */,
+                948A52D123F169C800848D71 /* MainFaceDetectorViewController.swift */,
+            );
+            path = VNFaceDetector;
+            sourceTree = "<group>";
+        };
+         94224C0223C3700100019CDA /* Vision */ = {
+			isa = PBXGroup;
+			children = (
+                018E5FDC2967D8320066F0D5 /* APZVision.swift */,
+				94B63EE023BDD43400F1C9C9 /* WeScan */,
+                ED7E852C24728DF800BDE03D /* MyPreviewController.swift */,
+                9464EBB6246FD754001E91E5 /* MainViewController.swift */,
+                EDB09BA1248F6D4A00159E42 /* AppzillonDocumentVerification.swift */,
+			);
+			path = Vision;
+			sourceTree = "<group>";
+		};
+        94B63EE023BDD43400F1C9C9 /* WeScan */ = {
+			isa = PBXGroup;
+			children = (
+				94B63F5D23BE3C5500F1C9C9 /* HookClassFromImageScanner.swift */,
+				94B63EE423BDD43400F1C9C9 /* ImageScannerController.swift */,
+				94B63EE723BDD43400F1C9C9 /* Scan */,
+				94B63EEE23BDD43400F1C9C9 /* Extensions */,
+				94B63EFA23BDD43400F1C9C9 /* Edit */,
+				94B63EFE23BDD43400F1C9C9 /* Common */,
+				94B63F0523BDD43400F1C9C9 /* Review */,
+				94B63F0A23BDD43400F1C9C9 /* Assets */,
+				94B63F1723BDD43400F1C9C9 /* Protocols */,
+				94B63F1B23BDD43400F1C9C9 /* Session */,
+			);
+			path = WeScan;
+			sourceTree = "<group>";
+		};
+		94B63EE723BDD43400F1C9C9 /* Scan */ = {
+			isa = PBXGroup;
+			children = (
+				94B63EE823BDD43400F1C9C9 /* RectangleFeaturesFunnel.swift */,
+				94B63EE923BDD43400F1C9C9 /* CaptureSessionManager.swift */,
+				94B63EEA23BDD43400F1C9C9 /* ShutterButton.swift */,
+				94B63EEB23BDD43400F1C9C9 /* FocusRectangleView.swift */,
+				94B63EEC23BDD43400F1C9C9 /* ScannerViewController.swift */,
+			);
+			path = Scan;
+			sourceTree = "<group>";
+		};
+		94B63EEE23BDD43400F1C9C9 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				94B63EEF23BDD43400F1C9C9 /* AVCaptureVideoOrientation+Utils.swift */,
+				94B63EF023BDD43400F1C9C9 /* CGPoint+Utils.swift */,
+				94B63EF123BDD43400F1C9C9 /* CGSize+Utils.swift */,
+				94B63EF223BDD43400F1C9C9 /* CGImagePropertyOrientation.swift */,
+				94B63EF323BDD43400F1C9C9 /* CIImage+Utils.swift */,
+				94B63EF423BDD43400F1C9C9 /* CGAffineTransform+Utils.swift */,
+				94B63EF523BDD43400F1C9C9 /* CGRect+Utils.swift */,
+				94B63EF623BDD43400F1C9C9 /* Array+Utils.swift */,
+				94B63EF723BDD43400F1C9C9 /* UIImage+Orientation.swift */,
+				94B63EF823BDD43400F1C9C9 /* UIImage+Utils.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		94B63EFA23BDD43400F1C9C9 /* Edit */ = {
+			isa = PBXGroup;
+			children = (
+				94B63EFB23BDD43400F1C9C9 /* ZoomGestureController.swift */,
+				94B63EFC23BDD43400F1C9C9 /* EditScanViewController.swift */,
+			);
+			path = Edit;
+			sourceTree = "<group>";
+		};
+		94B63EFE23BDD43400F1C9C9 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				94B63EFF23BDD43400F1C9C9 /* EditScanCornerView.swift */,
+				94B63F0023BDD43400F1C9C9 /* Error.swift */,
+				94B63F0123BDD43400F1C9C9 /* VisionRectangleDetector.swift */,
+				94B63F0223BDD43400F1C9C9 /* CIRectangleDetector.swift */,
+				94B63F0323BDD43400F1C9C9 /* QuadrilateralView.swift */,
+				94B63F0423BDD43400F1C9C9 /* Quadrilateral.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		94B63F0523BDD43400F1C9C9 /* Review */ = {
+			isa = PBXGroup;
+			children = (
+				94B63F0623BDD43400F1C9C9 /* ReviewViewController.swift */,
+			);
+			path = Review;
+			sourceTree = "<group>";
+		};
+		94B63F0A23BDD43400F1C9C9 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				94B63F0B23BDD43400F1C9C9 /* flash.png */,
+				94B63F0C23BDD43400F1C9C9 /* rotate@3x.png */,
+				94B63F0D23BDD43400F1C9C9 /* rotate.png */,
+				94B63F0E23BDD43400F1C9C9 /* rotate@2x.png */,
+				94B63F0F23BDD43400F1C9C9 /* flash@2x.png */,
+				94B63F1023BDD43400F1C9C9 /* flashUnavailable@2x.png */,
+				94B63F1123BDD43400F1C9C9 /* flashUnavailable.png */,
+				94B63F1223BDD43400F1C9C9 /* flashUnavailable@3x.png */,
+				94B63F1323BDD43400F1C9C9 /* flash@3x.png */,
+				94B63F1423BDD43400F1C9C9 /* enhance@3x.png */,
+				94B63F1523BDD43400F1C9C9 /* enhance@2x.png */,
+				94B63F1623BDD43400F1C9C9 /* enhance.png */,
+			);
+			path = Assets;
+			sourceTree = "<group>";
+		};
+		94B63F1723BDD43400F1C9C9 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				94B63F1823BDD43400F1C9C9 /* CaptureDevice.swift */,
+				94B63F1923BDD43400F1C9C9 /* Transformable.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		94B63F1B23BDD43400F1C9C9 /* Session */ = {
+			isa = PBXGroup;
+			children = (
+				94B63F1C23BDD43400F1C9C9 /* CaptureSession+Flash.swift */,
+				94B63F1D23BDD43400F1C9C9 /* CaptureSession+Orientation.swift */,
+				94B63F1E23BDD43400F1C9C9 /* CaptureSession.swift */,
+				94B63F1F23BDD43400F1C9C9 /* CaptureSession+Focus.swift */,
+			);
+			path = Session;
+			sourceTree = "<group>";
+		};
+        F40B70B8270F33A9009A0C03 /* Calendar */ = {
+            isa = PBXGroup;
+            children = (
+                F40B70BB270F3414009A0C03 /* CalendarHelper.swift */,
+                F40B70B9270F340C009A0C03 /* APZCalendar.swift */,
+            );
+            path = Calendar;
+            sourceTree = "<group>";
+        };
+        F40B70BD270F3436009A0C03 /* Contact */ = {
+            isa = PBXGroup;
+            children = (
+                F40B70C2270F3480009A0C03 /* ContactHelper.swift */,
+                F40B70C0270F347A009A0C03 /* APZContact+Picker.swift */,
+                F40B70BE270F3473009A0C03 /* APZContact.swift */,
+            );
+            path = Contact;
+            sourceTree = "<group>";
+        };
+        8551CB90271028F60044B63A /* Zip */ = {
+            isa = PBXGroup;
+            children = (
+                8551CB96271029270044B63A /* APZZip.swift */,
+                8551CB91271029270044B63A /* Archive.swift */,
+                8551CB95271029270044B63A /* Archive+MemoryFile.swift */,
+                8551CB94271029270044B63A /* Archive+Reading.swift */,
+                8551CB93271029270044B63A /* Archive+Writing.swift */,
+                8551CB97271029270044B63A /* Data+Compression.swift */,
+                8551CB98271029270044B63A /* Data+Serialization.swift */,
+                8551CB92271029270044B63A /* Entry.swift */,
+                8551CB99271029270044B63A /* FileManager+ZIP.swift */,
+            );
+            path = Zip;
+            sourceTree = "<group>";
+        };
+        F444E31E2716DE4000D3C8E1 /* QCropper */ = {
+            isa = PBXGroup;
+            children = (
+                F444E31F2716DE4000D3C8E1 /* CustomUI */,
+                F444E3242716DE4000D3C8E1 /* Core */,
+                F444E3322716DE4000D3C8E1 /* HelperExtensions */,
+                F444E3372716DE4000D3C8E1 /* Overlay */,
+                F444E33B2716DE4000D3C8E1 /* Assets */,
+            );
+            path = QCropper;
+            sourceTree = "<group>";
+        };
+        F444E31F2716DE4000D3C8E1 /* CustomUI */ = {
+            isa = PBXGroup;
+            children = (
+                F444E3202716DE4000D3C8E1 /* Toolbar.swift */,
+                F444E3212716DE4000D3C8E1 /* TopBar.swift */,
+                F444E3222716DE4000D3C8E1 /* AngleRuler.swift */,
+                F444E3232716DE4000D3C8E1 /* AspectRatioPicker.swift */,
+                358DA9F42A3082D8006809D7 /* CustomNavigationViewController.swift */,
+            );
+            path = CustomUI;
+            sourceTree = "<group>";
+        };
+        F444E3242716DE4000D3C8E1 /* Core */ = {
+            isa = PBXGroup;
+            children = (
+                F444E3252716DE4000D3C8E1 /* Constants.swift */,
+                F444E3262716DE4000D3C8E1 /* CropperProtocols */,
+                F444E32E2716DE4000D3C8E1 /* ScrollViewContainer.swift */,
+                F444E32F2716DE4000D3C8E1 /* CropperState.swift */,
+                F444E3302716DE4000D3C8E1 /* CropperViewController.swift */,
+                F444E3312716DE4000D3C8E1 /* AspectRatio.swift */,
+            );
+            path = Core;
+            sourceTree = "<group>";
+        };
+        F444E3262716DE4000D3C8E1 /* CropperProtocols */ = {
+            isa = PBXGroup;
+            children = (
+                F444E3272716DE4000D3C8E1 /* CropBoxEdgeDraggable.swift */,
+                F444E3282716DE4000D3C8E1 /* StateRestorable.swift */,
+                F444E3292716DE4000D3C8E1 /* Stasisable.swift */,
+                F444E32A2716DE4000D3C8E1 /* Flipable.swift */,
+                F444E32B2716DE4000D3C8E1 /* Rotatable.swift */,
+                F444E32C2716DE4000D3C8E1 /* AngleAssist.swift */,
+                F444E32D2716DE4000D3C8E1 /* AspectRatioSettable.swift */,
+            );
+            path = CropperProtocols;
+            sourceTree = "<group>";
+        };
+        F444E3322716DE4000D3C8E1 /* HelperExtensions */ = {
+            isa = PBXGroup;
+            children = (
+                F444E3332716DE4000D3C8E1 /* UIImage+Helper.swift */,
+                F444E3342716DE4000D3C8E1 /* UIView+Helper.swift */,
+                F444E3352716DE4000D3C8E1 /* UIImage+Cropping.swift */,
+                F444E3362716DE4000D3C8E1 /* HelperExtensions.swift */,
+            );
+            path = HelperExtensions;
+            sourceTree = "<group>";
+        };
+        F444E3372716DE4000D3C8E1 /* Overlay */ = {
+            isa = PBXGroup;
+            children = (
+                F444E3382716DE4000D3C8E1 /* CropBox.swift */,
+                F444E3392716DE4000D3C8E1 /* Overlay.swift */,
+                F444E33A2716DE4000D3C8E1 /* Grid.swift */,
+            );
+            path = Overlay;
+            sourceTree = "<group>";
+        };
+        F444E33B2716DE4000D3C8E1 /* Assets */ = {
+            isa = PBXGroup;
+            children = (
+                F444E33C2716DE4000D3C8E1 /* QCropper.check.mark@2x.png */,
+                F444E33D2716DE4000D3C8E1 /* QCropper.rotate.right.fill@2x.png */,
+                F444E33E2716DE4000D3C8E1 /* QCropper.rotate.right.fill@3x.png */,
+                F444E33F2716DE4000D3C8E1 /* QCropper.check.mark@3x.png */,
+                F444E3402716DE4000D3C8E1 /* QCropper.aspectratio.fill@2x.png */,
+                F444E3412716DE4000D3C8E1 /* QCropper.aspectratio.fill@3x.png */,
+                F444E3422716DE4000D3C8E1 /* QCropper.flip.horizontal.fill@3x.png */,
+                F444E3432716DE4000D3C8E1 /* QCropper.flip.horizontal.fill@2x.png */,
+            );
+            path = Assets;
+            sourceTree = "<group>";
+        };
+        85E8B55E271D5571005342FB /* SignaturePad */ = {
+            isa = PBXGroup;
+            children = (
+                85B3795D2716EE6100C6BE50 /* APZSignaturePad.swift */,
+                85B379552716ED4800C6BE50 /* SignaturePad.swift */,
+                85B379522716ED4800C6BE50 /* SignaturePadHandler.swift */,
+                85B379532716ED4800C6BE50 /* SignaturePadViewController.swift */,
+                85B379542716ED4800C6BE50 /* SignaturePadViewController.xib */,
+            );
+            path = SignaturePad;
+            sourceTree = "<group>";
+        };
+        ABCE355F275DDD82007BFD78 /* WebView */ = {
+            isa = PBXGroup;
+            children = (
+                ABCE353927564A8A007BFD78 /* APZWebview.swift */,
+                ABCE353B27577005007BFD78 /* WebViewController.swift */,
+                ABCE353D27577033007BFD78 /* APZWebviewDelegate.swift */,
+            );
+            path = WebView;
+            sourceTree = "<group>";
+        };
+        F469F0EF2760B7CE007FE570 /* AppzillonUtil */ = {
+            isa = PBXGroup;
+            children = (
+                ABA1B3622A274D7D000544BA /* APZLoginUtility.swift */,
+                F469F0ED27607F27007FE570 /* UserPreferenceUtility.swift */,
+                ABE1BD26276B123E0047BDF0 /* AppzillonMainUtility.swift */,
+                85F493A02786FEB700E51D7E /* APZAppDelegateUtility.swift */,
+                9DAFA1C027BA543100C92461 /* APZUserDefaults.swift */,
+                358E9C082A2720D500D07857 /* APZNetworkMonitor.swift */,
+            );
+            path = AppzillonUtil;
+            sourceTree = "<group>";
+        };
+        9DE5D32E2770EEBA00CAB413 /* FileCryptography */ = {
+            isa = PBXGroup;
+            children = (
+                9DE5D32F2770EEBA00CAB413 /* APZFileDecryption.swift */,
+                9DE5D3302770EEBA00CAB413 /* APZFileEncryption.swift */,
+            );
+            path = FileCryptography;
+            sourceTree = "<group>";
+        };
+        AB378232278716A1007F466A /* Network */ = {
+            isa = PBXGroup;
+            children = (
+                AB378233278716C0007F466A /* APZNetworkManager.swift */,
+                AB378235278716D5007F466A /* APZNetworkUtility.swift */,
+                AB378237278D9934007F466A /* APZReachability.swift */,
+                9D7B8F5327FD99F50046D028 /* StringEscapeHandler.swift */,
+            );
+            path = Network;
+            sourceTree = "<group>";
+        };
+        F4A738A727F4625A005BCE7F /* Extensions */ = {
+            isa = PBXGroup;
+            children = (
+                F4A738A827F46279005BCE7F /* UIColor+Extension.swift */,
+            );
+            path = Extensions;
+            sourceTree = "<group>";
+        };
+        85D729C428B8D3030088B1AB /* BarcodeGenerator */ = {
+            isa = PBXGroup;
+            children = (
+                F48D0918272946DC00F7A7A1 /* APZBarcodeGenerator.swift */,
+            );
+            path = BarcodeGenerator;
+            sourceTree = "<group>";
+        };
+        85D729C628B8D4F10088B1AB /* BarcodeScanner */ = {
+            isa = PBXGroup;
+            children = (
+                F4A5398E272133E200F148DF /* APZBarcodeGallery.swift */,
+                F4A5398C271EA5C900F148DF /* BarCodeViewController.swift */,
+                F4A5398A271EA5B300F148DF /* APZBarcode.swift */,
+                2746083121AEB0190033C270 /* BarcodeFlashImages */,
+            );
+            path = BarcodeScanner;
+            sourceTree = "<group>";
+        };
+        85D729CC28B8D6A80088B1AB /* Camera */ = {
+            isa = PBXGroup;
+            children = (
+                F444E31C2716DE2800D3C8E1 /* APZCamera.swift */,
+            );
+            path = Camera;
+            sourceTree = "<group>";
+        };
+        85D729CE28B8D7C40088B1AB /* Media */ = {
+            isa = PBXGroup;
+            children = (
+                85F0C86D273BC375002E2ED2 /* AudioHelper.swift */,
+                855B5BB6273E4FBE00BFC8F5 /* APZAudio.swift */,
+            );
+            path = Media;
+            sourceTree = "<group>";
+        };
+        85D729CF28B8D8FC0088B1AB /* File-Download */ = {
+            isa = PBXGroup;
+            children = (
+                AB3F1E6629151048004F24E3 /* APZFileDownloadUtil.swift */,
+                ABA1B36A2A2DD99D000544BA /* APZFileDownload.swift */,
+            );
+            path = "File-Download";
+            sourceTree = "<group>";
+        };
+        85D729D128BCD43A0088B1AB /* File-Upload */ = {
+            isa = PBXGroup;
+            children = (
+                AB3F1E6829151059004F24E3 /* APZFileUploadUtil.swift */,
+                ABA1B3682A2DD8ED000544BA /* APZFileUpload.swift */,
+            );
+            path = "File-Upload";
+            sourceTree = "<group>";
+        };
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		18942CFA15D907260084F792 /* Appzillon */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 18942D2E15D907260084F792 /* Build configuration list for PBXNativeTarget "Appzillon" */;
+			buildPhases = (
+				18942CF715D907260084F792 /* Sources */,
+				18942CF815D907260084F792 /* Frameworks */,
+				18942CF915D907260084F792 /* Resources */,
+                271943181FFDFB1F0092D7E3 /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Appzillon;
+			productName = Appzillon;
+			productReference = 18942CFB15D907260084F792 /* APPZILLONPRODUCTNAME.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		18942CF215D907260084F792 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = Appzillon;
+				LastUpgradeCheck = 0500;
+                TargetAttributes = {
+					18942CFA15D907260084F792 = {
+						DevelopmentTeam = APZIOSDEVLOPMENTID;
+                        LastSwiftMigration = 1130;
+						ProvisioningStyle = APPPROVISIONSTYLE;
+					};
+				};
+			};
+			buildConfigurationList = 18942CF515D907260084F792 /* Build configuration list for PBXProject "Appzillon" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+                en,
+			);
+			mainGroup = 18942CF015D907260084F792;
+			productRefGroup = 18942CFC15D907260084F792 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				18942CFA15D907260084F792 /* Appzillon */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		18942CF915D907260084F792 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				84538C641D3DF09A009D75A0 /* containerprops.plist in Resources */,
+				18942D1615D907260084F792 /* AppzillonViewController.xib in Resources */,
+				52109F5D15E745650011FA91 /* Azuritei_phoneViewController.xib in Resources */,
+				84BA434B172ABB2E0097AFCE /* Assets in Resources */,
+                84C26B8D1C046BD700ABFC04 /* ContainerImages in Resources */,
+                2746082A21AE9B4E0033C270 /* fileBrowserIcons in Resources */,
+                2746083221AEB0190033C270 /* BarcodeFlashImages in Resources */,
+                843CA0581BC690D9005B822E /* Images.xcassets in Resources */,
+                C031D1F31F445C9C00B06302 /* noPhoto.png in Resources */,
+                C031D1EF1F44530500B06302 /* nextSong.png in Resources */,
+                C031D1F01F44530700B06302 /* pauseIcon.png in Resources */,
+                C031D1EE1F44530100B06302 /* playIcon.png in Resources */,
+                C031D1F11F44530B00B06302 /* previousSong.png in Resources */,
+                94B63F3A23BDD43400F1C9C9 /* flash.png in Resources */,
+                94B63F3B23BDD43400F1C9C9 /* rotate@3x.png in Resources */,
+                94B63F3D23BDD43400F1C9C9 /* rotate@2x.png in Resources */,
+                94B63F3C23BDD43400F1C9C9 /* rotate.png in Resources */,
+                94B63F3E23BDD43400F1C9C9 /* flash@2x.png in Resources */,
+                94B63F4223BDD43400F1C9C9 /* flash@3x.png in Resources */,
+                94B63F4023BDD43400F1C9C9 /* flashUnavailable.png in Resources */,
+                94B63F3F23BDD43400F1C9C9 /* flashUnavailable@2x.png in Resources */,
+                94B63F4123BDD43400F1C9C9 /* flashUnavailable@3x.png in Resources */,
+                94B63F4323BDD43400F1C9C9 /* enhance@3x.png in Resources */,
+                94B63F4423BDD43400F1C9C9 /* enhance@2x.png in Resources */,
+                94B63F4523BDD43400F1C9C9 /* enhance.png in Resources */,
+                F4A53982271E893500F148DF /* QCropper.check.mark@2x.png in Resources */,
+                F4A53986271E894100F148DF /* QCropper.aspectratio.fill@2x.png in Resources */,
+                F4A53989271E894900F148DF /* QCropper.flip.horizontal.fill@2x.png in Resources */,
+                F4A53987271E894300F148DF /* QCropper.aspectratio.fill@3x.png in Resources */,
+                F4A53985271E893E00F148DF /* QCropper.check.mark@3x.png in Resources */,
+                F4A53988271E894600F148DF /* QCropper.flip.horizontal.fill@3x.png in Resources */,
+                F4A53984271E893B00F148DF /* QCropper.rotate.right.fill@3x.png in Resources */,
+                F4A53983271E893700F148DF /* QCropper.rotate.right.fill@2x.png in Resources */,
+                85B379582716ED4800C6BE50 /* SignaturePadViewController.xib in Resources */,
+                APPZILLONSPLASHSCREENGIF4
+                APZRESOURCEBUILD
+                APPZILLONFIREBASEPLISTBUILDPHASE
+                APPZILLONFIREBASEBUNDLEBUILDPHASE
+                SHORTCUTFIRSTICON4
+                SHORTCUTSECONDICON4
+                SHORTCUTTHIRDICON4
+                SHORTCUTFOURTHICON4
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		18942CF715D907260084F792 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				18942D1315D907260084F792 /* AppzillonViewController.m in Sources */,
+				8493A17B17F3FB240052288E /* APZPlugin.m in Sources */,
+                9464EBB7246FD754001E91E5 /* MainViewController.swift in Sources */,
+                EDB09BA2248F6D4A00159E42 /* AppzillonDocumentVerification.swift in Sources */,
+                846EACE61A53EF1900F18F26 /* APZOTARefresh.m in Sources */,
+                ED7E852D24728DF800BDE03D /* MyPreviewController.swift in Sources */,
+				8403D3E81D478D19001527EC /* CallServer.m in Sources */,
+				84565FDE1D4A3E580008D202 /* AppzillonViewController+ServerCalls.m in Sources */,
+                271D2A682028328B00CAB0D0 /* CryptoUtility.m in Sources */,
+                2718B9BD20258D6400463D4A /* HashUtility.m in Sources */,
+                94B63F5E23BE3C5500F1C9C9 /* HookClassFromImageScanner.swift in Sources */,
+                94B63F2123BDD43400F1C9C9 /* ImageScannerController.swift in Sources */,
+                94B63F2223BDD43400F1C9C9 /* RectangleFeaturesFunnel.swift in Sources */,
+                94B63F2323BDD43400F1C9C9 /* CaptureSessionManager.swift in Sources */,
+                94B63F2423BDD43400F1C9C9 /* ShutterButton.swift in Sources */,
+                94B63F2523BDD43400F1C9C9 /* FocusRectangleView.swift in Sources */,
+                94B63F2623BDD43400F1C9C9 /* ScannerViewController.swift in Sources */,
+                94B63F2723BDD43400F1C9C9 /* AVCaptureVideoOrientation+Utils.swift in Sources */,
+                94B63F2823BDD43400F1C9C9 /* CGPoint+Utils.swift in Sources */,
+                94B63F2923BDD43400F1C9C9 /* CGSize+Utils.swift in Sources */,
+                94B63F2A23BDD43400F1C9C9 /* CGImagePropertyOrientation.swift in Sources */,
+                94B63F2B23BDD43400F1C9C9 /* CIImage+Utils.swift in Sources */,
+                94B63F2C23BDD43400F1C9C9 /* CGAffineTransform+Utils.swift in Sources */,
+                94B63F2D23BDD43400F1C9C9 /* CGRect+Utils.swift in Sources */,
+                94B63F2E23BDD43400F1C9C9 /* Array+Utils.swift in Sources */,
+                94B63F2F23BDD43400F1C9C9 /* UIImage+Orientation.swift in Sources */,
+                94B63F3023BDD43400F1C9C9 /* UIImage+Utils.swift in Sources */,
+                94B63F3123BDD43400F1C9C9 /* ZoomGestureController.swift in Sources */,
+                94B63F3223BDD43400F1C9C9 /* EditScanViewController.swift in Sources */,
+                94B63F3323BDD43400F1C9C9 /* EditScanCornerView.swift in Sources */,
+                94B63F3423BDD43400F1C9C9 /* Error.swift in Sources */,
+                94B63F3523BDD43400F1C9C9 /* VisionRectangleDetector.swift in Sources */,
+                94B63F3623BDD43400F1C9C9 /* CIRectangleDetector.swift in Sources */,
+                94B63F3723BDD43400F1C9C9 /* QuadrilateralView.swift in Sources */,
+                94B63F3823BDD43400F1C9C9 /* Quadrilateral.swift in Sources */,
+                94B63F3923BDD43400F1C9C9 /* ReviewViewController.swift in Sources */,
+                94B63F4623BDD43400F1C9C9 /* CaptureDevice.swift in Sources */,
+                94B63F4723BDD43400F1C9C9 /* Transformable.swift in Sources */,
+                94B63F4923BDD43400F1C9C9 /* CaptureSession+Flash.swift in Sources */,
+                94B63F4A23BDD43400F1C9C9 /* CaptureSession+Orientation.swift in Sources */,
+                94B63F4B23BDD43400F1C9C9 /* CaptureSession.swift in Sources */,
+                94B63F4C23BDD43400F1C9C9 /* CaptureSession+Focus.swift in Sources */,
+                948A52D323F169C800848D71 /* MainFaceDetectorViewController.swift in Sources */,
+                948A52D223F169C800848D71 /* PreviewViewController.swift in Sources */,
+                85E99F7626FB457B00B93245 /* APZDeepLinking.swift in Sources */,
+                F40B70BA270F340C009A0C03 /* APZCalendar.swift in Sources */,
+                F40B70A2270D9758009A0C03 /* StringConstants.swift in Sources */,
+                F40B70BF270F3473009A0C03 /* APZContact.swift in Sources */,
+                F40B70C1270F347A009A0C03 /* APZContact+Picker.swift in Sources */,
+                F40B70C3270F3480009A0C03 /* ContactHelper.swift in Sources */,
+                F40B70BC270F3414009A0C03 /* CalendarHelper.swift in Sources */,
+                8551CB9F271029270044B63A /* APZZip.swift in Sources */,
+                8551CB9E271029270044B63A /* Archive+MemoryFile.swift in Sources */,
+                8551CB9D271029270044B63A /* Archive+Reading.swift in Sources */,
+                8551CB9C271029270044B63A /* Archive+Writing.swift in Sources */,
+                8551CBA0271029270044B63A /* Data+Compression.swift in Sources */,
+                8551CB9B271029270044B63A /* Entry.swift in Sources */,
+                8551CB9A271029270044B63A /* Archive.swift in Sources */,
+                8551CBA2271029270044B63A /* FileManager+ZIP.swift in Sources */,
+                8551CBA1271029270044B63A /* Data+Serialization.swift in Sources */,
+                F48828B9271058A8001995FD /* APZLocale.swift in Sources */,
+                F4A5396A271E804500F148DF /* APZCamera.swift in Sources */,
+                F4A5396B271E815B00F148DF /* Toolbar.swift in Sources */,
+                F4A5396C271E823B00F148DF /* TopBar.swift in Sources */,
+                F4A5396D271E823E00F148DF /* AngleRuler.swift in Sources */,
+                F4A5396E271E824000F148DF /* AspectRatioPicker.swift in Sources */,
+                F4A5396F271E832F00F148DF /* Constants.swift in Sources */,
+                F4A53970271E833800F148DF /* CropBoxEdgeDraggable.swift in Sources */,
+                F4A53971271E833D00F148DF /* StateRestorable.swift in Sources */,
+                F4A53972271E834100F148DF /* Stasisable.swift in Sources */,
+                F4A53973271E834400F148DF /* Flipable.swift in Sources */,
+                F4A53974271E834700F148DF /* Rotatable.swift in Sources */,
+                F4A53975271E834A00F148DF /* AngleAssist.swift in Sources */,
+                F4A53976271E834C00F148DF /* AspectRatioSettable.swift in Sources */,
+                F4A53977271E834F00F148DF /* ScrollViewContainer.swift in Sources */,
+                F4A53978271E835100F148DF /* CropperState.swift in Sources */,
+                F4A53979271E835400F148DF /* CropperViewController.swift in Sources */,
+                F4A5397A271E835700F148DF /* AspectRatio.swift in Sources */,
+                F4A5397C271E85F600F148DF /* UIImage+Helper.swift in Sources */,
+                F4A5397D271E85F800F148DF /* UIView+Helper.swift in Sources */,
+                F4A5397E271E85FB00F148DF /* UIImage+Cropping.swift in Sources */,
+                F4A5397F271E85FD00F148DF /* HelperExtensions.swift in Sources */,
+                F4A5397B271E85EF00F148DF /* CropBox.swift in Sources */,
+                F4A53980271E886000F148DF /* Overlay.swift in Sources */,
+                F4A53981271E886300F148DF /* Grid.swift in Sources */,
+                85B3795E2716EE6100C6BE50 /* APZSignaturePad.swift in Sources */,
+                85B379592716ED4800C6BE50 /* SignaturePad.swift in Sources */,
+                85B379562716ED4800C6BE50 /* SignaturePadHandler.swift in Sources */,
+                85B379572716ED4800C6BE50 /* SignaturePadViewController.swift in Sources */,
+                F4A5398D271EA5C900F148DF /* BarCodeViewController.swift in Sources */,
+                F4A5398B271EA5B300F148DF /* APZBarcode.swift in Sources */,
+                85E8B56A271D86BE005342FB /* APZFileOperation.swift in Sources */,
+                F4A5398F272133E200F148DF /* APZBarcodeGallery.swift in Sources */,
+                F4218D7C2727CDE0003D8810 /* APZUserLocation.swift in Sources */,
+                F48D0919272946DC00F7A7A1 /* APZBarcodeGenerator.swift in Sources */,
+                F48D091B272BDA8800F7A7A1 /* FileManagerUtility.swift in Sources */,
+                ABED6EC5272C1836000514B4 /* APZVibrate.swift in Sources */,
+                F48D092227310C9200F7A7A1 /* VideoViewController.swift in Sources */,
+                F4D0B33A273A452E008B0350 /* APZActivityShare.swift in Sources */,
+                F49B6D4D273BA12B008FEFC9 /* VideoGalleryController.swift in Sources */,
+                ABED6EC72732927D000514B4 /* APZDeleteSubApp.swift in Sources */,
+                EDBCBD8D2743C1B800FC5D87 /* APZPullDown.swift in Sources */,
+                85F0C86E273BC376002E2ED2 /* AudioHelper.swift in Sources */,
+                855B5BB7273E4FBE00BFC8F5 /* APZAudio.swift in Sources */,
+                F4542BAE274E259100F9B58C /* APZDeviceInfo.swift in Sources */,
+                F49CACA02750C9D60017DAB4 /* WindowUtility.swift in Sources */,
+                9DA5833627564932006020AD /* APZBioAuthentication.swift in Sources */,
+                9DEAFEB42750AED50096B327 /* APZBiometricAvailability.swift in Sources */,
+                F49CACA227574C630017DAB4 /* APZDevice.swift in Sources */,
+                ABCE353C27577005007BFD78 /* WebViewController.swift in Sources */,
+                ABCE353A27564A8B007BFD78 /* APZWebview.swift in Sources */,
+                ABCE353E27577033007BFD78 /* APZWebviewDelegate.swift in Sources */,
+                855B5BBD2757441500BFC8F5 /* AppzillonViewController+SplashScreen.swift in Sources */,
+                9D9A4E71275F2BCF00F0C8F7 /* AppzillonViewController+GestureTimer.swift in Sources */,
+                9D9A4E70275F2BCF00F0C8F7 /* APZGestureRecognizable.swift in Sources */,
+                9D5FB600275F778100B89D6E /* APZAppstoreReview.swift in Sources */,
+                F469F0EE27607F27007FE570 /* UserPreferenceUtility.swift in Sources */,
+                EDE7FCEB276866A1004A126E /* APZMail.swift in Sources */,
+                F469F0F1276323B1007FE570 /* APZFileSize.swift in Sources */,
+                F469F0F327634B0E007FE570 /* APZOpenFile.swift in Sources */,
+                ABE1BD27276B123E0047BDF0 /* AppzillonMainUtility.swift in Sources */,
+                858E487D276A018700981DBA /* KeychainUtility.swift in Sources */,
+                9DE5D3322770EEBA00CAB413 /* APZFileEncryption.swift in Sources */,
+                9DE5D3312770EEBA00CAB413 /* APZFileDecryption.swift in Sources */,
+                85D5696227747DB1009A1615 /* APZEncrypt.swift in Sources */,
+                85D5696427747DC3009A1615 /* APZDecrypt.swift in Sources */,
+                85D5696027732E11009A1615 /* AppzillonViewController+ViewHandlers.swift in Sources */,
+                F4B919AA2772EE4F0069F6D0 /* APZBrowser.swift in Sources */,
+                F4B919B02775B6030069F6D0 /* FileOpenUtility.swift in Sources */,
+                ED5598132771EEAB00D909DE /* APZBase64File.swift in Sources */,
+                F4D777772787186900C5CE66 /* ImageViewController.swift in Sources */,
+                85F493A12786FEB700E51D7E /* APZAppDelegateUtility.swift in Sources */,
+                AB378236278716D5007F466A /* APZNetworkUtility.swift in Sources */,
+                AB378234278716C0007F466A /* APZNetworkManager.swift in Sources */,
+                AB378238278D9934007F466A /* APZReachability.swift in Sources */,
+                F4D77779278BF5F600C5CE66 /* FileLocationController.swift in Sources */,
+                F47471B2278EDDA8000EE9D9 /* FileLocationDelegate.swift in Sources */,
+                9D146ABC2795C23400ECAB5A /* APZProcessImage.swift in Sources */,
+                ED782196278ECD8900EE2B79 /* AppzillonImageUtility.swift in Sources */,
+                9D8BD6A42796A43800F5F2FA /* APZSecureStorage.swift in Sources */,
+                F4F34C4027994F3F00284202 /* APZTelephonyUtil.swift in Sources */,
+                F4F34C4827A3EB6100284202 /* APZFileBrowser.swift in Sources */,
+                F4F34C44279FF3F000284202 /* FilesViewController.swift in Sources */,
+                F4F34C46279FF70B00284202 /* FilesViewDelegate.swift in Sources */,
+                85E0F92027AA90AC0096BEC2 /* APZJBDetector.m in Sources */,
+                AB68FD8927AD38800050674F /* ImageGalleryController.swift in Sources */,
+                AB68FD9027B13E020050674F /* ImageGalleryDoneDelegate.swift in Sources */,
+                F4F34C4A27A926DA00284202 /* AppBrowserController.swift in Sources */,
+                F4E18F6827B0FB4600341839 /* AppBrowserDelegate.swift in Sources */,
+                ED0223AA27AA649E006FE869 /* MiscellaneousMethod.swift in Sources */,
+                85E0F94327B151BD0096BEC2 /* Base64.swift in Sources */,
+                F4C9324927B3BA3700637EE8 /* APZLocationPermission.swift in Sources */,
+                F4C9324B27B66A2A00637EE8 /* APZLocationDelegate.swift in Sources */,
+                9D1CE4AC27B5167400862933 /* APZStatusBarColor.swift in Sources */,
+                9DAFA1C127BA543200C92461 /* APZUserDefaults.swift in Sources */,
+                ABD6872927BE418C006156A1 /* AppzillonViewController+UserSettings.swift in Sources */,
+                85E2DE1127C4F2B80000D515 /* MusicGalleryController.swift in Sources */,
+                85E2DE1327C62BD30000D515 /* MusicGalleryDoneDelegate.swift in Sources */,
+                F4C9324D27BCDEB600637EE8 /* APZGps.swift in Sources */,
+                F4348E0927C751C2004E6D51 /* AppzillonViewController+EventMonitor.swift in Sources */,
+                EDE1810B27C3695100E58BA3 /* AppzillonViewController+KeyBoardListener.swift in Sources */,
+                9DBBDA5D27CE2A2400D0043A /* APZGpsStatus.swift in Sources */,
+                85E2DE2327DB4AF90000D515 /* AppDelegate+Handlers.swift in Sources */,
+                ED31AF9D27E7357B00ACD508 /* APZPDFGenerator.swift in Sources */,
+                EDB4911227E9AD3C0029CD6F /* APZMap.swift in Sources */,
+                85F0055727E345580038B8E1 /* AppzillonViewController+PluginCalls.swift in Sources */,
+                F4D3F68927E1B4E900F515F8 /* APZSpeechToText.swift in Sources */,
+                F4A738A927F46279005BCE7F /* UIColor+Extension.swift in Sources */,
+                8533A06327FC1BD60015BE5C /* AppzillonViewController+WebView.swift in Sources */,
+                9D7B8F5427FD99F50046D028 /* StringEscapeHandler.swift in Sources */,
+                AB0D17A027FEA9D100D47562 /* AppDelegate+Notifications.swift in Sources */,
+                ED87305B27FC6EE300CDCEA7 /* AppzillonViewController+Orientation.swift in Sources */,
+                ED73714D2806ABEB00FA9578 /* APZBattery.swift in Sources */,
+                8537D91028115D4900651CA7 /* APZStorage.swift in Sources */,
+                9DF30C93281BC07B007A1D7C /* AppzillonAppDelegate.swift in Sources */,
+                F4B36BFC281A5D2300B0014F /* AppzillonViewController+Location.swift in Sources */,
+                F4B36BFE281AA6CE00B0014F /* AppzillonViewController+ServerCalls.swift in Sources */,
+                ED7F14F8283F4674008D0C30 /* APZLogger.swift in Sources */,
+                8544C94928586F7100D116EC /* MusicViewController.swift in Sources */,
+                85C1E6FB285C518100EB437C /* MusicDelegate.swift in Sources */,
+                851B7C89289BD4F90085E93F /* APZMapViewController.swift in Sources */,
+                851B7C8B28A233FA0085E93F /* APZMapDelegate.swift in Sources */,
+                01192AFF28B5FCCE00FF65DF /* APZJsonUtility.swift in Sources */,
+                9DFC3EAE28C0C32B00EF0EAE /* APZAccessDeviceFiles.swift in Sources */,
+                A8DB1D8F28F5378A0055B4F6 /* APZClearWebCache.swift in Sources */,
+                AB3F1E6729151048004F24E3 /* APZFileDownloadUtil.swift in Sources */,
+                AB3F1E6929151059004F24E3 /* APZFileUploadUtil.swift in Sources */,
+                AB2C680B2949D0F700D41534 /* APZModifyShortCutItems.swift in Sources */,
+                AB7383232966A3A800888F7B /* APZCheckNFCSupport.swift in Sources */,
+                011305DA2965518C00847569 /* APZCheckNotificationStatus.swift in Sources */,
+                AB7383272967FC1000888F7B /* UIImage+Gif.swift in Sources */,
+                018E5FDD2967D8320066F0D5 /* APZVision.swift in Sources */,
+                A8266FC529653CA700C3F214 /* APZFaceDetector.swift in Sources */,
+                01FCDDE32996084C00FF115B /* APZGetSimDetails.swift in Sources */,
+                01C6B05529BAFD9E001A372D /* DenyPtrace.c in Sources */,
+                01C6B05329BAFD93001A372D /* main.swift in Sources */,
+                0170A78329ED2A7D006528CD /* NativeService.swift in Sources */,
+                ABEC9CF82A04CE9E000CD788 /* CryptoSwiftManager.swift in Sources */,
+                358E9C092A2720D500D07857 /* APZNetworkMonitor.swift in Sources */,
+                ABA1B3632A274D7D000544BA /* APZLoginUtility.swift in Sources */,
+                ABA1B36B2A2DD99D000544BA /* APZFileDownload.swift in Sources */,
+                ABA1B3692A2DD8ED000544BA /* APZFileUpload.swift in Sources */,
+                358DA9F52A3082D8006809D7 /* CustomNavigationViewController.swift in Sources */,
+                ABA1B36D2A30807D000544BA /* APZInstruction.swift in Sources */,
+                2BF905632A5C0A8400B715BB /* APZRedirectToSettings.swift in Sources */,
+
+                APPZILLONIMPLBUILDPHASE
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		18942D0815D907260084F792 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				18942D0915D907260084F792 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		18942D1415D907260084F792 /* AppzillonViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				18942D1515D907260084F792 /* en */,
+			);
+			name = AppzillonViewController.xib;
+			sourceTree = "<group>";
+		};
+		
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		18942D2C15D907260084F792 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+                CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+                CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+                ENABLE_BITCODE = NO;
+				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+			};
+			name = Debug;
+		};
+		18942D2D15D907260084F792 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+                CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+                ENABLE_BITCODE = NO;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		18942D2F15D907260084F792 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+                ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+                ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImages;
+                CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+                APPZILLONNOTIFISTAGETHREE
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+               "CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+                DEVELOPMENT_TEAM = APZIOSDEVLOPMENTID;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_FRAMEWORKS_DIR)\"",
+					"$(PROJECT_DIR)/Appzillon",
+                    "$(PROJECT_DIR)/Appzillon/GoogleSign",
+                    "$(PROJECT_DIR)/iosUserLibrary",
+                    "$(PROJECT_DIR)/Appzillon/Vision/FFR",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Appzillon/Appzillon-Prefix.pch";
+				INFOPLIST_FILE = "Appzillon/Appzillon-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/iosUserLibrary",
+				);
+                PRODUCT_BUNDLE_IDENTIFIER = APPZILLONBUNDLEID;
+				PRODUCT_NAME = "APPZILLONPRODUCTNAME";
+				PROVISIONING_PROFILE = "APPZILLONPPDEBUGUUID";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+                PROVISIONING_PROFILE_SPECIFIER = "APPZILLONPPDEBUGNAME";
+                SWIFT_OBJC_BRIDGING_HEADER = "Appzillon/Appzillon-Bridging-Header.h";
+                OTHER_LDFLAGS = "-ObjC";
+                TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				WRAPPER_EXTENSION = app;
+                LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+                SWIFT_VERSION = 5.0;
+                USER_HEADER_SEARCH_PATHS = "\"$(SRCROOT)/Appzillon/Vision/FFR\"";
+			};
+			name = Debug;
+		};
+		18942D3015D907260084F792 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+                ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+                ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImages;
+                CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+                APPZILLONNOTIFISTAGEFOUR
+			    CODE_SIGN_IDENTITY = "APPZILLONSIGNIDENTITY";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "APPZILLONSIGNIDENTITY";
+                DEVELOPMENT_TEAM = APZIOSDEVLOPMENTID;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_FRAMEWORKS_DIR)\"",
+					"$(PROJECT_DIR)/Appzillon",
+                     "$(PROJECT_DIR)/Appzillon/GoogleSign",
+                    "$(PROJECT_DIR)/iosUserLibrary",
+                    "$(PROJECT_DIR)/Appzillon/Vision/FFR",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Appzillon/Appzillon-Prefix.pch";
+				INFOPLIST_FILE = "Appzillon/Appzillon-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/iosUserLibrary",
+				);
+                PRODUCT_BUNDLE_IDENTIFIER = APPZILLONBUNDLEID;
+				PRODUCT_NAME = "APPZILLONPRODUCTNAME";
+	            PROVISIONING_PROFILE = "APPZILLONPPRELEASEUUID";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+                PROVISIONING_PROFILE_SPECIFIER = "APPZILLONPPRELEASENAME";
+                SWIFT_OBJC_BRIDGING_HEADER = "Appzillon/Appzillon-Bridging-Header.h";
+				TARGETED_DEVICE_FAMILY = "1,2";
+                OTHER_LDFLAGS = "-ObjC";
+				WRAPPER_EXTENSION = app;
+                LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+                SWIFT_VERSION = 5.0;
+                USER_HEADER_SEARCH_PATHS = "\"$(SRCROOT)/Appzillon/Vision/FFR\"";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		18942CF515D907260084F792 /* Build configuration list for PBXProject "Appzillon" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				18942D2C15D907260084F792 /* Debug */,
+				18942D2D15D907260084F792 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		18942D2E15D907260084F792 /* Build configuration list for PBXNativeTarget "Appzillon" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				18942D2F15D907260084F792 /* Debug */,
+				18942D3015D907260084F792 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 18942CF215D907260084F792 /* Project object */;
+}

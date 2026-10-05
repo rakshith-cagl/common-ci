@@ -1,0 +1,11 @@
+D:\TertoiseSVN\Appzlion 3.5.10\Studio\appzillonstudio-client\Appzillon\Sources\Containers\Windows10\Appzillon\obj\ARM\Debug\Appzillon.csprojResolveAssemblyReference.cache
+D:\TertoiseSVN\Appzlion 3.5.10\Studio\appzillonstudio-client\Appzillon\Sources\Containers\Windows10\Appzillon\obj\ARM\Debug\App.g.i.cs
+D:\TertoiseSVN\Appzlion 3.5.10\Studio\appzillonstudio-client\Appzillon\Sources\Containers\Windows10\Appzillon\obj\ARM\Debug\App.g.cs
+D:\TertoiseSVN\Appzlion 3.5.10\Studio\appzillonstudio-client\Appzillon\Sources\Containers\Windows10\Appzillon\obj\ARM\Debug\MainPage.g.i.cs
+D:\TertoiseSVN\Appzlion 3.5.10\Studio\appzillonstudio-client\Appzillon\Sources\Containers\Windows10\Appzillon\obj\ARM\Debug\MainPage.g.cs
+D:\TertoiseSVN\Appzlion 3.5.10\Studio\appzillonstudio-client\Appzillon\Sources\Containers\Windows10\Appzillon\obj\ARM\Debug\XamlTypeInfo.g.cs
+D:\TertoiseSVN\Appzlion 3.5.10\Studio\appzillonstudio-client\Appzillon\Sources\Containers\Windows10\Appzillon\obj\ARM\Debug\App.xaml
+D:\TertoiseSVN\Appzlion 3.5.10\Studio\appzillonstudio-client\Appzillon\Sources\Containers\Windows10\Appzillon\obj\ARM\Debug\MainPage.xaml
+D:\TertoiseSVN\Appzlion 3.5.10\Studio\appzillonstudio-client\Appzillon\Sources\Containers\Windows10\Appzillon\obj\ARM\Debug\App.xbf
+D:\TertoiseSVN\Appzlion 3.5.10\Studio\appzillonstudio-client\Appzillon\Sources\Containers\Windows10\Appzillon\obj\ARM\Debug\MainPage.xbf
+D:\TertoiseSVN\Appzlion 3.5.10\Studio\appzillonstudio-client\Appzillon\Sources\Containers\Windows10\Appzillon\obj\ARM\Debug\XamlSaveStateFile.xml

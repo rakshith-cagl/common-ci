@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="false">
+    <!-- Stop output INFO at start -->
+    <statusListener class="ch.qos.logback.core.status.NopStatusListener"/>
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+            <layout class="com.iexceed.webcontainer.logger.MaskingPatternLayout">
+                <maskPattern>\\*\"password\\*\"\s*:\s*\\*\"(.*?)\\*\"</maskPattern>
+                <maskPattern>\\*\"pwd\\*\"\s*:\s*\\*\"(.*?)\\*\"</maskPattern>
+                <maskPattern>\\*\"pin\\*\"\s*:\s*\\*\"(.*?)\\*\"</maskPattern>
+                <maskPattern>\\*\"tpin\\*\"\s*:\s*\\*\"(.*?)\\*\"</maskPattern>
+                <maskPattern>\\*\"mpin\\*\"\s*:\s*\\*\"(.*?)\\*\"</maskPattern>
+                <maskPattern>\\*\"txnpin\\*\"\s*:\s*\\*\"(.*?)\\*\"</maskPattern>
+                <maskPattern>\\*\"otp\\*\"\s*:\s*\\*\"(.*?)\\*\"</maskPattern>
+                <maskPattern>\\*\"oldPassword\\*\"\s*:\s*\\*\"(.*?)\\*\"</maskPattern>
+                <maskPattern>\\*\"newPassword\\*\"\s*:\s*\\*\"(.*?)\\*\"</maskPattern>
+                <maskPattern>\\*\"confirmPassword\\*\"\s*:\s*\\*\"(.*?)\\*\"</maskPattern>
+                <maskPattern>\\*\"hashKey1\\*\"\s*:\s*\\*\"(.*?)\\*\"</maskPattern>
+                <maskPattern>\\*\"hashKey2\\*\"\s*:\s*\\*\"(.*?)\\*\"</maskPattern>
+                <maskPattern>\\*\"requestKey\\*\"\s*:\s*\\*\"(.*?)\\*\"</maskPattern>
+                <maskPattern>\\*\"deviceId\\*\"\s*:\s*\\*\"(.*?)\\*\"</maskPattern>
+                <maskPattern>\\*\"oldPin\\*\"\s*:\s*\\*\"(.*?)\\*\"</maskPattern>	
+                <maskPattern>\\*\"mPin\\*\"\s*:\s*\\*\"(.*?)\\*\"</maskPattern>	
+                <maskPattern>\\*\"Password\\*\"\s*:\s*\\*\"(.*?)\\*\"</maskPattern>	
+                <maskPattern>\\*\"cardNumber\\*\"\s*:\s*\\*\"(.*?)\\*\"</maskPattern>	
+                <maskPattern>\\*\"expiryDate\\*\"\s*:\s*\\*\"(.*?)\\*\"</maskPattern>	
+                <maskPattern>\\*\"actualAnswer\\*\"\s*:\s*\\*\"(.*?)\\*\"</maskPattern>
+                <maskPattern>\\*\"Account_Number\\*\"\s*:\s*\\*\"(.*?)\\*\"</maskPattern>
+                <maskPattern>\\*\"CKYCR_ID\\*\"\s*:\s*\\*\"(.*?)\\*\"</maskPattern>
+                <maskPattern>\\*\"Mobile_No\\*\"\s*:\s*\\*\"(.*?)\\*\"</maskPattern>
+                <maskPattern>\\*\"Email\\*\"\s*:\s*\\*\"(.*?)\\*\"</maskPattern>
+                <maskPattern>\\*\"PAN_No\\*\"\s*:\s*\\*\"(.*?)\\*\"</maskPattern>
+                <maskPattern>\\*\"GSTN_NO\\*\"\s*:\s*\\*\"(.*?)\\*\"</maskPattern>
+                <maskPattern>\\*\"ID Number\\*\"\s*:\s*\\*\"(.*?)\\*\"</maskPattern>
+                <maskPattern>\\*\"Cust_Communication_Address_Line_1\\*\"\s*:\s*\\*\"(.*?)\\*\"</maskPattern>
+                <maskPattern>\\*\"Cust_Communication_Address_Line_2\\*\"\s*:\s*\\*\"(.*?)\\*\"</maskPattern>
+                <maskPattern>\\*\"Cust_Communication_Address_Line_3\\*\"\s*:\s*\\*\"(.*?)\\*\"</maskPattern>
+                <maskPattern>\\*\"Cust_Communication_Address_Line_4\\*\"\s*:\s*\\*\"(.*?)\\*\"</maskPattern>
+                <maskPattern>\\*\"ckycrId\\*\"\s*:\s*\\*\"(.*?)\\*\"</maskPattern>
+                <maskPattern>\\*\"panNo\\*\"\s*:\s*\\*\"(.*?)\\*\"</maskPattern>
+                <maskPattern>\\*\"aadhar\\*\"\s*:\s*\\*\"(.*?)\\*\"</maskPattern>
+                <maskPattern>\\*\"accountNo\\*\"\s*:\s*\\*\"(.*?)\\*\"</maskPattern>
+                <maskPattern>\\*\"mobileNo\\*\"\s*:\s*\\*\"(.*?)\\*\"</maskPattern>
+                <maskPattern>\\*\"emailId\\*\"\s*:\s*\\*\"(.*?)\\*\"</maskPattern>
+                <maskPattern>\\*\"permAddress1\\*\"\s*:\s*\\*\"(.*?)\\*\"</maskPattern>
+                <maskPattern>\\*\"permAddress2\\*\"\s*:\s*\\*\"(.*?)\\*\"</maskPattern>
+                <maskPattern>\\*\"permAddress3\\*\"\s*:\s*\\*\"(.*?)\\*\"</maskPattern>
+                <maskPattern>\\*\"permAddress4\\*\"\s*:\s*\\*\"(.*?)\\*\"</maskPattern>
+                <maskPattern>\\*\"communicationAddress1\\*\"\s*:\s*\\*\"(.*?)\\*\"</maskPattern>
+                <maskPattern>\\*\"communicationAddress2\\*\"\s*:\s*\\*\"(.*?)\\*\"</maskPattern>
+                <maskPattern>\\*\"communicationAddress3\\*\"\s*:\s*\\*\"(.*?)\\*\"</maskPattern>
+                <maskPattern>\\*\"communicationAddress4\\*\"\s*:\s*\\*\"(.*?)\\*\"</maskPattern>
+                <maskPattern>\\*\"nationalID\\*\"\s*:\s*\\*\"(.*?)\\*\"</maskPattern>
+                <Pattern>%d %p %logger{40} %m %n</Pattern>
+            </layout>
+        </encoder>
+    </appender>
+    <Logger name="com.iexceed" level="ERROR"/>
+    <root level="ERROR">
+        <appender-ref ref="CONSOLE"/>
+    </root>
+</configuration>

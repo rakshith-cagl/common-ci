@@ -1,0 +1,658 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:camel="http://camel.apache.org/schema/spring" xmlns:util="http://www.springframework.org/schema/util" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.springframework.org/schema/util         http://www.springframework.org/schema/util/spring-util.xsd         http://www.springframework.org/schema/beans           http://www.springframework.org/schema/beans/spring-beans.xsd        http://camel.apache.org/schema/spring           http://camel.apache.org/schema/spring/camel-spring.xsd        http://activemq.apache.org/schema/core           http://activemq.apache.org/schema/core/activemq-core.xsd">
+
+<camelContext xmlns="http://camel.apache.org/schema/spring" id="Admin2_appzillonframeworks">
+<endpoint id="Admin2__Admin2__GeoCoding" uri="https://maps.googleapis.com/maps/api/geocode/json"/>
+</camelContext>
+
+<!-- Generated beans goes here -->
+
+<bean class="com.iexceed.appzillon.services.BirtService" id="Admin2_Admin2__AdminOperationsReport_service" scope="request"/>
+<bean class="com.iexceed.appzillon.impl.BirtServicesImpl" id="Admin2_Admin2__AdminOperationsReport_impl" scope="request"/>
+<bean class="com.iexceed.appzillon.impl.AddlServiceProcessorBeanImpl" id="Admin2_Admin2__AdminOperationsReport_service_proc" scope="request"/>
+<bean class="com.iexceed.appzillon.intf.ExternalInterfaceDtls" id="Admin2_Admin2__AdminOperationsReport_intf" scope="request">
+<property name="beanId" value="Admin2_Admin2__AdminOperationsReport_impl"/>
+<property name="category" value="External"/>
+<property name="sessionReq" value="Y"/>
+</bean>
+<bean class="com.iexceed.appzillon.services.Admin2.deleteRole.deleteRole_Query_Service" id="Admin2_Admin2__deleteRole_Query_service" scope="request"/>
+<bean class="com.iexceed.appzillon.impl.DBServicesImpl" id="Admin2_Admin2__deleteRole_Query_impl" scope="request"/>
+<bean class="com.iexceed.appzillon.impl.AddlServiceProcessorBeanImpl" id="Admin2_Admin2__deleteRole_Query_service_proc" scope="request"/>
+<bean class="com.iexceed.appzillon.intf.ExternalInterfaceDtls" id="Admin2_Admin2__deleteRole_Query_intf" scope="request">
+<property name="beanId" value="Admin2_Admin2__deleteRole_Query_impl"/>
+<property name="category" value="External"/>
+<property name="sessionReq" value="Y"/>
+</bean>
+<bean class="com.iexceed.appzillon.services.Admin2.deleteRole.deleteRole_Delete_Service" id="Admin2_Admin2__deleteRole_Delete_service" scope="request"/>
+<bean class="com.iexceed.appzillon.impl.DBServicesImpl" id="Admin2_Admin2__deleteRole_Delete_impl" scope="request"/>
+<bean class="com.iexceed.appzillon.impl.AddlServiceProcessorBeanImpl" id="Admin2_Admin2__deleteRole_Delete_service_proc" scope="request"/>
+<bean class="com.iexceed.appzillon.intf.ExternalInterfaceDtls" id="Admin2_Admin2__deleteRole_Delete_intf" scope="request">
+<property name="beanId" value="Admin2_Admin2__deleteRole_Delete_impl"/>
+<property name="category" value="External"/>
+<property name="sessionReq" value="Y"/>
+</bean>
+<bean class="com.iexceed.appzillon.services.Admin2.DeviceGroupsDetail.DeviceGroupsDetail_Query_Service" id="Admin2_Admin2__DeviceGroupsDetail_Query_service" scope="request"/>
+<bean class="com.iexceed.appzillon.impl.DBServicesImpl" id="Admin2_Admin2__DeviceGroupsDetail_Query_impl" scope="request"/>
+<bean class="com.iexceed.appzillon.impl.AddlServiceProcessorBeanImpl" id="Admin2_Admin2__DeviceGroupsDetail_Query_service_proc" scope="request"/>
+<bean class="com.iexceed.appzillon.intf.ExternalInterfaceDtls" id="Admin2_Admin2__DeviceGroupsDetail_Query_intf" scope="request">
+<property name="beanId" value="Admin2_Admin2__DeviceGroupsDetail_Query_impl"/>
+<property name="category" value="External"/>
+<property name="sessionReq" value="Y"/>
+</bean>
+<bean class="com.iexceed.appzillon.services.Admin2.DeviceGroupsQuery.DeviceGroupsQuery_Query_Service" id="Admin2_Admin2__DeviceGroupsQuery_Query_service" scope="request"/>
+<bean class="com.iexceed.appzillon.impl.DBServicesImpl" id="Admin2_Admin2__DeviceGroupsQuery_Query_impl" scope="request"/>
+<bean class="com.iexceed.appzillon.impl.AddlServiceProcessorBeanImpl" id="Admin2_Admin2__DeviceGroupsQuery_Query_service_proc" scope="request"/>
+<bean class="com.iexceed.appzillon.intf.ExternalInterfaceDtls" id="Admin2_Admin2__DeviceGroupsQuery_Query_intf" scope="request">
+<property name="beanId" value="Admin2_Admin2__DeviceGroupsQuery_Query_impl"/>
+<property name="category" value="External"/>
+<property name="sessionReq" value="Y"/>
+</bean>
+<bean class="com.iexceed.appzillon.services.Admin2.DeviceGroupsQuery.DeviceGroupsQuery_Delete_Service" id="Admin2_Admin2__DeviceGroupsQuery_Delete_service" scope="request"/>
+<bean class="com.iexceed.appzillon.impl.DBServicesImpl" id="Admin2_Admin2__DeviceGroupsQuery_Delete_impl" scope="request"/>
+<bean class="com.iexceed.appzillon.impl.AddlServiceProcessorBeanImpl" id="Admin2_Admin2__DeviceGroupsQuery_Delete_service_proc" scope="request"/>
+<bean class="com.iexceed.appzillon.intf.ExternalInterfaceDtls" id="Admin2_Admin2__DeviceGroupsQuery_Delete_intf" scope="request">
+<property name="beanId" value="Admin2_Admin2__DeviceGroupsQuery_Delete_impl"/>
+<property name="category" value="External"/>
+<property name="sessionReq" value="Y"/>
+</bean>
+<bean class="com.iexceed.appzillon.services.Admin2.DlgMasterDetail.DlgMasterDetail_Query_Service" id="Admin2_Admin2__DlgMasterDetail_Query_service" scope="request"/>
+<bean class="com.iexceed.appzillon.impl.DBServicesImpl" id="Admin2_Admin2__DlgMasterDetail_Query_impl" scope="request"/>
+<bean class="com.iexceed.appzillon.impl.AddlServiceProcessorBeanImpl" id="Admin2_Admin2__DlgMasterDetail_Query_service_proc" scope="request"/>
+<bean class="com.iexceed.appzillon.intf.ExternalInterfaceDtls" id="Admin2_Admin2__DlgMasterDetail_Query_intf" scope="request">
+<property name="beanId" value="Admin2_Admin2__DlgMasterDetail_Query_impl"/>
+<property name="category" value="External"/>
+<property name="sessionReq" value="Y"/>
+</bean>
+<bean class="com.iexceed.appzillon.services.Admin2.DlgMasterDetail.DlgMasterDetail_New_Service" id="Admin2_Admin2__DlgMasterDetail_New_service" scope="request"/>
+<bean class="com.iexceed.appzillon.impl.DBServicesImpl" id="Admin2_Admin2__DlgMasterDetail_New_impl" scope="request"/>
+<bean class="com.iexceed.appzillon.impl.AddlServiceProcessorBeanImpl" id="Admin2_Admin2__DlgMasterDetail_New_service_proc" scope="request"/>
+<bean class="com.iexceed.appzillon.intf.ExternalInterfaceDtls" id="Admin2_Admin2__DlgMasterDetail_New_intf" scope="request">
+<property name="beanId" value="Admin2_Admin2__DlgMasterDetail_New_impl"/>
+<property name="category" value="External"/>
+<property name="sessionReq" value="Y"/>
+</bean>
+<bean class="com.iexceed.appzillon.services.Admin2.DlgMasterDetailModifyDel.DlgMasterDetailModifyDel_Modify_Service" id="Admin2_Admin2__DlgMasterDetailModifyDel_Modify_service" scope="request"/>
+<bean class="com.iexceed.admin.DBServicesImpl" id="Admin2_Admin2__DlgMasterDetailModifyDel_Modify_impl" scope="request"/>
+<bean class="com.iexceed.appzillon.impl.AddlServiceProcessorBeanImpl" id="Admin2_Admin2__DlgMasterDetailModifyDel_Modify_service_proc" scope="request"/>
+<bean class="com.iexceed.appzillon.intf.ExternalInterfaceDtls" id="Admin2_Admin2__DlgMasterDetailModifyDel_Modify_intf" scope="request">
+<property name="beanId" value="Admin2_Admin2__DlgMasterDetailModifyDel_Modify_impl"/>
+<property name="category" value="External"/>
+<property name="sessionReq" value="Y"/>
+</bean>
+<bean class="com.iexceed.appzillon.services.Admin2.DlgMasterDetailModifyDel.DlgMasterDetailModifyDel_Delete_Service" id="Admin2_Admin2__DlgMasterDetailModifyDel_Delete_service" scope="request"/>
+<bean class="com.iexceed.admin.DBServicesImpl" id="Admin2_Admin2__DlgMasterDetailModifyDel_Delete_impl" scope="request"/>
+<bean class="com.iexceed.appzillon.impl.AddlServiceProcessorBeanImpl" id="Admin2_Admin2__DlgMasterDetailModifyDel_Delete_service_proc" scope="request"/>
+<bean class="com.iexceed.appzillon.intf.ExternalInterfaceDtls" id="Admin2_Admin2__DlgMasterDetailModifyDel_Delete_intf" scope="request">
+<property name="beanId" value="Admin2_Admin2__DlgMasterDetailModifyDel_Delete_impl"/>
+<property name="category" value="External"/>
+<property name="sessionReq" value="Y"/>
+</bean>
+<bean class="com.iexceed.appzillon.services.SQLServices" id="Admin2_Admin2__FetchAllowAppIdSQL_service" scope="request"/>
+<bean class="com.iexceed.appzillon.impl.SQLServicesImpl" id="Admin2_Admin2__FetchAllowAppIdSQL_impl" scope="request"/>
+<bean class="com.iexceed.appzillon.impl.AddlServiceProcessorBeanImpl" id="Admin2_Admin2__FetchAllowAppIdSQL_service_proc" scope="request"/>
+<bean class="com.iexceed.appzillon.intf.ExternalInterfaceDtls" id="Admin2_Admin2__FetchAllowAppIdSQL_intf" scope="request">
+<property name="beanId" value="Admin2_Admin2__FetchAllowAppIdSQL_impl"/>
+<property name="category" value="External"/>
+<property name="sessionReq" value="Y"/>
+</bean>
+<bean class="com.iexceed.appzillon.services.SQLServices" id="Admin2_Admin2__FetchAppMasterAppIDSQL_service" scope="request"/>
+<bean class="com.iexceed.appzillon.impl.SQLServicesImpl" id="Admin2_Admin2__FetchAppMasterAppIDSQL_impl" scope="request"/>
+<bean class="com.iexceed.appzillon.impl.AddlServiceProcessorBeanImpl" id="Admin2_Admin2__FetchAppMasterAppIDSQL_service_proc" scope="request"/>
+<bean class="com.iexceed.appzillon.intf.ExternalInterfaceDtls" id="Admin2_Admin2__FetchAppMasterAppIDSQL_intf" scope="request">
+<property name="beanId" value="Admin2_Admin2__FetchAppMasterAppIDSQL_impl"/>
+<property name="category" value="External"/>
+<property name="sessionReq" value="Y"/>
+</bean>
+<bean class="com.iexceed.appzillon.services.Admin2.FetchNotificationCode.FetchNotificationCode_Query_Service" id="Admin2_Admin2__FetchNotificationCode_Query_service" scope="request"/>
+<bean class="com.iexceed.appzillon.impl.DBServicesImpl" id="Admin2_Admin2__FetchNotificationCode_Query_impl" scope="request"/>
+<bean class="com.iexceed.appzillon.impl.AddlServiceProcessorBeanImpl" id="Admin2_Admin2__FetchNotificationCode_Query_service_proc" scope="request"/>
+<bean class="com.iexceed.appzillon.intf.ExternalInterfaceDtls" id="Admin2_Admin2__FetchNotificationCode_Query_intf" scope="request">
+<property name="beanId" value="Admin2_Admin2__FetchNotificationCode_Query_impl"/>
+<property name="category" value="External"/>
+<property name="sessionReq" value="Y"/>
+</bean>
+<bean class="com.iexceed.appzillon.services.SQLServices" id="Admin2_Admin2__FetchNotificationCodeSQL_service" scope="request"/>
+<bean class="com.iexceed.appzillon.impl.SQLServicesImpl" id="Admin2_Admin2__FetchNotificationCodeSQL_impl" scope="request"/>
+<bean class="com.iexceed.appzillon.impl.AddlServiceProcessorBeanImpl" id="Admin2_Admin2__FetchNotificationCodeSQL_service_proc" scope="request"/>
+<bean class="com.iexceed.appzillon.intf.ExternalInterfaceDtls" id="Admin2_Admin2__FetchNotificationCodeSQL_intf" scope="request">
+<property name="beanId" value="Admin2_Admin2__FetchNotificationCodeSQL_impl"/>
+<property name="category" value="External"/>
+<property name="sessionReq" value="Y"/>
+</bean>
+<bean class="com.iexceed.appzillon.services.HttpService" id="Admin2_Admin2__GeoCoding_service" scope="request"/>
+<bean class="com.iexceed.appzillon.impl.HttpServicesImpl" id="Admin2_Admin2__GeoCoding_impl" scope="request"/>
+<bean class="com.iexceed.appzillon.impl.AddlServiceProcessorBeanImpl" id="Admin2_Admin2__GeoCoding_service_proc" scope="request"/>
+<bean class="com.iexceed.appzillon.intf.ExternalInterfaceDtls" id="Admin2_Admin2__GeoCoding_intf" scope="request">
+<property name="beanId" value="Admin2_Admin2__GeoCoding_impl"/>
+<property name="category" value="External"/>
+<property name="sessionReq" value="Y"/>
+</bean>
+<bean class="com.iexceed.appzillon.services.BirtService" id="Admin2_Admin2__InactiveUsersReport_service" scope="request"/>
+<bean class="com.iexceed.appzillon.impl.BirtServicesImpl" id="Admin2_Admin2__InactiveUsersReport_impl" scope="request"/>
+<bean class="com.iexceed.appzillon.impl.AddlServiceProcessorBeanImpl" id="Admin2_Admin2__InactiveUsersReport_service_proc" scope="request"/>
+<bean class="com.iexceed.appzillon.intf.ExternalInterfaceDtls" id="Admin2_Admin2__InactiveUsersReport_intf" scope="request">
+<property name="beanId" value="Admin2_Admin2__InactiveUsersReport_impl"/>
+<property name="category" value="External"/>
+<property name="sessionReq" value="Y"/>
+</bean>
+<bean class="com.iexceed.appzillon.services.SQLServices" id="Admin2_Admin2__InactiveUsersSql_service" scope="request"/>
+<bean class="com.iexceed.appzillon.impl.SQLServicesImpl" id="Admin2_Admin2__InactiveUsersSql_impl" scope="request"/>
+<bean class="com.iexceed.appzillon.impl.AddlServiceProcessorBeanImpl" id="Admin2_Admin2__InactiveUsersSql_service_proc" scope="request"/>
+<bean class="com.iexceed.appzillon.intf.ExternalInterfaceDtls" id="Admin2_Admin2__InactiveUsersSql_intf" scope="request">
+<property name="beanId" value="Admin2_Admin2__InactiveUsersSql_impl"/>
+<property name="category" value="External"/>
+<property name="sessionReq" value="Y"/>
+</bean>
+<bean class="com.iexceed.appzillon.services.Admin2.InterfaceQuery.InterfaceQuery_Query_Service" id="Admin2_Admin2__InterfaceQuery_Query_service" scope="request"/>
+<bean class="com.iexceed.appzillon.impl.DBServicesImpl" id="Admin2_Admin2__InterfaceQuery_Query_impl" scope="request"/>
+<bean class="com.iexceed.appzillon.impl.AddlServiceProcessorBeanImpl" id="Admin2_Admin2__InterfaceQuery_Query_service_proc" scope="request"/>
+<bean class="com.iexceed.appzillon.intf.ExternalInterfaceDtls" id="Admin2_Admin2__InterfaceQuery_Query_intf" scope="request">
+<property name="beanId" value="Admin2_Admin2__InterfaceQuery_Query_impl"/>
+<property name="category" value="External"/>
+<property name="sessionReq" value="Y"/>
+</bean>
+<bean class="com.iexceed.appzillon.services.Admin2.InterfaceQuery.InterfaceQuery_Delete_Service" id="Admin2_Admin2__InterfaceQuery_Delete_service" scope="request"/>
+<bean class="com.iexceed.appzillon.impl.DBServicesImpl" id="Admin2_Admin2__InterfaceQuery_Delete_impl" scope="request"/>
+<bean class="com.iexceed.appzillon.impl.AddlServiceProcessorBeanImpl" id="Admin2_Admin2__InterfaceQuery_Delete_service_proc" scope="request"/>
+<bean class="com.iexceed.appzillon.intf.ExternalInterfaceDtls" id="Admin2_Admin2__InterfaceQuery_Delete_intf" scope="request">
+<property name="beanId" value="Admin2_Admin2__InterfaceQuery_Delete_impl"/>
+<property name="category" value="External"/>
+<property name="sessionReq" value="Y"/>
+</bean>
+<bean class="com.iexceed.appzillon.services.Admin2.InterfacesDetailQuery.InterfacesDetailQuery_Query_Service" id="Admin2_Admin2__InterfacesDetailQuery_Query_service" scope="request"/>
+<bean class="com.iexceed.appzillon.impl.DBServicesImpl" id="Admin2_Admin2__InterfacesDetailQuery_Query_impl" scope="request"/>
+<bean class="com.iexceed.appzillon.impl.AddlServiceProcessorBeanImpl" id="Admin2_Admin2__InterfacesDetailQuery_Query_service_proc" scope="request"/>
+<bean class="com.iexceed.appzillon.intf.ExternalInterfaceDtls" id="Admin2_Admin2__InterfacesDetailQuery_Query_intf" scope="request">
+<property name="beanId" value="Admin2_Admin2__InterfacesDetailQuery_Query_impl"/>
+<property name="category" value="External"/>
+<property name="sessionReq" value="Y"/>
+</bean>
+<bean class="com.iexceed.appzillon.services.Admin2.InterfacesDetailQuery.InterfacesDetailQuery_New_Service" id="Admin2_Admin2__InterfacesDetailQuery_New_service" scope="request"/>
+<bean class="com.iexceed.appzillon.impl.DBServicesImpl" id="Admin2_Admin2__InterfacesDetailQuery_New_impl" scope="request"/>
+<bean class="com.iexceed.appzillon.impl.AddlServiceProcessorBeanImpl" id="Admin2_Admin2__InterfacesDetailQuery_New_service_proc" scope="request"/>
+<bean class="com.iexceed.appzillon.intf.ExternalInterfaceDtls" id="Admin2_Admin2__InterfacesDetailQuery_New_intf" scope="request">
+<property name="beanId" value="Admin2_Admin2__InterfacesDetailQuery_New_impl"/>
+<property name="category" value="External"/>
+<property name="sessionReq" value="Y"/>
+</bean>
+<bean class="com.iexceed.appzillon.services.Admin2.InterfacesDetailQuery.InterfacesDetailQuery_Authorize_Service" id="Admin2_Admin2__InterfacesDetailQuery_Authorize_service" scope="request"/>
+<bean class="com.iexceed.appzillon.impl.DBServicesImpl" id="Admin2_Admin2__InterfacesDetailQuery_Authorize_impl" scope="request"/>
+<bean class="com.iexceed.appzillon.impl.AddlServiceProcessorBeanImpl" id="Admin2_Admin2__InterfacesDetailQuery_Authorize_service_proc" scope="request"/>
+<bean class="com.iexceed.appzillon.intf.ExternalInterfaceDtls" id="Admin2_Admin2__InterfacesDetailQuery_Authorize_intf" scope="request">
+<property name="beanId" value="Admin2_Admin2__InterfacesDetailQuery_Authorize_impl"/>
+<property name="category" value="External"/>
+<property name="sessionReq" value="Y"/>
+</bean>
+<bean class="com.iexceed.appzillon.services.Admin2.InterfacesDetailQuery.InterfacesDetailQuery_Modify_Service" id="Admin2_Admin2__InterfacesDetailQuery_Modify_service" scope="request"/>
+<bean class="com.iexceed.appzillon.impl.DBServicesImpl" id="Admin2_Admin2__InterfacesDetailQuery_Modify_impl" scope="request"/>
+<bean class="com.iexceed.appzillon.impl.AddlServiceProcessorBeanImpl" id="Admin2_Admin2__InterfacesDetailQuery_Modify_service_proc" scope="request"/>
+<bean class="com.iexceed.appzillon.intf.ExternalInterfaceDtls" id="Admin2_Admin2__InterfacesDetailQuery_Modify_intf" scope="request">
+<property name="beanId" value="Admin2_Admin2__InterfacesDetailQuery_Modify_impl"/>
+<property name="category" value="External"/>
+<property name="sessionReq" value="Y"/>
+</bean>
+<bean class="com.iexceed.appzillon.services.Admin2.MessageStatistics.MessageStatistics_Query_Service" id="Admin2_Admin2__MessageStatistics_Query_service" scope="request"/>
+<bean class="com.iexceed.appzillon.impl.DBServicesImpl" id="Admin2_Admin2__MessageStatistics_Query_impl" scope="request"/>
+<bean class="com.iexceed.appzillon.impl.AddlServiceProcessorBeanImpl" id="Admin2_Admin2__MessageStatistics_Query_service_proc" scope="request"/>
+<bean class="com.iexceed.appzillon.intf.ExternalInterfaceDtls" id="Admin2_Admin2__MessageStatistics_Query_intf" scope="request">
+<property name="beanId" value="Admin2_Admin2__MessageStatistics_Query_impl"/>
+<property name="category" value="External"/>
+<property name="sessionReq" value="Y"/>
+</bean>
+<bean class="com.iexceed.appzillon.services.BirtService" id="Admin2_Admin2__NotificationsReport_service" scope="request"/>
+<bean class="com.iexceed.appzillon.impl.BirtServicesImpl" id="Admin2_Admin2__NotificationsReport_impl" scope="request"/>
+<bean class="com.iexceed.appzillon.impl.AddlServiceProcessorBeanImpl" id="Admin2_Admin2__NotificationsReport_service_proc" scope="request"/>
+<bean class="com.iexceed.appzillon.intf.ExternalInterfaceDtls" id="Admin2_Admin2__NotificationsReport_intf" scope="request">
+<property name="beanId" value="Admin2_Admin2__NotificationsReport_impl"/>
+<property name="category" value="External"/>
+<property name="sessionReq" value="Y"/>
+</bean>
+<bean class="com.iexceed.appzillon.services.Admin2.QuartzSchedulerDetailQuery.QuartzSchedulerDetailQuery_Query_Service" id="Admin2_Admin2__QuartzSchedulerDetailQuery_Query_service" scope="request"/>
+<bean class="com.iexceed.appzillon.impl.DBServicesImpl" id="Admin2_Admin2__QuartzSchedulerDetailQuery_Query_impl" scope="request"/>
+<bean class="com.iexceed.appzillon.impl.AddlServiceProcessorBeanImpl" id="Admin2_Admin2__QuartzSchedulerDetailQuery_Query_service_proc" scope="request"/>
+<bean class="com.iexceed.appzillon.intf.ExternalInterfaceDtls" id="Admin2_Admin2__QuartzSchedulerDetailQuery_Query_intf" scope="request">
+<property name="beanId" value="Admin2_Admin2__QuartzSchedulerDetailQuery_Query_impl"/>
+<property name="category" value="External"/>
+<property name="sessionReq" value="Y"/>
+</bean>
+<bean class="com.iexceed.appzillon.services.Admin2.QuartzSchedulerDetailQuery.QuartzSchedulerDetailQuery_New_Service" id="Admin2_Admin2__QuartzSchedulerDetailQuery_New_service" scope="request"/>
+<bean class="com.iexceed.appzillon.impl.DBServicesImpl" id="Admin2_Admin2__QuartzSchedulerDetailQuery_New_impl" scope="request"/>
+<bean class="com.iexceed.appzillon.impl.AddlServiceProcessorBeanImpl" id="Admin2_Admin2__QuartzSchedulerDetailQuery_New_service_proc" scope="request"/>
+<bean class="com.iexceed.appzillon.intf.ExternalInterfaceDtls" id="Admin2_Admin2__QuartzSchedulerDetailQuery_New_intf" scope="request">
+<property name="beanId" value="Admin2_Admin2__QuartzSchedulerDetailQuery_New_impl"/>
+<property name="category" value="External"/>
+<property name="sessionReq" value="Y"/>
+</bean>
+<bean class="com.iexceed.appzillon.services.Admin2.QuartzSchedulerDetailQuery.QuartzSchedulerDetailQuery_Modify_Service" id="Admin2_Admin2__QuartzSchedulerDetailQuery_Modify_service" scope="request"/>
+<bean class="com.iexceed.appzillon.impl.DBServicesImpl" id="Admin2_Admin2__QuartzSchedulerDetailQuery_Modify_impl" scope="request"/>
+<bean class="com.iexceed.appzillon.impl.AddlServiceProcessorBeanImpl" id="Admin2_Admin2__QuartzSchedulerDetailQuery_Modify_service_proc" scope="request"/>
+<bean class="com.iexceed.appzillon.intf.ExternalInterfaceDtls" id="Admin2_Admin2__QuartzSchedulerDetailQuery_Modify_intf" scope="request">
+<property name="beanId" value="Admin2_Admin2__QuartzSchedulerDetailQuery_Modify_impl"/>
+<property name="category" value="External"/>
+<property name="sessionReq" value="Y"/>
+</bean>
+<bean class="com.iexceed.appzillon.services.Admin2.QuartzSchedulerDetailQuery.QuartzSchedulerDetailQuery_Delete_Service" id="Admin2_Admin2__QuartzSchedulerDetailQuery_Delete_service" scope="request"/>
+<bean class="com.iexceed.appzillon.impl.DBServicesImpl" id="Admin2_Admin2__QuartzSchedulerDetailQuery_Delete_impl" scope="request"/>
+<bean class="com.iexceed.appzillon.impl.AddlServiceProcessorBeanImpl" id="Admin2_Admin2__QuartzSchedulerDetailQuery_Delete_service_proc" scope="request"/>
+<bean class="com.iexceed.appzillon.intf.ExternalInterfaceDtls" id="Admin2_Admin2__QuartzSchedulerDetailQuery_Delete_intf" scope="request">
+<property name="beanId" value="Admin2_Admin2__QuartzSchedulerDetailQuery_Delete_impl"/>
+<property name="category" value="External"/>
+<property name="sessionReq" value="Y"/>
+</bean>
+<bean class="com.iexceed.appzillon.services.Admin2.QuartzSchedulerQuery.QuartzSchedulerQuery_Query_Service" id="Admin2_Admin2__QuartzSchedulerQuery_Query_service" scope="request"/>
+<bean class="com.iexceed.appzillon.impl.DBServicesImpl" id="Admin2_Admin2__QuartzSchedulerQuery_Query_impl" scope="request"/>
+<bean class="com.iexceed.appzillon.impl.AddlServiceProcessorBeanImpl" id="Admin2_Admin2__QuartzSchedulerQuery_Query_service_proc" scope="request"/>
+<bean class="com.iexceed.appzillon.intf.ExternalInterfaceDtls" id="Admin2_Admin2__QuartzSchedulerQuery_Query_intf" scope="request">
+<property name="beanId" value="Admin2_Admin2__QuartzSchedulerQuery_Query_impl"/>
+<property name="category" value="External"/>
+<property name="sessionReq" value="Y"/>
+</bean>
+<bean class="com.iexceed.appzillon.services.Admin2.RoleDetailDesc.RoleDetailDesc_Query_Service" id="Admin2_Admin2__RoleDetailDesc_Query_service" scope="request"/>
+<bean class="com.iexceed.appzillon.impl.DBServicesImpl" id="Admin2_Admin2__RoleDetailDesc_Query_impl" scope="request"/>
+<bean class="com.iexceed.appzillon.impl.AddlServiceProcessorBeanImpl" id="Admin2_Admin2__RoleDetailDesc_Query_service_proc" scope="request"/>
+<bean class="com.iexceed.appzillon.intf.ExternalInterfaceDtls" id="Admin2_Admin2__RoleDetailDesc_Query_intf" scope="request">
+<property name="beanId" value="Admin2_Admin2__RoleDetailDesc_Query_impl"/>
+<property name="category" value="External"/>
+<property name="sessionReq" value="Y"/>
+</bean>
+<bean class="com.iexceed.appzillon.services.Admin2.RoleDetailDesc.RoleDetailDesc_New_Service" id="Admin2_Admin2__RoleDetailDesc_New_service" scope="request"/>
+<bean class="com.iexceed.appzillon.impl.DBServicesImpl" id="Admin2_Admin2__RoleDetailDesc_New_impl" scope="request"/>
+<bean class="com.iexceed.appzillon.impl.AddlServiceProcessorBeanImpl" id="Admin2_Admin2__RoleDetailDesc_New_service_proc" scope="request"/>
+<bean class="com.iexceed.appzillon.intf.ExternalInterfaceDtls" id="Admin2_Admin2__RoleDetailDesc_New_intf" scope="request">
+<property name="beanId" value="Admin2_Admin2__RoleDetailDesc_New_impl"/>
+<property name="category" value="External"/>
+<property name="sessionReq" value="Y"/>
+</bean>
+<bean class="com.iexceed.appzillon.services.Admin2.RoleDetailDesc.RoleDetailDesc_Modify_Service" id="Admin2_Admin2__RoleDetailDesc_Modify_service" scope="request"/>
+<bean class="com.iexceed.appzillon.impl.DBServicesImpl" id="Admin2_Admin2__RoleDetailDesc_Modify_impl" scope="request"/>
+<bean class="com.iexceed.appzillon.impl.AddlServiceProcessorBeanImpl" id="Admin2_Admin2__RoleDetailDesc_Modify_service_proc" scope="request"/>
+<bean class="com.iexceed.appzillon.intf.ExternalInterfaceDtls" id="Admin2_Admin2__RoleDetailDesc_Modify_intf" scope="request">
+<property name="beanId" value="Admin2_Admin2__RoleDetailDesc_Modify_impl"/>
+<property name="category" value="External"/>
+<property name="sessionReq" value="Y"/>
+</bean>
+<bean class="com.iexceed.appzillon.services.Admin2.RoleDetailQuery.RoleDetailQuery_Query_Service" id="Admin2_Admin2__RoleDetailQuery_Query_service" scope="request"/>
+<bean class="com.iexceed.appzillon.impl.DBServicesImpl" id="Admin2_Admin2__RoleDetailQuery_Query_impl" scope="request"/>
+<bean class="com.iexceed.appzillon.services.custom.RoleDetailQuery" id="Admin2_Admin2__RoleDetailQuery_Query_service_proc" scope="request"/>
+<bean class="com.iexceed.appzillon.intf.ExternalInterfaceDtls" id="Admin2_Admin2__RoleDetailQuery_Query_intf" scope="request">
+<property name="beanId" value="Admin2_Admin2__RoleDetailQuery_Query_impl"/>
+<property name="category" value="External"/>
+<property name="sessionReq" value="Y"/>
+</bean>
+<bean class="com.iexceed.appzillon.services.Admin2.RoleDetailQuery.RoleDetailQuery_New_Service" id="Admin2_Admin2__RoleDetailQuery_New_service" scope="request"/>
+<bean class="com.iexceed.appzillon.impl.DBServicesImpl" id="Admin2_Admin2__RoleDetailQuery_New_impl" scope="request"/>
+<bean class="com.iexceed.appzillon.services.custom.RoleDetailQuery" id="Admin2_Admin2__RoleDetailQuery_New_service_proc" scope="request"/>
+<bean class="com.iexceed.appzillon.intf.ExternalInterfaceDtls" id="Admin2_Admin2__RoleDetailQuery_New_intf" scope="request">
+<property name="beanId" value="Admin2_Admin2__RoleDetailQuery_New_impl"/>
+<property name="category" value="External"/>
+<property name="sessionReq" value="Y"/>
+</bean>
+<bean class="com.iexceed.appzillon.services.Admin2.RoleDetailUpdate.RoleDetailUpdate_Query_Service" id="Admin2_Admin2__RoleDetailUpdate_Query_service" scope="request"/>
+<bean class="com.iexceed.appzillon.impl.DBServicesImpl" id="Admin2_Admin2__RoleDetailUpdate_Query_impl" scope="request"/>
+<bean class="com.iexceed.appzillon.impl.AddlServiceProcessorBeanImpl" id="Admin2_Admin2__RoleDetailUpdate_Query_service_proc" scope="request"/>
+<bean class="com.iexceed.appzillon.intf.ExternalInterfaceDtls" id="Admin2_Admin2__RoleDetailUpdate_Query_intf" scope="request">
+<property name="beanId" value="Admin2_Admin2__RoleDetailUpdate_Query_impl"/>
+<property name="category" value="External"/>
+<property name="sessionReq" value="Y"/>
+</bean>
+<bean class="com.iexceed.appzillon.services.Admin2.RoleDetailUpdate.RoleDetailUpdate_Authorize_Service" id="Admin2_Admin2__RoleDetailUpdate_Authorize_service" scope="request"/>
+<bean class="com.iexceed.appzillon.impl.DBServicesImpl" id="Admin2_Admin2__RoleDetailUpdate_Authorize_impl" scope="request"/>
+<bean class="com.iexceed.appzillon.impl.AddlServiceProcessorBeanImpl" id="Admin2_Admin2__RoleDetailUpdate_Authorize_service_proc" scope="request"/>
+<bean class="com.iexceed.appzillon.intf.ExternalInterfaceDtls" id="Admin2_Admin2__RoleDetailUpdate_Authorize_intf" scope="request">
+<property name="beanId" value="Admin2_Admin2__RoleDetailUpdate_Authorize_impl"/>
+<property name="category" value="External"/>
+<property name="sessionReq" value="Y"/>
+</bean>
+<bean class="com.iexceed.appzillon.services.Admin2.RoleDetailUpdate.RoleDetailUpdate_Modify_Service" id="Admin2_Admin2__RoleDetailUpdate_Modify_service" scope="request"/>
+<bean class="com.iexceed.appzillon.impl.DBServicesImpl" id="Admin2_Admin2__RoleDetailUpdate_Modify_impl" scope="request"/>
+<bean class="com.iexceed.appzillon.impl.AddlServiceProcessorBeanImpl" id="Admin2_Admin2__RoleDetailUpdate_Modify_service_proc" scope="request"/>
+<bean class="com.iexceed.appzillon.intf.ExternalInterfaceDtls" id="Admin2_Admin2__RoleDetailUpdate_Modify_intf" scope="request">
+<property name="beanId" value="Admin2_Admin2__RoleDetailUpdate_Modify_impl"/>
+<property name="category" value="External"/>
+<property name="sessionReq" value="Y"/>
+</bean>
+<bean class="com.iexceed.appzillon.services.Admin2.RolesQuery.RolesQuery_Query_Service" id="Admin2_Admin2__RolesQuery_Query_service" scope="request"/>
+<bean class="com.iexceed.appzillon.impl.DBServicesImpl" id="Admin2_Admin2__RolesQuery_Query_impl" scope="request"/>
+<bean class="com.iexceed.appzillon.impl.AddlServiceProcessorBeanImpl" id="Admin2_Admin2__RolesQuery_Query_service_proc" scope="request"/>
+<bean class="com.iexceed.appzillon.intf.ExternalInterfaceDtls" id="Admin2_Admin2__RolesQuery_Query_intf" scope="request">
+<property name="beanId" value="Admin2_Admin2__RolesQuery_Query_impl"/>
+<property name="category" value="External"/>
+<property name="sessionReq" value="Y"/>
+</bean>
+<bean class="com.iexceed.appzillon.services.Admin2.ScreenDetailQuery.ScreenDetailQuery_Query_Service" id="Admin2_Admin2__ScreenDetailQuery_Query_service" scope="request"/>
+<bean class="com.iexceed.appzillon.impl.DBServicesImpl" id="Admin2_Admin2__ScreenDetailQuery_Query_impl" scope="request"/>
+<bean class="com.iexceed.appzillon.impl.AddlServiceProcessorBeanImpl" id="Admin2_Admin2__ScreenDetailQuery_Query_service_proc" scope="request"/>
+<bean class="com.iexceed.appzillon.intf.ExternalInterfaceDtls" id="Admin2_Admin2__ScreenDetailQuery_Query_intf" scope="request">
+<property name="beanId" value="Admin2_Admin2__ScreenDetailQuery_Query_impl"/>
+<property name="category" value="External"/>
+<property name="sessionReq" value="Y"/>
+</bean>
+<bean class="com.iexceed.appzillon.services.Admin2.ScreenDetailQuery.ScreenDetailQuery_New_Service" id="Admin2_Admin2__ScreenDetailQuery_New_service" scope="request"/>
+<bean class="com.iexceed.appzillon.impl.DBServicesImpl" id="Admin2_Admin2__ScreenDetailQuery_New_impl" scope="request"/>
+<bean class="com.iexceed.appzillon.impl.AddlServiceProcessorBeanImpl" id="Admin2_Admin2__ScreenDetailQuery_New_service_proc" scope="request"/>
+<bean class="com.iexceed.appzillon.intf.ExternalInterfaceDtls" id="Admin2_Admin2__ScreenDetailQuery_New_intf" scope="request">
+<property name="beanId" value="Admin2_Admin2__ScreenDetailQuery_New_impl"/>
+<property name="category" value="External"/>
+<property name="sessionReq" value="Y"/>
+</bean>
+<bean class="com.iexceed.appzillon.services.Admin2.ScreenDetailQuery.ScreenDetailQuery_Authorize_Service" id="Admin2_Admin2__ScreenDetailQuery_Authorize_service" scope="request"/>
+<bean class="com.iexceed.appzillon.impl.DBServicesImpl" id="Admin2_Admin2__ScreenDetailQuery_Authorize_impl" scope="request"/>
+<bean class="com.iexceed.appzillon.impl.AddlServiceProcessorBeanImpl" id="Admin2_Admin2__ScreenDetailQuery_Authorize_service_proc" scope="request"/>
+<bean class="com.iexceed.appzillon.intf.ExternalInterfaceDtls" id="Admin2_Admin2__ScreenDetailQuery_Authorize_intf" scope="request">
+<property name="beanId" value="Admin2_Admin2__ScreenDetailQuery_Authorize_impl"/>
+<property name="category" value="External"/>
+<property name="sessionReq" value="Y"/>
+</bean>
+<bean class="com.iexceed.appzillon.services.Admin2.ScreenDetailQuery.ScreenDetailQuery_Modify_Service" id="Admin2_Admin2__ScreenDetailQuery_Modify_service" scope="request"/>
+<bean class="com.iexceed.appzillon.impl.DBServicesImpl" id="Admin2_Admin2__ScreenDetailQuery_Modify_impl" scope="request"/>
+<bean class="com.iexceed.appzillon.impl.AddlServiceProcessorBeanImpl" id="Admin2_Admin2__ScreenDetailQuery_Modify_service_proc" scope="request"/>
+<bean class="com.iexceed.appzillon.intf.ExternalInterfaceDtls" id="Admin2_Admin2__ScreenDetailQuery_Modify_intf" scope="request">
+<property name="beanId" value="Admin2_Admin2__ScreenDetailQuery_Modify_impl"/>
+<property name="category" value="External"/>
+<property name="sessionReq" value="Y"/>
+</bean>
+<bean class="com.iexceed.appzillon.services.Admin2.ScreensQuery.ScreensQuery_Query_Service" id="Admin2_Admin2__ScreensQuery_Query_service" scope="request"/>
+<bean class="com.iexceed.appzillon.impl.DBServicesImpl" id="Admin2_Admin2__ScreensQuery_Query_impl" scope="request"/>
+<bean class="com.iexceed.appzillon.impl.AddlServiceProcessorBeanImpl" id="Admin2_Admin2__ScreensQuery_Query_service_proc" scope="request"/>
+<bean class="com.iexceed.appzillon.intf.ExternalInterfaceDtls" id="Admin2_Admin2__ScreensQuery_Query_intf" scope="request">
+<property name="beanId" value="Admin2_Admin2__ScreensQuery_Query_impl"/>
+<property name="category" value="External"/>
+<property name="sessionReq" value="Y"/>
+</bean>
+<bean class="com.iexceed.appzillon.services.Admin2.ScreensQuery.ScreensQuery_Delete_Service" id="Admin2_Admin2__ScreensQuery_Delete_service" scope="request"/>
+<bean class="com.iexceed.appzillon.impl.DBServicesImpl" id="Admin2_Admin2__ScreensQuery_Delete_impl" scope="request"/>
+<bean class="com.iexceed.appzillon.impl.AddlServiceProcessorBeanImpl" id="Admin2_Admin2__ScreensQuery_Delete_service_proc" scope="request"/>
+<bean class="com.iexceed.appzillon.intf.ExternalInterfaceDtls" id="Admin2_Admin2__ScreensQuery_Delete_intf" scope="request">
+<property name="beanId" value="Admin2_Admin2__ScreensQuery_Delete_impl"/>
+<property name="category" value="External"/>
+<property name="sessionReq" value="Y"/>
+</bean>
+<bean class="com.iexceed.appzillon.services.Admin2.SecurityParamsDetailQuery.SecurityParamsDetailQuery_Query_Service" id="Admin2_Admin2__SecurityParamsDetailQuery_Query_service" scope="request"/>
+<bean class="com.iexceed.appzillon.impl.DBServicesImpl" id="Admin2_Admin2__SecurityParamsDetailQuery_Query_impl" scope="request"/>
+<bean class="com.iexceed.appzillon.impl.AddlServiceProcessorBeanImpl" id="Admin2_Admin2__SecurityParamsDetailQuery_Query_service_proc" scope="request"/>
+<bean class="com.iexceed.appzillon.intf.ExternalInterfaceDtls" id="Admin2_Admin2__SecurityParamsDetailQuery_Query_intf" scope="request">
+<property name="beanId" value="Admin2_Admin2__SecurityParamsDetailQuery_Query_impl"/>
+<property name="category" value="External"/>
+<property name="sessionReq" value="Y"/>
+</bean>
+<bean class="com.iexceed.appzillon.services.Admin2.SecurityParamsDetailQuery.SecurityParamsDetailQuery_New_Service" id="Admin2_Admin2__SecurityParamsDetailQuery_New_service" scope="request"/>
+<bean class="com.iexceed.appzillon.impl.DBServicesImpl" id="Admin2_Admin2__SecurityParamsDetailQuery_New_impl" scope="request"/>
+<bean class="com.iexceed.appzillon.impl.AddlServiceProcessorBeanImpl" id="Admin2_Admin2__SecurityParamsDetailQuery_New_service_proc" scope="request"/>
+<bean class="com.iexceed.appzillon.intf.ExternalInterfaceDtls" id="Admin2_Admin2__SecurityParamsDetailQuery_New_intf" scope="request">
+<property name="beanId" value="Admin2_Admin2__SecurityParamsDetailQuery_New_impl"/>
+<property name="category" value="External"/>
+<property name="sessionReq" value="Y"/>
+</bean>
+<bean class="com.iexceed.appzillon.services.Admin2.SecurityParamsDetailQuery.SecurityParamsDetailQuery_Authorize_Service" id="Admin2_Admin2__SecurityParamsDetailQuery_Authorize_service" scope="request"/>
+<bean class="com.iexceed.appzillon.impl.DBServicesImpl" id="Admin2_Admin2__SecurityParamsDetailQuery_Authorize_impl" scope="request"/>
+<bean class="com.iexceed.appzillon.impl.AddlServiceProcessorBeanImpl" id="Admin2_Admin2__SecurityParamsDetailQuery_Authorize_service_proc" scope="request"/>
+<bean class="com.iexceed.appzillon.intf.ExternalInterfaceDtls" id="Admin2_Admin2__SecurityParamsDetailQuery_Authorize_intf" scope="request">
+<property name="beanId" value="Admin2_Admin2__SecurityParamsDetailQuery_Authorize_impl"/>
+<property name="category" value="External"/>
+<property name="sessionReq" value="Y"/>
+</bean>
+<bean class="com.iexceed.appzillon.services.Admin2.SecurityParamsDetailQuery.SecurityParamsDetailQuery_Modify_Service" id="Admin2_Admin2__SecurityParamsDetailQuery_Modify_service" scope="request"/>
+<bean class="com.iexceed.appzillon.impl.DBServicesImpl" id="Admin2_Admin2__SecurityParamsDetailQuery_Modify_impl" scope="request"/>
+<bean class="com.iexceed.appzillon.impl.AddlServiceProcessorBeanImpl" id="Admin2_Admin2__SecurityParamsDetailQuery_Modify_service_proc" scope="request"/>
+<bean class="com.iexceed.appzillon.intf.ExternalInterfaceDtls" id="Admin2_Admin2__SecurityParamsDetailQuery_Modify_intf" scope="request">
+<property name="beanId" value="Admin2_Admin2__SecurityParamsDetailQuery_Modify_impl"/>
+<property name="category" value="External"/>
+<property name="sessionReq" value="Y"/>
+</bean>
+<bean class="com.iexceed.appzillon.services.Admin2.SecurityParamsQuery.SecurityParamsQuery_Query_Service" id="Admin2_Admin2__SecurityParamsQuery_Query_service" scope="request"/>
+<bean class="com.iexceed.appzillon.impl.DBServicesImpl" id="Admin2_Admin2__SecurityParamsQuery_Query_impl" scope="request"/>
+<bean class="com.iexceed.appzillon.impl.AddlServiceProcessorBeanImpl" id="Admin2_Admin2__SecurityParamsQuery_Query_service_proc" scope="request"/>
+<bean class="com.iexceed.appzillon.intf.ExternalInterfaceDtls" id="Admin2_Admin2__SecurityParamsQuery_Query_intf" scope="request">
+<property name="beanId" value="Admin2_Admin2__SecurityParamsQuery_Query_impl"/>
+<property name="category" value="External"/>
+<property name="sessionReq" value="Y"/>
+</bean>
+<bean class="com.iexceed.appzillon.services.Admin2.SecurityParamsQuery.SecurityParamsQuery_Delete_Service" id="Admin2_Admin2__SecurityParamsQuery_Delete_service" scope="request"/>
+<bean class="com.iexceed.appzillon.impl.DBServicesImpl" id="Admin2_Admin2__SecurityParamsQuery_Delete_impl" scope="request"/>
+<bean class="com.iexceed.appzillon.impl.AddlServiceProcessorBeanImpl" id="Admin2_Admin2__SecurityParamsQuery_Delete_service_proc" scope="request"/>
+<bean class="com.iexceed.appzillon.intf.ExternalInterfaceDtls" id="Admin2_Admin2__SecurityParamsQuery_Delete_intf" scope="request">
+<property name="beanId" value="Admin2_Admin2__SecurityParamsQuery_Delete_impl"/>
+<property name="category" value="External"/>
+<property name="sessionReq" value="Y"/>
+</bean>
+<bean class="com.iexceed.appzillon.services.BirtService" id="Admin2_Admin2__StatisticsReport_service" scope="request"/>
+<bean class="com.iexceed.appzillon.impl.BirtServicesImpl" id="Admin2_Admin2__StatisticsReport_impl" scope="request"/>
+<bean class="com.iexceed.appzillon.impl.AddlServiceProcessorBeanImpl" id="Admin2_Admin2__StatisticsReport_service_proc" scope="request"/>
+<bean class="com.iexceed.appzillon.intf.ExternalInterfaceDtls" id="Admin2_Admin2__StatisticsReport_intf" scope="request">
+<property name="beanId" value="Admin2_Admin2__StatisticsReport_impl"/>
+<property name="category" value="External"/>
+<property name="sessionReq" value="Y"/>
+</bean>
+<bean class="com.iexceed.appzillon.services.Admin2.TaskRepairDetailQuery.TaskRepairDetailQuery_Query_Service" id="Admin2_Admin2__TaskRepairDetailQuery_Query_service" scope="request"/>
+<bean class="com.iexceed.appzillon.impl.DBServicesImpl" id="Admin2_Admin2__TaskRepairDetailQuery_Query_impl" scope="request"/>
+<bean class="com.iexceed.appzillon.impl.AddlServiceProcessorBeanImpl" id="Admin2_Admin2__TaskRepairDetailQuery_Query_service_proc" scope="request"/>
+<bean class="com.iexceed.appzillon.intf.ExternalInterfaceDtls" id="Admin2_Admin2__TaskRepairDetailQuery_Query_intf" scope="request">
+<property name="beanId" value="Admin2_Admin2__TaskRepairDetailQuery_Query_impl"/>
+<property name="category" value="External"/>
+<property name="sessionReq" value="Y"/>
+</bean>
+<bean class="com.iexceed.appzillon.services.Admin2.TaskRepairDetailQuery.TaskRepairDetailQuery_Modify_Service" id="Admin2_Admin2__TaskRepairDetailQuery_Modify_service" scope="request"/>
+<bean class="com.iexceed.appzillon.impl.DBServicesImpl" id="Admin2_Admin2__TaskRepairDetailQuery_Modify_impl" scope="request"/>
+<bean class="com.iexceed.appzillon.impl.AddlServiceProcessorBeanImpl" id="Admin2_Admin2__TaskRepairDetailQuery_Modify_service_proc" scope="request"/>
+<bean class="com.iexceed.appzillon.intf.ExternalInterfaceDtls" id="Admin2_Admin2__TaskRepairDetailQuery_Modify_intf" scope="request">
+<property name="beanId" value="Admin2_Admin2__TaskRepairDetailQuery_Modify_impl"/>
+<property name="category" value="External"/>
+<property name="sessionReq" value="Y"/>
+</bean>
+<bean class="com.iexceed.appzillon.services.Admin2.TaskRepairDetailQuery.TaskRepairDetailQuery_Delete_Service" id="Admin2_Admin2__TaskRepairDetailQuery_Delete_service" scope="request"/>
+<bean class="com.iexceed.appzillon.impl.DBServicesImpl" id="Admin2_Admin2__TaskRepairDetailQuery_Delete_impl" scope="request"/>
+<bean class="com.iexceed.appzillon.impl.AddlServiceProcessorBeanImpl" id="Admin2_Admin2__TaskRepairDetailQuery_Delete_service_proc" scope="request"/>
+<bean class="com.iexceed.appzillon.intf.ExternalInterfaceDtls" id="Admin2_Admin2__TaskRepairDetailQuery_Delete_intf" scope="request">
+<property name="beanId" value="Admin2_Admin2__TaskRepairDetailQuery_Delete_impl"/>
+<property name="category" value="External"/>
+<property name="sessionReq" value="Y"/>
+</bean>
+<bean class="com.iexceed.appzillon.services.Admin2.TaskRepairQuery.TaskRepairQuery_Query_Service" id="Admin2_Admin2__TaskRepairQuery_Query_service" scope="request"/>
+<bean class="com.iexceed.appzillon.impl.DBServicesImpl" id="Admin2_Admin2__TaskRepairQuery_Query_impl" scope="request"/>
+<bean class="com.iexceed.appzillon.impl.AddlServiceProcessorBeanImpl" id="Admin2_Admin2__TaskRepairQuery_Query_service_proc" scope="request"/>
+<bean class="com.iexceed.appzillon.intf.ExternalInterfaceDtls" id="Admin2_Admin2__TaskRepairQuery_Query_intf" scope="request">
+<property name="beanId" value="Admin2_Admin2__TaskRepairQuery_Query_impl"/>
+<property name="category" value="External"/>
+<property name="sessionReq" value="Y"/>
+</bean>
+<bean class="com.iexceed.appzillon.services.BirtService" id="Admin2_Admin2__TransactionReport_service" scope="request"/>
+<bean class="com.iexceed.appzillon.impl.BirtServicesImpl" id="Admin2_Admin2__TransactionReport_impl" scope="request"/>
+<bean class="com.iexceed.appzillon.impl.AddlServiceProcessorBeanImpl" id="Admin2_Admin2__TransactionReport_service_proc" scope="request"/>
+<bean class="com.iexceed.appzillon.intf.ExternalInterfaceDtls" id="Admin2_Admin2__TransactionReport_intf" scope="request">
+<property name="beanId" value="Admin2_Admin2__TransactionReport_impl"/>
+<property name="category" value="External"/>
+<property name="sessionReq" value="Y"/>
+</bean>
+<bean class="com.iexceed.appzillon.services.BirtService" id="Admin2_Admin2__UsageReport_service" scope="request"/>
+<bean class="com.iexceed.appzillon.impl.BirtServicesImpl" id="Admin2_Admin2__UsageReport_impl" scope="request"/>
+<bean class="com.iexceed.appzillon.impl.AddlServiceProcessorBeanImpl" id="Admin2_Admin2__UsageReport_service_proc" scope="request"/>
+<bean class="com.iexceed.appzillon.intf.ExternalInterfaceDtls" id="Admin2_Admin2__UsageReport_intf" scope="request">
+<property name="beanId" value="Admin2_Admin2__UsageReport_impl"/>
+<property name="category" value="External"/>
+<property name="sessionReq" value="Y"/>
+</bean>
+<bean class="com.iexceed.appzillon.services.Admin2.UserDetailsQuery.UserDetailsQuery_Query_Service" id="Admin2_Admin2__UserDetailsQuery_Query_service" scope="request"/>
+<bean class="com.iexceed.appzillon.impl.DBServicesImpl" id="Admin2_Admin2__UserDetailsQuery_Query_impl" scope="request"/>
+<bean class="com.iexceed.appzillon.impl.AddlServiceProcessorBeanImpl" id="Admin2_Admin2__UserDetailsQuery_Query_service_proc" scope="request"/>
+<bean class="com.iexceed.appzillon.intf.ExternalInterfaceDtls" id="Admin2_Admin2__UserDetailsQuery_Query_intf" scope="request">
+<property name="beanId" value="Admin2_Admin2__UserDetailsQuery_Query_impl"/>
+<property name="category" value="External"/>
+<property name="sessionReq" value="Y"/>
+</bean>
+<bean class="com.iexceed.appzillon.services.SQLServices" id="Admin2_Admin2__UserModifyStatusSQL_service" scope="request"/>
+<bean class="com.iexceed.appzillon.impl.SQLServicesImpl" id="Admin2_Admin2__UserModifyStatusSQL_impl" scope="request"/>
+<bean class="com.iexceed.appzillon.impl.AddlServiceProcessorBeanImpl" id="Admin2_Admin2__UserModifyStatusSQL_service_proc" scope="request"/>
+<bean class="com.iexceed.appzillon.intf.ExternalInterfaceDtls" id="Admin2_Admin2__UserModifyStatusSQL_intf" scope="request">
+<property name="beanId" value="Admin2_Admin2__UserModifyStatusSQL_impl"/>
+<property name="category" value="External"/>
+<property name="sessionReq" value="Y"/>
+</bean>
+<bean class="com.iexceed.appzillon.services.Admin2.UserProfileDetailQuery.UserProfileDetailQuery_Query_Service" id="Admin2_Admin2__UserProfileDetailQuery_Query_service" scope="request"/>
+<bean class="com.iexceed.appzillon.impl.DBServicesImpl" id="Admin2_Admin2__UserProfileDetailQuery_Query_impl" scope="request"/>
+<bean class="com.iexceed.appzillon.impl.AddlServiceProcessorBeanImpl" id="Admin2_Admin2__UserProfileDetailQuery_Query_service_proc" scope="request"/>
+<bean class="com.iexceed.appzillon.intf.ExternalInterfaceDtls" id="Admin2_Admin2__UserProfileDetailQuery_Query_intf" scope="request">
+<property name="beanId" value="Admin2_Admin2__UserProfileDetailQuery_Query_impl"/>
+<property name="category" value="External"/>
+<property name="sessionReq" value="Y"/>
+</bean>
+<bean class="com.iexceed.appzillon.services.MailService" id="Admin2_appzillonMailRequest_service" scope="request"/>
+<bean class="com.iexceed.appzillon.impl.MailServicesImpl" id="Admin2_appzillonMailRequest_impl" scope="request"/>
+<bean class="com.iexceed.appzillon.impl.AddlServiceProcessorBeanImpl" id="Admin2_appzillonMailRequest_service_proc" scope="request"/>
+<bean class="com.iexceed.appzillon.intf.ExternalInterfaceDtls" id="Admin2_appzillonMailRequest_intf">
+<property name="beanId" value="Admin2_appzillonMailRequest_impl"/>
+<property name="category" value="External"/>
+<property name="sessionReq" value="Y"/>
+</bean>
+<bean class="com.iexceed.appzillon.impl.TextMessagingServicesImpl" id="Admin2_sendSMSImpl" scope="request"/>
+<bean class="com.iexceed.appzillon.impl.TranslationBeanImpl" id="Admin2_paramImpl" scope="request"/>
+<bean class="com.iexceed.appzillon.impl.NLPImpl" id="Admin2_NLPImpl" scope="request"/>
+<bean class="com.iexceed.appzillon.impl.ConversationalUIImpl" id="Admin2_ConversationalUIImpl" scope="request"/>
+<bean class="com.iexceed.appzillon.dao.MailDetails" id="Admin2_appzillonMailRequest" scope="request">
+<property name="from" value=" iexceedtestemail@gmail.com"/>
+<property name="password" value="Appzillon@123"/>
+<property name="hostName" value="smtp.gmail.com"/>
+<property name="portNumber" value="465"/>
+<property name="userName" value=" iexceedtestemail@gmail.com"/>
+<property name="protocol" value="smtps"/>
+</bean>
+<bean class="com.iexceed.appzillon.dao.ReportDetails" id="Admin2_Admin2__AdminOperationsReport" scope="request">
+<property name="credRequired" value="N"/>
+<property name="reportType" value="ENCODED"/>
+<property name="dataSource" value="java:comp/env/jdbc/AppzillonServerDS"/>
+</bean>
+<bean class="com.iexceed.appzillon.dao.DBDetails" id="Admin2_Admin2__deleteRole" scope="request">
+<property name="persistenceUnitName" value="pu_AppzillonServerDS"/>
+</bean>
+<bean class="com.iexceed.appzillon.dao.DBDetails" id="Admin2_Admin2__DeviceGroupsDetail" scope="request">
+<property name="persistenceUnitName" value="pu_AppzillonServerDS"/>
+</bean>
+<bean class="com.iexceed.appzillon.dao.DBDetails" id="Admin2_Admin2__DeviceGroupsQuery" scope="request">
+<property name="persistenceUnitName" value="pu_AppzillonServerDS"/>
+</bean>
+<bean class="com.iexceed.appzillon.dao.DBDetails" id="Admin2_Admin2__DlgMasterDetail" scope="request">
+<property name="persistenceUnitName" value="pu_AppzillonServerDS"/>
+</bean>
+<bean class="com.iexceed.appzillon.dao.DBDetails" id="Admin2_Admin2__DlgMasterDetailModifyDel" scope="request">
+<property name="persistenceUnitName" value="pu_AppzillonServerDS"/>
+</bean>
+<bean class="com.iexceed.appzillon.dao.SQLDetails" id="Admin2_Admin2__FetchAllowAppIdSQL" scope="request">
+<property name="query" value="select APP_ID as &quot;APP_ID&quot; from TB_ASMI_SECURITY_PARAMETERS where APP_ID IN (select ALLOWED_APP_ID from TB_ASMI_USER_APP_ACCESS &#10;where USER_ID=:userId and APP_ACCESS = 'A')"/>
+<property name="DSName" value="java:comp/env/jdbc/AppzillonServerDS"/>
+<property name="timeOut" value="300"/>
+</bean>
+<bean class="com.iexceed.appzillon.dao.SQLDetails" id="Admin2_Admin2__FetchAppMasterAppIDSQL" scope="request">
+<property name="query" value="select APP_ID as &quot;APP_ID&quot;,APP_DESCRIPTION as &quot;APP_DESCRIPTION&quot; from TB_ASMI_APP_MASTER &#10;where APP_ID IN (select ALLOWED_APP_ID from TB_ASMI_USER_APP_ACCESS where USER_ID=:userId AND APP_ACCESS='A' AND APP_ID=:appId)"/>
+<property name="DSName" value="java:comp/env/jdbc/AppzillonServerDS"/>
+<property name="timeOut" value="300"/>
+</bean>
+<bean class="com.iexceed.appzillon.dao.DBDetails" id="Admin2_Admin2__FetchNotificationCode" scope="request">
+<property name="persistenceUnitName" value="pu_AppzillonServerDS"/>
+</bean>
+<bean class="com.iexceed.appzillon.dao.SQLDetails" id="Admin2_Admin2__FetchNotificationCodeSQL" scope="request">
+<property name="query" value="SELECT DISTINCT NOTIF_CODE as &quot;NOTIF_CODE&quot;&#10;FROM TB_ASNF_APP_OS_NOTIF_CODE&#10;WHERE APP_ID = :appId"/>
+<property name="DSName" value="java:comp/env/jdbc/AppzillonServerDS"/>
+<property name="timeOut" value="300"/>
+</bean>
+<bean class="com.iexceed.appzillon.dao.HttpDetails" id="Admin2_Admin2__GeoCoding" scope="request">
+<property name="callType" value="GET"/>
+<property name="responseType" value="JSON"/>
+<property name="requestType" value="JSON"/>
+<property name="payLoadType" value="application/json"/>
+<property name="headerNode" value=""/>
+<property name="headerAttributes" value=""/>
+<property name="SSLRequired" value="N"/>
+<property name="timeOut" value="0"/>
+<property name="queryParameters">
+<map>
+<entry key="address" value="address"/>
+<entry key="key" value="key"/>
+</map>
+</property>
+</bean>
+<bean class="com.iexceed.appzillon.dao.ReportDetails" id="Admin2_Admin2__InactiveUsersReport" scope="request">
+<property name="credRequired" value="N"/>
+<property name="reportType" value="ENCODED"/>
+<property name="dataSource" value="java:comp/env/jdbc/AppzillonServerDS"/>
+</bean>
+<bean class="com.iexceed.appzillon.dao.SQLDetails" id="Admin2_Admin2__InactiveUsersSql" scope="request">
+<property name="query" value="SELECT t1.USER_ID, t1.USER_NAME,t1.CREATE_TS&#10;FROM TB_ASMI_USER t1&#10;LEFT JOIN TB_ASTP_LAST_LOGIN t2 ON t2.USER_ID = t1.USER_ID AND t2.APP_ID = t1.APP_ID&#10;WHERE t2.USER_ID IS NULL AND t1.APP_ID = :appId AND t1.USER_ACTIVE = 'Y'"/>
+<property name="DSName" value="java:comp/env/jdbc/AppzillonServerDS"/>
+<property name="timeOut" value="300"/>
+</bean>
+<bean class="com.iexceed.appzillon.dao.DBDetails" id="Admin2_Admin2__InterfaceQuery" scope="request">
+<property name="persistenceUnitName" value="pu_AppzillonServerDS"/>
+</bean>
+<bean class="com.iexceed.appzillon.dao.DBDetails" id="Admin2_Admin2__InterfacesDetailQuery" scope="request">
+<property name="persistenceUnitName" value="pu_AppzillonServerDS"/>
+</bean>
+<bean class="com.iexceed.appzillon.dao.DBDetails" id="Admin2_Admin2__MessageStatistics" scope="request">
+<property name="persistenceUnitName" value="pu_AppzillonServerDS"/>
+</bean>
+<bean class="com.iexceed.appzillon.dao.ReportDetails" id="Admin2_Admin2__NotificationsReport" scope="request">
+<property name="credRequired" value="N"/>
+<property name="reportType" value="ENCODED"/>
+<property name="dataSource" value="java:comp/env/jdbc/AppzillonServerDS"/>
+</bean>
+<bean class="com.iexceed.appzillon.dao.DBDetails" id="Admin2_Admin2__QuartzSchedulerDetailQuery" scope="request">
+<property name="persistenceUnitName" value="pu_AppzillonServerDS"/>
+</bean>
+<bean class="com.iexceed.appzillon.dao.DBDetails" id="Admin2_Admin2__QuartzSchedulerQuery" scope="request">
+<property name="persistenceUnitName" value="pu_AppzillonServerDS"/>
+</bean>
+<bean class="com.iexceed.appzillon.dao.DBDetails" id="Admin2_Admin2__RoleDetailDesc" scope="request">
+<property name="persistenceUnitName" value="pu_AppzillonServerDS"/>
+</bean>
+<bean class="com.iexceed.appzillon.dao.DBDetails" id="Admin2_Admin2__RoleDetailQuery" scope="request">
+<property name="persistenceUnitName" value="pu_AppzillonServerDS"/>
+</bean>
+<bean class="com.iexceed.appzillon.dao.DBDetails" id="Admin2_Admin2__RoleDetailUpdate" scope="request">
+<property name="persistenceUnitName" value="pu_AppzillonServerDS"/>
+</bean>
+<bean class="com.iexceed.appzillon.dao.DBDetails" id="Admin2_Admin2__RolesQuery" scope="request">
+<property name="persistenceUnitName" value="pu_AppzillonServerDS"/>
+</bean>
+<bean class="com.iexceed.appzillon.dao.DBDetails" id="Admin2_Admin2__ScreenDetailQuery" scope="request">
+<property name="persistenceUnitName" value="pu_AppzillonServerDS"/>
+</bean>
+<bean class="com.iexceed.appzillon.dao.DBDetails" id="Admin2_Admin2__ScreensQuery" scope="request">
+<property name="persistenceUnitName" value="pu_AppzillonServerDS"/>
+</bean>
+<bean class="com.iexceed.appzillon.dao.DBDetails" id="Admin2_Admin2__SecurityParamsDetailQuery" scope="request">
+<property name="persistenceUnitName" value="pu_AppzillonServerDS"/>
+</bean>
+<bean class="com.iexceed.appzillon.dao.DBDetails" id="Admin2_Admin2__SecurityParamsQuery" scope="request">
+<property name="persistenceUnitName" value="pu_AppzillonServerDS"/>
+</bean>
+<bean class="com.iexceed.appzillon.dao.ReportDetails" id="Admin2_Admin2__StatisticsReport" scope="request">
+<property name="credRequired" value="N"/>
+<property name="reportType" value="ENCODED"/>
+<property name="dataSource" value="java:comp/env/jdbc/AppzillonServerDS"/>
+</bean>
+<bean class="com.iexceed.appzillon.dao.DBDetails" id="Admin2_Admin2__TaskRepairDetailQuery" scope="request">
+<property name="persistenceUnitName" value="pu_AppzillonServerDS"/>
+</bean>
+<bean class="com.iexceed.appzillon.dao.DBDetails" id="Admin2_Admin2__TaskRepairQuery" scope="request">
+<property name="persistenceUnitName" value="pu_AppzillonServerDS"/>
+</bean>
+<bean class="com.iexceed.appzillon.dao.ReportDetails" id="Admin2_Admin2__TransactionReport" scope="request">
+<property name="credRequired" value="N"/>
+<property name="reportType" value="ENCODED"/>
+<property name="dataSource" value="java:comp/env/jdbc/AppzillonServerDS"/>
+</bean>
+<bean class="com.iexceed.appzillon.dao.ReportDetails" id="Admin2_Admin2__UsageReport" scope="request">
+<property name="credRequired" value="N"/>
+<property name="reportType" value="ENCODED"/>
+<property name="dataSource" value="java:comp/env/jdbc/AppzillonServerDS"/>
+</bean>
+<bean class="com.iexceed.appzillon.dao.DBDetails" id="Admin2_Admin2__UserDetailsQuery" scope="request">
+<property name="persistenceUnitName" value="pu_AppzillonServerDS"/>
+</bean>
+<bean class="com.iexceed.appzillon.dao.SQLDetails" id="Admin2_Admin2__UserModifyStatusSQL" scope="request">
+<property name="query" value="Select APP_USER_ID as &quot;APP_USER_ID&quot;,DEVICE_ID as &quot;DEVICE_ID&quot;,CREATE_TS as &quot;CREATE_TS&quot;,INTERFACE_ID as &quot;INTERFACE_ID&quot;,USER_ID as &quot;USER_ID&quot;&#10;From TB_ASLG_TXN_DETAIL&#10;Where USER_APP_ID = :appId AND CREATE_TS between :startDate AND :endDate &#10;AND INTERFACE_ID IN(:interfaceId1,:interfaceId2,:interfaceId3,:interfaceId4)&#10;AND STATUS = 'S'"/>
+<property name="DSName" value="java:comp/env/jdbc/AppzillonServerDS"/>
+<property name="timeOut" value="300"/>
+</bean>
+<bean class="com.iexceed.appzillon.dao.DBDetails" id="Admin2_Admin2__UserProfileDetailQuery" scope="request">
+<property name="persistenceUnitName" value="pu_AppzillonServerDS"/>
+</bean>
+</beans>

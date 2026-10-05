@@ -1,0 +1,118 @@
+<ng-template #textContent>
+    <ng-container *ngIf="props.heading === 'h1'">
+        <h1>
+                <ng-container [ngTemplateOutlet]="tagContent"></ng-container>
+        </h1>
+    </ng-container>
+    <ng-container *ngIf="props.heading === 'h2'">
+        <h2>
+                <ng-container [ngTemplateOutlet]="tagContent"></ng-container>
+        </h2>
+    </ng-container>
+    <ng-container *ngIf="props.heading === 'h3'">
+        <h3>
+                <ng-container [ngTemplateOutlet]="tagContent"></ng-container>
+        </h3>
+    </ng-container>
+    <ng-container *ngIf="props.heading === 'h4'">
+        <h4>
+                <ng-container [ngTemplateOutlet]="tagContent"></ng-container>
+        </h4>
+    </ng-container>
+    <ng-container *ngIf="props.heading === 'h5'">
+        <h5>
+                <ng-container [ngTemplateOutlet]="tagContent"></ng-container>
+        </h5>
+    </ng-container>
+    <ng-container *ngIf="props.heading === 'h6'">
+        <h6>
+                <ng-container [ngTemplateOutlet]="tagContent"></ng-container>
+        </h6>
+    </ng-container>
+    <ng-container *ngIf="props.heading === 'p'">
+        <p>
+            <ng-container [ngTemplateOutlet]="tagContent"></ng-container>
+        </p>
+    </ng-container>
+</ng-template>
+
+<ng-template #tagContent>
+    <ng-container *ngIf="(props.hasIcon==='Y')||(props.hasSymbol==='Y'); else basicTag">
+        <ng-container *ngIf="(props.contentIcon.position ==='LEFT')">
+                <ng-container [ngTemplateOutlet]="labelContent"></ng-container>
+                <ng-container *ngIf="isUiElm()">
+                        <span id="{{id +'_txtcnt'}}" class={{props.content.direct.className}} [attr.rowno]="index" delegateEvent [blurEvent]="blur" [focusEvent]="focus">{{props.value}}</span>
+        
+                </ng-container>    
+                <ng-container *ngIf="!isUiElm()">
+                    <span id="{{id +'_txtcnt'}}" class={{props.content.direct.className}} [attr.rowno]="index" [innerHtml]="values[elm]" delegateEvent [blurEvent]="blur" [focusEvent]="focus"></span>
+                </ng-container>       
+        </ng-container>
+        <ng-container *ngIf="(props.contentIcon.position ==='RIGHT')">
+                <ng-container *ngIf="isUiElm()">
+                        <span id="{{id +'_txtcnt'}}" class={{props.content.direct.className}} [attr.rowno]="index" delegateEvent [blurEvent]="blur" [focusEvent]="focus">{{props.value}}</span>
+        
+                </ng-container>    
+                <ng-container *ngIf="!isUiElm()">
+                    <span id="{{id +'_txtcnt'}}" class={{props.content.direct.className}} [innerHtml]="values[elm]" [attr.rowno]="index" delegateEvent [blurEvent]="blur" [focusEvent]="focus"></span>
+                </ng-container>                
+                <ng-container [ngTemplateOutlet]="labelContent"></ng-container>
+        </ng-container>
+    </ng-container>
+    <ng-template #basicTag>
+        <ng-container *ngIf="!isUiElm()">
+                <span id="{{id +'_txtcnt'}}" class="{{'span wrapper ' + props.content.direct.className}}" [innerHtml]="values[elm]" [attr.rowno]="index" delegateEvent [blurEvent]="blur" [focusEvent]="focus"></span>
+
+        </ng-container>    
+       
+        <ng-container *ngIf="isUiElm()">
+            <span id="{{id +'_txtcnt'}}" class="{{'span wrapper ' + props.content.direct.className}}"  [attr.rowno]="index" delegateEvent [blurEvent]="blur" [focusEvent]="focus">{{props.value}}</span>
+        </ng-container>
+    </ng-template>
+</ng-template>
+
+<ng-template #content>
+<ng-content></ng-content>
+</ng-template>
+
+<ng-template #labelContent>
+    <ng-container *ngIf="(props.hasIcon === 'Y') && (props.hasSymbol=== 'N')">
+            <svg [attr.class]="props.contentIcon.direct.className" #contentIcon>
+					<use attr.xlink:href="{{'#'+ props.contentIcon.name}}" xlink:href="" />
+			</svg>
+    </ng-container>
+    <ng-container *ngIf="(props.hasIcon ==='N') && (props.hasSymbol==='Y')">
+            <span>{{props.symbolVal}}</span>
+    </ng-container>
+
+</ng-template>
+
+<ng-container *ngIf="props.cntrType=='FORM' ">
+        <ul #formWrapperClass  id="{{props.id + '_ul'}}" clickstoppropagation>
+            <li  #formlabelWrapper>
+                <label #formlabelProps  [innerHtml]="props.labelProps.title">
+                </label>
+            </li>
+            <li #formContentWrapper >
+            	 <span #SpanWrapper class="span wrapper">
+                        <ng-container [ngTemplateOutlet]="textContent">
+                        </ng-container>
+                 </span>
+            </li>
+        </ul>
+</ng-container>
+    
+<ng-container *ngIf="props.cntrType == 'NAVBAR' || props.cntrType == 'LIST'">
+	 <span #SpanWrapper class="span wrapper">
+                <ng-container [ngTemplateOutlet]="textContent">
+                </ng-container>
+     </span>         
+</ng-container>
+<ng-container *ngIf= "props.cntrType=='TABLE'">
+    
+        <td [attr.id]="('td_'+ props.id + '_' + rowIndex)" class="{{props.tdClasses}}">
+                <span [id]="(props.id + '_span_'+ rowIndex)"  #SpanWrapper>
+                   <ng-container [ngTemplateOutlet]="textContent"></ng-container>
+                </span>
+        </td>
+</ng-container>

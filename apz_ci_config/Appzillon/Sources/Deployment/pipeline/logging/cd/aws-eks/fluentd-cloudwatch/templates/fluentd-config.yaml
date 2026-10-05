@@ -1,0 +1,117 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: fluentd-config
+  namespace: {{.Values.nameSpace}}
+  labels:
+    k8s-app: fluentd-cloudwatch
+data:
+  fluent.conf: |
+    <source>
+      @type tail
+      @id in_tail_fluentd_web_logs
+      @label  @web_containers
+      path /var/log/appzillon_logs/WebContainerLogs/WebContainerLogFile.log
+      pos_file /var/log/appzillon_logs/WebContainerLogs/WebContainerLogFile.log.pos
+      tag WebContainerLogFile.access
+      <parse>
+        @type none
+      </parse>
+    </source>
+   
+    <label @web_containers>
+      <filter **>
+        @type record_transformer
+        @id filter_containers_stream_transformer_web
+        <record>
+          stream_name weblogs #
+        </record>
+      </filter>
+ 
+      <match **>
+        @type relabel
+        @label @fluentdlogs_web
+      </match>
+    </label>
+
+
+    <label @fluentdlogs_web>
+      <match WebContainerLogFile.access>
+        @type cloudwatch_logs
+        @id out_cloudwatch_logs_web_containers
+        region "#{ENV.fetch('AWS_REGION')}"
+        log_group_name "/aws/containerinsights/#{ENV.fetch('CLUSTER_NAME')}/appzillon_web"
+        log_stream_name_key stream_name
+        remove_log_stream_name_key true
+        auto_create_stream true
+        <buffer>
+          flush_interval 1
+          chunk_limit_size 2m
+          queued_chunks_limit_size 32
+          retry_forever true
+        </buffer>
+      </match>
+    </label>
+
+
+
+
+    <source>
+      @type tail
+      @id in_tail_fluentd_server_logs
+      @label  @server_containers
+      path /var/log/appzillon_logs/MainLogFile.log
+      pos_file /var/log/appzillon_logs/MainLogFile.log.pos
+      encoding "utf-8"
+      tag MainLogFile.access
+      <parse>
+        @type none
+        # @type multiline
+        # format_firstline /\d{4}-\d{1,2}-\d{1,2}/
+        # format1 /^(?<time>\d{4}-\d{1,2}-\d{1,2} \d{1,2}:\d{1,2}:\d{1,2},\d{3}) (?<level>[^\s]+:)(?<message>[\s\S]*)/
+      </parse>
+    </source>
+   
+    <label @server_containers>
+      # <filter **>
+      #   @type parser
+      #   key_name log
+      #   reserve_data true
+      #   <parse>
+      #     @type none
+      #   </parse>
+      # </filter>
+      
+      <filter **>
+        @type record_transformer
+        @id filter_containers_stream_transformer_server
+        <record>
+          stream_name serverlogs #
+        </record>
+      </filter>
+ 
+      <match **>
+        @type relabel
+        @label @fluentdlogs_server
+      </match>
+    </label>
+
+    <label @fluentdlogs_server>
+      <match MainLogFile.access>
+        @type cloudwatch_logs
+        @id out_cloudwatch_logs_server_containers
+        region "#{ENV.fetch('AWS_REGION')}"
+        log_group_name "/aws/containerinsights/#{ENV.fetch('CLUSTER_NAME')}/appzillon_server"
+        log_stream_name_key stream_name
+        remove_log_stream_name_key true
+        auto_create_stream true
+        <buffer>
+          flush_interval 1
+          chunk_limit_size 2m
+          queued_chunks_limit_size 32
+          retry_forever true
+        </buffer>
+      </match>
+    </label>
+

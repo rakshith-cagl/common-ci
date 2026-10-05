@@ -1,0 +1,125 @@
+<ng-container *ngIf="props.cntrType=='FORM'">
+        <ul id="{{props.id}}_ul" #wrapperClasses clickstoppropagation>
+			<li #labelWrapper>
+                 <ng-container *ngIf="(props.hasLabelIcon === 'Y' && props.labelIconProps.iconPos==='LEFT')"  [ngTemplateOutlet]="labelIconContent">
+            	</ng-container>
+
+	            <label #formlabelProps  [innerHtml]="props.labelProps.title">
+	            </label>
+	            
+	            <ng-container *ngIf="(props.hasLabelIcon === 'Y' && props.labelIconProps.iconPos!=='LEFT')"  [ngTemplateOutlet]="labelIconContent">
+	            </ng-container>
+            </li>
+            <li #contentWrapper>
+				<span #spanWrapper>
+						<ng-container [ngTemplateOutlet]="InputBody"></ng-container>
+				</span>
+			</li>
+		</ul>
+</ng-container>
+
+<ng-container *ngIf= "props.cntrType=='TABLE'">
+		<td [attr.id]="(rowIndex != undefined) ?('td_'+ props.id + '_' + rowIndex):('td_'+ props.id)" class="{{props.tdClasses}}">
+				<span #spanWrapper>
+						<ng-container [ngTemplateOutlet]="InputBody"></ng-container>
+				</span>
+		</td>
+</ng-container>
+
+<ng-container *ngIf="props.cntrType == 'NAVBAR' || props.cntrType == 'LIST'">
+		<span  #listOrNavSpanWrapper>
+			<ng-container [ngTemplateOutlet]="InputBody"></ng-container>
+		</span>
+</ng-container>
+
+<ng-template #InputBody>
+		<ng-container *ngIf="isWrapped == true;else getInput">
+			<span #elmWrapper>
+					<ng-container *ngIf="iconPosition == 'LEFT'">
+							<ng-container [ngTemplateOutlet]="InputIcon"></ng-container>
+					</ng-container>
+					<ng-container [ngTemplateOutlet]="InputWrapper"></ng-container>
+					<ng-container *ngIf="iconPosition == 'RIGHT'">
+							<ng-container [ngTemplateOutlet]="InputIcon"></ng-container>
+					</ng-container>
+			</span>
+		</ng-container>
+</ng-template>
+
+
+<ng-template #getInput>
+	<ng-container *ngIf="isUiElm() && isMultiRec()">
+			<input [id]="id" [(ngModel)]="value" [type]="props.type" 
+			 attr.rowno="{{index}}" #content delegateEvent [blurEvent]="blur" [focusEvent]="focus"/>
+	</ng-container>
+	<ng-container *ngIf="isUiElm() && !isMultiRec()">
+			<input [id]="id" [(ngModel)]="value" [type]="props.type" 
+			 #content delegateEvent [blurEvent]="blur" [focusEvent]="focus" attr.rowno="{{index}}">
+	</ng-container>
+	<ng-container *ngIf="!isUiElm()">
+			<input [id]="id" [(ngModel)]="values[elm]" [type]="props.type" (change)="setHandler()" 
+			 attr.rowno="{{index}}" #content delegateEvent [blurEvent]="blur" [focusEvent]="focus"/>
+	</ng-container>	
+	
+</ng-template>
+
+<ng-template #InputIcon>
+<ng-container *ngIf="(props.hasIcon == 'Y') && !(props.hasIconEvent == 'Y') && (props.hasSymbol == 'N') && !((props.isdateOrDateTime == 'Y') || (props.hasLov == 'Y'))">
+		<svg [attr.class]="props.svgContent.direct.className">
+			<use [attr.xlink:href]="'#' + props.contentIcon.name"></use>
+		</svg>
+	</ng-container>
+	
+	<ng-container *ngIf="!(props.hasIcon == 'Y') && (props.hasSymbol == 'Y')">
+		<span> {{props.symbolVal}}</span>
+	</ng-container>
+
+	<ng-container *ngIf="(props.hasIcon == 'Y') && (props.hasIconEvent == 'Y') && !(props.isdateOrDateTime == 'Y') && !(props.hasLov == 'Y')">
+		<span #elmWrapper>
+			<button id="{{id + '_button'}}" (click)="iconClickEvent($event)" #contentIcon>
+				<svg [attr.class]="props.svgContent.direct.className">
+					<use [attr.xlink:href]="'#' + props.contentIcon.name"></use>
+				</svg>
+			</button>
+		</span>
+	</ng-container>
+<ng-container *ngIf="(props.isdateOrDateTime == 'Y') || (props.hasLov == 'Y')">
+	<ng-container *ngIf="props.isdateOrDateTime == 'Y'">
+		<button id="{{id + '_button'}}" #contentIcon><!-- {...props.contentIcon.direct} -->
+			<svg [attr.class]="props.svgContent.direct.className">
+				<use [attr.xlink:href]="'#' + props.contentIcon.name">
+				</use>
+			</svg>
+		</button>
+	</ng-container>
+	<ng-container *ngIf="(props.hasLov == 'Y') && !(props.isdateOrDateTime == 'Y')">
+		<span class="etw-5">
+			<button id="{{id + '_button'}}" #contentIcon (click)="apz.lov.callLov(props.id,props.cntrId,apz.appId,this)"><!-- {...props.contentIcon.direct} -->
+				<svg [attr.class]="props.svgContent.direct.className">
+					<use [attr.xlink:href]="'#' + props.contentIcon.name">
+					</use>
+				</svg>
+			</button>
+		</span>
+	</ng-container>
+</ng-container>
+</ng-template>
+
+<ng-template #InputWrapper>
+	<ng-container *ngIf="(props.hasLov == 'Y' && props.isdateOrDateTime!='Y') || (props.osSpecific == 'Y' && props.isdateOrDateTime == 'Y')">
+		<span>
+			<ng-container [ngTemplateOutlet]="getInput"></ng-container>
+		</span>
+	</ng-container>
+	<ng-container *ngIf="!(( props.hasLov == 'Y' && props.isdateOrDateTime!='Y') || (props.osSpecific == 'Y' && props.isdateOrDateTime=='Y'))">
+			<ng-container [ngTemplateOutlet]="getInput"></ng-container>
+	</ng-container>
+</ng-template>
+
+<ng-template #labelIconContent>
+    <button class="ett-bttn tsp sml lbtn px20" (click)="labelIconClickEvent($event)">
+        <svg [attr.class]="props.labelIconProps.direct.className" #contentIcon>
+            <use attr.xlink:href="{{'#'+ props.labelIconProps.name}}" xlink:href="" />
+        </svg>
+    </button>
+</ng-template> 

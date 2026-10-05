@@ -1,0 +1,44 @@
+<ng-container *ngIf="props.cntrType=='FORM' ">
+                <ul #formWrapperClass  id="{{props.id}} + _ul" clickstoppropagation>
+                    <li  #formlabelWrapper >
+                        <label #formlabelProps  >
+                            {{props.labelProps.title}}
+                        </label>
+                    </li>
+                    <li #formContentWrapper >
+                                <a   [id]="id"  aria-label="Hyperlink" role="button" [attr.rowno]=index #anchorTag  title="{{props.anchorTag.direct['original-title']}}">
+                                        <ng-container *ngTemplateOutlet="hyperContent"></ng-container>
+                                </a>
+                                <ng-container *ngIf="props.HintRequired=='Y'"> <span id="{{id + '_hnt'}}" class="htx">{{props.linkHint.value}}</span></ng-container>
+                    </li>
+                </ul>
+</ng-container>
+
+<ng-container *ngIf="props.cntrType == 'NAVBAR' || props.cntrType == 'LIST'">
+            <a [id]="id"  aria-label="Hyperlink" role="button" [attr.rowno]=index #anchorTag delegateEvent [blurEvent]="blur" [focusEvent]="focus">
+                <ng-container *ngTemplateOutlet="hyperContent"></ng-container>
+            </a>
+            <ng-container *ngIf="props.HintRequired=='Y'"> <span id="{{id + '_hnt'}}" class="htx">{{props.linkHint.value}}</span></ng-container>
+</ng-container>
+
+<ng-container *ngIf= "props.cntrType=='TABLE'">
+        <td [attr.id]="(rowIndex != undefined) ?('td_'+ props.id + '_' + rowIndex):('td_'+ props.id)" class="{{props.tdClasses}}">
+                <a [id]="id"  aria-label="Hyperlink" role="button" [attr.rowno]=index #anchorTag delegateEvent [blurEvent]="blur" [focusEvent]="focus">
+                         <ng-container *ngTemplateOutlet="hyperContent"></ng-container>
+                </a>
+                <ng-container *ngIf="props.HintRequired=='Y'"> <span id="{{id + '_hnt'}}" class="htx">{{props.linkHint.value}}</span></ng-container>
+         </td>
+</ng-container>                
+
+<ng-template #hyperContent>
+        <ng-container *ngIf="props.iconPosition=='LEFT'" [ngTemplateOutlet]="hyperIcon"></ng-container>
+        <span id="{{id +'_txtcnt'}}">{{props.value}}</span>
+        <ng-container *ngIf="props.iconPosition=='RIGHT'" [ngTemplateOutlet]="hyperIcon"></ng-container>
+</ng-template>
+<ng-template #hyperIcon>
+                <button class="ett-bttn tsp sml lbtn px20" (click)="iconClickEvent($event)">                  
+                        <svg  aria-hidden="true" [attr.class]="props.hyperLinkIcon.direct.className" >
+                                <use attr.xlink:href="{{'#'+props.hyperLinkIcon.name}}" xlink:href=""></use>
+                        </svg>                    
+                </button>
+</ng-template>

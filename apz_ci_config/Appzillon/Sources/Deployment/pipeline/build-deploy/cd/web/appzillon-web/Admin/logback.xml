@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="false">
+    <!-- Stop output INFO at start -->
+    <statusListener class="ch.qos.logback.core.status.NopStatusListener" />
+
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+            <layout class="com.iexceed.webcontainer.logger.MaskingPatternLayout">
+                <maskPattern>\"pwd\"\s*:\s*\"(.*?)\"</maskPattern>
+                <maskPattern>\"pin\"\s*:\s*\"(.*?)\"</maskPattern>
+                <maskPattern>\"oldPassword\"\s*:\s*\"(.*?)\"</maskPattern>
+                <maskPattern>\"newPassword\"\s*:\s*\"(.*?)\"</maskPattern>
+                <maskPattern>\"confirmPassword\"\s*:\s*\"(.*?)\"</maskPattern>
+                <maskPattern>\"hashKey1\"\s*:\s*\"(.*?)\"</maskPattern>
+                <maskPattern>\"hashKey2\"\s*:\s*\"(.*?)\"</maskPattern>
+                <maskPattern>\"requestKey\"\s*:\s*\"(.*?)\"</maskPattern>
+                <maskPattern>\"deviceId\"\s*:\s*\"(.*?)\"</maskPattern>
+                <maskPattern>(\d+\.\d+\.\d+\.\d+)</maskPattern>
+                <Pattern>%d %p %-40c{1.} %m %n</Pattern>
+            </layout>
+        </encoder>
+      </appender>
+
+    <appender name="ASYNC" class="ch.qos.logback.classic.AsyncAppender">
+        <appender-ref ref="CONSOLE"/>
+    </appender>
+
+    <Logger name="com.iexceed.webcontainer" level="DEBUG">
+        <AppenderRef ref="ASYNC" level="DEBUG" />
+    </Logger> 
+
+    <root level="DEBUG">
+        <appender-ref ref="CONSOLE"/>
+    </root>
+
+</configuration>

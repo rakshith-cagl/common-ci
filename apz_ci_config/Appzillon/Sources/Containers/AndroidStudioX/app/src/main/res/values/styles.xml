@@ -1,0 +1,106 @@
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- For Tablet -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light">
+        <item name="colorPrimaryDark">@color/statusbar_color</item>
+    </style>
+
+    <style name="Login_Edit_Text" parent="android:Theme.Light">
+        <item name="android:paddingLeft">10dp</item>
+        <item name="android:paddingRight">10dp</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:layout_height">fill_parent</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:background">#F7F7F7</item>
+</style>
+
+    <style name="Login_tableRow" parent="android:Theme.Light">
+        <item name="android:paddingLeft">5dp</item>
+        <item name="android:paddingRight">5dp</item>
+        <item name="android:layout_marginRight">5dp</item>
+        <item name="android:layout_marginLeft">5dp</item>
+        <item name="android:layout_marginTop">5dp</item>
+        <item name="android:layout_marginBottom">5dp</item>
+    </style>
+    <!-- Normal -->
+    <style name="Login_Edit_Text_Normal" parent="android:Theme.Light">
+        <item name="android:paddingLeft">5dp</item>
+        <item name="android:paddingRight">5dp</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:layout_height">fill_parent</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:background">#F7F7F7</item>
+</style>
+
+    <style name="Login_tableRow_Normal" parent="android:Theme.Light">
+        <item name="android:paddingLeft">5dp</item>
+        <item name="android:paddingRight">5dp</item>
+        <item name="android:layout_marginRight">5dp</item>
+        <item name="android:layout_marginLeft">5dp</item>
+        <item name="android:layout_marginTop">2dp</item>
+        <item name="android:layout_marginBottom">2dp</item>
+    </style>
+
+    <!-- small-devices -->
+
+    <style name="Login_Edit_Text_small" parent="android:Theme.Light">
+        <item name="android:paddingLeft">5dp</item>
+        <item name="android:paddingRight">5dp</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:layout_height">fill_parent</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:background">#F7F7F7</item>
+    </style>
+
+    <style name="Login_tableRow_small" parent="android:Theme.Light">
+        <item name="android:paddingLeft">0dp</item>
+        <item name="android:layout_margin">2dp</item>
+    </style>
+
+    <style name="Login_tableRow_view_separator" parent="android:Theme.Light">
+        <item name="android:layout_marginRight">0dp</item>
+        <item name="android:layout_marginLeft">0dp</item>
+    </style>
+
+    <style name="ButtonText">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_margin">3dp</item>
+        <item name="android:textSize">30dp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    
+    
+	<style name="SplashTheme"  parent="Theme.AppCompat.Light">
+      <item name="colorPrimaryDark">@color/statusbar_color</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@color/splashbackgroundcolor</item>
+        <item name="android:windowSoftInputMode">adjustPan</item>
+    </style>
+
+
+    <style name="Removebg" parent="Theme.AppCompat.Light">
+        <item name="colorPrimaryDark">@color/statusbar_color</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@null</item>
+    </style>
+
+    <style name="SplashDialogTheme" >
+        <item name="android:windowAnimationStyle">@anim/fade_in</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowSoftInputMode">adjustPan</item>
+    </style>
+    
+     <style name="BiometricTheme" parent="AppTheme">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:backgroundDimEnabled">false</item>
+        <item name="android:windowDisablePreview">true</item>
+    </style>
+</resources>

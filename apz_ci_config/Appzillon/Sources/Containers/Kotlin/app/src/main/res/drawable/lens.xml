@@ -1,0 +1,20 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/ring0" android:top="6dp" android:left="6dp" android:right="6dp" android:bottom="6dp">
+        <shape android:shape="oval" >
+            <size android:height="44dp" android:width="44dp"/>
+            <solid android:color="@color/white" />
+        </shape>
+    </item>
+    <item  android:id="@+id/ring1" android:top="2dp" android:bottom="2dp" android:right="2dp" android:left="2dp" >
+        <shape android:shape="ring" android:useLevel="false" android:innerRadius="25dp" android:thickness="6dp">
+            <size android:width="60dp" android:height="60dp"/>
+            <solid android:color="@color/transparent"/>
+        </shape>
+    </item>
+    <item android:id="@+id/ring2" android:top="2dp" android:bottom="2dp" android:right="2dp" android:left="2dp" >
+        <shape android:shape="ring" android:useLevel="false" android:innerRadius="30dp" android:thickness="2dp">
+            <size android:width="60dp" android:height="60dp"/>
+            <solid android:color="@color/white"/>
+        </shape>
+    </item>
+</layer-list>

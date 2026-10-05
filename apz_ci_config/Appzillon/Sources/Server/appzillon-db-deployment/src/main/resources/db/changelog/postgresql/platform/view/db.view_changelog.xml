@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
+
+    <changeSet author="platform" id="ddl_vw_digits_3.24.0-1">
+        <createView fullDefinition="false" viewName="vw_digits" replaceIfExists="true">SELECT 0 AS digit
+            UNION ALL
+            SELECT 1 AS digit
+            UNION ALL
+            SELECT 2 AS digit
+            UNION ALL
+            SELECT 3 AS digit
+            UNION ALL
+            SELECT 4 AS digit
+            UNION ALL
+            SELECT 5 AS digit
+            UNION ALL
+            SELECT 6 AS digit
+            UNION ALL
+            SELECT 7 AS digit
+            UNION ALL
+            SELECT 8 AS digit
+            UNION ALL
+            SELECT 9 AS digit;</createView>
+    </changeSet>
+    <changeSet author="platform" id="ddl_vw_notify_appid_3.24.0-2">
+        <createView fullDefinition="false" viewName="vw_notify_appid" replaceIfExists="true">SELECT DISTINCT tb_asnf_devices_master.app_id AS appid
+            FROM tb_asnf_devices_master;</createView>
+    </changeSet>
+    <changeSet author="platform" id="ddl_vw_message_stats_3.24.0-3">
+        <createView fullDefinition="false" viewName="vw_message_stats" replaceIfExists="true">SELECT date(tnl.created_ts) AS txndate,
+            count(0) AS num,
+            tnm.os_id AS os,
+            tnl.app_id AS appid
+            FROM tb_asnf_txn_log tnl,
+            tb_asnf_devices_master tnm
+            WHERE ((tnl.notif_reg_id)::text = (tnm.notif_reg_id)::text)
+            GROUP BY (date(tnl.created_ts)), tnm.os_id, tnl.app_id;</createView>
+    </changeSet>
+    <changeSet author="platform" id="ddl_vw_numbers_3.24.0-4">
+        <createView fullDefinition="false" viewName="vw_numbers" replaceIfExists="true">SELECT (((ones.digit + (tens.digit * 10)) + (hundreds.digit * 100)) + (thousands.digit * 1000)) AS number
+            FROM vw_digits ones,
+            vw_digits tens,
+            vw_digits hundreds,
+            vw_digits thousands;</createView>
+    </changeSet>
+    <changeSet author="platform" id="ddl_vw_location_details_3.24.0-5">
+        <createView fullDefinition="false" viewName="vw_location_details" replaceIfExists="true">SELECT a.user_id,
+            a.app_id,
+            a.device_id,
+            a.request_key,
+            a.session_id,
+            a.last_req_time,
+            a.login_time,
+            a.create_ts,
+            a.version_no,
+            a.otp,
+            a.otp_generation_time,
+            a.otp_status,
+            a.otp_validation_count,
+            a.longitude,
+            a.latitude,
+            a.sublocality,
+            a.admin_area_lvl_1,
+            a.admin_area_lvl_2,
+            a.country,
+            a.formatted_address,
+            a.origination
+            FROM tb_astp_last_login a
+            WHERE ((a.session_id IS NOT NULL) AND (datediff('second'::character varying, date_trunc('second'::text, a.last_req_time), (date_trunc('second'::text, now()))::timestamp without time zone) &lt; ( SELECT c.session_timeout
+            FROM tb_asmi_security_parameters c
+            WHERE ((a.app_id)::text = (c.app_id)::text))));</createView>
+    </changeSet>
+    <changeSet author="platform" id="ddl_vw_active_sessions_3.24.0-6">
+        <createView fullDefinition="false" viewName="vw_active_sessions" replaceIfExists="true">SELECT b.os,
+            a.app_id,
+            count(*) AS count
+            FROM tb_astp_last_login a,
+            tb_asmi_device_master b
+            WHERE (((a.app_id)::text = (b.app_id)::text) AND ((a.device_id)::text = (b.device_id)::text) AND (a.session_id IS NOT NULL) AND (datediff('second'::character varying, date_trunc('second'::text, a.last_req_time), (date_trunc('second'::text, now()))::timestamp without time zone) &lt; ( SELECT c.session_timeout
+            FROM tb_asmi_security_parameters c
+            WHERE ((a.app_id)::text = (c.app_id)::text))))
+            GROUP BY b.os, a.app_id
+            UNION ALL
+            SELECT a.device_id AS os,
+            a.app_id,
+            count(*) AS count
+            FROM tb_astp_last_login a
+            WHERE (((a.device_id)::text = ANY ((ARRAY['WEB'::character varying, 'SIMULATOR'::character varying])::text[])) AND (a.session_id IS NOT NULL) AND (datediff('second'::character varying, date_trunc('second'::text, a.last_req_time), (date_trunc('second'::text, now()))::timestamp without time zone) &lt; ( SELECT c.session_timeout
+            FROM tb_asmi_security_parameters c
+            WHERE ((a.app_id)::text = (c.app_id)::text))))
+            GROUP BY a.device_id, a.app_id;</createView>
+    </changeSet>
+    <changeSet author="platform" id="ddl_vw_login_report_3.24.0-7">
+        <createView fullDefinition="false" viewName="vw_login_report" replaceIfExists="true">SELECT tb.app_id,
+            tb.device_id,
+            date(tb.create_ts) AS accessdate,
+            count(*) AS totaltxns,
+            0 AS logins,
+            0 AS distinctlogins
+            FROM tb_aslg_txn_detail tb
+            WHERE ((tb.txn_stat)::text = 'S'::text)
+            GROUP BY tb.app_id, tb.device_id, (date(tb.create_ts))
+            UNION ALL
+            SELECT tb2.app_id,
+            tb2.device_id,
+            date(tb2.create_ts) AS accessdate,
+            0 AS totaltxns,
+            count(*) AS logins,
+            count(DISTINCT date(tb2.create_ts)) AS distinctlogins
+            FROM tb_aslg_txn_detail tb2
+            WHERE ((((tb2.interface_id)::text = 'appzillonReLoginRequest'::text) OR ((tb2.interface_id)::text = 'appzillonAuthenticationRequest'::text)) AND ((tb2.txn_stat)::text = 'S'::text))
+            GROUP BY tb2.app_id, tb2.user_id, tb2.device_id, (date(tb2.create_ts));</createView>
+    </changeSet>
+    <changeSet author="platform" id="ddl_vw_customer_details_3.24.0-8">
+        <createView fullDefinition="false" viewName="vw_customer_details" replaceIfExists="true">SELECT tb_aslg_txn_detail.app_id,
+            tb_aslg_txn_detail.user_id,
+            date(tb_aslg_txn_detail.create_ts) AS accessdate,
+            tb_aslg_txn_detail.session_id,
+            min(tb_aslg_txn_detail.st_tm) AS st_tm,
+            max(tb_aslg_txn_detail.end_tm) AS end_tm,
+            count(*) AS totaltxns,
+            0 AS distincttxns,
+            tb_aslg_txn_detail.latitude,
+            tb_aslg_txn_detail.longitude,
+            tb_aslg_txn_detail.formatted_address
+            FROM tb_aslg_txn_detail
+            WHERE ((tb_aslg_txn_detail.txn_stat)::text = 'S'::text)
+            GROUP BY tb_aslg_txn_detail.app_id, tb_aslg_txn_detail.user_id, (date(tb_aslg_txn_detail.create_ts)), tb_aslg_txn_detail.session_id, tb_aslg_txn_detail.latitude, tb_aslg_txn_detail.longitude, tb_aslg_txn_detail.formatted_address
+            UNION ALL
+            SELECT tb_aslg_txn_detail.app_id,
+            tb_aslg_txn_detail.user_id,
+            date(tb_aslg_txn_detail.create_ts) AS accessdate,
+            tb_aslg_txn_detail.session_id,
+            min(tb_aslg_txn_detail.st_tm) AS st_tm,
+            max(tb_aslg_txn_detail.end_tm) AS end_tm,
+            0 AS totaltxns,
+            count(DISTINCT tb_aslg_txn_detail.interface_id) AS distincttxns,
+            tb_aslg_txn_detail.latitude,
+            tb_aslg_txn_detail.longitude,
+            tb_aslg_txn_detail.formatted_address
+            FROM tb_aslg_txn_detail
+            WHERE ((tb_aslg_txn_detail.txn_stat)::text = 'S'::text)
+            GROUP BY tb_aslg_txn_detail.app_id, tb_aslg_txn_detail.user_id, (date(tb_aslg_txn_detail.create_ts)), tb_aslg_txn_detail.session_id, tb_aslg_txn_detail.interface_id, tb_aslg_txn_detail.latitude, tb_aslg_txn_detail.longitude, tb_aslg_txn_detail.formatted_address;</createView>
+    </changeSet>
+    <changeSet author="platform" id="ddl_vw_customer_report_3.24.0-9">
+        <createView fullDefinition="false" viewName="vw_customer_report" replaceIfExists="true">SELECT tb.app_id,
+            tb.user_id,
+            tb.session_id,
+            to_milliseconds(min(tb.st_tm), max(tb.end_tm)) AS tm,
+            count(*) AS totaltxns,
+            count(DISTINCT tb.interface_id) AS distincttxns,
+            0 AS logins,
+            0 AS distinctlogins
+            FROM tb_aslg_txn_detail tb
+            WHERE ((tb.txn_stat)::text = 'S'::text)
+            GROUP BY tb.app_id, tb.user_id, tb.session_id
+            UNION ALL
+            SELECT tb2.app_id,
+            tb2.user_id,
+            NULL::character varying AS session_id,
+            NULL::integer AS tm,
+            0 AS totaltxns,
+            0 AS distincttxns,
+            count(*) AS logins,
+            count(DISTINCT date(tb2.create_ts)) AS distinctlogins
+            FROM tb_aslg_txn_detail tb2
+            WHERE ((((tb2.interface_id)::text = 'appzillonReLoginRequest'::text) OR ((tb2.interface_id)::text = 'appzillonAuthenticationRequest'::text)) AND ((tb2.txn_stat)::text = 'S'::text))
+            GROUP BY tb2.app_id, tb2.user_id;</createView>
+    </changeSet>
+    <changeSet author="platform" id="ddl_vw_lat_lon_details_3.24.0-10">
+        <createView fullDefinition="false" viewName="vw_lat_lon_details" replaceIfExists="true">SELECT tb_aslg_txn_detail.app_id,
+            tb_aslg_txn_detail.user_id,
+            count(tb_aslg_txn_detail.longitude) AS count_lon,
+            tb_aslg_txn_detail.longitude,
+            count(tb_aslg_txn_detail.latitude) AS count_lat,
+            tb_aslg_txn_detail.latitude,
+            tb_aslg_txn_detail.formatted_address
+            FROM tb_aslg_txn_detail
+            GROUP BY tb_aslg_txn_detail.longitude, tb_aslg_txn_detail.latitude, tb_aslg_txn_detail.formatted_address, tb_aslg_txn_detail.app_id, tb_aslg_txn_detail.user_id;</createView>
+    </changeSet>
+    <changeSet author="platform" id="ddl_vw_txn_app_usage_3.24.0-11">
+        <createView fullDefinition="false" viewName="vw_txn_app_usage" replaceIfExists="true">SELECT txn.app_id,
+            date(txn.create_ts) AS accessdate,
+            intf.description,
+            txn.txn_stat,
+            min(to_milliseconds(txn.st_tm, txn.end_tm)) AS mintime,
+            max(to_milliseconds(txn.st_tm, txn.end_tm)) AS maxtime,
+            avg(to_milliseconds(txn.st_tm, txn.end_tm)) AS avgtime,
+            count(txn.interface_id) AS intfcount
+            FROM tb_aslg_txn_detail txn,
+            tb_asmi_intf_master intf
+            WHERE ((txn.interface_id)::text = (intf.interface_id)::text)
+            GROUP BY txn.app_id, txn.interface_id, (date(txn.create_ts)), intf.description, txn.txn_stat;</createView>
+    </changeSet>
+    <changeSet author="platform" id="ddl_vw_asmi_nanoapps_3.24.0-12">
+        <createView fullDefinition="false" viewName="vw_asmi_nanoapps" replaceIfExists="true">SELECT t1.app_id,
+            t2.screen_id,
+            t1.screen_id AS callform_id,
+            t1.screen_name AS callform_name,
+            t1.screen_icon AS callform_icon
+            FROM tb_asmi_scr_master t1,
+            tb_asmi_screen_widgets t2
+            WHERE (((t1.app_id)::text = (t2.app_id)::text) AND ((t1.screen_id)::text = (t2.callform_id)::text) AND ((t1.screen_type)::text = 'CALL'::text));</createView>
+    </changeSet>
+    <changeSet author="platform" id="ddl_vw_active_inactive_users_3.24.0-13">
+        <createView fullDefinition="false" viewName="vw_active_inactive_users" replaceIfExists="true">SELECT t1.app_id,
+            date(date_trunc('day'::text, t1.create_ts)) AS create_ts,
+            count(*) AS active,
+            0 AS inactive
+            FROM (tb_asmi_user t1
+            LEFT JOIN tb_astp_last_login t2 ON ((((t2.user_id)::text = (t1.user_id)::text) AND ((t2.app_id)::text = (t1.app_id)::text))))
+            WHERE ((t2.user_id IS NOT NULL) AND ((t1.user_active)::text = 'Y'::text))
+            GROUP BY t1.app_id, (date(date_trunc('day'::text, t1.create_ts)))
+            UNION ALL
+            SELECT t1.app_id,
+            date(date_trunc('day'::text, t1.create_ts)) AS create_ts,
+            0 AS active,
+            count(*) AS inactive
+            FROM (tb_asmi_user t1
+            LEFT JOIN tb_astp_last_login t2 ON ((((t2.user_id)::text = (t1.user_id)::text) AND ((t2.app_id)::text = (t1.app_id)::text))))
+            WHERE ((t2.user_id IS NULL) AND ((t1.user_active)::text = 'Y'::text))
+            GROUP BY t1.app_id, (date(date_trunc('day'::text, t1.create_ts)));</createView>
+    </changeSet>
+    <changeSet author="platform" id="ddl_vw_asmi_microapps_3.24.0-14">
+        <createView fullDefinition="false" viewName="vw_asmi_microapps" replaceIfExists="true">SELECT t2.app_id,
+            t2.screen_id,
+            t2.micro_app_id,
+            t1.app_name AS micro_app_name,
+            t1.app_icon AS micro_app_icon,
+            t1.micro_app_type
+            FROM tb_asmi_app_master t1,
+            tb_asmi_screen_micro_app t2
+            WHERE (((t1.app_id)::text = (t2.micro_app_id)::text) AND ((t1.base_app)::text = 'N'::text));</createView>
+    </changeSet>
+    <changeSet author="platform" id="ddl_vw_asmi_device_grps_3.24.0-15">
+        <createView fullDefinition="false" viewName="vw_asmi_device_grps" replaceIfExists="true">SELECT tb_asmi_device_grps.app_id,
+            tb_asmi_device_grps.device_group_id,
+            tb_asmi_device_grps.device_group_description,
+            tb_asmi_device_grps.os,
+            tb_asmi_device_grps.height,
+            tb_asmi_device_grps.width,
+            'PORTRAIT'::text AS orientation
+            FROM tb_asmi_device_grps
+            WHERE ((tb_asmi_device_grps.orientation_lock)::text = 'ANY'::text)
+            UNION ALL
+            SELECT tb_asmi_device_grps.app_id,
+            tb_asmi_device_grps.device_group_id,
+            tb_asmi_device_grps.device_group_description,
+            tb_asmi_device_grps.os,
+            tb_asmi_device_grps.height,
+            tb_asmi_device_grps.width,
+            'LANDSCAPE'::text AS orientation
+            FROM tb_asmi_device_grps
+            WHERE ((tb_asmi_device_grps.orientation_lock)::text = 'ANY'::text)
+            UNION ALL
+            SELECT tb_asmi_device_grps.app_id,
+            tb_asmi_device_grps.device_group_id,
+            tb_asmi_device_grps.device_group_description,
+            tb_asmi_device_grps.os,
+            tb_asmi_device_grps.height,
+            tb_asmi_device_grps.width,
+            tb_asmi_device_grps.orientation_lock AS orientation
+            FROM tb_asmi_device_grps
+            WHERE ((tb_asmi_device_grps.orientation_lock)::text &lt;&gt; 'ANY'::text);</createView>
+    </changeSet>
+    <changeSet author="platform" id="ddl_vw_dates_3.24.0-16">
+        <createView fullDefinition="false" viewName="vw_dates" replaceIfExists="true">SELECT (CURRENT_DATE - vw_numbers.number) AS date
+            FROM vw_numbers;</createView>
+    </changeSet>
+    <changeSet author="platform" id="ddl_vw_os_dates_3.24.0-17">
+        <createView fullDefinition="false" viewName="vw_os_dates" replaceIfExists="true">SELECT d.date AS osdates,
+            o.os_id AS datesos,
+            ap.appid
+            FROM vw_dates d,
+            tb_os o,
+            vw_notify_appid ap;</createView>
+    </changeSet>
+    <changeSet author="platform" id="ddl_vw_message_notify_stats_3.24.0-18">
+        <createView fullDefinition="false" viewName="vw_message_notify_stats" replaceIfExists="true">SELECT vw_os_dates.appid,
+            vw_os_dates.osdates,
+            COALESCE(vw_message_stats.num, (0)::bigint) AS count,
+            vw_os_dates.datesos
+            FROM (vw_message_stats
+            RIGHT JOIN vw_os_dates ON (((vw_os_dates.osdates = vw_message_stats.txndate) AND ((vw_os_dates.datesos)::text = (vw_message_stats.os)::text) AND ((vw_os_dates.appid)::text = (vw_message_stats.appid)::text))));</createView>
+    </changeSet>
+</databaseChangeLog>

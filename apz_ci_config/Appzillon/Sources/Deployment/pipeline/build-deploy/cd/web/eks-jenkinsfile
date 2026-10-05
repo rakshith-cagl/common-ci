@@ -1,0 +1,74 @@
+pipeline {
+    parameters {
+      string defaultValue: 'eks-cluster-dev', description: '', name: 'CLUSTER_NAME', trim: false
+      string defaultValue: 'us-east-1', description: '', name: 'CLUSTER_REGION', trim: false
+      choice(name:'DEPLOY_TYPE', choices: ['fresh', 'incremental'], description: 'Fresh and Incremental pipeline options')
+      string defaultValue: '325617413693', description: '', name: 'AWS_ACCOUNT_ID', trim: false
+      string defaultValue: 'appzillon-develop', description: '', name: 'NAMESPACE', trim: false
+      string defaultValue: 'Admin', description: '', name: 'APP_ID', trim: false
+      string defaultValue: 'develop', description: '', name: 'STAGE', trim: false
+      string defaultValue: 'staging-eks-appzillon-admin', description: '', name: 'DOCKER_APP_NAME', trim: false
+      string defaultValue: 'v1', description: '', name: 'BUILD_TAG', trim: false
+      string defaultValue: 'ubuntu', description: '', name: 'SHIPPER_USERNAME', trim: false
+      string defaultValue: 'appzillon', description: '', name: 'SERVICE_ACCOUNT', trim: false
+      string defaultValue: '18.210.183.63', description: '', name: 'SHIPPER_TARGET', trim: false
+      string defaultValue: 'eks-admin.apzplatforms.com', description: '', name: 'APP_WEB_DOMAIN', trim: false
+      extendedChoice defaultValue: '', description: '', multiSelectDelimiter: ',', name: 'KONG', quoteValue: false, saveJSONParameterToFile: false, type: 'PT_CHECKBOX', value: 'Use Kong Gateway', visibleItemCount: 1
+      string defaultValue: 'arn:aws:acm:us-east-1:325617413693:certificate/86fc6620-7c3f-4a00-b237-3a6f12bc71d1', description: 'For aws loadbalancer', name: 'AWS_CERTICATE_ARN', trim: false
+      string defaultValue: '/AppzillonAdmin', description: '', name: 'CONTEXT_PATH', trim: false
+      string defaultValue: '1', description: '', name: 'REPLICAS', trim: false
+   }
+
+    environment {
+        REGISTRY= getRegistry(env.AWS_ACCOUNT_ID,env.CLUSTER_REGION,env.DOCKER_APP_NAME)
+    }
+
+
+    agent any
+
+    stages {
+        stage('Deploy Web') {
+            steps {
+                sshagent (credentials: ['run-eks-client']) {
+                    script {
+                        // Variables
+                        def sourcepath="/home/"+SHIPPER_USERNAME+"/projects/ship-eks/"+STAGE+"/web/" //web helm chart path
+
+                        // EKS Cluster login
+                        sh '''
+                            COMMAND0="aws eks update-kubeconfig --name ${CLUSTER_NAME}  --region ${CLUSTER_REGION}"
+                            ssh -o StrictHostKeyChecking=no -l ${SHIPPER_USERNAME} ${SHIPPER_TARGET} $COMMAND0
+
+                        '''
+
+                        // If kong gateway is enabled in the EKS Cluster
+                        def flag=false
+                        if('Use Kong Gateway' in KONG){
+                            flag=true
+                        }
+ 
+                        // Fresh deployment of Web
+                        if (DEPLOY_TYPE == "fresh" ) {
+                            sh "ssh -o StrictHostKeyChecking=no -l ${SHIPPER_USERNAME} ${SHIPPER_TARGET} 'helm upgrade  --install ${DOCKER_APP_NAME} ${sourcepath}/appzillon-web/ --set fullnameOverride=${DOCKER_APP_NAME} --set ingress.annotations.\"alb\\.ingress\\.kubernetes\\.io/certificate-arn\"=${AWS_CERTICATE_ARN} --set path=${CONTEXT_PATH} --set appId=${APP_ID} --set kong=${flag} --set replicaCount=${REPLICAS} --set image.repository=$REGISTRY --set image.tag=${BUILD_TAG} --set serviceAccount.name=${SERVICE_ACCOUNT} --set 'ingress.hosts[0].host=${APP_WEB_DOMAIN},ingress.hosts[0].paths[0]=${CONTEXT_PATH}' --set contextPath=${CONTEXT_PATH} --set nameSpace=${NAMESPACE} -f ${sourcepath}/appzillon-web/values-eks.yaml -n ${NAMESPACE}'"
+                        }
+                        // Incremental deployment of Web           
+                        else {
+                            sh "ssh -o StrictHostKeyChecking=no -l ${SHIPPER_USERNAME} ${SHIPPER_TARGET} 'helm upgrade ${DOCKER_APP_NAME} ${sourcepath}/appzillon-web/ --set fullnameOverride=${DOCKER_APP_NAME} --set ingress.annotations.\"alb\\.ingress\\.kubernetes\\.io/certificate-arn\"=${AWS_CERTICATE_ARN} --set path=${CONTEXT_PATH} --set appId=${APP_ID} --set kong=${flag} --set replicaCount=${REPLICAS} --set image.repository=$REGISTRY --set image.tag=${BUILD_TAG} --set serviceAccount.name=${SERVICE_ACCOUNT} --set 'ingress.hosts[0].host=${APP_WEB_DOMAIN},ingress.hosts[0].paths[0]=${CONTEXT_PATH}' --set contextPath=${CONTEXT_PATH} --set nameSpace=${NAMESPACE} -f ${sourcepath}/appzillon-web/values-eks.yaml -n ${NAMESPACE}'"
+                        }
+                    }
+                }
+            }
+        }
+    }
+    post { 
+        always { 
+            cleanWs()
+        }
+    }
+}
+def getRegistry(accessid,region,dockerappname){
+    return accessid+".dkr.ecr."+region+".amazonaws.com/"+dockerappname
+}
+def initContainer(accessid,region){
+    return accessid+".dkr.ecr."+region+".amazonaws.com/init-container:v1"
+}

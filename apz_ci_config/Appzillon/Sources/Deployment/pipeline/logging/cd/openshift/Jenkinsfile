@@ -1,0 +1,125 @@
+pipeline {
+    parameters {
+      string defaultValue: 'develop', description: '', name: 'STAGE', trim: false
+      string defaultValue: 'appzillon-develop', description: '', name: 'OC_PROJECT', trim: false
+      choice(name:'FLUENTD_TYPE', choices: ['fluentd-rsyslog','fluentbit'], description: 'Select the following option for fluentd types')
+      choice(name:'DOCKER_FLUENTD_IMAGE_NAME', choices: ['appzillon-fluentd-elastic','appzillon-fluentd-rsyslog','fluentbit'], description: 'Select the following option for fluentd image name')
+      choice(name: 'ARTIFACTORY_TYPE', choices: ['jfrog', 'harbor'], description: 'Select Artifactory Types')
+      string defaultValue: 'appzillon', description: '', name: 'SERVICE_ACCOUNT', trim: false
+      string defaultValue: 'latest', description: '', name: 'BUILD_TAG', trim: false
+      string defaultValue: 'sha256~aW7khl35APbmumcnNNFHZE3hcxEo6n5EO26hr_XxEvA', description: '', name: 'OC_TOKEN', trim: false
+      string defaultValue: 'https://api.iexceed-platform.apzplatforms.com:6443', description: '', name: 'OC_CLIENT_URL', trim: false
+      string defaultValue: 'ec2-user', description: '', name: 'SHIPPER_USERNAME', trim: false
+      string defaultValue: '18.216.193.145', description: '', name: 'SHIPPER_TARGET', trim: false
+      string defaultValue: 'aws-appzillon-logpvc', description: '', name: 'PVC_LOG_NAME', trim: false
+      string defaultValue: '/fluentd/etc/', description: '', name: 'ENV_MOUNT_PATH', trim: false
+      string defaultValue: '/fluentd-elastic-tls/', description: '', name: 'TLS_MOUNT_PATH', trim: false
+      string defaultValue: '/var/log/appzillon_logs', description: '', name: 'LOG_PATH', trim: false
+      string defaultValue: 'efk.apzplatforms.com', description: 'for fluentbit', name: 'ELASTIC_HOST', trim: false
+      string defaultValue: 'appzillon-admin-server', description: 'for fluentbit', name: 'SERVER_APP', trim: false
+      string defaultValue: 'appzillon-admin', description: 'for fluentbit', name: 'WEB_APP', trim: false
+      string defaultValue: '1', description: '', name: 'REPLICAS', trim: false
+
+   }
+   environment {
+        REGISTRY= "${env.ARTIFACTORY_TYPE == 'jfrog' ? 'artifactory.appzillon.com:443/docker-dev-local' : 'harbor-platform.apzplatforms.com/appzillon-develop'}"
+        DOCKER_SERVER= "${env.ARTIFACTORY_TYPE == 'jfrog' ? 'artifactory.appzillon.com:443' : 'harbor-platform.apzplatforms.com'}"
+    }
+
+    agent any
+    stages {
+        stage('Copy deployment YAMLs') {
+            steps {
+                sshagent (credentials: ['run-oc-client']) {
+                    sh '''
+
+                        if [ ${FLUENTD_TYPE} = "fluentd-rsyslog" ]; then
+                            SOURCE_PATH=$WORKSPACE/logging/cd/openshift/fluentd-rsyslog/*
+                            DESTINATION_PATH=/dataext/home/${SHIPPER_USERNAME}/projects/ship-openshift/default/fluentd/
+                            scp -o StrictHostKeyChecking=no -r $SOURCE_PATH ${SHIPPER_USERNAME}@${SHIPPER_TARGET}:$DESTINATION_PATH
+                        elif [ ${FLUENTD_TYPE} = "fluentd-rsyslog" ]; then
+                            SOURCE_PATH=$WORKSPACE/logging/cd/openshift/fluentd-elasticsearch
+                            DESTINATION_PATH=/dataext/home/${SHIPPER_USERNAME}/projects/ship-openshift/${STAGE}/
+                            scp -o StrictHostKeyChecking=no -r $SOURCE_PATH ${SHIPPER_USERNAME}@${SHIPPER_TARGET}:$DESTINATION_PATH
+                        else
+                            SOURCE_PATH=$WORKSPACE/logging/cd/aws-eks/fluentbit
+                            DESTINATION_PATH=/dataext/home/${SHIPPER_USERNAME}/projects/ship-openshift/${STAGE}/
+                            scp -o StrictHostKeyChecking=no -r $SOURCE_PATH ${SHIPPER_USERNAME}@${SHIPPER_TARGET}:$DESTINATION_PATH
+                        fi
+                    '''
+                }
+            }
+        }
+        stage('Deploy fluentd') {
+            when {
+                expression {
+                    'fluentd-elasticsearch' in FLUENTD_TYPE && 'fluentd-rsyslog' in FLUENTD_TYPE
+                }
+            }
+            environment {
+                ELASTIC_CREDS = credentials('elastic-creds')
+                REGISTRY_CREDS = credentials("${ARTIFACTORY_TYPE}_id")
+            }
+            steps {
+                sshagent (credentials: ['run-oc-client']) {
+                    sh '''
+                        COMMAND1="oc login --token=${OC_TOKEN} --server=${OC_CLIENT_URL} --insecure-skip-tls-verify"
+                        ssh -o StrictHostKeyChecking=no -l ${SHIPPER_USERNAME} ${SHIPPER_TARGET} $COMMAND1
+
+                        COMMAND2="oc project ${OC_PROJECT}"
+                        ssh -o StrictHostKeyChecking=no -l ${SHIPPER_USERNAME} ${SHIPPER_TARGET} $COMMAND2
+
+                        COMMAND3="oc adm policy add-scc-to-user anyuid -z ${SERVICE_ACCOUNT} -n ${OC_PROJECT}"
+                        ssh -o StrictHostKeyChecking=no -l ${SHIPPER_USERNAME} ${SHIPPER_TARGET} $COMMAND3
+
+                        
+                        if [ ${FLUENTD_TYPE} = "fluentd-rsyslog" ]; then
+                            COMMAND4="oc create secret docker-registry ${ARTIFACTORY_TYPE}-fluentd-rsyslog-secret --docker-server=$DOCKER_SERVER --docker-username=${REGISTRY_CREDS_USR} --docker-password=${REGISTRY_CREDS_PSW} --docker-email=lagudu.saikrishna@i-exceed.com"
+                            ssh -o StrictHostKeyChecking=no -l ${SHIPPER_USERNAME} ${SHIPPER_TARGET} $COMMAND4
+
+                            SOURCE_PATH=/dataext/home/${SHIPPER_USERNAME}/projects/ship-openshift/default/fluentd/
+                            COMMAND5="oc process -f $SOURCE_PATH/fluentd-rsyslog.yaml IMAGE_REPO=$REGISTRY/${DOCKER_FLUENTD_IMAGE_NAME} APP_TAG=${BUILD_TAG} ARTIFACTORY_TYPE=${ARTIFACTORY_TYPE}-${FLUENTD_TYPE} NAMESPACE=${OC_PROJECT} SERVICE_ACCOUNT=${SERVICE_ACCOUNT} REPLICAS=${REPLICAS} LOG_PATH=${LOG_PATH} ENV_MOUNT_PATH=${ENV_MOUNT_PATH} PVC_LOG_NAME=${PVC_LOG_NAME} TLS_MOUNT_PATH=${TLS_MOUNT_PATH}  | oc apply -f -"
+                            ssh -o StrictHostKeyChecking=no -l ${SHIPPER_USERNAME} ${SHIPPER_TARGET} $COMMAND5
+
+                            SOURCE_PATH=/dataext/home/${SHIPPER_USERNAME}/projects/ship-openshift/default/fluentd/
+                            COMMAND6="oc process -f $SOURCE_PATH/fluentd-rsyslog.yaml IMAGE_REPO=$REGISTRY/${DOCKER_FLUENTD_IMAGE_NAME} APP_TAG=${BUILD_TAG} ARTIFACTORY_TYPE=${ARTIFACTORY_TYPE}-${FLUENTD_TYPE} NAMESPACE=${OC_PROJECT} SERVICE_ACCOUNT=${SERVICE_ACCOUNT} REPLICAS=${REPLICAS} LOG_PATH=${LOG_PATH} ENV_MOUNT_PATH=${ENV_MOUNT_PATH} PVC_LOG_NAME=${PVC_LOG_NAME} TLS_MOUNT_PATH=${TLS_MOUNT_PATH}  | oc apply -f -"
+                            ssh -o StrictHostKeyChecking=no -l ${SHIPPER_USERNAME} ${SHIPPER_TARGET} $COMMAND6 
+                        else 
+                            SOURCE_PATH=/dataext/home/${SHIPPER_USERNAME}/projects/ship-openshift/${STAGE}/
+                            COMMAND7="helm upgrade --install fluentd-elasticsearch $SOURCE_PATH/fluentd-elasticsearch --set logPath=${LOG_PATH} --set pvcLogName=${PVC_LOG_NAME} --set artifactType=${ARTIFACTORY_TYPE} --set image.repository=$REGISTRY/${DOCKER_FLUENTD_IMAGE_NAME} --set image.tag=${BUILD_TAG} --set serviceAccount.name=${SERVICE_ACCOUNT} --set nameSpace=${OC_PROJECT}  -n ${OC_PROJECT}"
+                            ssh -o StrictHostKeyChecking=no -l ${SHIPPER_USERNAME} ${SHIPPER_TARGET} $COMMAND7
+                        fi
+                    '''
+                }
+            }
+        }
+        stage('Deploy Fluentbit'){
+            when {
+                    expression {
+                        'fluentbit' in FLUENTD_TYPE
+                    }
+                }
+            steps{
+                sshagent (credentials: ['run-oc-client']) {
+                    script{
+                        sh '''
+                            COMMAND1="oc login --token=${OC_TOKEN} --server=${OC_CLIENT_URL} --insecure-skip-tls-verify"
+                            ssh -o StrictHostKeyChecking=no -l ${SHIPPER_USERNAME} ${SHIPPER_TARGET} $COMMAND1
+
+                            COMMAND2="oc project ${OC_PROJECT}"
+                            ssh -o StrictHostKeyChecking=no -l ${SHIPPER_USERNAME} ${SHIPPER_TARGET} $COMMAND2
+                        '''
+
+                        SOURCE_PATH="/dataext/home/${SHIPPER_USERNAME}/projects/ship-openshift/${STAGE}/"
+                        sh "ssh -o StrictHostKeyChecking=no -l ${SHIPPER_USERNAME} ${SHIPPER_TARGET} 'helm upgrade --install fluentbit ${SOURCE_PATH}/fluentbit --set openshift.cluster=true --set imagePullSecrets[0].name=registry-secret --set fullnameOverride=fluentbit --set serverApp=${SERVER_APP} --set webApp=${WEB_APP} --set nameSpace=${OC_PROJECT} --set image.repository=$REGISTRY/${DOCKER_FLUENTD_IMAGE_NAME} --set image.tag=${BUILD_TAG} --set serviceAccount.name=${SERVICE_ACCOUNT} --set elasticHost=${ELASTIC_HOST} -n ${OC_PROJECT}'"
+                    }
+                }
+            }
+        }
+    }
+    post { 
+        always { 
+            cleanWs()
+        }
+    }
+}

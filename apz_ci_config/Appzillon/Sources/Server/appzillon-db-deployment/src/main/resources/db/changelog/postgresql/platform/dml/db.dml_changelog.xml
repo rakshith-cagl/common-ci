@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
+
+   <changeSet id="dml_tb_astp_seq_gen_3.24.0-1" author="platform">
+        <insert tableName="tb_astp_seq_gen" dbms="postgresql">
+            <column name="sequence_name" value="ADMIN_DOMAIN"/>
+            <column name="sequence_value" value="1"/>
+            <column name="create_by" value="NULL"/>
+            <column name="create_ts" value="${now}"/>
+            <column name="version_no" value="1"/>
+        </insert>
+        <insert tableName="tb_astp_seq_gen" dbms="postgresql">
+            <column name="sequence_name" value="GROUP_NO"/>
+            <column name="sequence_value" value="1"/>
+            <column name="create_by" value="NULL"/>
+            <column name="create_ts" value="${now}"/>
+            <column name="version_no" value="1"/>
+        </insert>
+        <insert tableName="tb_astp_seq_gen" dbms="postgresql">
+            <column name="sequence_name" value="NOTIFICATION_NO"/>
+            <column name="sequence_value" value="1"/>
+            <column name="create_by" value="NULL"/>
+            <column name="create_ts" value="${now}"/>
+            <column name="version_no" value="1"/>
+        </insert>
+        <insert tableName="tb_astp_seq_gen" dbms="postgresql">
+            <column name="sequence_name" value="TXNREF"/>
+            <column name="sequence_value" value="1"/>
+            <column name="create_by" value="NULL"/>
+            <column name="create_ts" value="${now}"/>
+            <column name="version_no" value="1"/>
+        </insert>
+        <insert tableName="tb_astp_seq_gen" dbms="postgresql">
+            <column name="sequence_name" value="WORKFLOW"/>
+            <column name="sequence_value" value="1"/>
+            <column name="create_by" value="NULL"/>
+            <column name="create_ts" value="${now}"/>
+            <column name="version_no" value="1"/>
+        </insert>
+        <insert tableName="tb_astp_seq_gen" dbms="postgresql">
+            <column name="sequence_name" value="JMS_TXN_ID"/>
+            <column name="sequence_value" value="1"/>
+            <column name="create_by" value="NULL"/>
+            <column name="create_ts" value="${now}"/>
+            <column name="version_no" value="1"/>
+        </insert>
+        <insert tableName="tb_astp_seq_gen" dbms="postgresql">
+            <column name="sequence_name" value="ACCESS_REF"/>
+            <column name="sequence_value" value="1"/>
+            <column name="create_by" value="NULL"/>
+            <column name="create_ts" value="${now}"/>
+            <column name="version_no" value="1"/>
+        </insert>
+        <insert tableName="tb_astp_seq_gen" dbms="postgresql">
+            <column name="sequence_name" value="BEACON_REF"/>
+            <column name="sequence_value" value="1"/>
+            <column name="create_by" value="NULL"/>
+            <column name="create_ts" value="${now}"/>
+            <column name="version_no" value="1"/>
+        </insert>
+        <insert tableName="tb_astp_seq_gen" dbms="postgresql">
+            <column name="sequence_name" value="ISO8583_F11"/>
+            <column name="sequence_value" value="1"/>
+            <column name="create_by" value="NULL"/>
+            <column name="create_ts" value="${now}"/>
+            <column name="version_no" value="1"/>
+        </insert>
+        <insert tableName="tb_astp_seq_gen" dbms="postgresql">
+            <column name="sequence_name" value="OTP_REF_NO"/>
+            <column name="sequence_value" value="1"/>
+            <column name="create_by" value="NULL"/>
+            <column name="create_ts" value="${now}"/>
+            <column name="version_no" value="1"/>
+        </insert>
+        <insert tableName="tb_astp_seq_gen" dbms="postgresql">
+            <column name="sequence_name" value="AR_REF"/>
+            <column name="sequence_value" value="1"/>
+            <column name="create_by" value="NULL"/>
+            <column name="create_ts" value="${now}"/>
+            <column name="version_no" value="1"/>
+        </insert>
+        <insert tableName="tb_astp_seq_gen" dbms="postgresql">
+            <column name="sequence_name" value="SMS_TXNREF"/>
+            <column name="sequence_value" value="1"/>
+            <column name="create_by" value="NULL"/>
+            <column name="create_ts" value="${now}"/>
+            <column name="version_no" value="1"/>
+        </insert>
+        <insert tableName="tb_astp_seq_gen" dbms="postgresql">
+            <column name="sequence_name" value="USSD_TXNREF"/>
+            <column name="sequence_value" value="1"/>
+            <column name="create_by" value="NULL"/>
+            <column name="create_ts" value="${now}"/>
+            <column name="version_no" value="1"/>
+        </insert>
+        <insert tableName="tb_astp_seq_gen" dbms="postgresql">
+            <column name="sequence_name" value="TXT_TXNREF"/>
+            <column name="sequence_value" value="1"/>
+            <column name="create_by" value="NULL"/>
+            <column name="create_ts" value="${now}"/>
+            <column name="version_no" value="1"/>
+        </insert>
+        <insert tableName="tb_astp_seq_gen" dbms="postgresql">
+            <column name="sequence_name" value="SOURCE_MSG_ID"/>
+            <column name="sequence_value" value="1"/>
+            <column name="create_by" value="NULL"/>
+            <column name="create_ts" value="${now}"/>
+            <column name="version_no" value="1"/>
+        </insert>
+        <insert tableName="tb_astp_seq_gen" dbms="postgresql">
+            <column name="sequence_name" value="CAPTCHA_REF_NO"/>
+            <column name="sequence_value" value="1"/>
+            <column name="create_by" value="NULL"/>
+            <column name="create_ts" value="${now}"/>
+            <column name="version_no" value="1"/>
+        </insert>
+    </changeSet>
+   <changeSet id="dml_tb_os_3.24.0-2" author="platform">
+        <insert tableName="tb_os" dbms="postgresql">
+            <column name="os_id" value="ANDROID"/>
+            <column name="create_ts" value="${now}"/>
+        </insert>
+        <insert tableName="tb_os" dbms="postgresql">
+            <column name="os_id" value="IOS"/>
+            <column name="create_ts" value="${now}"/>
+        </insert>
+        <insert tableName="tb_os" dbms="postgresql">
+            <column name="os_id" value="WINDOWS"/>
+            <column name="create_ts" value="${now}"/>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>

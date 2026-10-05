@@ -1,0 +1,23 @@
+{{- if .Values.openshift.cluster }}
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  annotations:
+    sealedsecrets.bitnami.com/namespace-wide: "true"
+  creationTimestamp: null
+  name: grafana-tls
+  namespace: {{ .Values.nameSpace}}
+spec:
+  encryptedData:
+    tls.crt: {{ .Values.tlsCrt }}
+    tls.key: {{ .Values.tlsKey }}
+  template:
+    metadata:
+      annotations:
+        sealedsecrets.bitnami.com/namespace-wide: "true"
+      creationTimestamp: null
+      name: grafana-tls
+      namespace: {{ .Values.nameSpace}}
+    type: kubernetes.io/tls
+{{- end }}
+

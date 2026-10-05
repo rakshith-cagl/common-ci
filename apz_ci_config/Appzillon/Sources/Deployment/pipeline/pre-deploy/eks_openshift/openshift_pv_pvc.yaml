@@ -1,0 +1,117 @@
+# Cluster Host Path Storage
+---
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: "appzillon-upload-logpv"
+spec:
+  capacity:
+    storage: 2Gi
+  accessModes:
+  - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: gp2
+  hostPath:
+    path: "/var/app_volume/uploads"
+
+---
+kind: PersistentVolumeClaim                                                 
+apiVersion: v1
+metadata:
+  name: "appzillon-upload-logpvc"
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 2Gi
+  volumeName: "appzillon-upload-logpv"
+
+
+---
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name:  "appzillon-web-server-logpv"
+spec:
+  capacity:
+    storage: 2Gi
+  accessModes:
+  - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: gp2
+  hostPath:
+    path: "/var/log/appzillon_logs"
+
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: "appzillon-web-server-logpvc"
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 2Gi
+  volumeName: "appzillon-web-server-logpv"
+
+
+
+
+# AWS EBS Storage
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: aws-appzillon-logpv
+spec:
+  capacity:
+    storage: 2Gi
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: gp2
+  awsElasticBlockStore:
+    fsType: ext4
+    volumeID: vol-0235ff0955dafa667
+
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: aws-appzillon-logpvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 2Gi
+  volumeName: aws-appzillon-logpv
+
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: aws-appzillon-uploadpv
+spec:
+  capacity:
+    storage: 2Gi
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: gp2
+  awsElasticBlockStore:
+    fsType: ext4
+    volumeID: vol-0734aa044611ecea4
+
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: aws-appzillon-uploadpvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 2Gi
+  volumeName: aws-appzillon-uploadpv

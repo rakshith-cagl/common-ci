@@ -1,0 +1,217 @@
+﻿//--Error Code----
+WinContainer.Command = {
+    //#region AcceleroMeter
+    ACCELERO_START: "PLGN_ACC_START",
+    ACCELERO_STOP: "PLGN_ACC_STOP",
+
+    //#region App idle time out
+    APP_IDLE_TIME_OUT: "PLGN_IDLE_TMR_START",
+
+    //#region Augment Reality
+    AUGMENT_START: "PLGN_AUG_START",
+    AUGMENT_STOP: "PLGN_AUG_RELOAD",
+
+
+    //#region Barcode
+    BARCODE: "PLGN_SCN_BARCODE",
+
+    //#region Biometric
+    BIOMETRIC: "PLGN_BIO_AUTH",
+    SCAN_FINGER: "PLGN_SCN_FINGER",
+
+    //#region Battery
+    BATTERY_START: "PLGN_BT_MTR_START",
+    BATTERY_STOP: "PLGN_BT_MTR_STOP",
+
+    //#region Beacon
+    BEACON_START: "PLGN_BCON_START",
+    BEACON_STOP: "PLGN_BCON_STOP",
+
+
+    //#region Calendar
+    CALENDAR: "PLGN_CRT_CAL_EVT",
+    CALENDAR_DELETE: "PLGN_DLT_CAL_EVT",
+    CALENDAR_EDIT:"PLGN_EDT_CAL_EVT",
+
+    //#region Call
+    CALL: "PLGN_CALL_NMB",
+
+    //#region Camera
+    CAMERA: "PLGN_OPN_CAMERA",
+
+    //#region Compass
+    COMPASS_START: "PLGN_CMP_START",
+    COMPASS_STOP: "PLGN_CMP_STOP",
+
+    //#region Contacts
+    CONTACT_CREATE: "PLGN_ADD_CONT",
+    CONTACT_DELETE: "PLGN_DEL_CONT",
+    CONTACT_SEARCH: "PLGN_SRCH_CONT",
+    CONTACT_EDIT: "PLGN_EDIT_CONT",
+    CONTACT_FETCH: "PLGN_FETCH_CONT",
+
+    //#region Device
+    DEVICE: "PLGN_DEV_DETAILS",
+    DEVICE_INFO: "PLGN_DEV_INFO",
+    IP_GET: "PLGN_GET_IP",
+
+    //#region deeplink
+    DEEPLINK:"PLGN_DEEP_LNK",
+
+    //#region Email
+    EMAIL: "PLGN_SEND_MAIL",
+
+    //#region Encryption and Decryption
+    ENCRYPT_FILE: "PLGN_ENCRPT_FILE",
+    DECRYPT_FILE: "PLGN_DECRPT_FILE",
+    ENCRYPT_STRING: "PLGN_ENCRPT_DATA",
+    DECRYPT_STRING: "PLGN_DECRPT_DATA",
+
+    //#region Events
+    CTRL_EVTS: "PLGN_DET_EVE",
+
+    //#region File Operation
+    FILE_BROWSER: "PLGN_BRWS_FILE",
+    FILE_TO_BASE64: "PLGN_FILE_TO_B64",
+    FILE_UPLOAD: "PLGN_UPLD_FILE",
+    FILE_DOWNLOAD: "PLGN_DWLD_FILE",
+    FILE_UPLOAD_WS: "FILE_UPLOAD_WS", // WS - Without Session
+    FILE_DOWNLOAD_WS: "FILE_DOWNLOAD_WS",
+    GET_FILE_SIZE: "PLGN_FILE_SIZE",
+    FILE_CREATE: "PLGN_CRT_FILE",
+    BASE64_TO_PDF: "PLGN_B64_TO_FILE",
+    FILE_READ: "PLGN_OPN_FILE",
+    PLGN_FILE_CONTENT: "PLGN_FILE_CONTENT",
+    FILE_DEL: "PLGN_DEL_FILE",
+    READ_FILE: "PLGN_READ_FILE",
+
+    //#region Get Instructions
+    GET_INSTRUCTION: "PLGN_GET_INST",
+
+    //#region GPS
+    GPS_START: "PLGN_LOC_TRCK_START",
+    GPS_STOP: "PLGN_LOC_TRCK_STOP",
+    GET_LOC: "PLGN_GET_LOCATION",
+
+    GESTURE_START: "PLGN_GSTR_START",
+    GESTURE_STOP: "PLGN_GSTR_STOP",
+
+    //#region Keyboard
+    PLGN_KEYBD_LISTR: "PLGN_KEYBD_LISTR_STRT",
+    PLGN_KEYBD_LISTR_STOP: "PLGN_KEYBD_LISTR_STOP",
+
+    //#region Map
+    MAP_LOCATE: "PLGN_LOAD_MAP",
+    MAP_DRIVE_DIRECTION: "PLGN_DRVNG_DIRCTN",
+    MAP_AREA_SELECTOR: "PLGN_LOC_SELECTR",
+    GEO_FENCE: "PLGN_CALL_GEOFNCING",
+
+    //#region Media
+    AUDIO: "PLGN_AUDIO",
+    VIDEO_RECORD: "PLGN_RECD_VIDEO",
+
+    //#region NAtiveService
+    NATIVE_SERVICE: "PLGN_NTV_EXT",
+
+    //#region NFC
+    NFC_SEND: "PLGN_SND_NFC",
+    NFC_STOP: "PLGN_STOP_NFC",
+    NFC_RECIEVE: "PLGN_RCV_NFC",
+
+    //#region Notification
+    NOTIFICATION_DEL: "PLGN_DLT_NOTIF",
+    NOTIFICATION_SHOW: "PLGN_SHW_NOTIF",
+    NOTIFICATION_UPDATE: "PLGN_UPDT_NOTIF",
+    NOTIFICATION_GET: "PLGN_GET_NOTIF",
+    CHECK_NOTIFICATION: "PLGN_CHK_NOTIF",
+    PLGN_LTN_NTF: "PLGN_NOT_LISTR_STRT",
+    PLGN_LTN_NTF_STP: "PLGN_NOT_LISTR_STOP",
+    //#region Notify
+    NOTIFY: "PLGN_NOTIFY",
+
+
+    //#region Orientation and Rotation
+    ORIENTATION_SET: "PLGN_SET_ORTN",
+    ROTATION_LOCK: "PLGN_LCK_ROTN",
+    ROTATION_UNLOCK: "PLGN_UNLCK_ROTN",
+	//Ruthvik 18-04-17 modified by adding new commands for orientation listener
+    OR_LSTN_START: "PLGN_ORTN_START",
+    OR_LSTN_STOP: "PLGN_ORTN_STOP",
+    //#region OTP
+    GENERATE_OTP: "PLGN_HASH_PWD",
+
+    //#region Pulldown
+    HIDE_REFRESH: "PLGN_HIDE_REFRESH",
+    PLGN_EN_PLDN: "PLGN_EN_PLDN",
+    PLGN_DIS_PLDN: "PLGN_DIS_PLDN",
+
+    //#region Setttings
+    GET_SETTING: "PLGN_GET_PREF",
+    GET_SETTING_S: "PLGN_GET_USER_PREF",
+    SET_SETTING: "PLGN_SET_PREF",
+    SET_SETTING_S: "PLGN_SET_STNGS",
+
+    LOAD_SETTING_S: "PLGN_LOAD_STNGS",
+    SAVE_SETTING_S: "PLGN_SAVE_STNGS",
+
+    //#region Signature Pad
+    SIGNATURE_PAD: "PLGN_SIGN_PAD",
+
+    //#region Skype
+    CALL_SKYPE: "CALL_SKYPE",
+
+    //#region app basics
+    CLOSE_APP: "PLGN_CLS_APPCTN",
+    GET_APP_VERSION: "PLGN_APP_VERSION",
+
+
+    //#region Whatsapp
+    WHATSAPP: "PLGN_OP_WP",
+
+    //#region SMS
+    SMS_SEND: "PLGN_SMS_SEND",
+
+    //#region
+    SPLASH_SHOW: "PLGN_SPLASH_SHOW",
+    SPLASH_HIDE: "PLGN_SPLASH_HIDE",
+
+    //#region Social Media
+    GOOGLE_LOGIN: "PLGN_GOOGLE_LOGIN",
+    FACEBOOK_LOGIN: "PLGN_FACEBK_LOGIN",
+    LINKEDIN_LOGIN: "PLGN_LINKDIN_LOGIN",
+    TWITTER_LOGIN: "PLGN_TWITTER_LOGIN",
+
+    //#region Sqlite
+    EXECUTE_SQL: "PLGN_EXE_SQL",
+
+
+    //#region Vibrate
+    VIBRATE_DEVICE: "PLGN_VIBRATE",
+
+    //#region View
+    WEBVIEW_LAUNCH: "PLGN_LNCH_WEBVW",
+    WEBVIEW_CLOSE: "PLGN_CLS_WEBVW",
+    MULTIVIEW_LAUNCH: "PLGN_MLTVW_OPEN",
+    MULTIVIEW_CLOSE: "PLGN_MLTVW_CLOSE",
+
+
+    //#region Voice Support
+    VOICE: "PLGN_VOICE",
+
+    //#region WipeOut
+    WIPEOUT: "PLGN_WIPEOUT",
+
+    //#region OpenUrl
+    OPEN_URL: "PLGN_OPEN_URL",
+    PLGN_YOUTUBE: "PLGN_YOUTUBE",
+
+    //#region Whitelist
+    UPDATE_WLIST: "PLGN_UPDT_WLIST",
+
+    //#region ZIP & UnZip
+    ZIP: "PLGN_ZIP",
+    UNZIP: "PLGN_UNZIP",
+    DEBUG: "DEBUG",
+    ALERT: "ALERT"
+}
+

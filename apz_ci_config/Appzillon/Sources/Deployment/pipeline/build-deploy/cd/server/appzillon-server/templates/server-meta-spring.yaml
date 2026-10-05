@@ -1,0 +1,12 @@
+{{- $warName  := .Values.serverWarName -}}
+{{- range $configmap := .Values.mounts }}
+{{- range $appid := $configmap.appid }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ lower $appid }}-server-meta-spring
+data:
+{{ ($.Files.Glob (printf "%s/META-INF/spring/*" $warName)).AsConfig | indent 2 }}
+---
+{{- end }}
+{{- end }}

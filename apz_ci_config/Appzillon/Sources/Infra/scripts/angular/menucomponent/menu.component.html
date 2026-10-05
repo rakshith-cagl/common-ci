@@ -1,0 +1,42 @@
+<ng-container *ngIf="props.responsive == 'Y' && props.contextMenu != 'Y';else menuBody">
+        <div [id]="props.id" [ngStyle]="{display:'block'}" #content>
+            <ul [id]="props.id+'_ul'">
+                    <ng-container [ngTemplateOutlet]="ngcontent">
+                    </ng-container>
+            </ul>
+        </div>
+        <a [id]="props.id+'-mobiletoggle'" class="animateddrawer ett-bttn tsp med" [ngStyle]="{display:'none'}">
+            <svg  [attr.class]="props.iconWrapper.className">
+                <use attr.xlink:href="{{'#'+props.iconWrapper.name}}"></use>
+            </svg>
+        </a>
+    </ng-container>
+    
+    <ng-template #menuBody>    
+        <ng-container *ngIf="props.contextMenu == 'Y';else Menubody">
+                <div #contextWrapper>
+                    <div [id]="props.id" class="cmnu-ctr">
+                        <ul>
+                                <ng-container [ngTemplateOutlet]="ngcontent">
+                                    </ng-container>
+                        </ul>
+                    </div>
+                </div>
+        </ng-container>
+    </ng-template>
+    
+    <ng-template #Menubody>
+        <ng-container>
+            <ul [id]="props.id" #content>
+                    <ng-container [ngTemplateOutlet]="ngcontent">
+                        </ng-container>
+            </ul>
+        </ng-container>
+    </ng-template>
+    
+    
+    
+    
+    <ng-template #ngcontent>
+            <ng-content></ng-content>
+    </ng-template>

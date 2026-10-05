@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:aop="http://www.springframework.org/schema/aop" xmlns:context="http://www.springframework.org/schema/context" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.springframework.org/schema/beans              http://www.springframework.org/schema/beans/spring-beans.xsd              http://www.springframework.org/schema/context               http://www.springframework.org/schema/context/spring-context-3.1.xsd               http://www.springframework.org/schema/aop              http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
+
+<bean class="com.iexceed.appzillon.sms.impl.AuthenticationImpl" id="Admin2_authenticationBean" scope="request">
+<aop:scoped-proxy proxy-target-class="false"/>
+</bean>
+<bean class="com.iexceed.appzillon.sms.impl.SessionManagerImpl" id="Admin2_sesssionManagerBean" scope="request">
+<aop:scoped-proxy proxy-target-class="false"/>
+</bean>
+<bean class="com.iexceed.appzillon.sms.impl.ChangePasswordImpl" id="Admin2_changepwd" scope="request">
+<aop:scoped-proxy proxy-target-class="false"/>
+</bean>
+<bean class="com.iexceed.appzillon.sms.impl.AuthorisationImpl" id="Admin2_authorization" scope="request">
+<aop:scoped-proxy proxy-target-class="false"/>
+</bean>
+<bean class="com.iexceed.appzillon.sms.impl.ReportImpl" id="Admin2_reporter" scope="request">
+<aop:scoped-proxy proxy-target-class="false"/>
+</bean>
+<bean class="com.iexceed.appzillon.sms.impl.ScreenMaintainerImpl" id="Admin2_screen" scope="request">
+<aop:scoped-proxy proxy-target-class="false"/>
+</bean>
+<bean class="com.iexceed.appzillon.sms.impl.UserProfileImpl" id="Admin2_userprofile" scope="request">
+<aop:scoped-proxy proxy-target-class="false"/>
+</bean>
+<bean class="com.iexceed.appzillon.sms.impl.RoleMaintainerImpl" id="Admin2_roleprofile" scope="request">
+<aop:scoped-proxy proxy-target-class="false"/>
+</bean>
+<bean class="com.iexceed.appzillon.sms.impl.AuditLogImpl" id="Admin2_auditLogProfile" scope="request">
+<aop:scoped-proxy proxy-target-class="false"/>
+</bean>
+<bean class="com.iexceed.appzillon.sms.impl.OTAImpl" id="Admin2_otaImplementaionBean" scope="request">
+<aop:scoped-proxy proxy-target-class="false"/>
+</bean>
+<bean class="com.iexceed.appzillon.sms.impl.DeviceMasterImpl" id="Admin2_DeviceMasterProfile" scope="request">
+<aop:scoped-proxy proxy-target-class="false"/>
+</bean>
+<bean class="com.iexceed.appzillon.sms.impl.LoggingImpl" id="Admin2_loggingprofile" scope="request">
+<aop:scoped-proxy proxy-target-class="false"/>
+</bean>
+<bean class="com.iexceed.appzillon.sms.impl.SmsUserDetailImpl" id="Admin2_SmsUserDetailProfile" scope="request">
+<aop:scoped-proxy proxy-target-class="false"/>
+</bean>
+<bean class="com.iexceed.appzillon.sms.impl.BeaconImpl" id="Admin2_beacon" scope="request">
+<aop:scoped-proxy proxy-target-class="false"/>
+</bean>
+<bean class="com.iexceed.appzillon.sms.impl.AugumentedRealityImpl" id="Admin2_ARbean" scope="request">
+<aop:scoped-proxy proxy-target-class="false"/>
+</bean>
+<bean class="com.iexceed.appzillon.sms.impl.DragDropImpl" id="Admin2_dragDropProfile" scope="request">
+<aop:scoped-proxy proxy-target-class="false"/>
+</bean>
+<bean class="com.iexceed.appzillon.sms.impl.TextMessageImpl" id="Admin2_sendSMSbean" scope="request">
+<aop:scoped-proxy proxy-target-class="false"/>
+</bean>
+<bean class="com.iexceed.appzillon.sms.impl.CustomizeImpl" id="Admin2_ICustomizer" scope="request">
+<aop:scoped-proxy proxy-target-class="false"/>
+</bean>
+<bean class="com.iexceed.appzillon.sms.impl.TrackLocationImpl" id="Admin2_ITrackLocation" scope="request">
+<aop:scoped-proxy proxy-target-class="false"/>
+</bean>
+<bean class="com.iexceed.appzillon.sms.impl.CaptchaGenerateImpl" id="Admin2_captchaGenerate" scope="request">
+<aop:scoped-proxy proxy-target-class="false"/>
+</bean>
+<bean class="com.iexceed.appzillon.sms.impl.ClientServerNonceServiceImpl" id="Admin2_nonceGenerate" scope="request">
+<aop:scoped-proxy proxy-target-class="false"/>
+</bean>
+<bean class="com.iexceed.appzillon.sms.impl.TenantCreationImpl" id="Admin2_tenantCreationBean" scope="request">
+<aop:scoped-proxy proxy-target-class="false"/>
+</bean>
+<bean class="com.iexceed.appzillon.sms.impl.CaptchaDefaultPropertiesImpl" id="Admin2_iCaptchaPropertiesImpl" scope="request">
+<aop:scoped-proxy proxy-target-class="false"/>
+</bean>
+<bean class="com.iexceed.appzillon.sms.handlers.AuthenticationHandler" id="Admin2_smsLoginLogoutRequestHandler">
+<property name="cAuthentication">
+<ref bean="Admin2_authenticationBean"/>
+</property>
+</bean>
+<bean class="com.iexceed.appzillon.sms.handlers.SessionHandler" id="Admin2_sesssionHandlerBean">
+<property name="cSesssionManager">
+<ref bean="Admin2_sesssionManagerBean"/>
+</property>
+</bean>
+<bean class="com.iexceed.appzillon.sms.handlers.ChangePasswordHandler" id="Admin2_smsChangePasswordHandler">
+<property name="cChangepwd">
+<ref bean="Admin2_changepwd"/>
+</property>
+</bean>
+<bean class="com.iexceed.appzillon.sms.handlers.AuthorizationHandler" id="Admin2_smsAuthorizationHandler">
+<property name="cAuthorizaion">
+<ref bean="Admin2_authorization"/>
+</property>
+</bean>
+<bean class="com.iexceed.appzillon.sms.handlers.ReportHandler" id="Admin2_smsReportHandler">
+<property name="cReporter">
+<ref bean="Admin2_reporter"/>
+</property>
+</bean>
+<bean class="com.iexceed.appzillon.sms.handlers.ScreenHandler" id="Admin2_smsScreenHandler">
+<property name="cScreen">
+<ref bean="Admin2_screen"/>
+</property>
+</bean>
+<bean class="com.iexceed.appzillon.sms.handlers.UserProfileHandler" id="Admin2_smsUserProfileHandler">
+<property name="cUserprofile">
+<ref bean="Admin2_userprofile"/>
+</property>
+</bean>
+<bean class="com.iexceed.appzillon.sms.handlers.RoleHandler" id="Admin2_smsRoleProfileHandler">
+<property name="cRoleprofile">
+<ref bean="Admin2_roleprofile"/>
+</property>
+</bean>
+<bean class="com.iexceed.appzillon.sms.handlers.AuditLogHandler" id="Admin2_smsAuditLogHandler">
+<property name="cAuditlog">
+<ref bean="Admin2_auditLogProfile"/>
+</property>
+</bean>
+<bean class="com.iexceed.appzillon.sms.handlers.OTAHandler" id="Admin2_smsOTAHandler">
+<property name="cIOta">
+<ref bean="Admin2_otaImplementaionBean"/>
+</property>
+</bean>
+<bean class="com.iexceed.appzillon.sms.handlers.DeviceMasterHandler" id="Admin2_smsDeviceMaster">
+<property name="cDeviceHandler">
+<ref bean="Admin2_DeviceMasterProfile"/>
+</property>
+</bean>
+<bean class="com.iexceed.appzillon.sms.handlers.LoggingHandler" id="Admin2_smsLoggingHandler">
+<property name="cLogging">
+<ref bean="Admin2_loggingprofile"/>
+</property>
+</bean>
+<bean class="com.iexceed.appzillon.sms.handlers.SmsUserDetailHandler" id="Admin2_smsUserDetail">
+<property name="cSmsUserDetailProfile">
+<ref bean="Admin2_SmsUserDetailProfile"/>
+</property>
+</bean>
+<bean class="com.iexceed.appzillon.sms.handlers.BeaconHandler" id="Admin2_beaconHandler">
+<property name="cBeacon">
+<ref bean="Admin2_beacon"/>
+</property>
+</bean>
+<bean class="com.iexceed.appzillon.sms.handlers.AugumentedRealityHandler" id="Admin2_ARHandler">
+<property name="cARDetails">
+<ref bean="Admin2_ARbean"/>
+</property>
+</bean>
+<bean class="com.iexceed.appzillon.sms.handlers.DragDropHandler" id="Admin2_dragDropHandler">
+<property name="cDragDrop">
+<ref bean="Admin2_dragDropProfile"/>
+</property>
+</bean>
+<bean class="com.iexceed.appzillon.sms.handlers.TextMessageHandler" id="Admin2_sendSMSHandler">
+<property name="sendSMS">
+<ref bean="Admin2_sendSMSbean"/>
+</property>
+</bean>
+<bean class="com.iexceed.appzillon.sms.handlers.CustomizeHandler" id="Admin2_customizeHandler">
+<property name="customize">
+<ref bean="Admin2_ICustomizer"/>
+</property>
+</bean>
+<bean class="com.iexceed.appzillon.sms.handlers.TrackLocationHandler" id="Admin2_trackLocation">
+<property name="trackLocation">
+<ref bean="Admin2_ITrackLocation"/>
+</property>
+</bean>
+<bean class="com.iexceed.appzillon.sms.handlers.CaptchaGenerateHandler" id="Admin2_captchaGenerateHandler">
+<property name="cCaptchaGenerate">
+<ref bean="Admin2_captchaGenerate"/>
+</property>
+</bean>
+<bean class="com.iexceed.appzillon.sms.handlers.ClientServerNonceHandler" id="Admin2_nonceHandler">
+<property name="cClientServerNonce">
+<ref bean="Admin2_nonceGenerate"/>
+</property>
+</bean>
+<bean class="com.iexceed.appzillon.sms.handlers.TenantCreationHandler" id="Admin2_tenantCreationHandler">
+<property name="cTenantCreation">
+<ref bean="Admin2_tenantCreationBean"/>
+</property>
+</bean>
+</beans>

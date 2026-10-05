@@ -1,0 +1,33 @@
+<resources>
+
+    <dimen name="padding_small">8dp</dimen>
+    <dimen name="padding_medium">8dp</dimen>
+    <dimen name="padding_large">16dp</dimen>
+    <dimen name="tab_height">40dp</dimen>
+    <dimen name="tab_padding">10dp</dimen>
+    <dimen name="text_small">14sp</dimen>
+    <dimen name="text_default">17sp</dimen>
+    <dimen name="list_item_height">30dp</dimen>
+
+    <!-- Default screen margins, per the Android Design guidelines.Video cap -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+<!--Auto capture-->
+    <dimen name="search_progress_bar_size">48dp</dimen>
+    <dimen name="bounding_box_stroke_width">7dp</dimen>
+    <dimen name="bounding_box_confirmed_stroke_width">5dp</dimen>
+    <dimen name="bounding_box_corner_radius">12dp</dimen>
+    <dimen name="object_reticle_ripple_stroke_width">4dp</dimen>
+    <dimen name="object_reticle_ripple_size_offset">24dp</dimen>
+    <dimen name="object_reticle_outer_ring_fill_radius">22dp</dimen>
+    <dimen name="object_reticle_outer_ring_stroke_radius">24dp</dimen>
+    <dimen name="object_reticle_outer_ring_stroke_width">4dp</dimen>
+    <dimen name="object_reticle_inner_ring_stroke_radius">14dp</dimen>
+    <dimen name="object_reticle_inner_ring_stroke_width">2dp</dimen>
+    <dimen name="object_dot_radius">@dimen/object_reticle_inner_ring_stroke_radius</dimen>
+
+    <dimen name="barcode_reticle_stroke_width">4dp</dimen>
+    <dimen name="barcode_reticle_corner_radius">8dp</dimen>
+    <dimen name="list_item_spacing">16dp</dimen>
+    <dimen name="list_item_spacing_half">8dp</dimen>
+</resources>

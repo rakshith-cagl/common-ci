@@ -1,0 +1,19 @@
+<ng-container>
+  <!-- //NOSONAR -->  <li (click)="apz.data.breadCrumbAction($event.currentTarget,this)" #breadCrumbWrapperClass>
+        <a [id]="props.id" href="javascript:void(0)" #breadCrumbClass>
+            <ng-container [ngTemplateOutlet]="iconTitle"></ng-container>
+            <span [id]="props.id+'_txtcnt'">
+                {{props.buttonTitle.value}}
+            </span>
+        </a>
+    </li>
+</ng-container>
+
+<ng-template #iconTitle> 
+    <ng-container *ngIf="props.hasTitleIcon">
+            <svg [id]="props.titleIcon.id" aria-hidden="true" role="presentation" #titleIcon>
+				<use [attr.xlink.href]="'#'+props.titleIcon.name"></use>
+			</svg>
+    </ng-container>
+</ng-template>
+

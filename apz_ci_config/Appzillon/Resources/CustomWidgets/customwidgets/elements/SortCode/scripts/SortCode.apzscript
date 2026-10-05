@@ -1,0 +1,130 @@
+apz.SortCode = {};
+apz.SortCode.getObjValue = function(obj){
+	var value = "";
+	if(obj){
+		var commonId = obj.id;
+	    var tagName = $(obj)[0].tagName;
+	    var objRowNo = apz.getObjRowNumber(obj);
+	    var id = apz.getObjIdWORowNumber(obj);
+	    var rowNo = "";
+	    if (objRowNo!=-1) {
+	        rowNo = "_"+objRowNo;
+	    }
+	    tagName = $(obj).find("#"+id+"_00"+rowNo+"")[0].tagName;
+	    if (tagName == 'P') {
+	        value = $(obj).find("#"+id+"_00"+rowNo+"").text();
+	        value = value + $(obj).find("#"+id+"_11"+rowNo+"").text();
+	        value = value + $(obj).find("#"+id+"_22"+rowNo+"").text();
+	    } else if (tagName == "INPUT") {
+	        value = $(obj).find("#"+id+"_00"+rowNo+"").val();
+	        value = value + $(obj).find("#"+id+"_11"+rowNo+"").val();
+	        value = value + $(obj).find("#"+id+"_22"+rowNo+"").val();
+	    }
+	}
+	return value;
+}
+apz.SortCode.setObjValue = function(obj, value){
+	if(obj){
+		var commonId = obj.id;
+	    var tagName = $(obj)[0].tagName;
+	    var objRowNo = apz.getObjRowNumber(obj);
+	    var id = apz.getObjIdWORowNumber(obj);
+	    var rowNo = "";
+	    if (objRowNo!=-1) {
+	        rowNo = "_"+objRowNo;
+	    }
+	    tagName = $(obj).find("#"+id+"_00"+rowNo+"")[0].tagName;
+        if (!apz.isNull(value)){
+    	    if (tagName == 'P') {
+    	        $(obj).find("#"+id+"_00"+rowNo+"").text(value.substr(0,2));
+        	    $(obj).find("#"+id+"_11"+rowNo+"").text(value.substr(2,2));
+        	    $(obj).find("#"+id+"_22"+rowNo+"").text(value.substr(4,2));
+    	    } else if (tagName == "INPUT") {
+    	        $(obj).find("#"+id+"_00"+rowNo+"").val(value.substr(0,2));
+        	    $(obj).find("#"+id+"_11"+rowNo+"").val(value.substr(2,2));
+        	    $(obj).find("#"+id+"_22"+rowNo+"").val(value.substr(4,2));
+    	    }
+        }else{
+            if (tagName == 'P') {
+                $(obj).find("#"+id+"_00"+rowNo+"").text("");
+                $(obj).find("#"+id+"_11"+rowNo+"").text("");
+                $(obj).find("#"+id+"_22"+rowNo+"").text("");
+            } else if (tagName == "INPUT") {
+                $(obj).find("#"+id+"_00"+rowNo+"").val("");
+                $(obj).find("#"+id+"_11"+rowNo+"").val("");
+                $(obj).find("#"+id+"_22"+rowNo+"").val("");
+            }
+        }
+	}
+}
+apz.SortCode.validateInput = function(obj,e) {
+    //backspace, tab, delete, Ctrl+A, left, right and numbers are only allowed
+    if ($.inArray(e.keyCode, [46, 9, 8]) !== -1 || (e.shiftKey && e.keyCode == 9) || (e.keyCode === 65 && e.ctrlKey === true) || ( e.ctrlKey === true && e.keyCode === 67 ) || ( e.ctrlKey === true && e.keyCode === 86 ) || ( e.ctrlKey === true && e.keyCode === 88 ) || ( e.ctrlKey === true && e.keyCode === 90 ) ||(e.keyCode == 37 || e.keyCode == 39) || !((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105))) {
+        var actElmId = apz.getObjIdWORowNumber(obj);
+        var rowNo = apz.getObjRowNumber(obj);
+        var originalId = actElmId.substring(0, actElmId.length - 2);
+        var designerId = originalId.substring(0,actElmId.length - 3);
+        var designerContId = apz.scrMetaData.elmsMap[designerId].container;
+        var containerType = apz.scrMetaData.containersMap[designerContId].type;
+        var lastChar = parseInt(actElmId.substring(actElmId.length - 2, actElmId.length));
+        var newChar = lastChar+11;
+        var nxtElmId = originalId + newChar.toString();
+        if (rowNo!=-1) {
+            nxtElmId = nxtElmId + "_" + rowNo;
+            actElmId = actElmId + "_" + rowNo;
+        }
+        if ($(obj).val().length > 1 && lastChar != "22") {
+            if (!($.inArray(e.keyCode, [46, 9, 8]) !== -1 || (e.shiftKey && e.keyCode == 9) || (e.keyCode === 65 && e.ctrlKey === true) || (e.keyCode == 37 || e.keyCode == 39))) {
+                if (window.getSelection().toString()=="") {
+                    $("#"+nxtElmId).focus();
+                    if ($("#"+nxtElmId).val().length > 1) {
+                        e.preventDefault();
+                    }
+                }
+            }
+        } else if ($(obj).val().length > 1 && lastChar == "22") {
+            if (!($.inArray(e.keyCode, [46, 9, 8]) !== -1 || (e.shiftKey && e.keyCode == 9) || (e.keyCode === 65 && e.ctrlKey === true) || (e.keyCode == 37 || e.keyCode == 39))) {
+                if (window.getSelection().toString() == "") {
+                    $("#"+actElmId).blur();
+                    if ($("#" + actElmId).hasClass('accountreq')) {
+                        var spanObj = $("#"+actElmId).parents('span:first');
+                        if (containerType == "TABLE") {
+                            $(spanObj).parent().next('td').find('input').focus();
+                        } else if (containerType == "FORM") {
+                            if ($(spanObj).parent().parent().hasClass('hrow')) {
+                                $(spanObj).parent('li').next('li').find('input').focus();
+                            } else {
+                                $(spanObj).parents('ul:first').next('ul').find('input').focus();
+                            }
+                        } else {
+                            var spanObjId = $(spanObj).attr('id');
+                            $('#'+spanObjId).next("span").find('input').focus();
+                        }
+                    }
+                }
+            }
+        }
+        return;
+    } else {
+        e.preventDefault();
+    }
+}
+apz.SortCode.validateObj = function(domObj,obj){
+    var lscrdiv = domObj.id;
+    var errCode = false;
+    if(obj.mand !== "N"){ 
+    $("#" + lscrdiv + " input").each(function(){
+        if(this.value == ""){
+            $(this).addClass("input-error");
+            errCode = "APZ-VAL-001";
+        } else if(this.value.length != 2){
+            $(this).addClass("input-error");
+            errCode = "APZ-CNT-128";
+        }
+    });
+    if (errCode) {
+        $("#"+lscrdiv).addClass('input-error');
+    }
+    }
+    return errCode;
+}

@@ -1,0 +1,12 @@
+{{- $warName  := .Values.serverWarName -}}
+{{- range $configmap := .Values.mounts }}
+{{- range $appid := $configmap.appid }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ lower $appid }}-server-app
+data:
+{{ ($.Files.Glob (printf "%s/%s/*.properties" $warName $appid)).AsConfig | indent 2 }}
+---
+{{- end }}
+{{- end }}

@@ -1,0 +1,2367 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.1.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
+    <changeSet author="platform" id="DDL_TB_ASCZ_SCREEN_LAYOUTS_3.24.0-1">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASCZ_SCREEN_LAYOUTS"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASCZ_SCREEN_LAYOUTS">
+            <column name="APP_ID" type="VARCHAR(6)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="SCREEN_ID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="LAYOUT_ID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="DEFAULT_TEMPLATE" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="CURRENT_TIMESTAMP(3)" name="CREATE_TS" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+            <column name="MAKER_ID" type="VARCHAR(45)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP(3)" name="MAKER_TS" type="timestamp"/>
+            <column name="CHECKER_ID" type="VARCHAR(45)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP(3)" name="CHECKER_TS" type="timestamp"/>
+            <column defaultValue="U" name="AUTH_STATUS" type="VARCHAR(1)"/>
+            <column defaultValueNumeric="1" name="VERSION_NO" type="INT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB_ASCZ_TEMPLATE_OBJECTS_3.24.0-2">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASCZ_TEMPLATE_OBJECTS"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASCZ_TEMPLATE_OBJECTS">
+            <column name="APP_ID" type="VARCHAR(6)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="SCREEN_ID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="LAYOUT_ID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="TEMPLATE_ID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="PARENT_ID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="CHILD_ID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="CHILD_SEQ" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB_ASFS_FILE_DETAILS_3.24.0-3">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASFS_FILE_DETAILS"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASFS_FILE_DETAILS">
+            <column name="APP_ID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="SCREEN_ID" type="VARCHAR(100)"/>
+            <column name="USER_ID" type="VARCHAR(100)"/>
+            <column name="FILE_NAME" type="VARCHAR(150)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="FILE_TYPE" type="VARCHAR(20)"/>
+            <column name="INTERFACE_ID" type="VARCHAR(30)"/>
+            <column name="CREATE_USER_ID" type="VARCHAR(100)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP(3)" name="LAST_UPLOADED_DATE" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="CURRENT_TIMESTAMP(3)" name="RECENT_UPLOADED_DATE" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB_ASHS_ROLE_CONTROLS_3.24.0-4">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASHS_ROLE_CONTROLS"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASHS_ROLE_CONTROLS">
+            <column name="APP_ID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="ROLE_ID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="CONTROL_ID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="CREATED_BY" type="VARCHAR(100)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP(3)" name="CREATED_TS" type="timestamp"/>
+            <column defaultValueNumeric="1" name="VERSION_NO" type="INT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB_ASHS_ROLE_INTF_3.24.0-5">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASHS_ROLE_INTF"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASHS_ROLE_INTF">
+            <column name="APP_ID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="ROLE_ID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="INTERFACE_ID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="CREATE_USER_ID" type="VARCHAR(100)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP(3)" name="CREATE_TS" type="timestamp"/>
+            <column defaultValueNumeric="1" name="VERSION_NO" type="INT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB_ASHS_ROLE_MASTER_3.24.0-6">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASHS_ROLE_MASTER"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASHS_ROLE_MASTER">
+            <column name="ROLE_ID" type="VARCHAR(255)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="APP_ID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="ROLE_DESC" type="VARCHAR(255)"/>
+            <column defaultValue="A" name="INTERFACE_ALLOWED" type="VARCHAR(1)"/>
+            <column defaultValue="A" name="SCREEN_ALLOWED" type="VARCHAR(1)"/>
+            <column defaultValue="A" name="CONTROL_ALLOWED" type="VARCHAR(1)"/>
+            <column name="CREATE_USER_ID" type="VARCHAR(100)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP(3)" name="CREATE_TS" type="timestamp"/>
+            <column defaultValueNumeric="1" name="VERSION_NO" type="INT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="MAKER_ID" type="VARCHAR(45)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP(3)" name="MAKER_TS" type="timestamp"/>
+            <column name="CHECKER_ID" type="VARCHAR(45)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP(3)" name="CHECKER_TS" type="timestamp"/>
+            <column defaultValue="U" name="AUTH_STATUS" type="VARCHAR(45)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB_ASHS_ROLE_SCR_3.24.0-7">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASHS_ROLE_SCR"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASHS_ROLE_SCR">
+            <column name="APP_ID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="SCREEN_ID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="ROLE_ID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="CREATE_USER_ID" type="VARCHAR(100)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP(3)" name="CREATE_TS" type="timestamp"/>
+            <column defaultValueNumeric="1" name="VERSION_NO" type="INT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB_ASHS_SECURITY_PARAMETERS_3.24.0-8">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASHS_SECURITY_PARAMETERS"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASHS_SECURITY_PARAMETERS">
+            <column name="APP_ID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="MIN_NUM_NUM" type="INT"/>
+            <column name="MIN_NUM_SPCL_CHAR" type="INT"/>
+            <column name="MIN_NUM_UPPER_CASE_CHAR" type="INT"/>
+            <column name="MIN_LENGTH" type="INT"/>
+            <column name="MAX_LENGTH" type="INT"/>
+            <column name="PASS_CHANGE_FREQ" type="INT"/>
+            <column name="LAST_N_PASS_NOT_TO_USE" type="INT"/>
+            <column name="SESSION_TIMEOUT" type="INT"/>
+            <column name="NOOFFAILEDCOUNTS" type="INT"/>
+            <column name="CREATE_USER_ID" type="VARCHAR(100)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP(3)" name="CREATE_TS" type="timestamp"/>
+            <column defaultValueNumeric="1" name="VERSION_NO" type="INT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="SERVER_TOKEN" type="VARCHAR(255)"/>
+            <column name="FAIL_COUNT_TIMEOUT" type="INT"/>
+            <column name="PASSWORD_COUNT" type="INT"/>
+            <column defaultValue="Y" name="DEFAULT_AUTHORIZATION" type="CHAR(1)"/>
+            <column name="RESTRICT_SPL_CHARS" type="VARCHAR(100)"/>
+            <column defaultValue="N" name="ALLOW_USER_PASSWORD_ENTRY" type="VARCHAR(1)"/>
+            <column defaultValue="Y" name="AUTO_APPROVE" type="VARCHAR(1)"/>
+            <column defaultValue="BOTH" name="PWD_RSET_VALIDATE_PARAMS" type="VARCHAR(45)"/>
+            <column defaultValue="BOTH" name="PWD_RSET_COMM_CHANNEL" type="VARCHAR(45)"/>
+            <column defaultValue="N" name="PWD_RSET_ACCEPT_USR_PWD" type="VARCHAR(1)"/>
+            <column defaultValue="Y" name="TXN_LOG_REQ" type="VARCHAR(45)"/>
+            <column name="MAKER_ID" type="VARCHAR(45)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP(3)" name="MAKER_TS" type="timestamp"/>
+            <column name="CHECKER_ID" type="VARCHAR(45)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP(3)" name="CHECKER_TS" type="timestamp"/>
+            <column defaultValue="BOTH" name="PWD_COMM_CHANNEL" type="VARCHAR(45)"/>
+            <column defaultValue="U" name="AUTH_STATUS" type="VARCHAR(45)"/>
+            <column defaultValue="Y" name="MULTIPLE_SESSION_ALLOWED" type="VARCHAR(1)"/>
+            <column defaultValue="Y" name="TXN_LOG_PAYLOAD" type="VARCHAR(1)"/>
+            <column name="OTP_LENGTH" type="INT"/>
+            <column name="OTP_VALIDATION_COUNT" type="INT"/>
+            <column name="OTP_EXPIRY" type="INT"/>
+            <column name="OTP_RESEND" type="VARCHAR(10)"/>
+            <column name="OTP_FORMAT" type="VARCHAR(20)"/>
+            <column name="OTP_RESEND_COUNT" type="INT"/>
+            <column name="OTP_RESEND_LOCK_TIMEOUT" type="INT"/>
+            <column defaultValue="BOTH" name="PWD_CHANGE_COMM_CHANNEL" type="VARCHAR(30)"/>
+            <column defaultValue="N" name="PASSWORD_ON_AUTHORIZATION" type="VARCHAR(1)"/>
+            <column defaultValue="Y" name="DATA_INTEGRITY" type="VARCHAR(1)"/>
+            <column defaultValueNumeric="0" name="ACCESS_TOKEN_EXPIRY" type="INT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB_ASHS_SMS_USER_3.24.0-9">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASHS_SMS_USER"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASHS_SMS_USER">
+            <column name="APP_ID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="MOBILE_NUMBER" type="VARCHAR(20)"/>
+            <column name="USER_ID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="CREATED_BY" type="VARCHAR(50)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP(3)" name="CREATE_TS" type="timestamp"/>
+            <column defaultValueNumeric="1" name="VERSION_NO" type="INT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="SMS_REQ" type="VARCHAR(1)"/>
+            <column name="USSD_REQ" type="VARCHAR(1)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB_ASHS_USER_3.24.0-10">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASHS_USER"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASHS_USER">
+            <column name="USER_ID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="APP_ID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="PIN" type="VARCHAR(300)"/>
+            <column name="USER_NAME" type="VARCHAR(100)"/>
+            <column name="LAST_NAME" type="VARCHAR(100)"/>
+            <column name="LOGIN_STATUS" type="VARCHAR(3)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="FAIL_COUNT" type="INT"/>
+            <column defaultValue="Y" name="USER_ACTIVE" type="VARCHAR(3)"/>
+            <column defaultValue="N" name="USER_LOCKED" type="VARCHAR(3)"/>
+            <column defaultValue="en" name="LANGUAGE" type="VARCHAR(2)"/>
+            <column name="EXTERNALIDENTIFIER" type="VARCHAR(30)"/>
+            <column name="USER_ADDR1" type="VARCHAR(50)"/>
+            <column name="USER_ADDR2" type="VARCHAR(50)"/>
+            <column name="USER_ADDR3" type="VARCHAR(50)"/>
+            <column name="USER_ADDR4" type="VARCHAR(50)"/>
+            <column name="USER_EML1" type="VARCHAR(255)"/>
+            <column name="USER_EML2" type="VARCHAR(255)"/>
+            <column name="USER_PHNO1" type="VARCHAR(20)"/>
+            <column name="USER_PHNO2" type="VARCHAR(20)"/>
+            <column name="USER_LVL" type="INT"/>
+            <column name="USER_LOCK_TS" type="timestamp"/>
+            <column name="PIN_CHANGE_TS" type="timestamp"/>
+            <column name="PROFILE_PIC" type="MEDIUMTEXT"/>
+            <column name="CREATE_USER_ID" type="VARCHAR(100)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP(3)" name="CREATE_TS" type="timestamp"/>
+            <column defaultValueNumeric="1" name="VERSION_NO" type="INT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="MAKER_ID" type="VARCHAR(45)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP(3)" name="MAKER_TS" type="timestamp"/>
+            <column name="CHECKER_ID" type="VARCHAR(45)"/>
+            <column name="DATE_OF_BIRTH" type="date"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP(3)" name="CHECKER_TS" type="timestamp"/>
+            <column defaultValue="U" name="AUTH_STATUS" type="VARCHAR(45)"/>
+            <column name="ADD_INFO1" type="VARCHAR(255)"/>
+            <column name="ADD_INFO2" type="VARCHAR(255)"/>
+            <column name="ADD_INFO3" type="VARCHAR(255)"/>
+            <column name="ADD_INFO4" type="VARCHAR(255)"/>
+            <column name="ADD_INFO5" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB_ASHS_USER_APP_ACCESS_3.24.0-11">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASHS_USER_APP_ACCESS"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASHS_USER_APP_ACCESS">
+            <column name="APP_ID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="USER_ID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="ALLOWED_APP_ID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column defaultValue="D" name="APP_ACCESS" type="VARCHAR(1)"/>
+            <column name="CREATE_USER_ID" type="VARCHAR(100)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP(3)" name="CREATE_TS" type="timestamp"/>
+            <column defaultValueNumeric="1" name="VERSION_NO" type="INT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB_ASHS_USER_DEVICES_3.24.0-12">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASHS_USER_DEVICES"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASHS_USER_DEVICES">
+            <column name="APP_ID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="DEVICE_ID" type="VARCHAR(250)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="USER_ID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="DEVICE_STATUS" type="VARCHAR(100)"/>
+            <column name="CREATE_USER_ID" type="VARCHAR(100)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP(3)" name="CREATE_TS" type="timestamp"/>
+            <column name="MAKER_ID" type="VARCHAR(45)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP(3)" name="MAKER_TS" type="timestamp"/>
+            <column name="CHECKER_ID" type="VARCHAR(45)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP(3)" name="CHECKER_TS" type="timestamp"/>
+            <column defaultValue="U" name="AUTH_STATUS" type="VARCHAR(45)"/>
+            <column defaultValueNumeric="1" name="VERSION_NO" type="INT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB_ASHS_USER_PASSWORDS_3.24.0-13">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASHS_USER_PASSWORDS"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASHS_USER_PASSWORDS">
+            <column name="USER_ID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="APP_ID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="PIN" type="VARCHAR(255)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column defaultValueComputed="CURRENT_TIMESTAMP(3)" name="CHANGE_TIME" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CREATE_USER_ID" type="VARCHAR(100)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP(3)" name="CREATE_TS" type="timestamp"/>
+            <column defaultValueNumeric="1" name="VERSION_NO" type="INT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB_ASHS_USER_ROLE_3.24.0-14">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASHS_USER_ROLE"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASHS_USER_ROLE">
+            <column name="USER_ID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="ROLE_ID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="APP_ID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="CREATE_USER_ID" type="VARCHAR(100)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP(3)" name="CREATE_TS" type="timestamp"/>
+            <column defaultValueNumeric="1" name="VERSION_NO" type="INT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB_ASHS_WORKFLOW_DET_3.24.0-15">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASHS_WORKFLOW_DET"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASHS_WORKFLOW_DET">
+            <column name="TRANSACTION_REF_NO" type="VARCHAR(30)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="VERSION_NO" type="INT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="WORKFLOW_ID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="APP_ID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="CURRENT_STAGE" type="VARCHAR(100)"/>
+            <column name="SCREEN_ID" type="VARCHAR(100)"/>
+            <column name="NEXT_STAGE" type="VARCHAR(100)"/>
+            <column name="STATUS" type="VARCHAR(20)"/>
+            <column name="INTERFACE_ID" type="VARCHAR(100)"/>
+            <column name="USER_ID" type="VARCHAR(100)"/>
+            <column name="SCREEN_DATA" type="LONGTEXT"/>
+            <column name="STAGE_SEQ_NO" type="VARCHAR(255)"/>
+            <column name="ACTION" type="VARCHAR(255)"/>
+            <column name="CREATE_USER_ID" type="VARCHAR(100)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP(3)" name="CREATE_TS" type="timestamp"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB_ASHS_WORKFLOW_TXN_DETAILS_3.24.0-16">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASHS_WORKFLOW_TXN_DETAILS"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASHS_WORKFLOW_TXN_DETAILS">
+            <column name="APP_ID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="WORKFLOW_REF_NO" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="WORKFLOW_SEQ_NO" type="INT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="WORKFLOW_ID" type="VARCHAR(100)"/>
+            <column name="STAGE_ID" type="VARCHAR(50)"/>
+            <column name="TASK_DATA" type="LONGTEXT"/>
+            <column name="USER_ID" type="VARCHAR(50)"/>
+            <column name="STATUS" type="VARCHAR(50)"/>
+            <column name="UPDATED_NEXT_STAGES" type="VARCHAR(255)"/>
+            <column name="LAST_ACTION" type="VARCHAR(50)"/>
+            <column name="CUSTOM_FIELD_1" type="VARCHAR(100)"/>
+            <column name="CUSTOM_FIELD_2" type="VARCHAR(100)"/>
+            <column name="CUSTOM_FIELD_3" type="VARCHAR(100)"/>
+            <column name="CUSTOM_FIELD_4" type="VARCHAR(100)"/>
+            <column name="CUSTOM_FIELD_5" type="VARCHAR(100)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB_ASHS_WORKFLOW_TXN_MASTER_3.24.0-17">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASHS_WORKFLOW_TXN_MASTER"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASHS_WORKFLOW_TXN_MASTER">
+            <column name="APP_ID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="WORKFLOW_REF_NO" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="WORKFLOW_ID" type="VARCHAR(100)"/>
+            <column name="STATUS" type="VARCHAR(50)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP(3)" name="START_TS" type="timestamp"/>
+            <column name="MODIFIED_TS" type="timestamp"/>
+            <column name="END_TS" type="timestamp"/>
+            <column name="CUSTOM_FIELD_1" type="VARCHAR(100)"/>
+            <column name="CUSTOM_FIELD_2" type="VARCHAR(100)"/>
+            <column name="CUSTOM_FIELD_3" type="VARCHAR(100)"/>
+            <column name="CUSTOM_FIELD_4" type="VARCHAR(100)"/>
+            <column name="CUSTOM_FIELD_5" type="VARCHAR(100)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB_ASLG_AUDIT_LOG_3.24.0-18">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASLG_AUDIT_LOG"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASLG_AUDIT_LOG">
+            <column name="ACCESS_REF" type="VARCHAR(255)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="APP_ID" type="VARCHAR(100)"/>
+            <column name="USER_ID" type="VARCHAR(100)"/>
+            <column name="DEVICE_ID" type="VARCHAR(250)"/>
+            <column name="SESSION_ID" type="VARCHAR(100)"/>
+            <column name="ACTION" type="VARCHAR(30)"/>
+            <column name="START_TIME_STAMP" type="VARCHAR(30)"/>
+            <column name="END_TIME_STAMP" type="VARCHAR(30)"/>
+            <column name="FIELD1" type="VARCHAR(100)"/>
+            <column name="FIELD2" type="VARCHAR(100)"/>
+            <column name="FIELD3" type="VARCHAR(100)"/>
+            <column name="FIELD4" type="VARCHAR(100)"/>
+            <column name="FIELD5" type="VARCHAR(100)"/>
+            <column name="CREATE_DATE" type="date"/>
+            <column name="CREATE_USER_ID" type="VARCHAR(100)"/>
+            <column defaultValueNumeric="1" name="VERSION_NO" type="INT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB_ASLG_CNVUI_TXN_LOG_3.24.0-19">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASLG_CNVUI_TXN_LOG"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASLG_CNVUI_TXN_LOG">
+            <column name="TXN_REF" type="VARCHAR(255)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="APP_ID" type="VARCHAR(100)"/>
+            <column name="CNVUI_ID" type="VARCHAR(100)"/>
+            <column name="RESP_DLG_ID" type="VARCHAR(100)"/>
+            <column name="SCREEN_DATA" type="LONGTEXT"/>
+            <column name="CREATE_USER_ID" type="VARCHAR(100)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP(3)" name="CREATE_TS" type="timestamp"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP(3)" name="UPDATE_TS" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB_ASLG_DEVICE_LOCATION_3.24.0-20">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASLG_DEVICE_LOCATION"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASLG_DEVICE_LOCATION">
+            <column name="APP_ID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="DEVICE_ID" type="VARCHAR(255)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="LATITUDE" type="VARCHAR(255)"/>
+            <column name="LONGITUDE" type="VARCHAR(255)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP(3)" name="CREATE_TS" type="timestamp"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB_ASLG_FMW_TXN_DETAIL_3.24.0-21">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASLG_FMW_TXN_DETAIL"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASLG_FMW_TXN_DETAIL">
+            <column name="TXN_REF" type="VARCHAR(255)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="MASTER_TXN_REF" type="VARCHAR(255)"/>
+            <column name="INTERFACE_ID" type="VARCHAR(50)"/>
+            <column name="REQ_LD_REFNO" type="VARCHAR(100)"/>
+            <column name="REQ_NO_RECS" type="INT"/>
+            <column name="RES_LD_REFNO" type="VARCHAR(100)"/>
+            <column name="RES_NO_RECS" type="INT"/>
+            <column name="ENDPOINT_TYPE" type="VARCHAR(255)"/>
+            <column name="ST_TM" type="timestamp"/>
+            <column name="END_TM" type="timestamp"/>
+            <column name="STATUS" type="VARCHAR(1)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP(3)" name="CREATE_TS" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB_ASLG_JMS_REQ_RESP_3.24.0-22">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASLG_JMS_REQ_RESP"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASLG_JMS_REQ_RESP">
+            <column name="TRANS_ID" type="INT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="INTERFACE_ID" type="VARCHAR(150)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="APP_ID" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="REQ_TYPE" type="VARCHAR(150)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="RES_TYPE" type="VARCHAR(150)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="SENT_DATE" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="RECEIVED_DATE" type="datetime"/>
+            <column name="MSG_ID" type="VARCHAR(250)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="REQ_Q" type="VARCHAR(250)"/>
+            <column name="RESP_Q" type="VARCHAR(250)"/>
+            <column name="MSG_STATUS" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="MSG_SENT" type="LONGTEXT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="MSG_RECEIVED" type="LONGTEXT"/>
+            <column name="RESP_DESC" type="VARCHAR(250)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB_ASLG_SMS_TXN_3.24.0-23">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASLG_SMS_TXN"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASLG_SMS_TXN">
+            <column name="SMS_TXNREF" type="VARCHAR(255)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="APP_ID" type="VARCHAR(100)"/>
+            <column name="MOBILE_NUMBER" type="VARCHAR(13)"/>
+            <column name="REQUEST" type="VARCHAR(4000)"/>
+            <column name="MESSAGE_ID" type="VARCHAR(20)"/>
+            <column name="ORIGINATION" type="VARCHAR(20)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP(3)" name="START_TM" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+            <column name="RESPONSE" type="VARCHAR(4000)"/>
+            <column name="END_TM" type="timestamp"/>
+            <column name="CREATED_BY" type="VARCHAR(20)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP(3)" name="CREATE_TS" type="timestamp"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB_ASLG_TXN_DETAIL_3.24.0-24">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASLG_TXN_DETAIL"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASLG_TXN_DETAIL">
+            <column name="TXN_REF" type="VARCHAR(255)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="USER_ID" type="VARCHAR(100)"/>
+            <column name="USER_APP_ID" type="VARCHAR(100)"/>
+            <column name="APP_USER_ID" type="VARCHAR(100)"/>
+            <column name="SESSION_ID" type="VARCHAR(255)"/>
+            <column name="DEVICE_ID" type="VARCHAR(255)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP(3)" name="ST_TM" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="CURRENT_TIMESTAMP(3)" name="END_TM" type="timestamp"/>
+            <column name="INTERFACE_ID" type="VARCHAR(50)"/>
+            <column name="APP_ID" type="VARCHAR(100)"/>
+            <column name="TXN_STAT" type="VARCHAR(20)"/>
+            <column name="REQ_LD_REFNO" type="VARCHAR(100)"/>
+            <column name="REQ_NO_RECS" type="INT"/>
+            <column name="RES_LD_REFNO" type="VARCHAR(100)"/>
+            <column name="RES_NO_RECS" type="INT"/>
+            <column name="INFO1" type="VARCHAR(255)"/>
+            <column name="INFO2" type="VARCHAR(255)"/>
+            <column name="INFO3" type="VARCHAR(255)"/>
+            <column name="INFO4" type="VARCHAR(255)"/>
+            <column name="INFO5" type="VARCHAR(255)"/>
+            <column name="CREATE_BY" type="VARCHAR(200)"/>
+            <column name="SOURCE" type="VARCHAR(255)"/>
+            <column name="LONGITUDE" type="VARCHAR(255)"/>
+            <column name="LATITUDE" type="VARCHAR(255)"/>
+            <column name="ORIGINATION" type="VARCHAR(255)"/>
+            <column name="STATUS" type="VARCHAR(255)"/>
+            <column name="SUBLOCALITY" type="VARCHAR(255)"/>
+            <column name="ADMIN_AREA_LVL_1" type="VARCHAR(255)"/>
+            <column name="ADMIN_AREA_LVL_2" type="VARCHAR(255)"/>
+            <column name="COUNTRY" type="VARCHAR(255)"/>
+            <column name="FORMATTED_ADDRESS" type="VARCHAR(255)"/>
+            <column name="EXT_ST_TM" type="timestamp"/>
+            <column name="EXT_END_TM" type="timestamp"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP(3)" name="CREATE_TS" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB_ASLG_TXT_MSLG_LOG_3.24.0-25">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASLG_TXT_MSLG_LOG"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASLG_TXT_MSLG_LOG">
+            <column name="TXT_TXNREF" type="VARCHAR(255)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="APP_ID" type="VARCHAR(100)"/>
+            <column name="MOBILE_NUMBER" type="VARCHAR(20)"/>
+            <column name="REQUEST" type="TEXT"/>
+            <column name="PORT" type="VARCHAR(10)"/>
+            <column name="ORIGINATION" type="VARCHAR(20)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP(3)" name="START_TM" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+            <column name="RESPONSE" type="VARCHAR(200)"/>
+            <column name="END_TM" type="timestamp"/>
+            <column name="CREATED_BY" type="VARCHAR(20)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP(3)" name="CREATE_TS" type="timestamp"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB_ASLG_USSD_TXN_3.24.0-26">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASLG_USSD_TXN"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASLG_USSD_TXN">
+            <column name="USSD_TXNREF" type="VARCHAR(255)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="APP_ID" type="VARCHAR(100)"/>
+            <column name="MOBILE_NUMBER" type="VARCHAR(13)"/>
+            <column name="REQUEST" type="VARCHAR(200)"/>
+            <column name="ACTION" type="VARCHAR(3000)"/>
+            <column name="STEP" type="VARCHAR(100)"/>
+            <column name="ORIGINATION" type="VARCHAR(20)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP(3)" name="START_TM" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+            <column name="RESPONSE" type="VARCHAR(200)"/>
+            <column name="END_TM" type="timestamp"/>
+            <column name="CREATED_BY" type="VARCHAR(20)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP(3)" name="CREATE_TS" type="timestamp"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB_ASMI_APP_ACCESS_TOKEN_3.24.0-27">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASMI_APP_ACCESS_TOKEN"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASMI_APP_ACCESS_TOKEN">
+            <column name="APP_ID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="USER_ID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="ACCESS_TOKEN" type="VARCHAR(255)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="CLIENT_NONCE" type="VARCHAR(255)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column defaultValueComputed="CURRENT_TIMESTAMP(3)" name="CREATE_TS" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB_ASMI_APP_DTLS_3.24.0-28">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASMI_APP_DTLS"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASMI_APP_DTLS">
+            <column name="APP_ID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="OS_ID" type="VARCHAR(50)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="APP_DESC" type="VARCHAR(200)"/>
+            <column name="CREATE_BY" type="VARCHAR(100)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP(3)" name="CREATE_TS" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="1" name="VERSION_NO" type="INT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB_ASMI_APP_FILES_3.24.0-29">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASMI_APP_FILES"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASMI_APP_FILES">
+            <column name="APP_ID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="APP_VERSION" type="VARCHAR(10)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="OS" type="VARCHAR(20)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="FILE_NAME" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="FILE_PATH" type="VARCHAR(255)"/>
+            <column name="ACTION" type="VARCHAR(10)"/>
+            <column name="CREATE_USER_ID" type="VARCHAR(100)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP(3)" name="CREATE_TS" type="timestamp"/>
+            <column defaultValueNumeric="1" name="VERSION_NO" type="INT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB_ASMI_APP_ID_VERSION_3.24.0-30">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASMI_APP_ID_VERSION"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASMI_APP_ID_VERSION">
+            <column name="APP_ID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="OS" type="VARCHAR(20)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="APP_ID_VERSION" type="VARCHAR(10)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="CREATE_USER_ID" type="VARCHAR(50)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP(3)" name="CREATE_TS" type="timestamp"/>
+            <column defaultValueNumeric="1" name="VERSION_NO" type="INT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB_ASMI_APP_MASTER_3.24.0-31">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASMI_APP_MASTER"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASMI_APP_MASTER">
+            <column name="APP_ID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="PARENT_APPID" type="VARCHAR(100)"/>
+            <column name="APP_NAME" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CONTAINER_APP" type="VARCHAR(1)"/>
+            <column name="OTA_REQ" type="VARCHAR(1)"/>
+            <column name="REMOTE_DEBUG" type="VARCHAR(1)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP(3)" name="EXPIRY_DATE" type="timestamp"/>
+            <column name="APP_DESCRIPTION" type="VARCHAR(200)"/>
+            <column name="DEFAULT_LANGUAGE" type="VARCHAR(20)"/>
+            <column name="CREATE_USER_ID" type="VARCHAR(20)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP(3)" name="CREATE_TS" type="timestamp"/>
+            <column defaultValueNumeric="1" name="VERSION_NO" type="INT"/>
+            <column name="BASE_APP" type="VARCHAR(1)"/>
+            <column name="MICRO_APP_TYPE" type="VARCHAR(10)"/>
+            <column defaultValue="N" name="PRIMARY_MICRO_APP" type="VARCHAR(1)"/>
+            <column name="APP_ICON" type="LONGTEXT"/>
+            <column name="APP_VERSION" type="VARCHAR(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="IDE_VERSION" type="VARCHAR(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="MAKER_ID" type="VARCHAR(45)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP(3)" name="MAKER_TS" type="timestamp"/>
+            <column name="CHECKER_ID" type="VARCHAR(45)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP(3)" name="CHECKER_TS" type="timestamp"/>
+            <column defaultValue="U" name="AUTH_STATUS" type="VARCHAR(45)"/>
+            <column name="WELCOME_MSG" type="VARCHAR(255)"/>
+            <column name="ANDROID_SIGNATURE" type="VARCHAR(200)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB_ASMI_APP_OS_VERSION_3.24.0-32">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASMI_APP_OS_VERSION"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASMI_APP_OS_VERSION">
+            <column name="APP_ID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="OS" type="VARCHAR(20)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="APP_VERSION" type="VARCHAR(10)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="CREATE_USER_ID" type="VARCHAR(50)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP(3)" name="CREATE_TS" type="timestamp"/>
+            <column defaultValueNumeric="1" name="VERSION_NO" type="INT"/>
+            <column defaultValue="IGNORE" name="APP_ACTION" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB_ASMI_APP_USER_3.24.0-33">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASMI_APP_USER"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASMI_APP_USER">
+            <column name="USER_ID" type="VARCHAR(50)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="PARENT_APP_ID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="CHILD_APP_ID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="CREATE_USER_ID" type="VARCHAR(50)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP(3)" name="CREATE_TS" type="timestamp"/>
+            <column defaultValueNumeric="1" name="VERSION_NO" type="INT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB_ASMI_CAPTCHA_DTLS_3.24.0-34">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASMI_CAPTCHA_DTLS"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASMI_CAPTCHA_DTLS">
+            <column name="CAPTCHA_REF" type="INT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="APP_ID" type="VARCHAR(100)"/>
+            <column name="CAPTCHA_STRING" type="VARCHAR(255)"/>
+            <column name="AUDIO_CAPTCHA" type="VARCHAR(255)"/>
+            <column name="INTERFACE_ID" type="VARCHAR(100)"/>
+            <column name="SESSION_ID" type="VARCHAR(255)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP(3)" name="CREATE_TS" type="timestamp"/>
+            <column name="VALIDATE_TS" type="timestamp"/>
+            <column defaultValue="NP" name="CAPTCHA_STATUS" type="VARCHAR(2)"/>
+            <column defaultValueNumeric="0" name="VERSION_NO" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB_ASMI_CNVUI_MASTER_3.24.0-35">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASMI_CNVUI_MASTER"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASMI_CNVUI_MASTER">
+            <column name="APP_ID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="CNVUI_ID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="CNVUI_DESC" type="VARCHAR(100)"/>
+            <column name="CREATE_USER_ID" type="VARCHAR(100)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP(3)" name="CREATE_TS" type="timestamp"/>
+            <column defaultValueNumeric="1" name="VERSION_NO" type="INT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB_ASMI_CNVUI_SCR_3.24.0-36">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASMI_CNVUI_SCR"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASMI_CNVUI_SCR">
+            <column name="APP_ID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="SCREEN_ID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="SCREEN_DESC" type="VARCHAR(100)"/>
+            <column name="SCREEN_DEF" type="LONGTEXT"/>
+            <column name="SCREEN_DESIGN" type="LONGTEXT"/>
+            <column name="SCREEN_HTML" type="LONGTEXT"/>
+            <column name="SCREEN_LAYOUT" type="LONGTEXT"/>
+            <column name="TEMPLATE" type="LONGTEXT"/>
+            <column name="CREATE_USER_ID" type="VARCHAR(100)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP(3)" name="CREATE_TS" type="timestamp"/>
+            <column defaultValueNumeric="1" name="VERSION_NO" type="INT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB_ASMI_CONTROLS_MASTER_3.24.0-37">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASMI_CONTROLS_MASTER"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASMI_CONTROLS_MASTER">
+            <column name="APP_ID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="CONTROL_ID" type="VARCHAR(255)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="CONTROL_DESC" type="VARCHAR(255)"/>
+            <column name="CREATED_BY" type="VARCHAR(100)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP(3)" name="CREATED_TS" type="timestamp"/>
+            <column name="MAKER_ID" type="VARCHAR(45)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP(3)" name="MAKER_TS" type="timestamp"/>
+            <column name="CHECKER_ID" type="VARCHAR(45)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP(3)" name="CHECKER_TS" type="timestamp"/>
+            <column defaultValue="U" name="AUTH_STATUS" type="VARCHAR(45)"/>
+            <column defaultValueNumeric="1" name="VERSION_NO" type="INT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB_ASMI_COOKIES_3.24.0-38">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASMI_COOKIES"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASMI_COOKIES">
+            <column name="APP_ID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="USER_ID" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="USR_SELECTOR" type="VARCHAR(50)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="USR_VALIDATOR" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="CURRENT_TIMESTAMP(3)" name="CREATE_TS" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="CURRENT_TIMESTAMP(3)" name="EXPIRY_TS" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="1" name="VERSION_NO" type="INT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB_ASMI_CS_NONCEDETAILS_3.24.0-39">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASMI_CS_NONCEDETAILS"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASMI_CS_NONCEDETAILS">
+            <column name="DEVICE_ID" type="VARCHAR(100)">
+                <constraints uniqueConstraintName="TB_ASMI_CS_NONCEDETAILS_IDX01" unique="true"/>
+            </column>
+            <column name="APP_ID" type="VARCHAR(100)">
+                <constraints uniqueConstraintName="TB_ASMI_CS_NONCEDETAILS_IDX01" unique="true"/>
+            </column>
+            <column name="REQUEST_ID" type="VARCHAR(255)">
+                <constraints uniqueConstraintName="TB_ASMI_CS_NONCEDETAILS_IDX01" unique="true"/>
+            </column>
+            <column name="CLIENT_NONCE" type="VARCHAR(100)">
+                <constraints uniqueConstraintName="TB_ASMI_CS_NONCEDETAILS_IDX01" unique="true"/>
+            </column>
+            <column name="SERVER_NONCE" type="VARCHAR(100)">
+                <constraints uniqueConstraintName="TB_ASMI_CS_NONCEDETAILS_IDX01" unique="true"/>
+            </column>
+            <column name="STATUS" type="VARCHAR(100)"/>
+            <column name="SERVER_TOKEN" type="VARCHAR(100)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP(3)" name="CREATE_TS" type="timestamp"/>
+            <column name="CREATED_ON" type="date"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB_ASMI_DESIGN_OBJECTS_3.24.0-40">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASMI_DESIGN_OBJECTS"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASMI_DESIGN_OBJECTS">
+            <column name="APP_ID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="SCREEN_ID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="LAYOUT_ID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="DESIGN_ID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="PARENT_ID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="CHILD_ID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="CHILD_SEQ" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB_ASMI_DEVICE_GRPS_3.24.0-41">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASMI_DEVICE_GRPS"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASMI_DEVICE_GRPS">
+            <column name="APP_ID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="DEVICE_GROUP_ID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="DEVICE_GROUP_DESCRIPTION" type="VARCHAR(1000)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="OS" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="HEIGHT" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="WIDTH" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ORIENTATION_LOCK" type="VARCHAR(10)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB_ASMI_DEVICE_MASTER_3.24.0-42">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASMI_DEVICE_MASTER"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASMI_DEVICE_MASTER">
+            <column name="APP_ID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="DEVICE_ID" type="VARCHAR(200)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="OS" type="VARCHAR(20)"/>
+            <column name="OS_VERSION" type="VARCHAR(50)"/>
+            <column name="MOBILE_NUMBER1" type="VARCHAR(20)"/>
+            <column name="MOBILE_NUMBER2" type="VARCHAR(20)"/>
+            <column name="MODEL" type="VARCHAR(100)"/>
+            <column name="MAKE" type="VARCHAR(100)"/>
+            <column name="SCREEN_RESOLUTION" type="VARCHAR(100)"/>
+            <column defaultValue="N" name="WIPED_OUT" type="VARCHAR(1)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP(3)" name="CREATE_TS" type="timestamp"/>
+            <column name="DEVICE_NAME" type="VARCHAR(100)"/>
+            <column name="LONGITUDE" type="VARCHAR(100)"/>
+            <column name="LATITUDE" type="VARCHAR(100)"/>
+            <column name="APP_VERSION" type="VARCHAR(50)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB_ASMI_DLG_MASTER_3.24.0-43">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASMI_DLG_MASTER"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASMI_DLG_MASTER">
+            <column name="APP_ID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="CNVUI_ID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="DLG_ID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="DLG_DESC" type="VARCHAR(100)"/>
+            <column name="DLG_TYPE" type="VARCHAR(100)"/>
+            <column name="DLG_SEQ" type="INT"/>
+            <column name="NXT_DLG_ID" type="VARCHAR(100)"/>
+            <column name="RESP_DLG_ID" type="VARCHAR(100)"/>
+            <column name="RESP_TYPE" type="VARCHAR(100)"/>
+            <column name="SCREEN_ID" type="VARCHAR(100)"/>
+            <column name="INTERFACE_ID" type="VARCHAR(100)"/>
+            <column name="CREATE_USER_ID" type="VARCHAR(100)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP(3)" name="CREATE_TS" type="timestamp"/>
+            <column name="MAKER_ID" type="VARCHAR(45)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP(3)" name="MAKER_TS" type="timestamp"/>
+            <column name="CHECKER_ID" type="VARCHAR(45)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP(3)" name="CHECKER_TS" type="timestamp"/>
+            <column defaultValue="U" name="AUTH_STATUS" type="VARCHAR(1)"/>
+            <column defaultValueNumeric="1" name="VERSION_NO" type="INT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB_ASMI_INTF_MASTER_3.24.0-44">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASMI_INTF_MASTER"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASMI_INTF_MASTER">
+            <column name="INTERFACE_ID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="APP_ID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="CATEGORY" type="VARCHAR(30)"/>
+            <column name="TYPE" type="VARCHAR(30)"/>
+            <column name="DESCRIPTION" type="VARCHAR(100)"/>
+            <column defaultValue="Y" name="AUTHRZ_REQ" type="VARCHAR(1)"/>
+            <column name="CREATE_USER_ID" type="VARCHAR(100)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP(3)" name="CREATE_TS" type="timestamp"/>
+            <column defaultValueNumeric="1" name="VERSION_NO" type="INT"/>
+            <column name="MAKER_ID" type="VARCHAR(45)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP(3)" name="MAKER_TS" type="timestamp"/>
+            <column name="CHECKER_ID" type="VARCHAR(45)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP(3)" name="CHECKER_TS" type="timestamp"/>
+            <column defaultValue="U" name="AUTH_STATUS" type="VARCHAR(1)"/>
+            <column defaultValue="N" name="CAPTCHA_REQ" type="VARCHAR(5)"/>
+            <column defaultValue="N" name="CAPTCHA_TYPE" type="VARCHAR(7)"/>
+            <column name="INTERFACE_DEF" type="LONGTEXT"/>
+            <column defaultValue="Y" name="DG_TXN_LOG_REQ" type="VARCHAR(1)"/>
+            <column defaultValue="Y" name="TXN_LOG_REQ" type="VARCHAR(1)"/>
+            <column defaultValue="NONE" name="TXN_LOG_PAYLOAD_REQ" type="VARCHAR(10)"/>
+            <column defaultValue="Y" name="FMW_TXN_REQ" type="VARCHAR(1)"/>
+            <column defaultValue="NONE" name="FMW_TXN_PAYLOAD_REQ" type="VARCHAR(10)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB_ASMI_LOV_QUERIES_3.24.0-45">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASMI_LOV_QUERIES"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASMI_LOV_QUERIES">
+            <column name="APP_ID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="QUERY_ID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="QUERY_STRING" type="VARCHAR(1000)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="DB_JNDI_NAME" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="SQL" name="QUERY_TYPE" type="VARCHAR(3)"/>
+            <column name="BINDVAR_COLS" type="VARCHAR(300)"/>
+            <column name="BINDVAR_DATA_TYPES" type="VARCHAR(300)"/>
+            <column name="FILTER_COLS" type="VARCHAR(300)"/>
+            <column name="ORDERBY_COL" type="VARCHAR(40)"/>
+            <column defaultValue="ASC" name="ORDERBY_TYPE" type="VARCHAR(5)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP(3)" name="CREATE_TS" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="CURRENT_TIMESTAMP(3)" name="UPDATE_TS" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CREATE_BY" type="VARCHAR(50)"/>
+            <column name="SESSION_REQD" type="VARCHAR(1)"/>
+            <column defaultValueNumeric="1" name="VERSION_NO" type="INT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB_ASMI_OS_DTLS_3.24.0-46">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASMI_OS_DTLS"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASMI_OS_DTLS">
+            <column name="OS_ID" type="VARCHAR(50)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="OS_DESC" type="VARCHAR(200)"/>
+            <column name="CREATE_BY" type="VARCHAR(100)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP(3)" name="CREATE_TS" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="1" name="VERSION_NO" type="INT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB_ASMI_ROLE_CONTROLS_3.24.0-47">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASMI_ROLE_CONTROLS"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASMI_ROLE_CONTROLS">
+            <column name="APP_ID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="ROLE_ID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="CONTROL_ID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="CREATED_BY" type="VARCHAR(100)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP(3)" name="CREATED_TS" type="timestamp"/>
+            <column defaultValueNumeric="1" name="VERSION_NO" type="INT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB_ASMI_ROLE_INTF_3.24.0-48">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASMI_ROLE_INTF"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASMI_ROLE_INTF">
+            <column name="APP_ID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="ROLE_ID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="INTERFACE_ID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="CREATE_USER_ID" type="VARCHAR(100)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP(3)" name="CREATE_TS" type="timestamp"/>
+            <column defaultValueNumeric="1" name="VERSION_NO" type="INT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB_ASMI_ROLE_MASTER_3.24.0-49">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASMI_ROLE_MASTER"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASMI_ROLE_MASTER">
+            <column name="ROLE_ID" type="VARCHAR(255)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="APP_ID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="ROLE_DESC" type="VARCHAR(255)"/>
+            <column defaultValue="A" name="INTERFACE_ALLOWED" type="VARCHAR(1)"/>
+            <column defaultValue="A" name="SCREEN_ALLOWED" type="VARCHAR(1)"/>
+            <column defaultValue="A" name="CONTROL_ALLOWED" type="VARCHAR(1)"/>
+            <column name="CREATE_USER_ID" type="VARCHAR(100)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP(3)" name="CREATE_TS" type="timestamp"/>
+            <column defaultValueNumeric="1" name="VERSION_NO" type="INT"/>
+            <column name="MAKER_ID" type="VARCHAR(45)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP(3)" name="MAKER_TS" type="timestamp"/>
+            <column name="CHECKER_ID" type="VARCHAR(45)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP(3)" name="CHECKER_TS" type="timestamp"/>
+            <column defaultValue="U" name="AUTH_STATUS" type="VARCHAR(1)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB_ASMI_ROLE_SCR_3.24.0-50">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASMI_ROLE_SCR"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASMI_ROLE_SCR">
+            <column name="APP_ID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="SCREEN_ID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="ROLE_ID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="CREATE_USER_ID" type="VARCHAR(100)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP(3)" name="CREATE_TS" type="timestamp"/>
+            <column defaultValueNumeric="1" name="VERSION_NO" type="INT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB_ASMI_ROLE_WORKFLOWS_3.24.0-51">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASMI_ROLE_WORKFLOWS"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASMI_ROLE_WORKFLOWS">
+            <column name="APP_ID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="ROLE_ID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="WORKFLOW_ID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="STAGE_ID" type="VARCHAR(50)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB_ASMI_SCHEDULER_JOB_3.24.0-52">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASMI_SCHEDULER_JOB"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASMI_SCHEDULER_JOB">
+            <column name="APP_ID" type="VARCHAR(45)"/>
+            <column name="JOB_NAME" type="VARCHAR(255)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="JOB_CLASS" type="VARCHAR(255)"/>
+            <column name="JOB_DATA" type="VARCHAR(255)"/>
+            <column defaultValue="P" name="JOB_STATUS" type="VARCHAR(45)"/>
+            <column name="JOB_CREATED_TS" type="timestamp"/>
+            <column name="JOB_EXECUTED_TS" type="timestamp"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB_ASMI_SCHEDULER_JOB_EXP_3.24.0-53">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASMI_SCHEDULER_JOB_EXP"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASMI_SCHEDULER_JOB_EXP">
+            <column name="JOB_NAME" type="VARCHAR(45)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="START_DATE" type="VARCHAR(45)"/>
+            <column name="END_DATE" type="VARCHAR(45)"/>
+            <column name="EXP_START_SEC" type="VARCHAR(45)"/>
+            <column name="EXP_SEC" type="VARCHAR(45)"/>
+            <column name="EXP_MIN" type="VARCHAR(45)"/>
+            <column name="EXP_HR" type="VARCHAR(45)"/>
+            <column name="EXP_DOM" type="VARCHAR(45)"/>
+            <column name="EXP_MONTH" type="VARCHAR(45)"/>
+            <column name="EXP_DOW" type="VARCHAR(45)"/>
+            <column name="EXP_YEAR" type="VARCHAR(45)"/>
+            <column name="EXPRESSION" type="VARCHAR(45)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB_ASMI_SCREEN_LAYOUTS_3.24.0-54">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASMI_SCREEN_LAYOUTS"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASMI_SCREEN_LAYOUTS">
+            <column name="APP_ID" type="VARCHAR(6)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="SCREEN_ID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="LAYOUT_ID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="LAYOUT_NAME" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="LAYOUT_ICON" type="LONGTEXT"/>
+            <column name="DEFAULT_TEMPLATE" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB_ASMI_SCREEN_MICRO_APP_3.24.0-55">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASMI_SCREEN_MICRO_APP"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASMI_SCREEN_MICRO_APP">
+            <column name="APP_ID" type="VARCHAR(6)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="SCREEN_ID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="MICRO_APP_ID" type="VARCHAR(6)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column defaultValueComputed="CURRENT_TIMESTAMP(3)" name="CREATE_TS" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB_ASMI_SCREEN_WIDGETS_3.24.0-56">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASMI_SCREEN_WIDGETS"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASMI_SCREEN_WIDGETS">
+            <column name="APP_ID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="SCREEN_ID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="CALLFORM_ID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column defaultValueComputed="CURRENT_TIMESTAMP(3)" name="CREATE_TS" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB_ASMI_SCR_MASTER_3.24.0-57">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASMI_SCR_MASTER"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASMI_SCR_MASTER">
+            <column name="SCREEN_ID" type="VARCHAR(255)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="APP_ID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="SCREEN_DESC" type="VARCHAR(255)"/>
+            <column name="CREATE_USER_ID" type="VARCHAR(100)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP(3)" name="CREATE_TS" type="timestamp"/>
+            <column defaultValueNumeric="1" name="VERSION_NO" type="INT"/>
+            <column name="MAKER_ID" type="VARCHAR(45)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP(3)" name="MAKER_TS" type="timestamp"/>
+            <column name="CHECKER_ID" type="VARCHAR(45)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP(3)" name="CHECKER_TS" type="timestamp"/>
+            <column defaultValue="U" name="AUTH_STATUS" type="VARCHAR(45)"/>
+            <column name="SCREEN_TYPE" type="VARCHAR(10)"/>
+            <column name="SCREEN_NAME" type="VARCHAR(100)"/>
+            <column name="SCREEN_ICON" type="LONGTEXT"/>
+            <column name="CUSTOMISABLE" type="VARCHAR(1)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB_ASMI_SECURITY_PARAMETERS_3.24.0-58">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASMI_SECURITY_PARAMETERS"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASMI_SECURITY_PARAMETERS">
+            <column name="APP_ID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="MIN_NUM_NUM" type="INT"/>
+            <column name="MIN_NUM_SPCL_CHAR" type="INT"/>
+            <column name="MIN_NUM_UPPER_CASE_CHAR" type="INT"/>
+            <column name="MIN_NUM_LOWER_CASE_CHAR" type="INT"/>
+            <column name="MIN_LENGTH" type="INT"/>
+            <column name="MAX_LENGTH" type="INT"/>
+            <column name="PASS_CHANGE_FREQ" type="INT"/>
+            <column name="LAST_N_PASS_NOT_TO_USE" type="INT"/>
+            <column name="SESSION_TIMEOUT" type="INT"/>
+            <column name="NOOFFAILEDCOUNTS" type="INT"/>
+            <column name="CREATE_USER_ID" type="VARCHAR(100)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP(3)" name="CREATE_TS" type="timestamp"/>
+            <column defaultValueNumeric="1" name="VERSION_NO" type="INT"/>
+            <column name="SERVER_TOKEN" type="VARCHAR(255)"/>
+            <column name="FAIL_COUNT_TIMEOUT" type="INT"/>
+            <column name="PASSWORD_COUNT" type="INT"/>
+            <column defaultValue="Y" name="DEFAULT_AUTHORIZATION" type="CHAR(1)"/>
+            <column name="RESTRICT_SPL_CHARS" type="VARCHAR(100)"/>
+            <column defaultValue="N" name="ALLOW_USER_PASSWORD_ENTRY" type="VARCHAR(1)"/>
+            <column defaultValue="Y" name="AUTO_APPROVE" type="VARCHAR(1)"/>
+            <column defaultValue="BOTH" name="PWD_RSET_VALIDATE_PARAMS" type="VARCHAR(45)"/>
+            <column defaultValue="BOTH" name="PWD_RSET_COMM_CHANNEL" type="VARCHAR(45)"/>
+            <column defaultValue="N" name="PWD_RSET_ACCEPT_USR_PWD" type="VARCHAR(1)"/>
+            <column defaultValue="Y" name="TXN_LOG_REQ" type="VARCHAR(45)"/>
+            <column name="MAKER_ID" type="VARCHAR(45)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP(3)" name="MAKER_TS" type="timestamp"/>
+            <column name="CHECKER_ID" type="VARCHAR(45)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP(3)" name="CHECKER_TS" type="timestamp"/>
+            <column defaultValue="BOTH" name="PWD_COMM_CHANNEL" type="VARCHAR(45)"/>
+            <column defaultValue="U" name="AUTH_STATUS" type="VARCHAR(45)"/>
+            <column defaultValue="Y" name="MULTIPLE_SESSION_ALLOWED" type="VARCHAR(1)"/>
+            <column defaultValue="NONE" name="TXN_LOG_PAYLOAD" type="VARCHAR(10)"/>
+            <column defaultValue="Y" name="FMW_TXN_REQ" type="VARCHAR(1)"/>
+            <column defaultValue="NONE" name="FMW_TXN_PAYLOAD" type="VARCHAR(10)"/>
+            <column name="OTP_LENGTH" type="INT"/>
+            <column name="OTP_VALIDATION_COUNT" type="INT"/>
+            <column name="OTP_EXPIRY" type="INT"/>
+            <column name="OTP_RESEND" type="VARCHAR(10)"/>
+            <column name="OTP_FORMAT" type="VARCHAR(20)"/>
+            <column name="OTP_RESEND_COUNT" type="INT"/>
+            <column name="OTP_RESEND_LOCK_TIMEOUT" type="INT"/>
+            <column defaultValueNumeric="0" name="OTP_REGEN_COUNT" type="INT"/>
+            <column defaultValue="BOTH" name="PWD_CHANGE_COMM_CHANNEL" type="VARCHAR(30)"/>
+            <column defaultValue="N" name="PASSWORD_ON_AUTHORIZATION" type="VARCHAR(1)"/>
+            <column defaultValue="Y" name="DATA_INTEGRITY" type="VARCHAR(1)"/>
+            <column defaultValueNumeric="0" name="ACCESS_TOKEN_EXPIRY" type="INT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB_ASMI_SMS_USER_3.24.0-59">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASMI_SMS_USER"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASMI_SMS_USER">
+            <column name="APP_ID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="USER_ID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="MOBILE_NUMBER" type="VARCHAR(20)"/>
+            <column name="CREATED_BY" type="VARCHAR(50)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP(3)" name="CREATE_TS" type="timestamp"/>
+            <column defaultValueNumeric="1" name="VERSION_NO" type="INT"/>
+            <column name="SMS_REQ" type="VARCHAR(1)"/>
+            <column name="USSD_REQ" type="VARCHAR(1)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB_ASMI_USER_3.24.0-60">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASMI_USER"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASMI_USER">
+            <column name="USER_ID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="APP_ID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="PIN" type="VARCHAR(300)"/>
+            <column name="USER_NAME" type="VARCHAR(100)"/>
+            <column name="LAST_NAME" type="VARCHAR(100)"/>
+            <column name="LOGIN_STATUS" type="VARCHAR(3)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="FAIL_COUNT" type="INT"/>
+            <column defaultValue="Y" name="USER_ACTIVE" type="VARCHAR(3)"/>
+            <column defaultValue="N" name="USER_LOCKED" type="VARCHAR(3)"/>
+            <column defaultValue="en" name="LANGUAGE" type="VARCHAR(2)"/>
+            <column name="EXTERNALIDENTIFIER" type="VARCHAR(30)"/>
+            <column name="USER_ADDR1" type="VARCHAR(50)"/>
+            <column name="USER_ADDR2" type="VARCHAR(50)"/>
+            <column name="USER_ADDR3" type="VARCHAR(50)"/>
+            <column name="USER_ADDR4" type="VARCHAR(50)"/>
+            <column name="USER_EML1" type="VARCHAR(255)"/>
+            <column name="USER_EML2" type="VARCHAR(255)"/>
+            <column name="USER_PHNO1" type="VARCHAR(20)"/>
+            <column name="USER_PHNO2" type="VARCHAR(20)"/>
+            <column name="USER_LVL" type="INT"/>
+            <column name="USER_LOCK_TS" type="timestamp"/>
+            <column name="PIN_CHANGE_TS" type="timestamp"/>
+            <column name="PROFILE_PIC" type="MEDIUMTEXT"/>
+            <column name="CREATE_USER_ID" type="VARCHAR(100)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP(3)" name="CREATE_TS" type="timestamp"/>
+            <column defaultValueNumeric="1" name="VERSION_NO" type="INT"/>
+            <column name="MAKER_ID" type="VARCHAR(45)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP(3)" name="MAKER_TS" type="timestamp"/>
+            <column name="CHECKER_ID" type="VARCHAR(45)"/>
+            <column name="DATE_OF_BIRTH" type="date"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP(3)" name="CHECKER_TS" type="timestamp"/>
+            <column defaultValue="U" name="AUTH_STATUS" type="VARCHAR(45)"/>
+            <column name="ADD_INFO1" type="VARCHAR(255)"/>
+            <column name="ADD_INFO2" type="VARCHAR(255)"/>
+            <column name="ADD_INFO3" type="VARCHAR(255)"/>
+            <column name="ADD_INFO4" type="VARCHAR(255)"/>
+            <column name="ADD_INFO5" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB_ASMI_USER_APP_ACCESS_3.24.0-61">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASMI_USER_APP_ACCESS"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASMI_USER_APP_ACCESS">
+            <column name="APP_ID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="USER_ID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="ALLOWED_APP_ID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column defaultValue="D" name="APP_ACCESS" type="VARCHAR(1)"/>
+            <column name="CREATE_USER_ID" type="VARCHAR(100)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP(3)" name="CREATE_TS" type="timestamp"/>
+            <column defaultValueNumeric="1" name="VERSION_NO" type="INT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB_ASMI_USER_DEVICES_3.24.0-62">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASMI_USER_DEVICES"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASMI_USER_DEVICES">
+            <column name="APP_ID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="DEVICE_ID" type="VARCHAR(250)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="USER_ID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="NOTIF_REG_ID" type="VARCHAR(255)"/>
+            <column name="DEVICE_STATUS" type="VARCHAR(100)"/>
+            <column name="CREATE_USER_ID" type="VARCHAR(100)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP(3)" name="CREATE_TS" type="timestamp"/>
+            <column name="MAKER_ID" type="VARCHAR(45)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP(3)" name="MAKER_TS" type="timestamp"/>
+            <column name="CHECKER_ID" type="VARCHAR(45)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP(3)" name="CHECKER_TS" type="timestamp"/>
+            <column defaultValue="U" name="AUTH_STATUS" type="VARCHAR(45)"/>
+            <column defaultValueNumeric="1" name="VERSION_NO" type="INT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB_ASMI_USER_ROLE_3.24.0-63">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASMI_USER_ROLE"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASMI_USER_ROLE">
+            <column name="USER_ID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="ROLE_ID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="APP_ID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="CREATE_USER_ID" type="VARCHAR(100)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP(3)" name="CREATE_TS" type="timestamp"/>
+            <column defaultValueNumeric="1" name="VERSION_NO" type="INT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB_ASMI_WORKFLOW_DEFN_3.24.0-64">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASMI_WORKFLOW_DEFN"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASMI_WORKFLOW_DEFN">
+            <column name="APP_ID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="WORKFLOW_ID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="WORKFLOW_DESC" type="VARCHAR(255)"/>
+            <column name="VERSION_NO" type="INT"/>
+            <column name="MAKER_ID" type="VARCHAR(255)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP(3)" name="MAKER_TS" type="timestamp"/>
+            <column name="CHECKER_ID" type="VARCHAR(255)"/>
+            <column name="CHECKER_TS" type="timestamp"/>
+            <column name="AUTH_STATUS" type="VARCHAR(1)"/>
+            <column name="ACTIVE" type="CHAR(1)"/>
+            <column name="TXN_TYPE" type="VARCHAR(100)"/>
+            <column name="ONCE_AUTH" type="VARCHAR(1)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB_ASMI_WORKFLOW_LINKED_STAGES_3.24.0-65">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASMI_WORKFLOW_LINKED_STAGES"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASMI_WORKFLOW_LINKED_STAGES">
+            <column name="APP_ID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="WORKFLOW_ID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="STAGE_ID" type="VARCHAR(50)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="LINKAGE_TYPE" type="CHAR(1)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="LINKED_STAGE_ID" type="VARCHAR(50)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB_ASMI_WORKFLOW_RULES_3.24.0-66">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASMI_WORKFLOW_RULES"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASMI_WORKFLOW_RULES">
+            <column name="APP_ID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="WORKFLOW_ID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="RULE_ID" type="VARCHAR(50)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="RULE_DESC" type="VARCHAR(255)"/>
+            <column name="RULE_BEAN" type="VARCHAR(255)"/>
+            <column name="VERSION_NO" type="INT"/>
+            <column name="MAKER_ID" type="VARCHAR(45)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP(3)" name="MAKER_TS" type="timestamp"/>
+            <column name="CHECKER_ID" type="VARCHAR(45)"/>
+            <column name="CHECKER_TS" type="timestamp"/>
+            <column name="AUTH_STATUS" type="VARCHAR(1)"/>
+            <column name="ACTIVE" type="CHAR(1)"/>
+            <column name="ONCE_AUTH" type="VARCHAR(1)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB_ASMI_WORKFLOW_STAGES_3.24.0-67">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASMI_WORKFLOW_STAGES"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASMI_WORKFLOW_STAGES">
+            <column name="APP_ID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="WORKFLOW_ID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="STAGE_ID" type="VARCHAR(50)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="STAGE_SEQ_NO" type="INT"/>
+            <column name="STAGE_TYPE" type="VARCHAR(50)"/>
+            <column name="STAGE_DESC" type="VARCHAR(255)"/>
+            <column name="RULE_ID" type="VARCHAR(50)"/>
+            <column name="SCREEN_ID" type="VARCHAR(50)"/>
+            <column name="IS_AUTH_MATRIX_REQD" type="VARCHAR(1)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB_ASNF_APP_OS_NOTIF_CODE_3.24.0-68">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASNF_APP_OS_NOTIF_CODE"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASNF_APP_OS_NOTIF_CODE">
+            <column name="APP_ID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="OS_ID" type="VARCHAR(45)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="NOTIF_CODE" type="VARCHAR(255)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="ACTION_CODE" type="VARCHAR(255)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="ACTION_DISPLAY" type="VARCHAR(255)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP(3)" name="CREATE_TS" type="timestamp"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB_ASNF_DEVICES_MASTER_3.24.0-69">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASNF_DEVICES_MASTER"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASNF_DEVICES_MASTER">
+            <column name="APP_ID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="NOTIF_REG_ID" type="VARCHAR(255)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="DEVICE_ID" type="VARCHAR(255)"/>
+            <column name="DEVICE_NAME" type="VARCHAR(255)"/>
+            <column name="OS_ID" type="VARCHAR(50)"/>
+            <column name="OS_VERSION" type="VARCHAR(255)"/>
+            <column name="STATUS" type="VARCHAR(20)"/>
+            <column name="CREATED_BY" type="VARCHAR(255)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP(3)" name="CREATED_TS" type="timestamp"/>
+            <column defaultValueNumeric="1" name="VERSION_NO" type="INT"/>
+            <column name="MAKER_ID" type="VARCHAR(45)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP(3)" name="MAKER_TS" type="timestamp"/>
+            <column name="CHECKER_ID" type="VARCHAR(45)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP(3)" name="CHECKER_TS" type="timestamp"/>
+            <column defaultValue="U" name="AUTH_STATUS" type="VARCHAR(45)"/>
+            <column name="NOTIF_MSG_SERVER" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB_ASNF_GROUP_DEVICES_3.24.0-70">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASNF_GROUP_DEVICES"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASNF_GROUP_DEVICES">
+            <column name="APP_ID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="GROUP_ID" type="VARCHAR(255)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="NOTIF_REG_ID" type="VARCHAR(255)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="CREATED_BY" type="VARCHAR(255)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP(3)" name="CREATED_TS" type="timestamp"/>
+            <column defaultValueNumeric="1" name="VERSION_NO" type="INT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB_ASNF_GROUP_MASTER_3.24.0-71">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASNF_GROUP_MASTER"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASNF_GROUP_MASTER">
+            <column name="APP_ID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="GROUP_ID" type="VARCHAR(255)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="GROUP_DESC" type="VARCHAR(500)"/>
+            <column name="CREATED_BY" type="VARCHAR(50)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP(3)" name="CREATED_TS" type="timestamp"/>
+            <column defaultValueNumeric="1" name="VERSION_NO" type="INT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB_ASNF_TXN_DEVICES_3.24.0-72">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASNF_TXN_DEVICES"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASNF_TXN_DEVICES">
+            <column name="NOTIF_ID" type="INT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="APP_ID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="NOTIF_REG_ID" type="VARCHAR(255)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB_ASNF_TXN_GROUPS_3.24.0-73">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASNF_TXN_GROUPS"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASNF_TXN_GROUPS">
+            <column name="NOTIF_ID" type="INT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="APP_ID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="GROUP_ID" type="VARCHAR(255)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB_ASNF_TXN_LOG_3.24.0-74">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASNF_TXN_LOG"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASNF_TXN_LOG">
+            <column name="NOTIF_ID" type="INT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="APP_ID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="USER_ID" type="VARCHAR(100)"/>
+            <column name="NOTIF_REG_ID" type="VARCHAR(255)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="DEVICE_ID" type="VARCHAR(255)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="STATUS" type="CHAR(150)"/>
+            <column name="CREATED_BY" type="VARCHAR(150)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP(3)" name="CREATED_TS" type="timestamp"/>
+            <column defaultValueNumeric="1" name="VERSION_NO" type="INT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB_ASNF_TXN_MASTER_3.24.0-75">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASNF_TXN_MASTER"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASNF_TXN_MASTER">
+            <column name="NOTIF_ID" type="INT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="APP_ID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="NOTIF_MSG" type="VARCHAR(255)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="TITLE" type="VARCHAR(255)"/>
+            <column name="SUBTITLE" type="VARCHAR(255)"/>
+            <column name="IMAGE_URL" type="VARCHAR(255)"/>
+            <column name="CATEGORY" type="VARCHAR(255)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP(3)" name="CREATE_TS" type="timestamp"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB_ASTP_AR_MASTER_3.24.0-76">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASTP_AR_MASTER"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASTP_AR_MASTER">
+            <column name="APP_ID" type="VARCHAR(255)"/>
+            <column name="ID" type="INT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="REGION_CODE" type="VARCHAR(255)"/>
+            <column name="CATEGORY" type="VARCHAR(255)"/>
+            <column name="LATITUDE" type="VARCHAR(255)"/>
+            <column name="LONGITUDE" type="VARCHAR(255)"/>
+            <column name="TITLE" type="VARCHAR(255)"/>
+            <column name="ADDITIONAL_INFO" type="VARCHAR(255)"/>
+            <column name="DESCRIPTION" type="VARCHAR(255)"/>
+            <column name="IMAGE" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB_ASTP_BEACON_MASTER_3.24.0-77">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASTP_BEACON_MASTER"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASTP_BEACON_MASTER">
+            <column name="APP_ID" type="VARCHAR(100)"/>
+            <column name="ID" type="INT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="DEVICE_ID" type="VARCHAR(225)"/>
+            <column name="USER_ID" type="VARCHAR(100)"/>
+            <column name="ENTRY_TIME" type="timestamp"/>
+            <column name="STATUS" type="VARCHAR(45)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB_ASTP_LAST_LOGIN_3.24.0-78">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASTP_LAST_LOGIN"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASTP_LAST_LOGIN">
+            <column name="USER_ID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="APP_ID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="DEVICE_ID" type="VARCHAR(255)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="REQUEST_KEY" type="VARCHAR(255)"/>
+            <column name="SESSION_ID" type="VARCHAR(255)"/>
+            <column name="LAST_REQ_TIME" type="timestamp"/>
+            <column name="LOGIN_TIME" type="timestamp"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP(3)" name="CREATE_TS" type="timestamp"/>
+            <column defaultValueNumeric="1" name="VERSION_NO" type="INT"/>
+            <column name="OTP" type="VARCHAR(200)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP(3)" name="OTP_GENERATION_TIME" type="timestamp"/>
+            <column name="OTP_STATUS" type="VARCHAR(1)"/>
+            <column defaultValueNumeric="0" name="OTP_VALIDATION_COUNT" type="INT"/>
+            <column name="LONGITUDE" type="VARCHAR(255)"/>
+            <column name="LATITUDE" type="VARCHAR(255)"/>
+            <column name="SUBLOCALITY" type="VARCHAR(255)"/>
+            <column name="ADMIN_AREA_LVL_1" type="VARCHAR(255)"/>
+            <column name="ADMIN_AREA_LVL_2" type="VARCHAR(255)"/>
+            <column name="COUNTRY" type="VARCHAR(255)"/>
+            <column name="FORMATTED_ADDRESS" type="VARCHAR(255)"/>
+            <column name="ORIGINATION" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB_ASTP_LD_RECS_3.24.0-79">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASTP_LD_RECS"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASTP_LD_RECS">
+            <column name="REF_NO" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="SEQ_NO" type="INT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="DATA1" type="VARCHAR(255)"/>
+            <column name="DATA2" type="VARCHAR(255)"/>
+            <column name="DATA3" type="VARCHAR(255)"/>
+            <column name="DATA4" type="VARCHAR(255)"/>
+            <column name="DATA5" type="VARCHAR(255)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP(3)" name="CREATE_TS" type="timestamp"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB_ASTP_OTP_ENGINE_3.24.0-80">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASTP_OTP_ENGINE"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASTP_OTP_ENGINE">
+            <column name="REF_NO" type="INT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="APP_ID" type="VARCHAR(100)"/>
+            <column name="USER_ID" type="VARCHAR(255)"/>
+            <column name="INTERFACE_ID" type="VARCHAR(255)"/>
+            <column name="SESSION_ID" type="VARCHAR(255)"/>
+            <column name="OTP" type="VARCHAR(255)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP(3)" name="OTP_GEN_TS" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+            <column name="OTP_EXP_TS" type="timestamp"/>
+            <column defaultValue="N" name="OTP_STATUS" type="VARCHAR(255)"/>
+            <column name="OTP_VAL_TS" type="timestamp"/>
+            <column name="REQ_LD_REFNO" type="VARCHAR(100)"/>
+            <column name="REQ_NO_RECS" type="INT"/>
+            <column name="REQ_PAYLOAD_STATUS" type="VARCHAR(200)"/>
+            <column name="REQ_PAYLOAD_PROCESS_TS" type="timestamp"/>
+            <column name="OTP_VALIDATION_COUNT" type="INT"/>
+            <column name="OTP_RESENT_COUNT" type="INT"/>
+            <column name="OTP_RESEND_LOCK" type="VARCHAR(1)"/>
+            <column name="OTP_RESEND_LOCK_TS" type="timestamp"/>
+            <column defaultValueNumeric="0" name="OTP_REGEN_COUNT" type="INT"/>
+            <column defaultValueNumeric="0" name="VERSION_NO" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB_ASTP_SEQ_GEN_3.24.0-81">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASTP_SEQ_GEN"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASTP_SEQ_GEN">
+            <column name="SEQUENCE_NAME" type="VARCHAR(50)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="SEQUENCE_VALUE" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CREATE_BY" type="VARCHAR(20)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP(3)" name="CREATE_TS" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="1" name="VERSION_NO" type="INT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB_ASTP_SESSION_STORAGE_3.24.0-82">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASTP_SESSION_STORAGE"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASTP_SESSION_STORAGE">
+            <column name="APP_ID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="USER_ID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="SESSION_ID" type="VARCHAR(255)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="DEVICE_ID" type="VARCHAR(255)"/>
+            <column name="SESSION_KEY" type="VARCHAR(255)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="SESSION_VALUE" type="LONGTEXT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CREATED_BY" type="VARCHAR(100)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP(3)" name="CREATE_TS" type="timestamp"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB_ASTP_WORKFLOW_DET_3.24.0-83">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASTP_WORKFLOW_DET"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASTP_WORKFLOW_DET">
+            <column name="TRANSACTION_REF_NO" type="VARCHAR(30)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="VERSION_NO" type="DECIMAL(10)"/>
+            <column name="WORKFLOW_ID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="APP_ID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="CURRENT_STAGE" type="VARCHAR(100)"/>
+            <column name="SCREEN_ID" type="VARCHAR(100)"/>
+            <column name="NEXT_STAGE" type="VARCHAR(100)"/>
+            <column name="STATUS" type="VARCHAR(20)"/>
+            <column name="INTERFACE_ID" type="VARCHAR(100)"/>
+            <column name="USER_ID" type="VARCHAR(100)"/>
+            <column name="SCREEN_DATA" type="LONGTEXT"/>
+            <column name="STAGE_SEQ_NO" type="VARCHAR(255)"/>
+            <column name="ACTION" type="VARCHAR(255)"/>
+            <column name="CREATE_USER_ID" type="VARCHAR(100)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP(3)" name="CREATE_TS" type="timestamp"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB_ASTP_WORKFLOW_EVENT_3.24.0-84">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASTP_WORKFLOW_EVENT"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASTP_WORKFLOW_EVENT">
+            <column name="APP_ID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="WORKFLOW_REF_NO" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="WORKFLOW_SEQ_NO" type="INT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="EVENT_SEQ_NO" type="INT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="WORKFLOW_ID" type="VARCHAR(100)"/>
+            <column name="STAGE_ID" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="EVENT_ID" type="VARCHAR(50)"/>
+            <column name="TASK_DATA" type="LONGTEXT"/>
+            <column name="USER_ID" type="VARCHAR(50)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP(3)" name="EVENT_TS" type="timestamp"/>
+            <column name="REMARKS" type="VARCHAR(255)"/>
+            <column name="CUSTOM_FIELD_1" type="VARCHAR(100)"/>
+            <column name="CUSTOM_FIELD_2" type="VARCHAR(100)"/>
+            <column name="CUSTOM_FIELD_3" type="VARCHAR(100)"/>
+            <column name="CUSTOM_FIELD_4" type="VARCHAR(100)"/>
+            <column name="CUSTOM_FIELD_5" type="VARCHAR(100)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB_ASTP_WORKFLOW_TXN_DETAIL_3.24.0-85">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASTP_WORKFLOW_TXN_DETAIL"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASTP_WORKFLOW_TXN_DETAIL">
+            <column name="APP_ID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="WORKFLOW_REF_NO" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="STAGE_ID" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="WORKFLOW_ID" type="VARCHAR(100)"/>
+            <column name="WORKFLOW_SEQ_NO" type="INT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="TASK_DATA" type="LONGTEXT"/>
+            <column name="USER_ID" type="VARCHAR(50)"/>
+            <column name="STATUS" type="VARCHAR(50)"/>
+            <column name="UPDATED_NEXT_STAGES" type="VARCHAR(255)"/>
+            <column name="LAST_EVENT_NO" type="INT"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP(3)" name="START_TS" type="timestamp"/>
+            <column name="END_TS" type="timestamp"/>
+            <column name="REMARKS" type="VARCHAR(255)"/>
+            <column name="CUSTOM_FIELD_1" type="VARCHAR(100)"/>
+            <column name="CUSTOM_FIELD_2" type="VARCHAR(100)"/>
+            <column name="CUSTOM_FIELD_3" type="VARCHAR(100)"/>
+            <column name="CUSTOM_FIELD_4" type="VARCHAR(100)"/>
+            <column name="CUSTOM_FIELD_5" type="VARCHAR(100)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB_ASTP_WORKFLOW_TXN_MASTER_3.24.0-86">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASTP_WORKFLOW_TXN_MASTER"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASTP_WORKFLOW_TXN_MASTER">
+            <column name="APP_ID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="WORKFLOW_REF_NO" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="WORKFLOW_ID" type="VARCHAR(100)"/>
+            <column name="STATUS" type="VARCHAR(50)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP(3)" name="START_TS" type="timestamp"/>
+            <column name="MODIFIED_TS" type="timestamp"/>
+            <column name="END_TS" type="timestamp"/>
+            <column name="CUSTOM_FIELD_1" type="VARCHAR(100)"/>
+            <column name="CUSTOM_FIELD_2" type="VARCHAR(100)"/>
+            <column name="CUSTOM_FIELD_3" type="VARCHAR(100)"/>
+            <column name="CUSTOM_FIELD_4" type="VARCHAR(100)"/>
+            <column name="CUSTOM_FIELD_5" type="VARCHAR(100)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB_DBTP_TXN_MASTER_3.24.0-87">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_DBTP_TXN_MASTER"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_DBTP_TXN_MASTER">
+            <column name="TXN_REF_NO" type="VARCHAR(255)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="APP_ID" type="VARCHAR(6)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="USER_ID" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CUSTOMER_ID" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="AMOUNT" type="DECIMAL(22, 3)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="TXN_TYPE" type="VARCHAR(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="U" name="TXN_STATUS" type="VARCHAR(1)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP(3)" name="CREATION_TS" type="timestamp"/>
+            <column name="COMPLETION_TS" type="timestamp"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB_OS_3.24.0-88">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_OS"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_OS">
+            <column name="OS_ID" type="VARCHAR(15)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column defaultValueComputed="CURRENT_TIMESTAMP(3)" name="CREATE_TS" type="timestamp"/>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

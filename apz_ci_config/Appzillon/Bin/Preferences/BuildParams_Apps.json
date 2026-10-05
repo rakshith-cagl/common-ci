@@ -1,0 +1,100 @@
+{
+    "user": "ci",
+    "status": "S",
+    "simulator": false,
+    "serverurl": "http://localhost:8181/AppzillonServer/Appzillon",
+    "buildfolder": "D:\\CiBuild\\Build",
+    "preLoadDependencies": false,
+    "loadAllOnStartup": false,
+    "buildmode": "RELEASE",
+    "dataintegrity": "Y",
+    "envobj":  {
+        "name": "Env"
+    },
+    "enablemockserver": false,
+	"publicKey": "",
+    "langs": [
+        "en",
+        "cc"
+    ],
+    "oss": [
+        {
+            "name": "WEB",
+            "typeclass": "WEB",
+            "state": "YETTOSTART",
+            "status": "S",
+			"buildmode": "WEB",
+            "warfilename": "Testing",
+            "logdir": "D:\\Web\\Logs",
+            "settingspath": "D:\\Web\\Settings",
+            "httpkeystorepath": "",
+            "keystorepassword": "",
+            "truststorepath": "",
+            "bundlewebprops": "Y",
+			"httponlycookie": "N",
+			"securecookie": "N",
+			"csrfprevention":"N",
+			"safekey": "",
+            "truststorepwd": "",
+            "keepsignedin": "N",
+            "cookieage": "",
+            "codecoverage": "N",
+            "sessionstickyness": "N"
+        },
+        {
+            "typeclass": "ANDROID",
+            "name": "ANDROID",
+            "buildinstaller": "APK",
+            "state": "YETTOSTART",
+            "status": "S",
+			"keystorepath": "",
+		    "keystorepwd": "",
+		    "keystorealias": "",
+		    "keystorealiaspwd": "",
+		    "obfuscation": "N",
+            "buildtypeuniversal": "Y",
+            "buildtype32bitarm": "N",
+            "buildtype32bitx86": "N",
+            "buildtype64bitarm": "N",
+            "buildtype64bitx86": "N",
+            "buildtypehuawei": "N",
+            "buildsdktype": "KOTLIN",
+			"gdapplicationid": "",
+            "gdapplicationversion":""
+        },
+        {
+            "typeclass": "IOS",
+            "name": "IOS",
+            "state": "YETTOSTART",
+            "status": "S",
+            "ppuuid": "75538996-539e-4cf6-9214-a053c3e4c3c6",
+            "ppname": "DemoBankAdhocPush",
+            "developmentteam": "5GX9V47BXL",
+            "deployementmode": "ad-hoc",
+            "gdapplicationid": "",
+            "gdapplicationversion":"",
+            "iosbuildtype": "IPA"
+        },
+        {
+            "typeclass": "WIN81",
+            "name": "WIN81",
+            "state": "YETTOSTART",
+            "status": "S",
+            "storecertpath": "Windows_StoreKey.pfx"
+        },
+        {
+            "typeclass": "WINDOWS10",
+            "name": "WINDOWS10",
+            "state": "YETTOSTART",
+            "status": "S",
+			"storecertpath": "Windows_StoreKey.pfx"
+        }
+    ],
+    "apps": [
+        {
+            "id": "com.iexceed.demobank",
+            "name": "DemoBank",
+            "folder": "D:\\CiBuild\\DemoBank"
+        }
+    ]
+}

@@ -1,0 +1,25 @@
+<ng-container>
+    <div [id]="props.id + '_chbox'" class="{{props.className}}">
+        <ng-container *ngIf="props.titleValue || props.titleIcon"> 
+            <ul id="{{props.id + '_title'}}" class="{{'ttl ' + props.alignmentClass}}">
+                <li class="ttl-ctr">
+                    <ul class="ttv">
+                        <ng-container *ngIf="props.titleIcon">
+                            <li class="icn">
+                                <svg aria-hidden="true" [attr.class]="'ett-icon ' + props.titleIcon + props.titleIconSize">
+                                    <use [attr.xlink:href]="'#' + props.titleIcon" > </use>
+                                </svg>
+                            </li> 
+                        </ng-container>
+                        <ng-container *ngIf="props.titleValue"> 
+                            <li class="lbl">
+                                <h4>{{props.titleValue}}</h4>
+                            </li> 
+                        </ng-container>
+                    </ul>
+                </li>
+            </ul>
+        </ng-container>
+        <div id="{{props.id+'_chart'}}"></div>
+    </div>
+</ng-container>

@@ -1,0 +1,145 @@
+﻿//--Error Code----
+var ErrorCode = (function () {
+    return {
+        INVALID_JSON_INPUT: "APZ-CNT-077",
+        NOT_SUPPORTED: "APZ-CNT-022",
+        // AcceleroMeter 
+        ACCELERO_DEVICE_NOT_FOUND: "APZ-CNT-060",
+        ACCELERO_RUNTIME_EXCEPTION: "APZ-CNT-061",
+
+        RUNTIME_EXCEPTION: "APZ-CNT-082",
+        // Audio
+        OPERATION_NOT_POSSIBLE_IN_CURRENT_STATE: "APZ-CNT-029",
+        COULD_NOT_SAVE: "APZ-CNT-095",
+        RECORDING_STOPPED: "APZ-CNT-093",
+        PAUSE_FAIL: "APZ-CNT-094",
+        AUDIO_FAIL: "APZ-CNT-029",
+        AUDIO_RECORDING_FAIL :"APZ-CNT-032",
+        PLAY_FAIL: "APZ-CNT-030",
+        LIMIT_EXCEEDED: "APZ-CNT-117",
+        RECORDING_NOT_STARTED: "APZ-CNT-033",
+        INVALID_LOCATION :"APZ-CNT-002",
+        // BATTERY
+        REGISTERING_TO_TIMED_MONITORING: "UNDEFINED",
+        UNREGISTERING_MONITORING: "UNDEFINED",
+
+        // CALENDAR
+        UNABLE_TO_CREATE_EVENT: "UNDEFINED",
+        UNABLE_TO_DELETE_EVENT: "UNDEFINED",
+        UNABLE_TO_EDIT_EVENT: "UNDEFINED",
+
+        // COMPASS
+        COMPASS_NOT_FOUND: "UNDEFINED",
+        FAILED_TO_STOP_COMPASS: "UNDEFINED",
+
+
+        FILE_NOT_FOUND: "APZ-CNT-031",
+
+        // Crypto file
+        FILE_ENCRYPTION_FAIL: "APZ-CNT-209",
+        FILE_DECRYPTION_FAIL: "APZ-CNT-210",
+
+        // Contacts 
+        CANNOT_ADD_CONTACT: "UNDEFINED",
+        CONTACT_NOT_FOUND: "UNDEFINED",
+        CAN_NOT_EDIT_CONTACT: "UNDEFINED",
+
+        // Device
+        COULD_NOT_OBTAIN_SYSTEM_STATUS: "UNDEFINED",
+
+        // Social
+        COULD_NOT_LOGIN: "UNDEFINED",
+        HTTP: "UNDEFINED",
+
+        //// FILEOPERATION 
+        APPZILLON_HEADER: "UNDEFINED",
+        FILE_ALREADY_EXISTS: "APZ-CNT-228",
+        SERVER_ERROR: "UNDEFINED",
+        UPLOADING_FILE: "UNDEFINED",
+        DOWNLOADING_FILE: "UNDEFINED",
+        FILE_COULD_NOT_BE_CREATED: "UNDEFINED",
+        FILE_DELETE: "UNDEFINED",
+        FILE_READ: "UNDEFINED",
+        FILE_ENCODING: "UNDEFINED",
+        ZIP_FAIL: "APZ-CNT-082",
+        UNZIP_FAIL: "APZ-CNT-082",
+        NO_FILE_SELECTED: "APZ-CNT-009",
+        FILE_BROWSER_FAIL: "APZ-CNT-227",
+        FILE_SIZE_GET_FAIL: "APZ-CNT-031",
+        FILE_FETCH_FAIL: "APZ-CNT-006",
+        // MAP 
+        MAP_LOCATION_NOT_FOUND: "UNDEFINED",
+        GEOFENCING_FAIL: "UNDEFINED",
+        MAP_LOAD_FAIL: "APZ-CNT-107",
+        MAP_AREA_SELECT_FAIL :"APZ-CNT-082",
+        LOCATION_ACCESS_UNAVAILABLE: "UNDEFINED",
+        GPS_FAIL: "UNDEFINED",
+        GPS_STOP_FAIL: "UNDEFINED",
+
+        //// GETINSRUCTIONS
+        GET_INSTRUCTIONS_FAIL: "UNDEFINED",
+
+        // MAIL
+        MAIL_SENDING_FAILED: "APZ-CNT-107",
+
+        // MULTIVIEW 
+        MULTIVIEW_LOAD_FAIL: "UNDEFINED",
+        MULTIVIEW_CLOSE_FAIL: "UNDEFINED",
+
+        //// ORIENTATION
+        ORIENATATION_LOCK_FAIL: "APZ-CNT-082",
+
+        //// CALL
+        COULD_NOT_PLACE_THE_CALL_REQUESTED: "UNDEFINED",
+
+        //// SMS
+        COULD_NOT_SEND_SMS: "UNDEFINED",
+
+        // SIGNATUREPAD
+        FAILED_TO_LOAD_SIGNATURE_PAD: "UNDEFINED",
+        FAILED_TO_ACCEPT_SIGNATURE: "UNDEFINED",
+
+        //skype
+        SKYPE_CALL_FAIL : "UNDEFINED",
+        // STORAGE
+        SQL_QUERY_FAIL: "UNDEFINED",
+
+
+
+        // Vibration
+        // VIBRATE
+        VIBRATION_REQUEST_FAIL: "APZ-CNT-213",
+        VIBRATE_NOT_SUPPORTED:"APZ-CNT-134",
+
+
+        // Voice
+        // VOICE
+        SPEECH_RECOGNITION_FAILED: "APZ-CNT-203",
+        MICROPHONE_ACCESS_DENIED: "UNDEFINED",
+     	
+		//Ruthvik 11-04-17 added latest Error Code
+
+		//Ringtone
+        //RINGTONE
+        DEVICE_CAN_NOT_SET_RINGTONE: "APZ-CNT-300",
+		
+		//Ruthvik 11-04-17 added latest Error Code
+        //Print
+        //PRINT
+        APPLICATION_DOES_NOT_SUPPORT_FILE_OPEN: "APZ-CNT-236",
+        DEVICE_DOES_NOT_SUPPORT_PRINT: "APZ-CNT-231",
+
+		//Ruthvik 11-04-17 added latest Error Code
+        //Internet
+        //INTERNET
+        CHECK_YOUR_INTERNET_CONNECTION: "APZ-CNT-059",
+
+		//Ruthvik 11-04-17 added latest Error Code
+        //BioMetric
+        //BIOMETRIC
+        DEVICE_DOES_NOT_SUPPORT_BIOMETRIC_AUTHENTICATION: "APZ-CNT-135"
+
+    }
+
+})();
+    

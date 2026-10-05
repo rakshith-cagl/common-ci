@@ -1,0 +1,125 @@
+pipeline{
+    parameters{
+        choice(name:'TARGET_ENVIRONMENT', choices: ['poc', 'dev', 'staging'], description: 'Select target environment')
+        string defaultValue: 'dev-eks', description: '', name: 'CLUSTER_NAME', trim: false
+        string defaultValue: 'ap-south-1', description: '', name: 'LOCATION', trim: false
+        string defaultValue: 'infra', description: '', name: 'PROFILE', trim: false
+        booleanParam(name: 'apply', defaultValue: false, description: 'Create Terraform build')
+        booleanParam(name: 'destroy', defaultValue: false, description: 'Destroy Terraform build?')
+        string defaultValue: 'ubuntu', description: '', name: 'SHIPPER_USERNAME', trim: false
+        string defaultValue: '44.198.111.227', description: '', name: 'SHIPPER_TARGET', trim: false
+    }
+    agent any
+    environment {
+        AWS_ACCESS_KEY_ID     = credentials('AWS_ACCESS_KEY_ID')
+        AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
+        TF_PATH="/home/${SHIPPER_USERNAME}/projects/ship-eks/infra/${TARGET_ENVIRONMENT}/eks-cluster"
+    }
+    stages{
+        stage('SCP to Bastion node'){
+            when {
+                not {
+                    equals expected: true, actual: params.destroy
+                }
+            }
+            steps{
+                sshagent (credentials: ['run-eks-client']) {
+                    script{
+                        sh '''
+                            SOURCE_PATH="$WORKSPACE/eks-cluster/"
+                            DESTINATION_PATH="/home/${SHIPPER_USERNAME}/projects/ship-eks/infra/${TARGET_ENVIRONMENT}/"
+                            scp -o StrictHostKeyChecking=no -r $SOURCE_PATH ${SHIPPER_USERNAME}@${SHIPPER_TARGET}:$DESTINATION_PATH
+                        '''
+                    }
+                }
+            }             
+        }
+        stage('Plan') {
+            steps {
+                sshagent (credentials: ['run-eks-client']) {
+                script{
+                    sh "ssh -o StrictHostKeyChecking=no -l ${SHIPPER_USERNAME} ${SHIPPER_TARGET} 'cd  $TF_PATH; terraform init -input=false'"
+                    sh "ssh -o StrictHostKeyChecking=no -l ${SHIPPER_USERNAME} ${SHIPPER_TARGET} 'cd  $TF_PATH; terraform plan -var-file='envs/${TARGET_ENVIRONMENT}.tfvars' -var='profile=${PROFILE}' -var='location=${LOCATION}' -var='cluster_name=${CLUSTER_NAME}' -input=false -out tfplan'"
+                }
+                }
+            }
+        }
+        stage('Approval') {
+            environment {
+                APPROVAL = credentials('email_secrets')
+            }
+           steps {
+               sshagent (credentials: ['run-eks-client']) {
+                    script {
+                        Random rand = new Random()
+                        random_num = rand.nextInt(1000)
+                        def emails = APPROVAL.split(",")
+
+                        for (int i=0;i<emails.size();i++){
+                            mail to: "${emails[i]}", subject: "EKS cluster plan is ready, please check to approve #${env.BUILD_NUMBER}", 
+                            body: """
+                            Use this ${env.BUILD_URL}. OTP: ${random_num}
+                            """
+                        }
+                        
+                        def userInput = input(id: 'userInput', message: 'Apply Terraform?',
+                        parameters: [[$class: 'StringParameterDefinition', defaultValue: '', 
+                            description:'', name:'OTP']
+                        ])
+                            
+                        def ch=random_num.toString()
+                        if (userInput != ch) {
+                            currentBuild.result = 'ABORTED'
+                            error('Incorrect OTP…')
+                        }
+                    }
+                }
+            }
+        }
+        stage('Cluster creation') {
+            when {
+                equals expected: true, actual: params.apply  
+            }
+            
+            steps {
+                sshagent (credentials: ['run-eks-client']) {
+                    script{
+                        sh "ssh -o StrictHostKeyChecking=no -l ${SHIPPER_USERNAME} ${SHIPPER_TARGET} 'cd  $TF_PATH; terraform apply -input=false tfplan'"
+                    }
+                }
+            }
+        }
+        stage('Destroy cluster') {
+            when {
+                equals expected: true, actual: params.destroy
+            }
+        
+            steps {
+                sshagent (credentials: ['run-eks-client']) {
+                    script{
+                        sh "ssh -o StrictHostKeyChecking=no -l ${SHIPPER_USERNAME} ${SHIPPER_TARGET} 'cd  $TF_PATH; terraform destroy -var-file='envs/${TARGET_ENVIRONMENT}.tfvars' -var='profile=${PROFILE}' -var='location=${LOCATION}' -var='cluster_name=${CLUSTER_NAME}' --auto-approve'"
+                    }
+                }
+            }
+        }
+        stage('Cleanup Bastion node workspace') {
+            when {
+                equals expected: true, actual: params.destroy
+            }
+        
+            steps {
+                sshagent (credentials: ['run-eks-client']) {
+                    script{
+                        TARGET_PATH="/home/${SHIPPER_USERNAME}/projects/ship-eks/infra/"
+                        sh "ssh -o StrictHostKeyChecking=no -l ${SHIPPER_USERNAME} ${SHIPPER_TARGET} 'cd  $TARGET_PATH; rm -rf $TARGET_ENVIRONMENT/*'"
+                    }
+                }
+            }
+        }
+    }
+    post { 
+        always { 
+            cleanWs()
+        }
+    }    
+}

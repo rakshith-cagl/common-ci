@@ -1,0 +1,19 @@
+apz.Bullets = {};
+apz.Bullets.getObjValue = function(obj){
+	var valArr = [];
+	if(obj){
+		$(obj).children('li').each(function() {
+		    valArr.push($(this).text());
+		});
+	}
+	return valArr.toString();
+}
+apz.Bullets.setObjValue = function(obj, value){
+    var valArr = value.split(",");
+    $(obj).children('li').remove();
+	if(obj){
+	    for(var a=0; a<valArr.length; a++) {
+	        $(obj).append("<li id='"+valArr[a]+"_li'><p>"+valArr[a]+"</p></li>")
+	    }
+	}
+}

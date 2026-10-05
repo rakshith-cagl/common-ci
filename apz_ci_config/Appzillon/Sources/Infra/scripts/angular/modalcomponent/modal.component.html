@@ -1,0 +1,34 @@
+<ng-container>
+<div id="{{props.id}}"  role="dialog" aria-hidden="true" #parentDivWrapper>
+        <div role="document" #modalDivWrapper>
+            <ul class="modal-header">
+                <li>
+                    <h1>{{props.title}}</h1>
+                </li>
+                <li>
+                    <button id="{{props.id+'_close'}}" class="close ett-bttn tsp med" type="button" data-dismiss="modal" aria-label="Close" >
+                        <svg aria-hidden="true" class="ett-icon icon-remove px24">
+                            <use xlink:href="#icon-remove">
+                            </use>
+                        </svg>
+                    </button>
+                </li>
+            </ul>
+            <div id="{{props.id+'_content'}}" class="modal-cnt">
+                <ng-content></ng-content>
+            </div>
+            <ng-container *ngTemplateOutlet="ModalFooter"></ng-container>
+        </div>
+    </div>
+</ng-container>
+
+<ng-template #ModalFooter>
+    <ng-container *ngIf="props.modalFooter=='Y'">
+            <ul id="{{props.id+'_footer'}}" class="modal-footer">
+                <li id="{{props.id+'_li'}}">
+                <button  id="{{props.id+'_footer_close'}}"  type="button" class="ett-bttn sec med" data-dismiss="modal">Close</button>
+                <button id="{{props.id+'_footer_save'}}" type="button" class="ett-bttn pri med">Save changes</button>
+                </li>
+            </ul>
+    </ng-container>
+</ng-template>

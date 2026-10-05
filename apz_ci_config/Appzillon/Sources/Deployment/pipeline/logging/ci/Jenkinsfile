@@ -1,0 +1,90 @@
+pipeline {
+
+    parameters {
+      choice(name:'BUILD_TYPE', choices: ['rsyslog','elastic'], description: 'Select the following option for the build type')
+      choice(name: 'ARTIFACTORY_TYPE', choices: ['jfrog', 'harbor','aws-ecr'], description: 'Select the Artifactory Types')
+      string defaultValue: '169639270777', description: 'AWS_ACCOUNT_ID', name: 'AWS_ACCOUNT_ID', trim: false
+      string defaultValue: 'us-east-1', description: '', name: 'EKS_CLUSTER_REGION', trim: false
+      string defaultValue: 'appzillon-fluentd', description: '', name: 'DOCKER_IMAGE_NAME', trim: false
+      string defaultValue: 'latest', description: '', name: 'BUILD_TAG', trim: false
+      string defaultValue: 'ec2-user', description: '', name: 'SHIPPER_USERNAME', trim: false
+      string defaultValue: '18.216.193.145', description: '', name: 'SHIPPER_TARGET', trim: false
+   }
+
+    environment {
+        REGISTRY_URL=getRegistryUrl(env.ARTIFACTORY_TYPE,env.AWS_ACCOUNT_ID,env.CLUSTER_REGION)
+        REGISTRY=getRegistry(env.ARTIFACTORY_TYPE,env.AWS_ACCOUNT_ID,env.CLUSTER_REGION)
+        REGISTRY_CRED=getRegistryCred(env.ARTIFACTORY_TYPE,env.CLUSTER_REGION)
+        DOCKER_IMAGE = ''
+        DOCKER_IMAGE_TYPE= "${env.BUILD_TYPE == 'rsyslog' ? 'debian-syslog' : 'debian-elasticsearch7'}" 
+    }
+
+    agent any
+    stages {
+        stage('Build fluentd Image') { 
+            steps {
+                echo 'Copy required fluentd files to the build system'
+                sh '''
+                    cd $WORKSPACE
+                    mkdir -p projects/App/fluentd
+                    SOURCE_PATH=$WORKSPACE/logging/ci/fluentd-kubernetes-daemonset-master.tar.gz
+                    DESTINATION_PATH=$WORKSPACE/projects/App/fluentd
+                    cp -f $SOURCE_PATH $DESTINATION_PATH
+                    cd $DESTINATION_PATH
+                    tar xvf fluentd-kubernetes-daemonset-master.tar.gz
+                '''
+                script {
+                    BUILD_PATH="$WORKSPACE/projects/App/fluentd/fluentd-kubernetes-daemonset-master/docker-image/v1.13/$DOCKER_IMAGE_TYPE"
+                    DOCKER_IMAGE = docker.build(REGISTRY+"/"+"${DOCKER_IMAGE_NAME}-${BUILD_TYPE}:${BUILD_TAG}", "-f $BUILD_PATH/Dockerfile $BUILD_PATH")
+                }
+            }
+        }
+        stage('Push fluentd Image') {
+            steps{
+                script {
+                    docker.withRegistry(REGISTRY_URL, REGISTRY_CRED) {
+                        DOCKER_IMAGE.push()
+                    }
+                }
+            }
+        }
+       
+    }
+    post { 
+        always { 
+            cleanWs()
+        }
+    }
+}
+
+
+
+def getRegistryUrl(artifactory,accessid,region) {
+    if("aws-ecr".equals(artifactory)) {
+        return "https://"+accessid+".dkr.ecr."+region+".amazonaws.com";
+    } else if ("harbor".equals(artifactory)) {
+        return "https://harbor-platform.apzplatforms.com";
+    } else {
+        return "https://artifactory.appzillon.com:443";
+    }
+}
+
+def getRegistry(artifactory,accessid,region) {
+    if("aws-ecr".equals(artifactory)) {
+        return accessid+".dkr.ecr."+region+".amazonaws.com";
+    } else if ("harbor".equals(artifactory)) {
+        return "harbor-platform.apzplatforms.com/appzillon-develop";
+    } else {
+        return "artifactory.appzillon.com:443/docker-dev-local";
+    }
+}
+
+def getRegistryCred(artifactory,region) {
+    if("aws-ecr".equals(artifactory)) {
+        return "ecr:"+region+":aws.creds";
+    } else if ("harbor".equals(artifactory)) {
+        return "harbor-creds";
+    } else {
+        return "jfrog-creds";
+    }
+}

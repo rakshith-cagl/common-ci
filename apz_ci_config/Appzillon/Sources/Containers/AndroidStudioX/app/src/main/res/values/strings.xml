@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="settings">Settings</string>
+    <!-- Common across activities -->
+    <string name="save">Save</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="cancel">Cancel</string>
+    <string name="select">Select</string>
+    <string name="delete">Delete</string>
+    <string name="ok">OK</string>
+    <string name="file_notfound">File Not Found.</string>
+    <string name="sdcard_unavailable">Mount SD Card</string>
+    <string name="invalid_search">Invalid Search Criteria</string>
+    <string name="allow_geolocation">Allow</string>
+    <string name="not_allow_geolocation">Don\'t Allow</string>
+    <string name="share_geoloc_msg">Would like to use your Current Location </string>
+    <string name="geolocation_title">Locations</string>
+    <string name="capture_pic_btn">Capture</string>
+    <string name="crop_pic_btn">Crop</string>
+    <string name="resize_pic_btn">Resize</string>
+    <!-- <string name="zoom_in_btn">Zoom-in</string>
+    <string name="zoom_out_btn">Zoom-out</string> -->
+    <string name="zoom_in_max">Max Level reached, can not zoom-in more.</string>
+    <string name="zoom_out_max">Max Level reached, can not zoom-out more.</string>
+    <string name="notes_ref_id">Reference ID</string>
+
+    <!-- activity_gcm -->
+    <string name="error_config">Please set the %1$s constant and recompile the app.</string>
+    <string name="already_registered">Device is already registered.</string>
+    <string name="gcm_registered">From GCM: device successfully registered!</string>
+    <string name="gcm_unregistered">From GCM: device successfully unregistered!</string>
+    <string name="gcm_message">From GCM: you got message!</string>
+    <string name="gcm_error">From GCM: error (%1$s).</string>
+    <string name="gcm_recoverable_error">From GCM: recoverable error (%1$s).</string>
+    <string name="gcm_deleted">From GCM: server deleted %1$d pending messages!</string>
+    <string name="server_registering">Trying (attempt %1$d/%2$d) to register device on Demo Server.</string>
+    <string name="server_registered">From Demo Server: successfully added device!</string>
+    <string name="server_unregistered">From Demo Server: successfully removed device!</string>
+    <string name="server_register_error">Could not register device on Demo Server after %1$d attempts.</string>
+    <string name="server_unregister_error">Could not unregister device on Demo Server (%1$s).</string>
+    <string name="options_register">Register</string>
+    <string name="options_unregister">Unregister</string>
+    <string name="options_clear">Clear</string>
+    <string name="options_exit">Exit</string>
+    <string name="title_activity_demo">DemoActivity</string>
+    <string name="title_activity_locate_web">Locate</string>
+    <string name="push_msg">Message:</string>
+    <string name="internet_connection_error">Check Internet Connection</string>
+    <string name="progress_loading_msg">Loading..</string>
+    <string name="back_camera_unavailable">Back camera not available.</string>
+
+    <!-- DownloadInterface -->
+    <string name="download_complete">Download Complete.</string>
+    <string name="download_invalid_url">Error: Invalid URL!</string>
+    <string name="download_error">Error in Downloading.</string>
+    <string name="download_json_error">Error : Invalid JSON.</string>
+
+    <!-- Upload Interface -->
+    <string name="upload_complete">Upload Complete.</string>
+    <string name="upload_failed">Upload Failed.</string>
+    <string name="upload_invalid_url">Error: Invalid URL!</string>
+    <string name="upload_error">Error in Uploading..</string>
+
+    <!-- VideoCapture Activity -->
+    <string name="video_rec_stop">STOP</string>
+    <string name="video_save_success">Saved Successfully</string>
+    <string name="video_filename_empty">Enter File Name</string>
+    <string name="video_rec_cancel">Cancel</string>
+    <string name="video_rec_start">Start</string>
+
+    <!-- Date picker in javascript interface -->
+    <string name="datepicker_set_title">Set Date</string>
+    <string name="datepicker_set">Set</string>
+    <string name="datepicker_clear">Clear</string>
+
+    <!-- Barcode Activity -->
+    <string name="scanning">Scanning</string>
+
+    <!-- Audio Plugin -->
+    <string name="audio_stop">Stopped.</string>
+    <string name="audio_save_then_play">Save then play. Recording is on</string>
+    <string name="audio_invalid_action">Not a valid action.</string>
+    <string name="audio_filename_location_unavailable">File Name and location can not be empty.</string>
+    <string name="audio_location">Location value can be extrenal or default.</string>
+    <string name="audio_resume_fail">Failed to resume.</string>
+    <string name="audio_mediaplayer_not_running">MediaPlayer not running</string>
+    <string name="audio_stop_then_rec">Stop play then record.Play is on</string>
+    <string name="audio_recording">Recording</string>
+    <string name="audio_recording_on">Recording is on.</string>
+    <string name="audio_stopped_and_saved">Recording Stopped and saved</string>
+    <string name="audio_record_save_fail">Unable to save.</string>
+    <string name="audio_play_on">Play is on.</string>
+    <string name="audio_playing">Playing</string>
+    <string name="audio_play_completed">Play Completed.</string>
+    <string name="audio_paused">Paused</string>
+    <string name="audio_saved">Saved</string>
+
+    <!-- Multiview Plugin -->
+    <string name="success_msg">Success</string>
+    <string name="failure_msg">Operation Failed</string>
+    <string name="title_activity_map">Map</string>
+    <string name="action_settings">Settings</string>
+
+    <!-- Report Plugin -->
+    <string name="report_save_success">Saved Successfully.</string>
+
+    <!-- Camera plugin START-->
+    <string name="crop_not_supported">Crop Feature Not Supported for this device.</string>
+    <string name="resize_values_unavailable">Please provide resize values.</string>
+    <string name="resize_values_rejected">Can not resize , please recheck resize values.</string>
+    <string name="resize_values_large">Can not resize, Max width : %1$s , and Max height : %2$d supported.</string>
+    <string name="resize_confirmed">Image resized, width : %1$s , height : %2$d .</string>
+    <!-- Camera plugin END-->
+
+    <string name="cannot_read_file">Can not read file.</string>
+
+    <!-- Signature plugin START -->
+    <string name="no_signature">No Signature captured.</string>
+    <!-- Signature plugin END -->
+
+    <!-- NFC plugin START -->
+    <string name="start_nfc_receiver">Please start NFC receiver activity, to receive.</string>
+    <string name="device_nfc_receive">Please bring the devices closer in order to receive.</string>
+    <string name="device_nfc_send">Please bring the devices closer in order to send.</string>
+    <string name="tag_read_ndef_not">NDEF is not supported by this Tag.</string>
+    <string name="tag_write_not_writable">Error: tag not writable.</string>
+    <string name="tag_write_small">Error: tag too small.</string>
+    <string name="tag_refused_format">Error: tag refused to format.</string>
+    <string name="tag_refused_connect">Error: tag refused to connect.</string>
+    <string name="tag_cant_format">Error: tag cannot be formatted.</string>
+    <!-- NFC plugin END -->
+
+    <!-- Multifactor START -->
+    <!-- <string name="wait_multifactor_res">Waiting for Multifactor response.</string> -->
+    <!-- Multifactor END -->
+
+    <!-- LandingPage START -->
+    <!-- <string name="first_launch_initialization">Initializing files for first launch.</string>
+	<string name="app_inst_wait">Waiting for App Instructions.</string>
+	<string name="load_screen">Load Screen.</string>
+	<string name="multifactor_reg">Multifactor registration.</string> -->
+    <!-- LandingPage END -->
+
+    <!-- Calendar Plugin START -->
+    <string name="unsupported_operation">Unsupported Operation.</string>
+    <string name="check_date_time">Check Schedule Date and Time.</string>
+    <string name="add_success">Add Success.</string>
+    <string name="add_failed">Add Failed.</string>
+    <string name="multiple_entry">Multiple entry with same Title is not supported.</string>
+    <string name="event_present">Event already present.</string>
+    <string name="event_not_present">Event not present.</string>
+    <string name="edit_success">Edit Success.</string>
+    <string name="edit_failed">Edit Failed.</string>
+    <string name="delete_success">Deleted Successfully.</string>
+    <string name="delete_failed">Delete operation Failed.</string>
+    <string name="invalid_action">Invalid Action.</string>
+    <string name="parse_exception">Please verify start date and end date.</string>
+    <string name="verify_recurrence_end_date">Please verify recurrence end date..</string>
+    <!-- Calendar Plugin END -->
+
+    <!-- Application Expiry Message -->
+    <string name="appExpiryMsg">Application Expired.</string>
+    <string name="appExpiryMsgOK">OK</string>
+    <string name="expiryDateFormat">dd/MM/yyyy</string>
+    <string name="application_not_found">Application Not Found</string>
+    <!-- Application Expiry Message End -->
+
+    <string name="MORPHO_OK">No error.</string>
+    <string name="MORPHOERR_INTERNAL">Biometrics device performed an internal error.</string>
+    <string name="MORPHOERR_PROTOCOLE">Communication protocole error.</string>
+    <string name="MORPHOERR_CONNECT">Can not connect biometrics device.</string>
+    <string name="MORPHOERR_CLOSE_COM">Error while closing communication port.</string>
+    <string name="MORPHOERR_BADPARAMETER">Invalid parameter.</string>
+    <string name="MORPHOERR_MEMORY_PC">Not enough memory (in the PC).</string>
+    <string name="MORPHOERR_MEMORY_DEVICE">Not enough memory for the creation of a database in the MSO.</string>
+    <string name="MORPHOERR_NO_HIT">Authentication or Identification failed.</string>
+    <string name="MORPHOERR_STATUS">MSO returned an unknown status error.</string>
+    <string name="MORPHOERR_DB_FULL">The database is full.</string>
+    <string name="MORPHOERR_DB_EMPTY">The database is empty.</string>
+    <string name="MORPHOERR_ALREADY_ENROLLED">User has already been enrolled.</string>
+    <string name="MORPHOERR_BASE_NOT_FOUND">The specified base does not exist.</string>
+    <string name="MORPHOERR_BASE_ALREADY_EXISTS">The specified base already exist.</string>
+    <string name="MORPHOERR_NO_ASSOCIATED_DB">User object has been instanciated without MorphoDatabase.getUser.</string>
+    <string name="MORPHOERR_NO_ASSOCIATED_DEVICE">Database object has been instanciated without MorphoDevice.getDatabase.</string>
+    <string name="MORPHOERR_INVALID_TEMPLATE">The template is not valid.</string>
+    <string name="MORPHOERR_NOT_IMPLEMENTED">Command not yet implemented in this release.</string>
+    <string name="MORPHOERR_TIMEOUT">No response after defined time.</string>
+    <string name="MORPHOERR_NO_REGISTERED_TEMPLATE">No templates have been registered.</string>
+    <string name="MORPHOERR_FIELD_NOT_FOUND">Field does not exist.</string>
+    <string name="MORPHOERR_CORRUPTED_CLASS">Class has been corrupted.</string>
+    <string name="MORPHOERR_TO_MANY_TEMPLATE">There are too many templates.</string>
+    <string name="MORPHOERR_TO_MANY_FIELD">There are too many fields.</string>
+    <string name="MORPHOERR_MIXED_TEMPLATE">Templates with differents formats are mixed.</string>
+    <string name="MORPHOERR_CMDE_ABORTED">Command has been aborted.</string>
+    <string name="MORPHOERR_INVALID_PK_FORMAT">Invalid PK format.</string>
+    <string name="MORPHOERR_SAME_FINGER">User gave twice the same finger.</string>
+    <string name="MORPHOERR_OUT_OF_FIELD">The number of the additional field is more than 128.</string>
+    <string name="MORPHOERR_INVALID_USER_ID">UserID is not valid.</string>
+    <string name="MORPHOERR_INVALID_USER_DATA">The user data are not valid.</string>
+    <string name="MORPHOERR_FIELD_INVALID">Additional field name length is more than MORPHO_FIELD_NAME_LEN.</string>
+    <string name="MORPHOERR_USER_NOT_FOUND">User is not found.</string>
+    <string name="MORPHOERR_COM_NOT_OPEN">Serial COM has not been opened.</string>
+    <string name="MORPHOERR_ELT_ALREADY_PRESENT">This element is already present in the list.</string>
+    <string name="MORPHOERR_NOCALLTO_DBQUERRYFIRST">You have to call MorphoDatabase.dbQueryFirst to initialize the querry.</string>
+    <string name="MORPHOERR_USER">The communication callback functions returns error between -10000 and -10499.</string>
+    <string name="MORPHOERR_BAD_COMPRESSION">The Compression is not valid.</string>
+    <string name="MORPHOERR_SECU">Security error.</string>
+    <string name="MORPHOERR_CERTIF_UNKNOW">The MSO has not the certificate necessary to verify the signature.</string>
+    <string name="MORPHOERR_INVALID_CLASS">The class has been destroyed.</string>
+    <string name="MORPHOERR_USB_DEVICE_NAME_UNKNOWN">The specified Usb device is not plugged.</string>
+    <string name="MORPHOERR_CERTIF_INVALID">The certificate is not valid.</string>
+    <string name="MORPHOERR_SIGNER_ID">The certificate identity is not the same than the X984 certificate identity.</string>
+    <string name="MORPHOERR_SIGNER_ID_INVALID">The X984 certificate identity size is different to 20 octets (SHA_1 size).</string>
+    <string name="MORPHOERR_FFD">False Finger Detected.</string>
+    <string name="MORPHOERR_MOIST_FINGER">The finger can be too moist or the scanner is wet.</string>
+    <string name="MORPHOERR_NO_SERVER">The Morpho MorphoSmart Service Provider Usb Server is stopped or not installed.</string>
+    <string name="MORPHOERR_OTP_NOT_INITIALIZED">No parameter has been initialized.</string>
+    <string name="MORPHOERR_OTP_PIN_NEEDED">Code pin is needed : it is the first enrollment.</string>
+    <string name="MORPHOERR_OTP_REENROLL_NOT_ALLOWED">User is not allowed to be reenrolled.</string>
+    <string name="MORPHOERR_OTP_ENROLL_FAILED">Enrollment failed.</string>
+    <string name="MORPHOERR_OTP_IDENT_FAILED">Identification failed.</string>
+    <string name="MORPHOERR_NO_MORE_OTP">No more OTP available (sequence number = 0).</string>
+    <string name="MORPHOERR_OTP_NO_HIT">Authentication or Identification failed.</string>
+    <string name="MORPHOERR_OTP_ENROLL_NEEDED">Enrollment needed before generating OTP.</string>
+    <string name="MORPHOERR_DEVICE_LOCKED">The device is locked.</string>
+    <string name="MORPHOERR_DEVICE_NOT_LOCK">The device is not locked.</string>
+    <string name="MORPHOERR_OTP_LOCK_GEN_OTP">ILV_OTP_GENERATE Locked.</string>
+    <string name="MORPHOERR_OTP_LOCK_SET_PARAM">ILV_OTP_SET_PARAMETERS Locked.</string>
+    <string name="MORPHOERR_OTP_LOCK_ENROLL">ILV_OTP_ENROLL_USER Locked.</string>
+    <string name="MORPHOERR_FVP_MINUTIAE_SECURITY_MISMATCH">Security level mismatch: attempt to match fingerprint template in high security level (MorphoSmart FINGER VP only).</string>
+    <string name="MORPHOERR_FVP_FINGER_MISPLACED_OR_WITHDRAWN">Misplaced or withdrawn finger has been detected during acquisition (MorphoSmart FINGER VP only).</string>
+    <string name="MORPHOERR_LICENSE_MISSING">A required license is missing.</string>
+    <string name="MORPHOERR_CANT_GRAN_PERMISSION_USB">Could not grant permissions to USB</string>
+    <string name="title_activity_main_facebook">MainActivityFacebook</string>
+    <string name="title_activity_google_plus">GooglePlusActivity</string>
+    
+    <!--Biometric-->
+    <string name="biotitle">Authentication</string>
+    <string name="biosubtitle">Please authenticate using Biometric!</string>
+    <string name="biodescription">Biometric authentication for secure access</string>
+    <string name="bionegative">ok</string>
+
+</resources>

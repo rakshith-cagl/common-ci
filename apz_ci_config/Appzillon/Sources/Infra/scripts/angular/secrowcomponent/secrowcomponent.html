@@ -1,0 +1,10 @@
+<ng-container *ngIf="props.cntrType=='NAVBAR'">
+	<ul id={{props.id}} class={{props.className}}>
+		<ng-content select="ng-container"></ng-content>
+	</ul>
+</ng-container>
+<ng-container *ngIf="props.cntrType != 'NAVBAR'">
+	<span id={{props.id}} class={{props.className}}>
+		<ng-content></ng-content>
+	</span>
+</ng-container>

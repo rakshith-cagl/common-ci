@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+<string name="MAINAPPID">com.iexceed.latestcontainerapp</string>
+<string name="OTAREQUIRED">N</string>
+<string name="NOTIFICATION">Y</string>
+<string name="GCMNOTIFAPPLICATIONKEY">AIzaSyC7sqnp08DVKqWunq4shXJM0HrXUfQo_UI</string>
+<string name="CERTIFICATENAME"/>
+<string name="CERTIFICATEPINNING">N</string>
+<string name="PREVENTSCREENSHOT">Y</string>
+<string name="PRODUCTDESC">TestingApp</string>
+<string name="PRODUCTNAME">ContainerTestApp</string>
+<string name="PRODUCTTITLE">ContainerApp</string>
+<string name="FACEBOOKID">610375619170524</string>
+<string name="TWITTERKEY">cLxLyjCc9CL2c0727CB4TZxeOeTOUQBHWjcJJWEIHW6tjRXxoR</string>
+<string name="INTERNALSANDBOX">APZANDROIDSANDBOXVALUE</string>
+<string name="SERVERCONNECTFAILURETITLE" />
+<string name="SERVERCONNECTFAILUREMESSAGE" />
+</resources>

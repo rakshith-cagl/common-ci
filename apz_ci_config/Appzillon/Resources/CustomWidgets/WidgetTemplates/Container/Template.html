@@ -1,0 +1,112 @@
+<html>
+	<head></head>
+	<!---------------------------------------------------------------------- 
+		This is the property page which will be displayed when the related widget is selected in the Designer
+	------------------------------------------------------------------------>
+	<body>
+		<div class="wrapper">
+			<div class="lrow">
+				<div class="lcol12 propertyHeading">
+				<!---------------------------------------------------------------------- 
+					Provide the heading for the properties page by keeping the content inside the next <h3> tag.
+				------------------------------------------------------------------------>
+					<h3> Container Properties</h3>
+				</div>
+			</div>
+			<div class="lrow">
+				<div class="lcol12 tabsection csprime form-horizontal">
+					<div class="lrow">
+						<div class="lcol12 ">
+							<ul class="tabs">
+							<!---------------------------------------------------------------------- 
+								There will be two types of Properties for Containers. 
+								Main, Advanced. These will be provided as the Tab Headings
+								Group the widget properties under these two categories by following the below provided rules.
+							------------------------------------------------------------------------>
+								<li class="current">
+									<a > <i class=""></i> Main </a>
+								</li>
+								
+							</ul>
+						</div>
+					</div>
+					<div class="lrow tabcontent visible">
+						<div class="lcol12">
+							<div class="cbox">
+								<div class="cbox-body">
+								<!---------------------------------------------------------------------- 
+									Add the Main Properties in this div
+									As there are three predefined properties, create new widget related properties
+									Follow the below structure to create the properties
+									
+								Ex:	<div class="control-group">
+										<label class="control-label" >Widget Property Name Comes Here</label>
+										<div class="controls">
+											// Widget property comes in this div, 
+											// Whether it is a dropdown, inputbox specify a unique ID as it will be saved based on its ID only.
+											// This is the ID which should be passed to widgetutils.setProperty() and widgetutils.getProperty() in the related js
+											<input id="id" type="text" value="" />
+										</div>
+									</div>
+								------------------------------------------------------------------------>
+									<div class="control-group dispnone">
+										<label class="control-label" >Designer ID</label>
+										<div class="controls">
+											<input id="id" type="text" value="" disabled="disabled"  />
+										</div>
+									</div>
+									<div class="control-group dispnone">
+										<label class="control-label" >Designer Parent ID</label>
+										<div class="controls">
+											<input id="pid" type="text" value=""  disabled="disabled"  />
+										</div>
+									</div>
+									<div class="control-group">
+										<ul class="srow">
+											<li class="w45">
+												<label class="control-label">ID</label>
+											</li>
+											<li>
+												<input id="name" type="text" value="" />
+											</li>
+										</ul>
+                                    </div>
+									<div class="control-group ">
+										<ul class="srow">
+											<li class="w45">
+												<label class="control-label">Title</label>
+											</li>
+											<li>
+												<input id="title" type="text" style=" width:140px;" class="" value="" /> <a class='ebtn-mini etxt-info px16 ebtn-icon' onclick="widgetutils.getLITCode('title');"><i class='icon-edit'></i></a>
+											</li>
+										</ul>
+									</div>
+									<div class="control-group">
+										<ul class="srow">
+											<li class="w45">
+												<label class="control-label">CSS Class</label>
+											</li>
+											<li>
+												<input id="attachcustom" type="text" placeholder="Default" />
+											</li>
+										</ul>
+									</div>
+									<!---------------------------------------------------------------------- 
+										Add widget properties here
+									------------------------------------------------------------------------>
+								<div id="eventscollapse" class="cbox-title accordionheading">
+									Additional Properties
+									<div class="tools">
+										<a href="javascript:;" class="collapse"></a>
+									</div>
+								</div>									
+									
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

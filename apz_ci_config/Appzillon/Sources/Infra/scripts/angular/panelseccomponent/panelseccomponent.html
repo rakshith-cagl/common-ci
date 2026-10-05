@@ -1,0 +1,140 @@
+<div *ngIf="ifCheckForPanelType(); then panelSecTemplate else tabOrAccordion" id={{props.id}} class={{props.className}}>
+</div>
+<ng-template #panelSecTemplate>
+	<ng-container *ngIf="props.panelType=='SIMPLE'">
+			<ng-container [ngTemplateOutlet]="simplePanel"></ng-container>
+	</ng-container>
+	<ng-container *ngIf="props.panelType=='CAROUSEL'">
+			<ng-container [ngTemplateOutlet]="carouselPanel"></ng-container>
+	</ng-container>
+	<ng-container *ngIf="props.panelType=='COLLAPSIBLE'">
+			<ng-container [ngTemplateOutlet]="collapsiblePanel"></ng-container>
+	</ng-container>
+</ng-template>
+
+<ng-template #carouselPanel>
+	<!-- //NOSONAR --><li id={{props.id}} class={{props.className}}>
+		<ng-container [ngTemplateOutlet]="ngcontent">
+		</ng-container>
+	</li>
+</ng-template>
+
+<ng-template #simplePanel>
+	<div id={{props.id}} class={{props.className}}>
+			<ng-container *ngIf="props.titleValue">
+				<ul id={{props.id}}_ul class="ttl">
+					<ng-container *ngIf="props.titleIcon">
+						<li class="icn">
+							<svg [attr.class]="props.svgContent.direct.className"> 
+								<use attr.xlink:href="{{'#'+props.titleIcon}}"></use>
+							</svg>
+						</li>
+						<li class="lbl">
+							<h4>{{props.titleValue}}</h4>
+						</li>
+					</ng-container>
+				</ul>
+			</ng-container>
+			<ng-container [ngTemplateOutlet]="ngcontent">
+			</ng-container>
+	</div>
+</ng-template>
+<ng-template #collapsiblePanel>
+	<div id={{props.id}}_div class={{props.className}}>
+			<ul id={{props.id}}_ul class="ttl" aria-selected="true" aria-expanded="true" (click)="apz.data.collapsibleAction($event.currentTarget,this)">
+				<ng-container *ngIf="props.titleIcon">
+					<li class="icn">
+						<svg [attr.class]="props.svgContent.direct.className"> 
+							<use attr.xlink:href="{{'#'+props.titleIcon}}"></use>
+						</svg>
+					</li>
+				</ng-container>
+							<li id={{props.id}}_li2 class="lbl">
+									<h4>{{props.titleValue}}</h4>
+								</li>
+					
+					<li id={{props.id}}_li3 class="tls">
+							<a class="collapse">
+								<svg role="presentation" class="icon icon-chevron-down px24" aria-hidden="true">
+									<use xlink:href="#icon-chevron-down" ></use>
+								</svg>
+							</a>
+						</li>
+			</ul>
+			<!--accContentWrapper should be added from java collapsibleContentWrapper -->
+			<div id={{props.id}} aria-hidden="false" attr.aria-labelledby={{props.id}}_ul role="tabpanel" #collapsibleContentWrapper>
+					<ng-container [ngTemplateOutlet]="ngcontent">
+					</ng-container>
+			</div>
+	</div>
+</ng-template>
+<ng-template #tabOrAccordion>
+	<ng-container *ngIf="props.panelType=='ACCORDION'">
+			<div id={{props.id}}_div #panelSectionDirect>
+					<ul id={{props.id}}_ul aria-selected="true" class={{props.ulWrapper.className}} aria-expanded="true" attr.aria-controls="{{props.id}}_ul"
+					(click)="apz.accordionAction($event.currentTarget)">
+					<ng-container [ngTemplateOutlet]="panelIcon"></ng-container>
+					<li id={{props.id}}_title_li class="lbl">
+							<h4 class="collapse">{{props.title}}</h4>
+					</li>
+					<li id={{props.id}}_tools_li class="tls">
+						<a attr.class="{{'acc-hd '+props.stateClass}}" aria-label="icon-chevron-down"  role="button">
+							<svg class="icon icon-chevron-down px24" aria-hidden="true">
+								<use xlink:href="#icon-chevron-down" ></use>
+							</svg>
+						</a>
+					</li>
+				</ul>
+				<div id={{props.id}} attr.aria-labelledby ="{{props.id}}_ul" #accContentWrapper>
+					<ng-container [ngTemplateOutlet]="ngcontent">
+					</ng-container>
+				</div>
+			</div>
+	</ng-container>
+	<ng-container *ngIf="props.panelType=='TAB'">
+			<div class="acco" role="tabpanel" attr.aria-labelledby="{{props.id}}_li" aria-hidden="true">
+					<ul id={{props.id}}_ul class="ttl" aria-selected="false" aria-expanpded="false" attr.aria-controls="{{props.id}}_ul">
+						<!-- PanelIcon(props)} -->
+						<ng-container [ngTemplateOutlet]="panelIcon"></ng-container>
+						<li id={{props.id}}_title_li class="lbl">
+							<h4 class="collapse">{{props.title}}</h4>
+						</li>
+						<li id={{props.id}}_li class="tls">
+							<a class="expand">
+								<svg role="presentation" aria-hidden="true" class="ett-icon icon-chevron-down px24">
+									<use xlink:href="#icon-chevron-down">
+									</use>
+								</svg>
+							</a>
+						</li>
+					</ul>
+					<div id={{props.id}} attr.data-apr=" lcol12-ptbox" aria-hidden="true" #propsDirect>
+						<ng-container [ngTemplateOutlet]="ngcontent">
+						</ng-container>
+					</div>
+				</div>
+	</ng-container>
+</ng-template>
+
+<ng-template #panelIcon>
+	<ng-container *ngIf="props.hasTitleIcon=='Y'">
+		<ng-container *ngIf="props.panelType == 'TAB'">
+			<!-- //NOSONAR -->	<li id={{props.id}}_icon_li class="icn">
+                        <svg role="presentation" aria-hidden="true" attr.class="{{props.titleIcon.direct.className}}">
+                            <use attr.xlink:href="{{'#'+props.titleIconName}}"></use>
+                        </svg>
+					</li>
+		</ng-container>
+		<ng-container *ngIf="props.panelType=='ACCORDION'">
+			<!-- //NOSONAR -->	<li id={{props.id}}_icon_li class="icn">
+						<svg role="presentation" aria-hidden="true" attr.class="{{props.titleIcon.direct.className}}">
+							<use attr.xlink:href="{{'#'+props.titleIconName}}"></use>
+						</svg>
+				</li>
+		</ng-container>
+	</ng-container>
+</ng-template>
+
+<ng-template #ngcontent>
+	<ng-content></ng-content>
+</ng-template>

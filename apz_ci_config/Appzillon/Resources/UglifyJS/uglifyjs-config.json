@@ -1,0 +1,7 @@
+{
+    "compress":false,
+    "mangle":false,
+    "output": {
+       "comments":false
+    }
+}

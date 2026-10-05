@@ -1,0 +1,121 @@
+pipeline {
+    parameters {
+      choice(name: 'LOGGING_TYPE', choices: ['fluentd-cloudwatch','fluentbit'], description: 'fluentd logging options')
+      string defaultValue: 'dev-eks', description: '', name: 'CLUSTER_NAME', trim: false
+      string defaultValue: 'us-east-1', description: '', name: 'CLUSTER_REGION', trim: false
+      string defaultValue: '169639270777', description: '', name: 'AWS_ACCOUNT_ID', trim: false
+      string defaultValue: 'develop', description: '', name: 'BRANCH', trim: false
+      string defaultValue: 'default', description: '', name: 'NAMESPACE', trim: false
+      string defaultValue: 'fluentd-elastic', description: '', name: 'DOCKER_IMAGE_NAME', trim: false
+      string defaultValue: 'appzillon', description: '', name: 'SERVICE_ACCOUNT', trim: false
+      string defaultValue: 'v1', description: '', name: 'BUILD_TAG', trim: false
+      string defaultValue: 'ubuntu', description: '', name: 'SHIPPER_USERNAME', trim: false
+      string defaultValue: '44.198.111.227', description: '', name: 'SHIPPER_TARGET', trim: false
+      string defaultValue: 'elastic-loadbalancer-296812513.us-east-2.elb.amazonaws.com', description: '', name: 'ELASTIC_HOST', trim: false
+      string defaultValue: 'staging-test-eks-appzillon-adminserver', description: '', name: 'SERVER_APP', trim: false
+      string defaultValue: 'staging-test-eks-appzillon-admin', description: '', name: 'WEB_APP', trim: false
+      string defaultValue: 'efs-logpvc', description: '', name: 'PVC_LOG_NAME', trim: false
+      string defaultValue: '/var/log/appzillon_logs', description: '', name: 'LOG_PATH', trim: false
+      string defaultValue: '1', description: '', name: 'REPLICAS', trim: false
+   }
+   environment {
+        REGISTRY=getRegistry(env.AWS_ACCOUNT_ID,env.CLUSTER_REGION,env.DOCKER_IMAGE_NAME)
+    }
+    agent any
+    stages {
+        stage('SCP to EKS bastion node'){
+            steps{
+                sshagent (credentials: ['run-eks-client']) {
+                     sh '''
+                        COMMAND0="aws eks update-kubeconfig --name ${CLUSTER_NAME}  --region ${CLUSTER_REGION}"
+                        ssh -o StrictHostKeyChecking=no -l ${SHIPPER_USERNAME} ${SHIPPER_TARGET} $COMMAND0
+
+                        if [ ${LOGGING_TYPE} = "fluentd-cloudwatch" ]; then
+                            SOURCE_PATH=$WORKSPACE/logging/cd/aws-eks/fluentd-cloudwatch
+                            DESTINATION_PATH=/home/${SHIPPER_USERNAME}/projects/ship-eks/${BRANCH}/
+                            scp -o StrictHostKeyChecking=no -r $SOURCE_PATH ${SHIPPER_USERNAME}@${SHIPPER_TARGET}:$DESTINATION_PATH
+                        elif [ ${LOGGING_TYPE} = "fluentd-daemon-elastic" ]; then
+                            SOURCE_PATH=$WORKSPACE/logging/cd/aws-eks/fluentd-daemon-elastic
+                            DESTINATION_PATH=/home/${SHIPPER_USERNAME}/projects/ship-eks/${BRANCH}/
+                            scp -o StrictHostKeyChecking=no -r $SOURCE_PATH ${SHIPPER_USERNAME}@${SHIPPER_TARGET}:$DESTINATION_PATH
+                        else
+                            SOURCE_PATH=$WORKSPACE/logging/cd/aws-eks/fluentbit
+                            DESTINATION_PATH=/home/${SHIPPER_USERNAME}/projects/ship-eks/${BRANCH}/
+                            scp -o StrictHostKeyChecking=no -r $SOURCE_PATH ${SHIPPER_USERNAME}@${SHIPPER_TARGET}:$DESTINATION_PATH
+                        fi
+                    '''
+                }
+            }   
+        }
+        stage('Create fluentd Configmap') {
+            when {
+                    expression {
+                        'fluentd-cloudwatch' in LOGGING_TYPE
+                    }
+                }
+            steps {
+                sshagent (credentials: ['run-eks-client']) {
+                    script{
+                        sh "ssh -o StrictHostKeyChecking=no -l ${SHIPPER_USERNAME} ${SHIPPER_TARGET} 'kubectl create configmap cluster-info --from-literal=cluster.name=${CLUSTER_NAME} --from-literal=logs.region=${CLUSTER_REGION} -n ${NAMESPACE}'"
+                    }
+                }
+            }
+        }
+        stage('Deploy Fluentd Cloudwatch'){
+            when {
+                    expression {
+                        'fluentd-cloudwatch' in LOGGING_TYPE
+                    }
+                }
+            steps{
+                sshagent (credentials: ['run-eks-client']) {
+                    script{
+                        SOURCE_PATH="/home/${SHIPPER_USERNAME}/projects/ship-eks/${BRANCH}"
+                        sh "ssh -o StrictHostKeyChecking=no -l ${SHIPPER_USERNAME} ${SHIPPER_TARGET} 'helm upgrade --install fluentd-cloudwatch ${SOURCE_PATH}/fluentd-cloudwatch --set nameSpace=${NAMESPACE} --set replicaCount=${REPLICAS} --set image.repository=$REGISTRY --set image.tag=${BUILD_TAG} --set serviceAccount.name=${SERVICE_ACCOUNT} --set logPath=${LOG_PATH} --set pvcLogName=${PVC_LOG_NAME} -n ${NAMESPACE}'"
+                    }
+                }
+            }
+        }
+        stage('Deploy Fluentd Daemon Elastic'){
+            when {
+                    expression {
+                        'fluentd-daemon-elastic' in LOGGING_TYPE
+                    }
+                }
+            steps{
+                sshagent (credentials: ['run-eks-client']) {
+                    script{
+                        SOURCE_PATH="/home/${SHIPPER_USERNAME}/projects/ship-eks/${BRANCH}"
+                        sh "ssh -o StrictHostKeyChecking=no -l ${SHIPPER_USERNAME} ${SHIPPER_TARGET} 'helm upgrade --install fluentd-daemon-elastic ${SOURCE_PATH}/fluentd-daemon-elastic --set fullnameOverride=fluentd-daemon-elastic --set serverApp=${SERVER_APP} --set webApp=${WEB_APP} --set nameSpace=${NAMESPACE} --set image.repository=$REGISTRY --set image.tag=${BUILD_TAG} --set serviceAccount.name=${SERVICE_ACCOUNT} -n ${NAMESPACE}'"
+                    }
+                }
+            }
+        }
+        stage('Deploy Fluentbit'){
+            when {
+                    expression {
+                        'fluentbit' in LOGGING_TYPE
+                    }
+                }
+            steps{
+                sshagent (credentials: ['run-eks-client']) {
+                    script{
+                        SOURCE_PATH="/home/${SHIPPER_USERNAME}/projects/ship-eks/${BRANCH}"
+                        sh "ssh -o StrictHostKeyChecking=no -l ${SHIPPER_USERNAME} ${SHIPPER_TARGET} 'helm upgrade --install fluentbit ${SOURCE_PATH}/fluentbit --set fullnameOverride=fluentbit --set serverApp=${SERVER_APP} --set webApp=${WEB_APP} --set nameSpace=${NAMESPACE} --set image.repository=$REGISTRY --set image.tag=${BUILD_TAG} --set serviceAccount.name=${SERVICE_ACCOUNT} --set elasticHost=${ELASTIC_HOST} -n ${NAMESPACE}'"
+                    }
+                }
+            }
+        }
+
+
+    }
+    post { 
+        always { 
+            cleanWs()
+        }
+    }
+}
+
+def getRegistry(accessid,region,dockerimage){
+    return accessid+".dkr.ecr."+region+".amazonaws.com/"+dockerimage;
+}

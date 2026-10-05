@@ -1,0 +1,56 @@
+<ng-container *ngIf="props.cntrType=='FORM'">
+    <ul id="{{props.id}} + '_ul'" #wrapperClasses clickstoppropagation>
+		<li #labelWrapper >
+			<label #labelProps  *ngIf="props.attrs.labelrequired =='Y'" [innerHtml]="props.labelProps.title">
+                
+            </label>
+        </li>
+        <li #contentWrapper>
+            <span #spanWrapper class="span wrapper">
+                <ng-container *ngTemplateOutlet="cardNumContent"></ng-container>  
+            </span>
+        </li>
+    </ul>
+</ng-container>
+
+<ng-container *ngIf="props.cntrType == 'LIST'">
+        <ng-container *ngTemplateOutlet="cardNumContent"></ng-container>  
+</ng-container>
+
+<ng-container *ngIf="props.cntrType == 'NAVBAR'">
+    <span #spanWrapper class="span wrapper">
+        <ng-container *ngTemplateOutlet="cardNumContent"></ng-container>  
+    </span>
+</ng-container>
+
+<ng-container *ngIf= "props.cntrType=='TABLE'">
+    <td [attr.id]="(rowIndex != undefined) ?('td_'+ props.id + '_' + rowIndex):('td_'+ props.id)" class="{{props.tdClasses}}">
+        <ng-container *ngTemplateOutlet="cardNumContent"></ng-container>  
+	</td>
+</ng-container>
+
+<ng-template #cardNumContent>
+    <span class="etw-100 icr  pri">
+        <ng-container *ngIf="isUiElm()">
+            <input [id]="id" 
+            class="{{'etw-'+width+' ett-inpt card-number card-js '+apprCls+' '+contentAllignCls+' '+cssCls+' '+snoCls}}" 
+            placeholder="{{placeHolder}}"
+            aria-labelledby="input_label_01" aria-describedby="htx_01" 
+            attr.rowno="{{index}}"
+            enabled="enabled" type="tel"  [(ngModel)]="num"
+            (keyup)="apz.CardNumber.formatInput($event.currentTarget,$event);saveValue(props,$event)" 
+            (change)="setHandler();saveValue(props,$event)" delegateEvent [blurEvent]="blur" [focusEvent]="focus" #state/>
+    </ng-container>
+    <ng-container *ngIf="!isUiElm()">
+            <input [id]="id" 
+            class="{{'etw-'+width+' ett-inpt card-number card-js '+apprCls+' '+contentAllignCls+' '+cssCls+' '+snoCls}}" 
+            placeholder="{{placeHolder}}"
+            attr.rowno="{{index}}"
+            aria-labelledby="input_label_01" aria-describedby="htx_01" 
+            enabled="enabled" type="tel" [(ngModel)]="num" 
+            (keyup)="apz.CardNumber.formatInput($event.currentTarget,$event);saveValue(props,$event)" 
+            (change)="setHandler();saveValue(props,$event)" delegateEvent [blurEvent]="blur" [focusEvent]="focus" #state/>
+    </ng-container>
+    </span>
+</ng-template>
+

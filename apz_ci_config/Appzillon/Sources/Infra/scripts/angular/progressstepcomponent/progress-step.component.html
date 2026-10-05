@@ -1,0 +1,44 @@
+<ng-container *ngIf="props.cntrType=='FORM'">
+        <ul id="{{props.id}}_ul" #wrapperClasses clickstoppropagation>
+            <li #labelWrapper >
+                <label #labelProps [innerHtml]="props.labelProps.title">
+                </label>
+            </li>
+            <li #contentWrapper>
+                <span #spanWrapper class="span wrapper">
+    	            <ul id="{{id+'_ext'}}" class="{{ulWrapperClass}}">
+                            <ng-container *ngTemplateOutlet="progressContent"></ng-container>
+                    </ul>
+                </span>
+            </li>
+        </ul>
+</ng-container>
+
+<ng-container *ngIf="props.cntrType == 'NAVBAR'">
+    <ul id="{{id+'_ext'}}" class="{{ulWrapperClass}}">
+        <ng-container *ngTemplateOutlet="progressContent"></ng-container>
+    </ul>
+</ng-container>
+
+<ng-template #progressContent>
+    <ng-container *ngIf="apz.isNull(props.value);else progressbdy">
+        <ng-container *ngFor="let steps of progressSteps; let i=index">
+            <!-- //NOSONAR -->    <li  class="pgst-step " [ngClass]="(steps.stepstatus == 'ACTIVE')?('pgs-' + steps.steppercent + ' active'):('pgs-' + steps.steppercent )" [attr.key]="i">
+						<span class="span wrapper"></span>
+						<span>{{steps.stepname}}</span>
+				</li>
+        </ng-container>
+    </ng-container>
+</ng-template>
+
+<ng-template #progressbdy>
+    <ng-container *ngFor="let steps of progressSteps; let i=index">
+            
+        <!-- //NOSONAR -->    <li class="pgst-step " [ngClass]="(stepSplit(steps)[1] === 'COMPLETE')?'pgs-100':''" [ngClass]="!((stepSplit(steps)[1] === 'COMPLETE')&&(stepSplit(steps)[1] === 'ACTIVE'))?'pgs-0':''" [ngClass]="(stepSplit(steps)[1] == 'ACTIVE')?('pgs-' + stepSplit(steps)[2] + ' active'):''" [attr.key]="i">
+                    <span class="span wrapper"></span>
+                    <span>{{stepSplit(steps)[0]}}</span>
+            </li>
+        
+    </ng-container>
+</ng-template>
+

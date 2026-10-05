@@ -1,0 +1,151 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.1.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
+    <changeSet author="platform" id="DDL_VW_NOTIFY_APPID_3.24.0-1">
+        <createView fullDefinition="false" viewName="VW_NOTIFY_APPID" replaceIfExists="true">select DISTINCT(APP_ID) appId from TB_ASNF_DEVICES_MASTER</createView>
+    </changeSet>
+    <changeSet author="platform" id="DDL_VW_DIGITS_3.24.0-2">
+        <createView fullDefinition="false" viewName="VW_DIGITS" replaceIfExists="true">SELECT 0 AS digit UNION ALL
+            SELECT 1 UNION ALL
+            SELECT 2 UNION ALL
+            SELECT 3 UNION ALL
+            SELECT 4 UNION ALL
+            SELECT 5 UNION ALL
+            SELECT 6 UNION ALL
+            SELECT 7 UNION ALL
+            SELECT 8 UNION ALL
+            SELECT 9</createView>
+    </changeSet>
+    <changeSet author="platform" id="DDL_VW_NUMBERS_3.24.0-3">
+        <createView fullDefinition="false" viewName="VW_NUMBERS" replaceIfExists="true">SELECT
+            ones.digit + tens.digit * 10 + hundreds.digit * 100 + thousands.digit * 1000 AS number
+            FROM
+            VW_DIGITS as ones,
+            VW_DIGITS as tens,
+            VW_DIGITS as hundreds,
+            VW_DIGITS as thousands</createView>
+    </changeSet>
+    <changeSet author="platform" id="DDL_VW_DATES_3.24.0-4">
+        <createView fullDefinition="false" viewName="VW_DATES" replaceIfExists="true">SELECT
+            CAST((GETDATE()-number) as Date) AS date
+            FROM VW_NUMBERS</createView>
+    </changeSet>
+    <changeSet author="platform" id="DDL_VW_OS_DATES_3.24.0-5">
+        <createView fullDefinition="false" viewName="VW_OS_DATES" replaceIfExists="true">select d.date osdates,OS_ID AS datesos,appId from VW_DATES d,TB_OS o,VW_NOTIFY_APPID ap</createView>
+    </changeSet>
+    <changeSet author="platform" id="DDL_VW_MESSAGE_STATS_3.24.0-6">
+        <createView fullDefinition="false" viewName="VW_MESSAGE_STATS" replaceIfExists="true">select CAST(tnl.CREATED_TS AS DATE) AS TXNDATE,count(0) AS num,tnm.OS_ID AS os,tnl.APP_ID AS appId
+            from TB_ASNF_TXN_LOG tnl,TB_ASNF_DEVICES_MASTER tnm
+            where tnl.NOTIF_REG_ID = tnm.NOTIF_REG_ID
+            group by CAST(tnl.CREATED_TS AS DATE),tnm.OS_ID,tnl.APP_ID</createView>
+    </changeSet>
+    <changeSet author="platform" id="DDL_VW_MESSAGE_NOTIFY_STATS_3.24.0-7">
+        <createView fullDefinition="false" viewName="VW_MESSAGE_NOTIFY_STATS" replaceIfExists="true">SELECT VW_OS_DATES.appId,osdates,COALESCE(num,0) count,datesos
+            FROM VW_MESSAGE_STATS RIGHT OUTER JOIN VW_OS_DATES ON osdates=TXNDATE AND datesos=os and
+            VW_OS_DATES.appId=VW_MESSAGE_STATS.appId</createView>
+    </changeSet>
+    <changeSet author="platform" id="DDL_VW_LOCATION_DETAILS_3.24.0-8">
+        <createView fullDefinition="false" viewName="VW_LOCATION_DETAILS" replaceIfExists="true">SELECT * FROM TB_ASTP_LAST_LOGIN A where A.SESSION_ID IS NOT NULL
+            AND abs(DATEDIFF("second",GETDATE(),LAST_REQ_TIME)) &lt; (SELECT SESSION_TIMEOUT FROM
+            TB_ASMI_SECURITY_PARAMETERS C WHERE A.APP_ID=C.APP_ID)</createView>
+    </changeSet>
+    <changeSet author="platform" id="DDL_VW_ACTIVE_SESSIONS_3.24.0-9">
+        <createView fullDefinition="false" viewName="VW_ACTIVE_SESSIONS" replaceIfExists="true">SELECT B.OS,A.APP_ID, COUNT(*) as COUNT
+            FROM TB_ASTP_LAST_LOGIN A,TB_ASMI_DEVICE_MASTER B
+            WHERE A.APP_ID =B.APP_ID
+            AND A.DEVICE_ID = B.DEVICE_ID
+            AND A.SESSION_ID IS NOT NULL
+            AND abs(DATEDIFF("second",GETDATE(),LAST_REQ_TIME)) &lt;
+            (SELECT SESSION_TIMEOUT FROM TB_ASMI_SECURITY_PARAMETERS C WHERE C.APP_ID=A.APP_ID)
+            GROUP BY B.OS, A.APP_ID
+            union all
+            SELECT A.DEVICE_ID,A.APP_ID, COUNT(*) as COUNT
+            FROM TB_ASTP_LAST_LOGIN A
+            WHERE A.DEVICE_ID IN ('WEB','SIMULATOR')
+            AND A.SESSION_ID IS NOT NULL
+            AND  abs(DATEDIFF("second",GETDATE(),LAST_REQ_TIME))
+            &lt; (SELECT SESSION_TIMEOUT FROM TB_ASMI_SECURITY_PARAMETERS C WHERE C.APP_ID=A.APP_ID)
+            GROUP BY A.DEVICE_ID, A.APP_ID</createView>
+    </changeSet>
+    <changeSet author="platform" id="DDL_VW_ACTIVE_INACTIVE_USERS_3.24.0-10">
+        <createView fullDefinition="false" viewName="VW_ACTIVE_INACTIVE_USERS" replaceIfExists="true">SELECT t1.APP_ID, CAST(t1.CREATE_TS AS DATE) as CREATE_TS, count(*) as ACTIVE , 0 INACTIVE
+            FROM TB_ASMI_USER t1
+            LEFT JOIN TB_ASTP_LAST_LOGIN t2 ON t2.USER_ID = t1.USER_ID AND t2.APP_ID = t1.APP_ID
+            WHERE t2.USER_ID IS NOT NULL AND t1.USER_ACTIVE='Y'
+            GROUP BY t1.APP_ID, CAST(t1.CREATE_TS  AS DATE)
+            UNION ALL
+            SELECT t1.APP_ID,CAST(t1.CREATE_TS AS DATE) as CREATE_TS, 0 ACTIVE, count(*) as INACTIVE
+            FROM TB_ASMI_USER t1
+            LEFT JOIN TB_ASTP_LAST_LOGIN t2 ON t2.USER_ID = t1.USER_ID AND t2.APP_ID = t1.APP_ID
+            WHERE t2.USER_ID IS NULL AND t1.USER_ACTIVE='Y'
+            GROUP BY t1.APP_ID, CAST(t1.CREATE_TS AS DATE)</createView>
+    </changeSet>
+    <changeSet author="platform" id="DDL_VW_LOGIN_REPORT_3.24.0-11">
+        <createView fullDefinition="false" viewName="VW_LOGIN_REPORT" replaceIfExists="true">select tb.APP_ID,tb.DEVICE_ID,CAST(tb.CREATE_TS AS Date) as AccessDate,count(*) as TotalTxns,0 Logins,0 DistinctLogins
+            from  TB_ASLG_TXN_DETAIL tb where tb.TXN_STAT='S'
+            group by tb.APP_ID,tb.DEVICE_ID,CAST(tb.CREATE_TS AS Date)
+            union all
+            select tb2.APP_ID,tb2.DEVICE_ID,CAST(tb2.CREATE_TS AS Date) as AccessDate,0 TotalTxns,count(*) as Logins,
+            count(distinct CAST(tb2.CREATE_TS AS Date)) as DistinctLogins
+            from TB_ASLG_TXN_DETAIL tb2 where
+            (tb2.INTERFACE_ID='appzillonReLoginRequest' OR tb2.INTERFACE_ID='appzillonAuthenticationRequest')
+            and tb2.TXN_STAT='S'
+            Group by tb2.APP_ID,tb2.USER_ID,tb2.DEVICE_ID,CAST(tb2.CREATE_TS AS Date)</createView>
+    </changeSet>
+    <changeSet author="platform" id="DDL_VW_CUSTOMER_REPORT_3.24.0-12">
+        <createView fullDefinition="false" viewName="VW_CUSTOMER_REPORT" replaceIfExists="true">SELECT tb.APP_ID,tb.USER_ID,tb.SESSION_ID,
+            abs(DATEDIFF("MILLISECOND",MAX(END_TM),MIN(ST_TM))) tm,
+            count(*) as TotalTxns,count(distinct(tb.INTERFACE_ID)) as DistinctTxns, 0 Logins, 0 DistinctLogins
+            FROM  TB_ASLG_TXN_DETAIL tb WHERE tb.TXN_STAT='S' GROUP BY tb.APP_ID, tb.USER_ID, tb.SESSION_ID
+            UNION ALL
+            SELECT tb2.APP_ID,tb2.USER_ID, null SESSION_ID,
+            null tm, 0 TotalTxns,0 DistinctTxns,count(*) as Logins, count(distinct CAST(tb2.CREATE_TS AS Date)) as DistinctLogins
+            FROM TB_ASLG_TXN_DETAIL tb2 WHERE
+            (tb2.INTERFACE_ID='appzillonReLoginRequest' OR tb2.INTERFACE_ID='appzillonAuthenticationRequest')
+            and tb2.TXN_STAT='S' GROUP BY tb2.APP_ID, tb2.USER_ID</createView>
+    </changeSet>
+    <changeSet author="platform" id="DDL_VW_LAT_LON_DETAILS_3.24.0-13">
+        <createView fullDefinition="false" viewName="VW_LAT_LON_DETAILS" replaceIfExists="true">SELECT APP_ID,USER_ID,COUNT(LONGITUDE) as COUNT_LON, LONGITUDE,
+            COUNT(LATITUDE) as COUNT_LAT,LATITUDE, FORMATTED_ADDRESS FROM TB_ASLG_TXN_DETAIL GROUP BY LONGITUDE, LATITUDE, FORMATTED_ADDRESS, APP_ID, USER_ID</createView>
+    </changeSet>
+    <changeSet author="platform" id="DDL_VW_CUSTOMER_DETAILS_3.24.0-14">
+        <createView fullDefinition="false" viewName="VW_CUSTOMER_DETAILS" replaceIfExists="true">SELECT APP_ID,USER_ID,CAST(CREATE_TS AS Date) AS AccessDate,SESSION_ID,min(ST_TM) as ST_TM,max(END_TM) as END_TM,Count(*) As
+            TotalTxns,0 DistinctTxns,LATITUDE,LONGITUDE,FORMATTED_ADDRESS
+            FROM TB_ASLG_TXN_DETAIL
+            WHERE TXN_STAT='S'
+            GROUP by APP_ID,USER_ID,CAST(CREATE_TS AS Date),SESSION_ID,LATITUDE,LONGITUDE,FORMATTED_ADDRESS
+            UNION ALL
+            SELECT APP_ID,USER_ID,CAST(CREATE_TS AS Date) AS AccessDate,SESSION_ID,min(ST_TM) as ST_TM,max(END_TM) as END_TM,0 TotalTxns,
+            Count(distinct(INTERFACE_ID)) AS DistinctTxns,LATITUDE,LONGITUDE,FORMATTED_ADDRESS
+            FROM TB_ASLG_TXN_DETAIL
+            WHERE TXN_STAT='S'
+            GROUP BY APP_ID,USER_ID,CAST(CREATE_TS AS Date),SESSION_ID,INTERFACE_ID,LATITUDE,LONGITUDE,FORMATTED_ADDRESS</createView>
+    </changeSet>
+    <changeSet author="platform" id="DDL_VW_TXN_APP_USAGE_3.24.0-15">
+        <createView fullDefinition="false" viewName="VW_TXN_APP_USAGE" replaceIfExists="true">SELECT txn.APP_ID,CAST(txn.CREATE_TS AS Date) AS AccessDate,intf.DESCRIPTION, txn.TXN_STAT,
+            MIN(abs(DATEDIFF("MILLISECOND",txn.END_TM,txn.ST_TM))) AS MinTime, MAX(abs(DATEDIFF("MILLISECOND",txn.END_TM,txn.ST_TM))) AS MaxTime,
+            AVG(abs(DATEDIFF("MILLISECOND",txn.END_TM,txn.ST_TM))) AS AvgTime, count(txn.INTERFACE_ID) AS IntfCount FROM TB_ASLG_TXN_DETAIL txn,
+            TB_ASMI_INTF_MASTER intf WHERE txn.INTERFACE_ID = intf.INTERFACE_ID
+            GROUP BY txn.APP_ID,txn.INTERFACE_ID,CAST(txn.CREATE_TS AS Date),intf.DESCRIPTION,txn.TXN_STAT</createView>
+    </changeSet>
+    <changeSet author="platform" id="DDL_VW_ASMI_DEVICE_GRPS_3.24.0-16">
+        <createView fullDefinition="false" viewName="VW_ASMI_DEVICE_GRPS" replaceIfExists="true">SELECT APP_ID, DEVICE_GROUP_ID, DEVICE_GROUP_DESCRIPTION, OS,HEIGHT, WIDTH, 'PORTRAIT' AS ORIENTATION
+            FROM TB_ASMI_DEVICE_GRPS WHERE ORIENTATION_LOCK = 'ANY'
+            UNION ALL
+            SELECT APP_ID, DEVICE_GROUP_ID, DEVICE_GROUP_DESCRIPTION, OS,HEIGHT, WIDTH, 'LANDSCAPE' AS ORIENTATION
+            FROM TB_ASMI_DEVICE_GRPS WHERE ORIENTATION_LOCK = 'ANY'
+            UNION ALL
+            SELECT APP_ID, DEVICE_GROUP_ID, DEVICE_GROUP_DESCRIPTION, OS,HEIGHT, WIDTH, ORIENTATION_LOCK AS ORIENTATION
+            FROM TB_ASMI_DEVICE_GRPS
+            WHERE ORIENTATION_LOCK != 'ANY'</createView>
+    </changeSet>
+    <changeSet author="platform" id="DDL_VW_ASMI_MICROAPPS_3.24.0-17">
+        <createView fullDefinition="false" viewName="VW_ASMI_MICROAPPS" replaceIfExists="true">SELECT T2.APP_ID AS APP_ID, T2.SCREEN_ID, T2.MICRO_APP_ID AS MICRO_APP_ID, T1.APP_NAME AS MICRO_APP_NAME, T1.APP_ICON AS MICRO_APP_ICON,
+            T1.MICRO_APP_TYPE AS MICRO_APP_TYPE FROM TB_ASMI_APP_MASTER T1, TB_ASMI_SCREEN_MICRO_APP T2
+            WHERE T1.APP_ID = T2.MICRO_APP_ID AND T1.BASE_APP = 'N'</createView>
+    </changeSet>
+    <changeSet author="platform" id="DDL_VW_ASMI_NANOAPPS_3.24.0-18">
+        <createView fullDefinition="false" viewName="VW_ASMI_NANOAPPS" replaceIfExists="true">SELECT T1.APP_ID, T2.SCREEN_ID, T1.SCREEN_ID AS CALLFORM_ID, T1.SCREEN_NAME AS CALLFORM_NAME, T1.SCREEN_ICON AS CALLFORM_ICON
+            FROM TB_ASMI_SCR_MASTER T1, TB_ASMI_SCREEN_WIDGETS T2
+            WHERE T1.APP_ID = T2.APP_ID AND T1.SCREEN_ID = T2.CALLFORM_ID AND T1.SCREEN_TYPE = 'CALL'</createView>
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,16 @@
+resource "kubernetes_secret" "this" {
+
+  depends_on = [helm_release.kubernetes-dashboard]
+
+  metadata {
+    name = "tls-secret"
+    namespace = "kubernetes-dashboard"
+  }
+
+  data = {
+      "tls.crt" = file("${path.module}/certs/tls.cert")
+      "tls.key" = file("${path.module}/certs/tls.key")
+  }
+
+  type = "kubernetes.io/tls"
+}

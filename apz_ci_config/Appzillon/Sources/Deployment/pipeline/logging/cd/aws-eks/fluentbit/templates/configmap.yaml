@@ -1,0 +1,88 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: fluent-bit-config
+  namespace: {{ .Values.nameSpace }}
+  labels:
+    k8s-app: {{ include "fluentbit.name" . }}
+data:
+  # Configuration files: server, input, filters and output
+  # ======================================================
+  fluent-bit.conf: |
+    [SERVICE]
+        Flush         1
+        Log_Level     info
+        Daemon        off
+        Parsers_File  parsers.conf
+        HTTP_Server   On
+        HTTP_Listen   0.0.0.0
+        HTTP_Port     2020
+
+    @INCLUDE input-kubernetes.conf
+    @INCLUDE output-elasticsearch.conf
+
+  input-kubernetes.conf: |
+    [INPUT]
+        Name              tail
+        Tag               WebContainerLogFile.access
+        Path              /var/log/pods/${NAMESPACE}_${WEB_APP}*/appzillon-web/*.log
+        Parser            json
+        DB                /var/log/flb_web.db
+        Mem_Buf_Limit     1MB
+        Skip_Long_Lines   Off
+        Refresh_Interval  3
+
+    [INPUT]
+        Name              tail
+        Tag               MainLogFile.access
+        Path              /var/log/pods/${NAMESPACE}_${SERVER_APP}*/appzillon-server/*.log
+        Parser            json
+        DB                /var/log/flb_server.db
+        Mem_Buf_Limit     1MB
+        Skip_Long_Lines   Off
+        Refresh_Interval  3
+
+
+  output-elasticsearch.conf: |
+    [OUTPUT]
+        Name            es
+        Match           WebContainerLogFile.access
+        Host            ${FLUENT_ELASTICSEARCH_HOST}
+        Port            ${FLUENT_ELASTICSEARCH_PORT}
+        HTTP_User       ${ES_USERNAME}
+        HTTP_Passwd     ${ES_PASSWORD}
+        Index           fluentbit-web
+        tls             On
+        tls.verify      Off
+        tls.ca_file     /fluentbit-elastic-tls/appzillon-ca.crt
+        tls.crt_file    /fluentbit-elastic-tls/appzillon.crt
+        tls.key_file    /fluentbit-elastic-tls/appzillon.key
+        Logstash_Format Off
+        Replace_Dots    Off
+        Retry_Limit     10
+
+    [OUTPUT]
+        Name            es
+        Match           MainLogFile.access
+        Host            ${FLUENT_ELASTICSEARCH_HOST}
+        Port            ${FLUENT_ELASTICSEARCH_PORT}
+        HTTP_User       ${ES_USERNAME}
+        HTTP_Passwd     ${ES_PASSWORD}
+        Index           fluentbit-server
+        tls             On
+        tls.verify      Off
+        tls.ca_file     /fluentbit-elastic-tls/appzillon-ca.crt
+        tls.crt_file    /fluentbit-elastic-tls/appzillon.crt
+        tls.key_file    /fluentbit-elastic-tls/appzillon.key
+        Logstash_Format Off
+        Replace_Dots    Off
+        Retry_Limit     10
+    
+  parsers.conf: |
+    [PARSER]
+        Name   json
+        Format json
+
+    [PARSER]
+        Name        docker
+        Format      json

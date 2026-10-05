@@ -1,0 +1,138 @@
+#--------------PV for NFS mount-------------
+
+# upload path PV
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: nfs-uploadpv
+  labels:
+    type: local
+spec:
+  storageClassName: nfs
+  capacity:
+    storage: 2Gi
+  accessModes:
+    - ReadWriteMany
+  nfs:
+    server: 172.31.21.187
+    path: "/srv/nfs/kubedata"
+
+
+# Reports path PV,
+# Note: Reports should be placed in the NFS Server in the mount path directory ,if you want to enable reports in your pipeline
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: nfs-reportspv
+  labels:
+    type: local
+spec:
+  storageClassName: nfs
+  capacity:
+    storage: 2Gi
+  accessModes:
+    - ReadWriteMany
+  nfs:
+    server: 172.31.21.187
+    path: "/srv/nfs/kubedata"
+
+
+# ------------PVC for NFS mount---------------
+
+# upload path PVC
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: nfs-uploadpvc
+spec:
+  storageClassName: nfs
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 1Gi
+  volumeName: nfs-uploadpv
+
+
+# reports PVC
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: nfs-reportspvc
+spec:
+  storageClassName: nfs
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 1Gi
+  volumeName: nfs-reportspv
+
+
+#---------------------PV,PVC FOR EFS--------------------------
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: efs-logpv
+spec:
+  capacity:
+    storage: 2Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: efs-sc
+  csi:
+    driver: efs.csi.aws.com
+    volumeHandle: fs-09ff953e7df2764e7
+
+
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: efs-logpvc
+spec:
+  storageClassName: efs-sc
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 2Gi
+  volumeName: efs-logpv
+
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: efs-uploadpv
+spec:
+  capacity:
+    storage: 2Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: efs-sc
+  csi:
+    driver: efs.csi.aws.com
+    volumeHandle: fs-0e86a704e320d64bc
+
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: efs-uploadpvc
+spec:
+  storageClassName: efs-sc
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 2Gi
+  volumeName: efs-uploadpv

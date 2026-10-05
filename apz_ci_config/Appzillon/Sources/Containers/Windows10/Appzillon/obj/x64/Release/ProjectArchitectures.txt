@@ -1,0 +1,2 @@
+D:\TertoiseSVN\Appzlion 3.5.10\Studio\appzillonstudio-client\Appzillon\Sources\Containers\Windows10\Appzillon\Appzillon.csproj;x64
+D:\TertoiseSVN\Appzlion 3.5.10\Studio\appzillonstudio-client\Appzillon\Sources\Containers\Windows10\Packages\SQLiteWinRT\SQLiteWinRT.vcxproj;x64

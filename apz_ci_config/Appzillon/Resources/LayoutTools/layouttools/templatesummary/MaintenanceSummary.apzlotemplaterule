@@ -1,0 +1,312 @@
+template.MaintenanceSummary.createLayout = function() {
+    template.addBody(null, 'BODY');
+    template.addRow('SearchRow', 'BODY', null, 'GRIDROW');
+    template.addColumn('SearchGridCol', 'SearchRow', null, 'GRIDCOL');
+    template.addPanel('headerPanel', 'SearchGridCol', 'SIMPLE', null, 'SIMPLEPANEL');
+    template.addPanelSection("headerPanelSection", "headerPanel", null, "PANELSECTION");
+    template.addContainer("headerNavbar", "headerPanelSection", "NAVBAR", null, "NAVBAR");
+    template.addRow("headerNavbarSecRow", "headerNavbar", null, "SECTIONROW");
+    template.addColumn("headerStaticTextSecCol", "headerNavbarSecRow", null, "SECTIONCOL");
+    template.addElement("headerText", "headerStaticTextSecCol", "TEXT", null, "TEXT");
+    if (datamodel.name != undefined) {
+        main.pointers["headerText"].defaultvalue = datamodel.name.toUpperCase();
+        main.pointers["headerText"].elementtype = "HEADING4";
+    }
+   
+    main.pointers['headerNavbar'].appearance = 'ter';
+    
+    // Creating FORM
+    lcolrequired = true;
+	lcount = 0;
+	var lservicetyp = "";
+	var lnoofifaces = datamodel.interfaces.length;
+
+	template.addPanel('formPanel', 'SearchGridCol', 'SIMPLE', null, 'SIMPLEPANEL');
+    template.addPanelSection("formPanelSection", "formPanel", null, "PANELSECTION");
+    template.addContainer('FORM1', 'formPanelSection', 'FORM', null, 'FORM');
+    template.addRow('formSecRow', 'FORM1', null, "SECTIONROW");
+    main.pointers["FORM1"].orientation = 'VERTICAL';
+
+    // Creating Buttons
+    template.addPanel('btnPanel', 'SearchGridCol', 'SIMPLE', null, 'SIMPLEPANEL');
+    template.addPanelSection("btnPanelSection", "btnPanel", null, "PANELSECTION");
+    template.addContainer("btnNavbar", "btnPanelSection", "NAVBAR", null, "NAVBAR");
+    template.addRow('btnSecRow', 'btnNavbar', null, 'SECTIONROW');
+    template.addColumn("btnSecCol", "btnSecRow", null, "SECTIONCOL");
+    template.addElement("searchButton", "btnSecCol", "BUTTON", null, "SEARCHBTN");
+    template.addElement("addButton", "btnSecCol", "BUTTON", null, "ADDBTN");
+    
+    
+    // Create Table
+	
+	if(lnoofifaces > 0) {
+	    var lfirstifaceobj = datamodel.interfaces[0];
+		lservicetyp = lfirstifaceobj.servicetype;
+		template.addRow('TableRow', 'SearchGridCol', null, 'GRIDROW');
+		template.addColumn('TableColumn', 'TableRow', null, 'GRIDCOL' );
+		template.addPanel('tablePanel', 'TableColumn', 'SIMPLE', null, 'SIMPLEPANEL');
+        template.addPanelSection("tablePanelSection", "tablePanel", null, "PANELSECTION");
+		template.addContainer('Table1', 'tablePanelSection', 'TABLE', null, 'TABLE');
+
+		for(var iface = 0; iface < lnoofifaces; iface++) {
+		    lifaceobj = datamodel.interfaces[iface];
+            var lnoofnodes = 0;
+            var ldmlobj = {};
+            var lnodeobj = {};
+            var lnoofdmls = lifaceobj.dmls.length;
+            //alert(lnoofdmls);
+            for (var d = 0; d < lnoofdmls; d++) {
+                ldmlobj = lifaceobj.dmls[d];
+                if (ldmlobj.type == "REQUESTDATAMODEL" && ldmlobj.nodes != undefined) {
+                    lnoofnodes = ldmlobj.nodes.length;
+                    //alert(lnoofnodes);
+                    for (var lnode = 0; lnode < lnoofnodes; lnode++) {
+                        dmtype = "REQUESTDATAMODEL";
+                        lnodeobj = ldmlobj.nodes[lnode];
+                        createNodeWidgets(lnodeobj);
+                    }
+                }
+            }
+		}
+	}
+}
+
+function createNodeWidgets(pnodeobj) {
+    var lnoofelms = pnodeobj.elements.length;
+	var lnodename = pnodeobj.name;
+	if(lnoofelms > 0) {
+	    lcount = lcount + 1;
+	    var lcommonid = pnodeobj.name + "__" + lcount;
+		var lgrid = "GR__" + lcommonid;
+		var lgcid = "GC__" + lcommonid;
+        var lpanel = "P__" + lcommonid;
+        var lpanelsec = "PC__" + lcommonid;
+	    var lcontainerId = "CON__" + lcommonid;
+	    var lsrid = "SR__" + lcommonid;
+    	var lscid = "SC__" + lcommonid;
+    	main.pointers['Table1'].icon = 'icon-list-alt';
+	    main.pointers['Table1'].title = 'Search Results';
+	    main.pointers['Table1'].containerstate = "READONLY";
+	   // main.pointers['Table1'].events[0]["function"] = 'apz.APZAPPID.fnLaunchViewScreen(event)';
+	    //main.pointers['Table1'].events[0]["name"] = 'ONCLICK';
+	    template.addRow(lsrid, 'Table1', null, "SECTIONROW");
+    	template.addColumn(lscid, lsrid, null, "SECTIONCOL");
+    	formseccol= [];
+		for(var lelm = 0; lelm < lnoofelms; lelm++){
+			var lelmobj = pnodeobj.elements[lelm];
+			createElementWidgets(pnodeobj, lelmobj, lscid, false);
+			if(lelmobj.properties.filterrequired === "Y") {
+			    formlscid = 'form_' + lscid + lelm;
+			    formseccol.push(formlscid);
+			    template.addColumn(formlscid, 'formSecRow', null, "SECTIONCOL");
+			    createElementWidgets(pnodeobj, lelmobj, formlscid, true);   
+			}
+		}
+		if(formseccol.length > 0) {
+		    formseccolwidth = (100/formseccol.length);
+		    for(var fs = 0; fs < formseccol.length; fs++) {
+		        main.pointers[formseccol[fs]].width = (formseccolwidth);
+		    }
+		}
+	}
+} 
+
+function createElementWidgets(pnodeobj, pelement, ppid, isForm) {
+    //alert('Alert' + JSON.stringify(lelmobj));
+    var lelmname = pelement.name;
+	//var lwidgettype = "INPUTBOX";
+	var lnodename = pnodeobj.name;
+	var lelmid = utils.getNameforWidget(lifaceobj.name,dmtype,lnodename,lelmname);
+	if (dmtype == "Response") {
+		if (container == "FORM") {
+			lwidgettype = "INPUTBOX";
+		} else {
+			lwidgettype = "TEXT";
+		}
+	} else {
+		if (pelement.staticoptions.length > 0) {
+			lwidgettype = "DROPDOWN";
+		} else if (pelement.datatype == "DATE" || pelement.datatype == "DATETIME") {
+			lwidgettype = "INPUTBOX";
+		} else {
+			lwidgettype = "INPUTBOX";
+		}
+	}
+	if(isForm) {
+	    //// Filter field elements for summary table
+	    template.addElement(lelmname, ppid, lwidgettype, null, lwidgettype);	    
+        if(pelement.properties.datatype == "DATE" || pelement.properties.datatype == "DATETIME"){
+	        main.pointers[lelmname].datetype = "GENERIC";
+	    }
+	    if(!pelement.properties.title) {
+	        main.pointers[lelmname].title = "Title";
+	    } else {
+	        main.pointers[lelmname].title = pelement.properties.title;
+	    }
+	    if (pelement.properties.datatype == "STRING" && pelement.staticoptions.length == 0 && pelement.properties.filtertype == "LOV") {
+	        //// Lov's only if input box with string datatype.
+    	    main.pointers[lelmname].lovname = "Summary_"+lifaceobj.name+"_"+lelmname+"_LOV";
+    	    main.pointers[lelmname].lovs = [{
+    	        "returnfields": [{
+					"screlement": lelmname
+    	        }]
+    	    }];
+    	    main.pointers[lelmname].iconposition = "RIGHT";
+	    }
+	    if (dmtype == "RESPONSEDATAMODEL") {
+	       main.pointers[lelmname].state = "READONLY";
+	    }else{
+	       main.pointers[lelmname].state = "ENABLE";
+	   }
+	} else {
+	    template.addElement(lelmid, ppid, lwidgettype, null, lwidgettype, lifaceobj.name, dmtype, lnodename, lelmname);
+	}	
+	if(!pelement.properties.title) {
+	    main.pointers[lelmid].title = "Title";
+	}
+	if (dmtype == "RESPONSEDATAMODEL") {
+		main.pointers[lelmid].state = "READONLY";
+	} else if (pelement.properties.datatype == "DATE" || pelement.properties.datatype=="DATETIME") {
+		main.pointers[lelmid].lookandfeel = "GENERIC";
+		main.pointers[lelmid].datetype = "GENERIC";
+		main.pointers[lelmid].state = "ENABLED";
+	} else if (lwidgettype == "DROPDOWN") {
+		main.pointers[lelmid].lookandfeel = "OSSPECIFIC";
+		main.pointers[lelmid].state = "ENABLED";
+	} else {
+		main.pointers[lelmid].state = "ENABLED";
+	}
+}
+
+template.MaintenanceSummary.updateLayout = function() {
+    lcount = 0;
+    if (!utils.isObjByIdAvailable("BODY")) {
+        template.addBody(null, "BODY");
+    }
+   // alert("Updating Layout");
+    var lnoofifaces = datamodel.interfaces.length;
+    var lwidgettype = "";
+    if (lnoofifaces > 0) {
+        for (var iface = 0; iface < lnoofifaces; iface++) {
+            lifaceobj = datamodel.interfaces[iface];
+            var lnoofnodes = 0;
+            var ldmlobj = {};
+            var lnodeobj = {};
+            var lnoofdmls = lifaceobj.dmls.length;
+            if (lnoofdmls > 0) {
+                for (var d = 0; d < lnoofdmls; d++) {
+                    ldmlobj = lifaceobj.dmls[d];
+                    if (ldmlobj.nodes != undefined) {
+                        lnoofnodes = ldmlobj.nodes.length;
+                        for (var lnode = 0; lnode < lnoofnodes; lnode++) {
+                            lnodeobj = ldmlobj.nodes[lnode];
+                            updateNodeWidgets(lnodeobj);
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+function updateNodeWidgets(pnodeobj) {
+    var lcount = 1;
+    var isNewNode = true;
+    var lnodename = pnodeobj.name;
+    var rowName = "";
+    var colName = "";
+    var lcontainerId = "";
+    var secRow = "";
+    var secCol = "";
+    var lnoofelms = pnodeobj.elements.length;
+    for (var j = 0; j < lnoofelms; j++) {
+        var lelmobj = pnodeobj.elements[j];
+        var lelmname = lelmobj.name;
+        alert('Here' + lelmobj);
+        var lelmid = utils.getNameforWidget(lifaceobj.name, dmtype, lnodename, lelmname);
+        if (!utils.isObjByNameAvailable(lelmid)) {
+            if (isNewNode || !rowName) {
+                rowName = "GR__" + lnodename + lcount;
+                rowName = getNewName(rowName);
+            }
+            if (isNewNode || !colName) {
+                colName = "GC__" + lnodename + lcount;
+                colName = getNewName(colName);
+            }
+            if (!utils.isObjByNameAvailable(rowName)) {
+                template.addRow(rowName, "BODY", null, "GRIDROW");
+                template.addColumn(colName, rowName, null, "GRIDCOL");
+            }
+            main.pointers[colName].contentboxtitle = lnodename;
+            main.pointers[colName].collapsible = "Y";
+            main.pointers[colName].contentcolor = "CSALT";
+            if ((pnodeobj.relationtype) == ("1:1")) {
+                if (dmtype == "RESPONSEDATAMODEL") {
+                    main.pointers[colName].contentcolor = "CSDB6";
+                } else {
+                    main.pointers[colName].contentcolor = "CSDB4";
+                }
+                lwidgettype = "FORM";
+            } else {
+                if (dmtype == "RESPONSEDATAMODEL") {
+                    main.pointers[colName].contentcolor = "CSDB2";
+                }
+                lwidgettype = "TABLE";
+            }
+            var container = lwidgettype;
+            if (isNewNode || !lcontainerId) {
+                lcontainerId = "CON__" + lnodename + "_" + lcount;
+                lcontainerId = getNewName(lcontainerId);
+            }
+            if (!utils.isObjByNameAvailable(lcontainerId)) {
+                template.addContainer(lcontainerId, colName, lwidgettype, null, lwidgettype);
+            }
+            if (dmtype == "RESPONSEDATAMODEL" || container == "TABLE") {
+                main.pointers[lcontainerId].readonly = "Y";
+            }
+            if (isNewNode || !secRow) {
+                secRow = "SR__" + lnodename + lcount;
+                secRow = getNewName(secRow);
+            }
+            if (isNewNode || !secCol) {
+                secCol = "SC__" + lnodename + lcount;
+                secCol = getNewName(secCol);
+            }
+            if (!utils.isObjByNameAvailable(secRow)) {
+                template.addRow(secRow, lcontainerId, null, "SECTIONROW");
+                template.addColumn(secCol, secRow, null, "SECTIONCOL");
+            }
+            if (dmtype == "RESPONSEDATAMODEL") {
+                if (container == "FORM") {
+                    lwidgettype = "INPUTBOX";
+                } else {
+                    lwidgettype = "TEXT";
+                }
+            } else {
+                if (lelmobj.noofstaticoptions > 0) {
+                    lwidgettype = "DROPDOWN";
+                } else if (lelmobj.datatype == "DATE") {
+                    lwidgettype = "INPUTBOX";
+                } else {
+                    lwidgettype = "INPUTBOX";
+                }
+            }
+            alert('Leml' + JSON.stringify(lelmobj));
+            template.addElement(lelmid, secCol, lwidgettype, null, lwidgettype, lifaceobj.name, dmtype, lnodename, lelmname);
+            if (dmtype == "RESPONSEDATAMODEL") {
+                main.pointers[lelmid].state = "READONLY";
+            } else if (lelmobj.datatype == "DATE") {
+                main.pointers[lelmid].lookandfeel = "GENERIC";
+                main.pointers[lelmid].state = "ENABLED";
+            } else if (lwidgettype == "DROPDOWN") {
+                main.pointers[lelmid].lookandfeel = "OSSPECIFIC";
+                main.pointers[lelmid].state = "ENABLED";
+            } else {
+                main.pointers[lelmid].state = "ENABLED";
+            }
+            main.pointers[lelmid].nodename = lnodename;
+            main.pointers[lelmid].elementname = lelmname;
+            isNewNode = false;
+        }
+    }
+}

@@ -1,0 +1,423 @@
+template.Appzillon01.createLayout = function() {
+    template.addHeader(null, "HEADER");
+    template.addRow("headerGridRow", "HEADER", null, "GRIDROW");
+    template.addColumn("headerGridCol", "headerGridRow", null, "GRIDCOLHEADER");
+    template.addPanel("headerPanel", "headerGridCol", "SIMPLE", null, "SIMPLEPANEL");
+    template.addPanelSection("headerPanelSection", "headerPanel", null, "PANELSECTION");
+    template.addContainer("headerNavbar", "headerPanelSection", "NAVBAR", null, "NAVBAR");
+    template.addRow("headerNavbarSecRow", "headerNavbar", null, "SECTIONROW");
+    template.addColumn("headerBackButtonSecCol", "headerNavbarSecRow", null, "SECTIONCOL1");
+    template.addElement("headerBackButton", "headerBackButtonSecCol", "BUTTON", null, "BACKBUTTON");
+    template.addColumn("headerTextSecCol", "headerNavbarSecRow", null, "SECTIONCOL2");
+    template.addElement("headerText", "headerTextSecCol", "TEXT", null, "TEXT");
+    if (datamodel.name != undefined) {
+        main.pointers["headerText"].defaultvalue = datamodel.name.toUpperCase();
+        main.pointers["headerText"].elementtype = "HEADING4";
+        //main.pointers["headerText"].semantics = "ETXT-INVERSE";
+    }
+    template.addColumn("headerLogoutButtonSecCol", "headerNavbarSecRow", null, "SECTIONCOL3");
+    template.addElement("headerLogoutButton", "headerLogoutButtonSecCol", "BUTTON", null, "LOGOUTBUTTON");
+    template.addBody(null, "BODY");
+    lcolrequired = true;
+	lcount = 0;
+	var lservicetyp = "";
+	var lnoofifaces = datamodel.interfaces.length;
+	if(lnoofifaces > 0){
+		var lfirstifaceobj = datamodel.interfaces[0];
+		lservicetyp = lfirstifaceobj.servicetype;
+        //alert("Creating Screen");
+        var lgobtnadded = false;
+        var lgobtnrequird = false;
+        template.addRow("Form1Row", "BODY", null, "GRIDROW");
+        template.addColumn("Form1Column", "Form1Row", null, "FORMCOLUMN");
+        template.addPanel("Form1Panel", "Form1Column", "SIMPLE", null, "SIMPLEPANEL");
+        template.addPanelSection("Form1PanelSection", "Form1Panel", null, "PANELSECTION");
+       /* template.addContainer("Form1", "Form1PanelSection", "FORM", null, "FORM");
+        template.addRow("SectionRow", "Form1", null, "SECTIONROW");
+        template.addColumn("SectionCol", "SectionRow", null, "SECTIONCOL");
+        template.addElement("BillerId", "SectionCol", "INPUTBOX", null, "FORMINPUTBOX");
+        template.addElement("BillerName", "SectionCol", "INPUTBOX", null, "FORMINPUTBOX");
+        main.pointers["BillerName"].title = "Biller Name";*/
+		for(var iface = 0; iface < lnoofifaces; iface++){
+            lifaceobj = datamodel.interfaces[iface];
+            var lnoofnodes = 0;
+            var ldmlobj = {};
+            var lnodeobj = {};
+            var lnoofdmls = lifaceobj.dmls.length;
+            if (lnoofdmls > 0) {
+                for (var d = 0; d < lnoofdmls; d++) {
+                    ldmlobj = lifaceobj.dmls[d];
+                    if (ldmlobj.type == "REQUESTDATAMODEL" && ldmlobj.nodes != undefined) {
+                        lnoofnodes = ldmlobj.nodes.length;
+                        for (var lnode = 0; lnode < lnoofnodes; lnode++) {
+                            dmtype = "REQUESTDATAMODEL";
+                            lgobtnrequird = true;
+                            lnodeobj = ldmlobj.nodes[lnode];
+                            createNodeWidgets(lnodeobj);
+                        }
+                    }
+                    if (ldmlobj.type == "RESPONSEDATAMODEL" && ldmlobj.nodes != undefined) {
+                        lnoofnodes = ldmlobj.nodes.length;
+                        for (var lnode = 0; lnode < lnoofnodes; lnode++) {
+                            dmtype = "RESPONSEDATAMODEL";
+                            lgobtnrequird = false;
+                            lnodeobj = ldmlobj.nodes[lnode];
+                            createNodeWidgets(lnodeobj);
+                        }
+                    }
+                    if (ldmlobj.type == "FAULTDATAMODEL" && ldmlobj.nodes != undefined) {
+                        lnoofnodes = ldmlobj.nodes.length;
+                        for (var lnode = 0; lnode < lnoofnodes; lnode++) {
+                            dmtype = "FAULTDATAMODEL";
+                            lgobtnrequird = false;
+                            lnodeobj = ldmlobj.nodes[lnode];
+                            createNodeWidgets(lnodeobj);
+                        }
+                    }
+                }
+            }
+        }
+		if(lgobtnrequird){
+		    getGoButton(lfirstifaceobj);
+		}
+	}
+}
+function createNodeWidgets(pnodeobj){
+	var lnoofelms = pnodeobj.elements.length;
+	var lnodename = pnodeobj.name;
+	if(lnoofelms > 0){
+		lcount = lcount + 1;
+		if ((pnodeobj.relationtype) == ("1:1")) {
+			container = "FORM";
+		} else {
+			container = "TABLE";
+		}
+		var lcommonid = pnodeobj.name + "__" + lcount;
+		var lgrid = "GR__" + lcommonid;
+		var lgcid = "GC__" + lcommonid;
+        var lpanel = "P__" + lcommonid;
+        var lpanelsec = "PC__" + lcommonid;
+		template.addRow(lgrid, "BODY", null, "GRIDROW");
+	//	alert('Chandu'+dmtype);
+		if ((dmtype == "RESPONSEDATAMODEL")) {
+		//	main.pointers[lgrid].options = "HIDDEN";
+		}
+		template.addColumn(lgcid, lgrid, null, "GRIDCOL");
+		if (lnodename == "createBillingTransaction") {
+			main.pointers[lgcid].collapsible = "N";
+			main.pointers[lgcid].titlestyle = "NONE";
+		} else {
+			main.pointers[lgcid].contentboxtitle = lnodename;
+			main.pointers[lgcid].collapsible = "Y";
+		}
+        template.addPanel(lpanel, lgcid, "SIMPLE", null, "SIMPLEPANEL");
+        template.addPanelSection(lpanelsec, lpanel, null, "PANELSECTION");
+		var lcontainerId = "CON__" + lcommonid;
+		template.addContainer(lcontainerId, lpanelsec, container, null, container);
+		if ((dmtype == "RESPONSEDATAMODEL") || container == "TABLE") {
+			main.pointers[lcontainerId].readonly = "Y";
+				
+		}
+			main.pointers[lcontainerId].title = pnodeobj.name;
+		if ((pnodeobj.relationtype) != ("1:1")) {
+			main.pointers[lcontainerId].interfacename = lifaceobj.name;
+			main.pointers[lcontainerId].datamodeltype = dmtype;
+			main.pointers[lcontainerId].xnode = pnodeobj.name;
+			main.pointers[lcontainerId].ynode = pnodeobj.name;
+			main.pointers[lcontainerId].xelement = pnodeobj.elements[0].name;
+			main.pointers[lcontainerId].chartxtitle = pnodeobj.elements[0].properties.title;
+			if (lnoofelms > 1) {
+				main.pointers[lcontainerId].yaxiselements = new Array();
+				var lyelms = main.pointers[lcontainerId].yaxiselements[0] = {};
+				lyelms.chartytitle = pnodeobj.elements[1].properties.title;
+				lyelms.element = pnodeobj.elements[1].name;
+				lyelms.node = pnodeobj.name;
+			}
+			main.pointers[lcontainerId].xfunc = "DISTINCT";
+			main.pointers[lcontainerId].yfunc = "SUM";
+			main.pointers[lcontainerId].zfunc = "DISTINCT";
+			main.pointers[lcontainerId].chartstylesheet = "SpendAnalysis";
+			main.pointers[lcontainerId].charttype = "Column3D";
+		}
+		var lsrid = "SR__" + lcommonid;
+		var lscid = "SC__" + lcommonid;
+		template.addRow(lsrid, lcontainerId, null, "SECTIONROW");
+		template.addColumn(lscid, lsrid, null, "SECTIONCOL");
+		for(var lelm = 0; lelm < lnoofelms; lelm++){
+			var lelmobj = pnodeobj.elements[lelm];
+			createElementWidgets(pnodeobj, lelmobj, lscid);
+		}
+	}
+}
+function createElementWidgets(pnodeobj, pelement, ppid){
+	var lelmname = pelement.name;
+	var lwidgettype = "INPUTBOX";
+	var lnodename = pnodeobj.name;
+	var lelmid = utils.getNameforWidget(lifaceobj.name,dmtype,lnodename,lelmname);
+	if (!(lnodename == "createBillingTransaction" && lelmname == "Biller")) {
+		if (dmtype == "Response") {
+			if (container == "FORM") {
+				lwidgettype = "INPUTBOX";
+			} else {
+				lwidgettype = "TEXT";
+			}
+		} else {
+			if (pelement.staticoptions.length > 0) {
+				lwidgettype = "DROPDOWN";
+			} else if (pelement.datatype == "DATE") {
+				lwidgettype = "INPUTBOX";
+			} else {
+				lwidgettype = "INPUTBOX";
+			}
+		}
+		template.addElement(lelmid, ppid, lwidgettype, null, lwidgettype, lifaceobj.name, dmtype, lnodename, lelmname);
+		if (dmtype == "RESPONSEDATAMODEL") {
+			main.pointers[lelmid].state = "READONLY";
+		} else if (pelement.datatype == "DATE") {
+			main.pointers[lelmid].lookandfeel = "GENERIC";
+			main.pointers[lelmid].state = "ENABLED";
+		} else if (lwidgettype == "DROPDOWN") {
+			main.pointers[lelmid].lookandfeel = "OSSPECIFIC";
+			main.pointers[lelmid].state = "ENABLED";
+		} else {
+			main.pointers[lelmid].state = "ENABLED";
+		}
+		main.pointers[lelmid].labelwidth = "25";
+		main.pointers[lelmid].columnwidth = "45";
+		main.pointers[lelmid].nodename = lnodename;
+		main.pointers[lelmid].elementname = lelmname;
+	}
+}
+function getGoButton(piface) {
+    template.addRow("footerGridRow", "BODY", null, "GRIDROW");
+    template.addColumn("footerGridCol", "footerGridRow", null, "GRIDCOLHEADER");
+        template.addPanel("footerPanel", "Form1Column", "SIMPLE", null, "SIMPLEPANEL");
+        template.addPanelSection("footerPanelSection", "footerPanel", null, "PANELSECTION");
+    template.addContainer("footerNavbar", "footerPanelSection", "NAVBAR", null, "NAVBAR");
+    main.pointers["footerNavbar"].variation = "TRANSPARENT";
+    template.addRow("footerNavbarSecRow", "footerNavbar", null, "SECTIONROW");
+    template.addColumn("footerGoButtonSecCol", "footerNavbarSecRow", null, "SECTIONCOL3");
+    main.pointers["footerGoButtonSecCol"].width = "100";
+    main.pointers["footerGoButtonSecCol"].customwidth = "";
+    template.addElement("footerGoButton", "footerGoButtonSecCol", "BUTTON", null, "GOBUTTON");
+    var gobtncont = main.pointers["footerGoButton"];
+    var interfacename = piface.name;
+    var lservicetyp = piface.servicetype;
+    if (lservicetyp == "DATABASE") {
+        interfacename = interfacename + "_Query";
+    }
+    if(gobtncont.events){
+        var req={};
+        req.ifaceName = interfacename;
+        req.buildReq ="Y";
+        req.paintResp="Y";
+        gobtncont.events[0]["function"] = 'apz.server.callServer('+ req +' )';
+    }
+};
+template.Appzillon01.updateLayout = function() {
+	lcount = 0;
+    if (!utils.isObjByIdAvailable("BODY")) {
+        template.addBody(null, "BODY");
+    }
+    alert("Updating Layout");
+    var lnoofifaces = datamodel.interfaces.length;
+    var lwidgettype = "";
+    if (lnoofifaces > 0) {
+        //alert("Updating Screen");
+        lgobtnadded = false;
+        lgobtnrequird = false;
+        for (var iface = 0; iface < lnoofifaces; iface++) {
+            lifaceobj = datamodel.interfaces[iface];
+            var lnoofnodes = 0;
+            var ldmlobj = {};
+            var lnodeobj = {};
+            var lnoofdmls = lifaceobj.dmls.length;
+            if (lnoofdmls > 0) {
+                for (var d = 0; d < lnoofdmls; d++) {
+                    ldmlobj = lifaceobj.dmls[d];
+                    if (ldmlobj.type == "REQUESTDATAMODEL" && ldmlobj.nodes != undefined) {
+                        lnoofnodes = ldmlobj.nodes.length;
+                        for (var lnode = 0; lnode < lnoofnodes; lnode++) {
+                            dmtype = "REQUESTDATAMODEL";
+                            lnodeobj = ldmlobj.nodes[lnode];
+                            updateNodeWidgets(lnodeobj);
+                        }
+                    }
+                    if (ldmlobj.type == "RESPONSEDATAMODEL" && ldmlobj.nodes != undefined) {
+                        lnoofnodes = ldmlobj.nodes.length;
+                        for (var lnode = 0; lnode < lnoofnodes; lnode++) {
+                            dmtype = "RESPONSEDATAMODEL";
+                            lnodeobj = ldmlobj.nodes[lnode];
+                            updateNodeWidgets(lnodeobj);
+                        }
+                    }
+                    if (ldmlobj.type == "FAULTDATAMODEL" && ldmlobj.nodes != undefined) {
+                        lnoofnodes = ldmlobj.nodes.length;
+                        for (var lnode = 0; lnode < lnoofnodes; lnode++) {
+                            dmtype = "FAULTDATAMODEL";
+                            lnodeobj = ldmlobj.nodes[lnode];
+                            updateNodeWidgets(lnodeobj);
+                        }
+                    }
+                }
+            }
+        }
+    }
+};
+
+function updateNodeWidgets(pnodeobj) {
+    var lcount = 1;
+    var isNewNode = true;
+    var lnodename = pnodeobj.name;
+    var rowName = "";
+    var colName = "";
+    var panelName = "";
+    var panelSecName = "";
+    var lcontainerId = "";
+    var secRow = "";
+    var secCol = "";
+    var lnoofelms = pnodeobj.elements.length;
+    for (var j = 0; j < lnoofelms; j++) {
+        var lelmobj = pnodeobj.elements[j];
+        var lelmname = lelmobj.name;
+        var lelmid = utils.getNameforWidget(lifaceobj.name, dmtype, lnodename, lelmname);
+        if (!utils.isObjByNameAvailable(lelmid)) {
+            if (dmtype == "REQUESTDATAMODEL") {
+                lgobtnrequird = true;
+            }
+            if (dmtype == "RESPONSEDATAMODEL" && !lgobtnadded) {
+                if (main.pointers["BODY"].childs.length > 0 && lgobtnrequird) {
+                    getGoButton(lifaceobj);
+                }
+                lgobtnadded = true;
+            }
+            if (isNewNode || !rowName) {
+                rowName = "GR__" + lnodename + lcount;
+                rowName = getNewName(rowName);
+            }
+            if (isNewNode || !colName) {
+                colName = "GC__" + lnodename + lcount;
+                colName = getNewName(colName);
+            }
+            if (isNewNode || !panelName) {
+                panelName = "P__" + lnodename + lcount;
+                panelName = getNewName(panelName);
+            }
+            if (isNewNode || !panelSecName) {
+                panelSecName = "PC__" + lnodename + lcount;
+                panelSecName = getNewName(panelSecName);
+            }
+            if (!utils.isObjByNameAvailable(rowName)) {
+                template.addRow(rowName, "BODY", null, "GRIDROW");
+                template.addColumn(colName, rowName, null, "GRIDCOL");
+                template.addPanel(panelName, colName,"SIMPLE", null, "SIMPLEPANEL");
+                template.addPanelSection(panelSecName, panelName, null, "PANELSECTION");
+            }
+            main.pointers[colName].contentboxtitle = lnodename;
+            main.pointers[colName].collapsible = "Y";
+            main.pointers[colName].contentcolor = "CSALT";
+            if ((pnodeobj.relationtype) == ("1:1")) {
+                if (dmtype == "RESPONSEDATAMODEL") {
+                    main.pointers[colName].contentcolor = "CSDB6";
+                } else {
+                    main.pointers[colName].contentcolor = "CSDB4";
+                }
+                lwidgettype = "FORM";
+            } else {
+                if (dmtype == "RESPONSEDATAMODEL") {
+                    main.pointers[colName].contentcolor = "CSDB2";
+                }
+                lwidgettype = "TABLE";
+            }
+            var container = lwidgettype;
+            if (isNewNode || !lcontainerId) {
+                lcontainerId = "CON__" + lnodename + "_" + lcount;
+                lcontainerId = getNewName(lcontainerId);
+            }
+            if (!utils.isObjByNameAvailable(lcontainerId)) {
+                template.addContainer(lcontainerId, panelSecName, lwidgettype, null, lwidgettype);
+            }
+            if (dmtype == "RESPONSEDATAMODEL" || container == "TABLE") {
+                main.pointers[lcontainerId].readonly = "Y";
+            }
+            if ((pnodeobj.relationtype) != ("1:1")) {
+                main.pointers[lcontainerId].xnode = pnodeobj.name;
+                main.pointers[lcontainerId].ynode = pnodeobj.name;
+                main.pointers[lcontainerId].xelement = pnodeobj.elements[0].name;
+                main.pointers[lcontainerId].chartxtitle = pnodeobj.elements[0].properties.title;
+                if (lnoofelms > 1) {
+                    main.pointers[lcontainerId].interfacename = lifaceobj.name;
+                    main.pointers[lcontainerId].datamodeltype = dmtype;
+                    main.pointers[lcontainerId].yaxiselements = new Array();
+                    var lyelms = main.pointers[lcontainerId].yaxiselements[0] = {};
+                    lyelms.chartytitle = pnodeobj.elements[1].properties.title;
+                    lyelms.element = pnodeobj.elements[1].name;
+                    lyelms.node = pnodeobj.name;
+                }
+                main.pointers[lcontainerId].xfunc = "DISTINCT";
+                main.pointers[lcontainerId].yfunc = "SUM";
+                main.pointers[lcontainerId].zfunc = "DISTINCT";
+            }
+            if (isNewNode || !secRow) {
+                secRow = "SR__" + lnodename + lcount;
+                secRow = getNewName(secRow);
+            }
+            if (isNewNode || !secCol) {
+                secCol = "SC__" + lnodename + lcount;
+                secCol = getNewName(secCol);
+            }
+            if (!utils.isObjByNameAvailable(secRow)) {
+                template.addRow(secRow, lcontainerId, null, "SECTIONROW");
+                template.addColumn(secCol, secRow, null, "SECTIONCOL");
+            }
+            if (dmtype == "RESPONSEDATAMODEL") {
+                if (container == "FORM") {
+                    lwidgettype = "INPUTBOX";
+                } else {
+                    lwidgettype = "TEXT";
+                }
+            } else {
+                if (lelmobj.noofstaticoptions > 0) {
+                    lwidgettype = "DROPDOWN";
+                } else if (lelmobj.datatype == "DATE") {
+                    lwidgettype = "INPUTBOX";
+                } else {
+                    lwidgettype = "INPUTBOX";
+                }
+            }
+            template.addElement(lelmid, secCol, lwidgettype, null, lwidgettype, lifaceobj.name, dmtype, lnodename, lelmname);
+            if (dmtype == "RESPONSEDATAMODEL") {
+                main.pointers[lelmid].state = "READONLY";
+            } else if (lelmobj.datatype == "DATE") {
+                main.pointers[lelmid].lookandfeel = "GENERIC";
+                main.pointers[lelmid].state = "ENABLED";
+            } else if (lwidgettype == "DROPDOWN") {
+                main.pointers[lelmid].lookandfeel = "OSSPECIFIC";
+                main.pointers[lelmid].state = "ENABLED";
+            } else {
+                main.pointers[lelmid].state = "ENABLED";
+            }
+            main.pointers[lelmid].labelwidth = "25";
+            main.pointers[lelmid].columnwidth = "45";
+            main.pointers[lelmid].nodename = lnodename;
+            main.pointers[lelmid].elementname = lelmname;
+            isNewNode = false;
+        }
+    }
+}
+
+function getNewName(pname) {
+    var lname = pname;
+    var lstatus = utils.isObjByNameAvailable(pname);
+    if (lstatus) {
+        var lnamepos = lname.lastIndexOf("_") + 1;
+        var lprefix = lname.substring(0, lnamepos);
+        var lcount = parseInt(lname.substring(lnamepos, lname.length));
+        lname = lprefix + lcount;
+        while (utils.isObjByNameAvailable(lname)) {
+            lcount = lcount + 1;
+            lname = lprefix + lcount;
+        }
+    }
+    return lname;
+}

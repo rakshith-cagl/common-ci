@@ -1,0 +1,35 @@
+<ng-container *ngIf="props.cntrType=='FORM' ">
+        <ul #formWrapperClass  id="{{props.id}} + _ul" clickstoppropagation>
+            <li  #formlabelWrapper>
+                <ng-container *ngIf="(props.hasLabelIcon === 'Y' && props.labelIconProps.iconPos==='LEFT')"  [ngTemplateOutlet]="labelIconContent">
+            	</ng-container>
+
+	            <label #formlabelProps  [innerHtml]="props.labelProps.title">
+	            </label>
+	            
+	            <ng-container *ngIf="(props.hasLabelIcon === 'Y' && props.labelIconProps.iconPos!=='LEFT')"  [ngTemplateOutlet]="labelIconContent">
+	            </ng-container>
+            </li>
+            <li #formContentWrapper >
+                <ng-container [ngTemplateOutlet]="GaugeEle"></ng-container>
+            </li>
+        </ul>
+</ng-container>
+
+
+
+
+<ng-template #GaugeEle>
+    <div [id]="props.id" #gaugeprops></div>
+    <ng-container *ngIf="props.hint">
+        <span [id]="props.id+'_hnt'" class="htx">{{props.hintValue}}</span>
+    </ng-container>
+</ng-template>
+
+<ng-template #labelIconContent>
+    <button class="ett-bttn tsp sml lbtn px20" (click)="labelIconClickEvent($event)">
+        <svg [attr.class]="props.labelIconProps.direct.className" #contentIcon>
+            <use attr.xlink:href="{{'#'+ props.labelIconProps.name}}" xlink:href="" />
+        </svg>
+    </button>
+</ng-template> 

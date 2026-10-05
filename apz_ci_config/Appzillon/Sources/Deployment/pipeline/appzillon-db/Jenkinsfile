@@ -1,0 +1,33 @@
+pipeline {
+
+    parameters {
+      choice(name: 'DB_TYPE', choices: ['mysql', 'postgresql','oracle','mssql'], description: 'Select the database type')
+      string defaultValue: 'http://ec2-3-137-4-178.us-east-2.compute.amazonaws.com/aws-eks', description: '', name: 'GIT_BASE_URL', trim: false
+      string defaultValue: 'appzillon-db-deployment', description: '', name: 'REPO_NAME', trim: false
+      string defaultValue: 'develop', description: '', name: 'BRANCH', trim: false
+   }
+
+    agent any
+
+    stages {    
+        stage('Checkout') {
+            steps {
+                echo 'Checkout Application project code from the GitLab repo'
+                checkout([$class: 'GitSCM', branches: [[name: '*/${BRANCH}']], extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'application_sources']], userRemoteConfigs: [[credentialsId: 'ae36ea63-634e-42a3-a251-3a6f8ec671ee', url: '${GIT_BASE_URL}/${REPO_NAME}']]])
+              }
+        }
+        stage('Build and Deploy') {
+            steps {
+                sh '''
+                    cd $WORKSPACE/application_sources
+                    mvn clean install -P${DB_TYPE}
+                '''
+            }
+        }
+    }
+    post { 
+        always { 
+            cleanWs()
+        }
+    }
+}

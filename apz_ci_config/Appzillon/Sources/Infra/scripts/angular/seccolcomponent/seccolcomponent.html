@@ -1,0 +1,87 @@
+<ng-container *ngIf="props.cntrType == 'FORM' && props.readOnly == 'Y';then getFormReadOnlyWrapper">
+</ng-container>
+
+<ng-container *ngIf="props.cntrType == 'FORM' && props.hrzntlGrouping == 'Y';then getFormHorizontalWrapper; else getGenericWrapper">
+</ng-container>
+
+<ng-template #getFormReadOnlyWrapper>
+	<ng-container *ngIf="props.fieldsetValue == 'Y';else nonFieldSetComp">
+		<span id={{props.id}} class={{props.className}}>
+			<fieldset>
+				<legend>{{props.legendValue}}</legend>
+				<ng-content></ng-content>
+			</fieldset>
+		</span>
+	</ng-container>
+</ng-template>
+
+<ng-template #nonFieldSetComp>
+	<span id={{props.id}} class={{props.className}}>
+			<ng-content></ng-content>
+		</span>
+</ng-template>
+
+<ng-template #getFormHorizontalWrapper>
+	<ng-container *ngIf="props.fieldsetValue == 'Y';else horizontalNonFieldSetComp">
+		<span >
+			<fieldset>
+				<legend>{{props.legendValue}}</legend>
+				<ul class="eoc srb wrapped pri">
+					<li class={{props.grpLblWith}}>
+						<label id={{props.id}}_lbl class={{props.grpLblClass}} htmlFor={{props.id}}_lbl>{{props.legendValue}}
+						</label>
+					</li>
+					<li class={{props.grpRemainWidthCls}}>
+						<ul class="hrow">
+							<li class=""> 
+								<span >
+									<ng-content></ng-content>
+								</span>
+								<ng-container *ngIf="props.hintRequired">
+									<span id={{props.id}}_hnt class="htx">{{props.hintValue}}
+									</span>
+								</ng-container>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</fieldset>
+		</span>
+	</ng-container>
+</ng-template>
+
+<ng-template #horizontalNonFieldSetComp>
+	<span>
+		 <ul class="eoc srb wrapped pri">
+					<li class={{props.grpLblWith}}>
+						<label id={{props.id}}_lbl class={{props.grpLblClass}} htmlFor={{props.id}}_lbl>{{props.legendValue}}
+						</label>
+					</li>
+					<li class={{props.grpRemainWidthCls}}>
+						<ul class="hrow">
+							<li class=""> 
+								<span>
+									<ng-content></ng-content>
+								</span>
+								<ng-container *ngIf="props.hintRequired">
+									<span id={{props.id}}_hnt class="htx">{{props.hintValue}}
+									</span>
+								</ng-container>
+							</li>
+						</ul>
+					</li>
+				</ul>
+	 </span>
+</ng-template>
+<ng-template #getGenericWrapper>
+	<ng-container *ngIf="props.cntrType == 'NAVBAR'">
+	<!-- //NOSONAR -->	<li #spanColWrapper>
+			<ng-content select="ng-container"></ng-content>
+		</li>
+	</ng-container>
+	<ng-container *ngIf="containerCheck()">
+		<span #spanColWrapper class={{props.ColWrapper.direct.className}}>
+			<ng-content></ng-content>
+		</span>
+	</ng-container>
+</ng-template>

@@ -1,0 +1,17 @@
+{{ if .Values.rbac.developer -}}
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: developer-role-binding
+  labels:
+{{ include "rbac-service.labels" . | indent 4 }}
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: developer-role
+  #namespace: {{ .Values.nameSpace }}
+subjects:
+  - kind: ServiceAccount
+    name: developer
+    namespace: {{ .Values.nameSpace }}
+{{- end -}}

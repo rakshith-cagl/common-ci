@@ -1,0 +1,217 @@
+def values=[]
+node {
+    values = params["DEPLOY_TYPES"].split(",")
+}
+
+pipeline {
+   parameters{
+      string defaultValue: 'dev-eks', description: '', name: 'CLUSTER_NAME', trim: false
+      string defaultValue: 'us-east-1', description: '', name: 'CLUSTER_REGION', trim: false
+      extendedChoice defaultValue: '', description: 'Choose any of the below options to clean up the deployments', multiSelectDelimiter: ',', name: 'DEPLOY_TYPES', quoteValue: false, saveJSONParameterToFile: false, type: 'PT_CHECKBOX', value: 'web,server,fluentd-cloudwatch,rbac-serviceaccounts,rbac-user,fluentbit,eks-dashboard,prometheus,grafana', visibleItemCount: 9
+      string defaultValue: 'default', description: '', name: 'NAMESPACE', trim: false
+      string defaultValue: 'develop', description: '', name: 'BRANCH', trim: false
+      string defaultValue: 'ubuntu', description: '', name: 'SHIPPER_USERNAME', trim: false
+      string defaultValue: '44.198.111.227', description: '', name: 'SHIPPER_TARGET', trim: false
+      string defaultValue: 'appzillon-server', description: '', name: 'SERVER_APP', trim: false
+      string defaultValue: 'appzillon-web', description: '', name: 'WEB_APP', trim: false
+   }
+   
+    agent any
+        stages {
+            stage('web') {
+                when {
+                    expression {
+                        'web' in values
+                    }
+                }
+                steps {
+                    sshagent (credentials: ['run-eks-client']) {
+                        script{
+                            sh '''
+                                COMMAND0="aws eks update-kubeconfig --name ${CLUSTER_NAME}  --region ${CLUSTER_REGION}"
+                                ssh -o StrictHostKeyChecking=no -l ${SHIPPER_USERNAME} ${SHIPPER_TARGET} $COMMAND0
+                            '''
+                            sh "ssh -o StrictHostKeyChecking=no -l ${SHIPPER_USERNAME} ${SHIPPER_TARGET} 'helm uninstall ${WEB_APP} -n ${NAMESPACE}'"
+                        }
+                    }
+                    
+                }
+            }
+            stage('server') {
+                when {
+                    expression {
+                        'server' in values
+                    }
+                }
+                steps {
+                    sshagent (credentials: ['run-eks-client']) {
+                        script{
+                            sh '''
+                                COMMAND0="aws eks update-kubeconfig --name ${CLUSTER_NAME}  --region ${CLUSTER_REGION}"
+                                ssh -o StrictHostKeyChecking=no -l ${SHIPPER_USERNAME} ${SHIPPER_TARGET} $COMMAND0
+                            '''
+                                            
+                            sh "ssh -o StrictHostKeyChecking=no -l ${SHIPPER_USERNAME} ${SHIPPER_TARGET} 'helm uninstall ${SERVER_APP} -n ${NAMESPACE}'"     
+                        }
+                    }
+                    
+                }
+            }
+            stage('fluentd-cloudwatch') {
+                when {
+                    expression {
+                        'fluentd-cloudwatch' in values
+                    }
+                }
+                steps {
+                    sshagent (credentials: ['run-eks-client']) {
+                        script{
+                            sh '''
+                                COMMAND0="aws eks update-kubeconfig --name ${CLUSTER_NAME}  --region ${CLUSTER_REGION}"
+                                ssh -o StrictHostKeyChecking=no -l ${SHIPPER_USERNAME} ${SHIPPER_TARGET} $COMMAND0
+                            '''
+                            sh "ssh -o StrictHostKeyChecking=no -l ${SHIPPER_USERNAME} ${SHIPPER_TARGET} 'kubectl delete cm cluster-info -n ${NAMESPACE}'"
+                            
+                            sh "ssh -o StrictHostKeyChecking=no -l ${SHIPPER_USERNAME} ${SHIPPER_TARGET} 'helm uninstall fluentd-cloudwatch -n ${NAMESPACE}'" 
+                        }
+                    }
+                    
+                }
+            }
+            stage('fluentbit') {
+                when {
+                    expression {
+                        'fluentbit' in values
+                    }
+                }
+                steps {
+                    sshagent (credentials: ['run-eks-client']) {
+                        script{
+                            sh '''
+                                COMMAND0="aws eks update-kubeconfig --name ${CLUSTER_NAME}  --region ${CLUSTER_REGION}"
+                                ssh -o StrictHostKeyChecking=no -l ${SHIPPER_USERNAME} ${SHIPPER_TARGET} $COMMAND0
+                            '''                            
+                            sh "ssh -o StrictHostKeyChecking=no -l ${SHIPPER_USERNAME} ${SHIPPER_TARGET} 'helm uninstall fluentbit -n ${NAMESPACE}'" 
+                        }
+                    }
+                    
+                }
+            }
+
+            stage('fluentd-daemon-elastic') {
+                when {
+                    expression {
+                        'fluentd-daemon-elastic' in values
+                    }
+                }
+                steps {
+                    sshagent (credentials: ['run-eks-client']) {
+                        script{
+                            sh '''
+                                COMMAND0="aws eks update-kubeconfig --name ${CLUSTER_NAME}  --region ${CLUSTER_REGION}"
+                                ssh -o StrictHostKeyChecking=no -l ${SHIPPER_USERNAME} ${SHIPPER_TARGET} $COMMAND0
+                            '''                            
+                            sh "ssh -o StrictHostKeyChecking=no -l ${SHIPPER_USERNAME} ${SHIPPER_TARGET} 'helm uninstall fluentd-daemon-elastic -n ${NAMESPACE}'" 
+                        }
+                    }
+                    
+                }
+            }
+            stage('rbac-serviceaccounts') {
+                when {
+                    expression {
+                        'rbrbac-serviceaccountsac' in values
+                    }
+                }
+                steps {
+                    sshagent (credentials: ['run-eks-client']) {
+                        script{
+                            sh '''
+                                COMMAND0="aws eks update-kubeconfig --name ${CLUSTER_NAME}  --region ${CLUSTER_REGION}"
+                                ssh -o StrictHostKeyChecking=no -l ${SHIPPER_USERNAME} ${SHIPPER_TARGET} $COMMAND0
+                            '''                            
+                            sh "ssh -o StrictHostKeyChecking=no -l ${SHIPPER_USERNAME} ${SHIPPER_TARGET} 'helm uninstall rbac-service -n ${NAMESPACE}'" 
+                        }
+                    }
+                    
+                }
+            }
+            stage('rbac-user') {
+                when {
+                    expression {
+                        'rbac-user' in values
+                    }
+                }
+                steps {
+                    sshagent (credentials: ['run-eks-client']) {
+                        script{
+                            sh '''
+                                COMMAND0="aws eks update-kubeconfig --name ${CLUSTER_NAME}  --region ${CLUSTER_REGION}"
+                                ssh -o StrictHostKeyChecking=no -l ${SHIPPER_USERNAME} ${SHIPPER_TARGET} $COMMAND0
+                            '''                            
+                            sh "ssh -o StrictHostKeyChecking=no -l ${SHIPPER_USERNAME} ${SHIPPER_TARGET} 'helm uninstall rbac-user -n ${NAMESPACE}'" 
+                        }
+                    }
+                    
+                }
+            }
+            stage('eks dashboard') {
+                when {
+                    expression {
+                        'eks-dashboard' in values
+                    }
+                }
+                steps {
+                    sshagent (credentials: ['run-eks-client']) {
+                        script{
+                            sh '''
+                                COMMAND0="aws eks update-kubeconfig --name ${CLUSTER_NAME}  --region ${CLUSTER_REGION}"
+                                ssh -o StrictHostKeyChecking=no -l ${SHIPPER_USERNAME} ${SHIPPER_TARGET} $COMMAND0
+                            '''                            
+                            sh "ssh -o StrictHostKeyChecking=no -l ${SHIPPER_USERNAME} ${SHIPPER_TARGET} 'helm uninstall kubernetes-dashboard -n ${NAMESPACE}'" 
+                        }
+                    }
+                    
+                }
+            }
+            stage('prometheus'){
+                when {
+                    expression {
+                        'prometheus' in values
+                    }
+                }
+                steps{
+                    sshagent (credentials: ['run-eks-client']) {
+                        script{
+                            sh '''
+                                COMMAND0="helm uninstall prometheus -n ${NAMESPACE}"
+                                ssh -o StrictHostKeyChecking=no -l ${SHIPPER_USERNAME} ${SHIPPER_TARGET} $COMMAND0
+                            '''
+                        }
+                    }
+                }
+            }
+            stage('grafana'){
+                when {
+                    expression {
+                        'grafana' in values
+                    }
+                }
+                steps{
+                    sshagent (credentials: ['run-eks-client']) {
+                        script{
+                            sh '''
+                                COMMAND0="helm uninstall grafana -n ${NAMESPACE}"
+                                ssh -o StrictHostKeyChecking=no -l ${SHIPPER_USERNAME} ${SHIPPER_TARGET} $COMMAND0
+                            '''
+                        }
+                    }
+                }
+            } 
+        }
+    post { 
+        always { 
+            cleanWs()
+        }
+    }
+}

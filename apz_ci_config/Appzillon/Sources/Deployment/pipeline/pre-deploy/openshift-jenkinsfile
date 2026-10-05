@@ -1,0 +1,119 @@
+pipeline {
+    parameters {
+      choice(name: 'DEPLOY_TYPE', choices: ['sealed-secret-controller', 'prometheus', 'grafana'], description: 'Select the Deploy Type')
+      string defaultValue: 'sha256~aW7khl35APbmumcnNNFHZE3hcxEo6n5EO26hr_XxEvA', description: 'for openshift only', name: 'OC_TOKEN', trim: false
+      string defaultValue: 'https://api.iexceed-platform.apzplatforms.com:6443', description: 'for openshift only', name: 'OC_CLIENT_URL', trim: false
+      string defaultValue: 'develop', description: '', name: 'BRANCH', trim: false
+      string defaultValue: 'monitoring', description: '', name: 'NAMESPACE', trim: false
+      string defaultValue: 'eks-dashboard.apzplatforms.com', description: '', name: 'DOMAIN_NAME', trim: false
+      string defaultValue: 'v2.5.1', description: 'Only for sealed-secret-controller', name: 'BUILD_TAG', trim: false
+      string defaultValue: 'ec2-user', description: '', name: 'SHIPPER_USERNAME', trim: false
+      string defaultValue: '3.16.220.228', description: '', name: 'SHIPPER_TARGET', trim: false
+      string defaultValue: '1', description: '', name: 'REPLICAS', trim: false
+   }
+   environment {
+        REGISTRY=getRegistry()
+        REGISTRY_CREDS = credentials("harbor_id")
+    }
+    agent any
+    stages {
+        stage('sealed secret controller') {
+            when {
+                    expression {
+                        'openshift' in CLUSTER_TYPE && 'sealed-secret-controller' in DEPLOY_TYPE
+                    }
+                }
+            steps {
+                sshagent (credentials: ['run-oc-client']) {
+                    script{
+                        sh '''
+                            SOURCE_PATH=$WORKSPACE/pre-deploy/sealed-secrets
+                            DESTINATION_PATH="/dataext/home/${SHIPPER_USERNAME}/projects/ship-openshift/${BRANCH}"
+                            scp -o StrictHostKeyChecking=no -r $SOURCE_PATH ${SHIPPER_USERNAME}@${SHIPPER_TARGET}:$DESTINATION_PATH
+
+                            COMMAND0="oc login --token=${OC_TOKEN} --server=${OC_CLIENT_URL} --insecure-skip-tls-verify"
+                            ssh -o StrictHostKeyChecking=no -l ${SHIPPER_USERNAME} ${SHIPPER_TARGET} $COMMAND0
+
+                            COMMAND1="oc project ${NAMESPACE}"
+                            ssh -o StrictHostKeyChecking=no -l ${SHIPPER_USERNAME} ${SHIPPER_TARGET} $COMMAND1
+                        '''
+                        def sourcepath="/dataext/home/"+SHIPPER_USERNAME+"/projects/ship-openshift/"+BRANCH
+
+                        sh "ssh -o StrictHostKeyChecking=no -l ${SHIPPER_USERNAME} ${SHIPPER_TARGET} oc create secret docker-registry harbor-secret --docker-server=$REGISTRY --docker-username=${REGISTRY_CREDS_USR} --docker-password=${REGISTRY_CREDS_PSW} --docker-email=lagudu.saikrishna@i-exceed.com -n ${NAMESPACE}"
+                        sh "ssh -o StrictHostKeyChecking=no -l ${SHIPPER_USERNAME} ${SHIPPER_TARGET} 'helm upgrade --install ${DOCKER_IMAGE_NAME} ${sourcepath}/sealed-secrets/ --set image.registry=$REGISTRY --set image.tag=${BUILD_TAG} -n ${NAMESPACE}'"
+                    }
+                }
+            }
+        }
+        stage('Dashboard for Prometheus'){
+            when {
+                    expression {
+                        'openshift' in CLUSTER_TYPE && 'prometheus' in DEPLOY_TYPE
+                    }
+                }
+            steps{
+                sshagent (credentials: ['run-oc-client']) {
+                    script{
+                        sh '''
+                            SOURCE_PATH=$WORKSPACE/pre-deploy/prometheus
+                            DESTINATION_PATH="/dataext/home/${SHIPPER_USERNAME}/projects/ship-openshift/${BRANCH}"
+                            scp -o StrictHostKeyChecking=no -r $SOURCE_PATH ${SHIPPER_USERNAME}@${SHIPPER_TARGET}:$DESTINATION_PATH
+
+                            COMMAND0="oc login --token=${OC_TOKEN} --server=${OC_CLIENT_URL} --insecure-skip-tls-verify"
+                            ssh -o StrictHostKeyChecking=no -l ${SHIPPER_USERNAME} ${SHIPPER_TARGET} $COMMAND0
+
+                            COMMAND1="oc project ${NAMESPACE}"
+                            ssh -o StrictHostKeyChecking=no -l ${SHIPPER_USERNAME} ${SHIPPER_TARGET} $COMMAND1
+                        '''
+                        def SOURCE_PATH="/dataext/home/"+SHIPPER_USERNAME+"/projects/ship-openshift/"+BRANCH
+                        sh "ssh -o StrictHostKeyChecking=no -l ${SHIPPER_USERNAME} ${SHIPPER_TARGET} 'helm upgrade --install prometheus ${SOURCE_PATH}/prometheus --set 'server.ingress.hosts[0]=${DOMAIN_NAME},ingress.tls[0].hosts[0]=${DOMAIN_NAME}' -f ${SOURCE_PATH}/prometheus/values-openshift.yaml -n ${NAMESPACE}'"
+
+                        sh "ssh -o StrictHostKeyChecking=no -l ${SHIPPER_USERNAME} ${SHIPPER_TARGET} 'oc adm policy add-scc-to-user anyuid -z prometheus-kube-state-metrics -n ${NAMESPACE}'"
+                        sh "ssh -o StrictHostKeyChecking=no -l ${SHIPPER_USERNAME} ${SHIPPER_TARGET} 'oc adm policy add-scc-to-user anyuid -z prometheus-alertmanager -n ${NAMESPACE}'"
+                        sh "ssh -o StrictHostKeyChecking=no -l ${SHIPPER_USERNAME} ${SHIPPER_TARGET} 'oc adm policy add-scc-to-user anyuid -z prometheus-pushgateway -n ${NAMESPACE}'"
+                        sh "ssh -o StrictHostKeyChecking=no -l ${SHIPPER_USERNAME} ${SHIPPER_TARGET} 'oc adm policy add-scc-to-user anyuid -z prometheus-server -n ${NAMESPACE}'"
+                        sh "ssh -o StrictHostKeyChecking=no -l ${SHIPPER_USERNAME} ${SHIPPER_TARGET} 'oc adm policy add-scc-to-user privileged -z prometheus-node-exporter -n ${NAMESPACE}'"
+                    }
+                }
+            }
+        } 
+        stage('Dashboard for Grafana'){
+            when {
+                    expression {
+                        'openshift' in CLUSTER_TYPE && 'grafana' in DEPLOY_TYPE
+                    }
+                }
+            steps{
+                sshagent (credentials: ['run-oc-client']) {
+                    script{
+                        sh '''
+                            SOURCE_PATH=$WORKSPACE/pre-deploy/grafana
+                            DESTINATION_PATH="/dataext/home/${SHIPPER_USERNAME}/projects/ship-openshift/${BRANCH}"
+                            scp -o StrictHostKeyChecking=no -r $SOURCE_PATH ${SHIPPER_USERNAME}@${SHIPPER_TARGET}:$DESTINATION_PATH
+
+                            COMMAND0="oc login --token=${OC_TOKEN} --server=${OC_CLIENT_URL} --insecure-skip-tls-verify"
+                            ssh -o StrictHostKeyChecking=no -l ${SHIPPER_USERNAME} ${SHIPPER_TARGET} $COMMAND0
+
+                            COMMAND1="oc project ${NAMESPACE}"
+                            ssh -o StrictHostKeyChecking=no -l ${SHIPPER_USERNAME} ${SHIPPER_TARGET} $COMMAND1
+                        '''
+                        def SOURCE_PATH="/dataext/home/"+SHIPPER_USERNAME+"/projects/ship-openshift/"+BRANCH
+                        sh "ssh -o StrictHostKeyChecking=no -l ${SHIPPER_USERNAME} ${SHIPPER_TARGET} 'helm upgrade --install grafana ${SOURCE_PATH}/grafana --set 'ingress.hosts[0]=${DOMAIN_NAME},ingress.tls[0].hosts[0]=${DOMAIN_NAME}'  --set replicaCount=${REPLICAS} -f ${SOURCE_PATH}/grafana/values-openshift.yaml -n ${NAMESPACE}'" 
+
+                        sh "ssh -o StrictHostKeyChecking=no -l ${SHIPPER_USERNAME} ${SHIPPER_TARGET} 'oc adm policy add-scc-to-user anyuid -z grafana -n ${NAMESPACE}'"
+                        sh "ssh -o StrictHostKeyChecking=no -l ${SHIPPER_USERNAME} ${SHIPPER_TARGET} 'oc adm policy add-scc-to-user anyuid -z grafana-test -n ${NAMESPACE}'"
+                    }
+                }
+            }
+        }
+    }
+    post { 
+        always { 
+            cleanWs()
+        }
+    }
+}
+
+def getRegistry(){
+    return "harbor-platform.apzplatforms.com/appzillon-develop";
+}

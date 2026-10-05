@@ -1,0 +1,17 @@
+*.iml
+.gradle
+/.idea/caches
+/.idea/libraries
+/.idea/modules.xml
+/.idea/workspace.xml
+/.idea/navEditor.xml
+/.idea/assetWizardSettings.xml
+.DS_Store
+/build
+/captures
+.externalNativeBuild
+.cxx
+<<<<<<< HEAD
+
+=======
+>>>>>>> 9dbd34b78f905ffe5e1459e32c3f50d15899728c

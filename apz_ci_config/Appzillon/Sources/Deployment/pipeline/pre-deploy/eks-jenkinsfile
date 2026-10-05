@@ -1,0 +1,111 @@
+pipeline {
+    parameters {
+      choice(name: 'DEPLOY_TYPE', choices: ['sealed-secret-controller', 'eks-dashboard', 'prometheus', 'grafana'], description: 'Select the Deploy Type')
+      string defaultValue: 'eks-cluster-dev', description: 'for eks only', name: 'CLUSTER_NAME', trim: false
+      string defaultValue: 'us-east-1', description: 'for eks only', name: 'CLUSTER_REGION', trim: false
+      string defaultValue: '325617413693', description: 'for eks only', name: 'AWS_ACCOUNT_ID', trim: false
+      string defaultValue: 'arn:aws:acm:us-east-1:325617413693:certificate/86fc6620-7c3f-4a00-b237-3a6f12bc71d1', description: 'For aws loadbalancer', name: 'AWS_CERTICATE_ARN', trim: false
+      string defaultValue: 'develop', description: '', name: 'BRANCH', trim: false
+      string defaultValue: 'monitoring', description: '', name: 'NAMESPACE', trim: false
+      string defaultValue: 'eks-dashboard.apzplatforms.com', description: '', name: 'DOMAIN_NAME', trim: false
+      string defaultValue: 'v2.5.1', description: 'Only for sealed-secret-controller or eks dashboard', name: 'BUILD_TAG', trim: false
+      string defaultValue: 'ubuntu', description: '', name: 'SHIPPER_USERNAME', trim: false
+      string defaultValue: '18.210.183.63', description: '', name: 'SHIPPER_TARGET', trim: false
+      string defaultValue: '1', description: '', name: 'REPLICAS', trim: false
+   }
+   environment {
+        REGISTRY=getRegistry(env.AWS_ACCOUNT_ID,env.CLUSTER_REGION,env.DOCKER_IMAGE_NAME)
+    }
+    agent any
+    stages {
+        stage('sealed secret controller for EKS'){
+            when {
+                    expression {
+                        'sealed-secret-controller' in DEPLOY_TYPE
+                    }
+                }
+            steps{
+                sshagent (credentials: ['run-eks-client']) {
+                    script{
+                        sh '''
+                            SOURCE_PATH=$WORKSPACE/pre-deploy/sealed-secrets
+                            DESTINATION_PATH="/home/${SHIPPER_USERNAME}/projects/ship-eks/${BRANCH}"
+                            scp -o StrictHostKeyChecking=no -r $SOURCE_PATH ${SHIPPER_USERNAME}@${SHIPPER_TARGET}:$DESTINATION_PATH
+                        '''
+                        def sourcepath="/home/"+SHIPPER_USERNAME+"/projects/ship-eks/"+BRANCH
+                        sh "ssh -o StrictHostKeyChecking=no -l ${SHIPPER_USERNAME} ${SHIPPER_TARGET} 'helm upgrade --install ${DOCKER_IMAGE_NAME} ${sourcepath}/sealed-secrets/ --set image.registry=$REGISTRY --set image.tag=${BUILD_TAG} -n ${NAMESPACE}'"
+                    }
+                }
+            }
+        }
+        stage('Dashboard for EKS'){
+            when {
+                    expression {
+                        'eks-dashboard' in DEPLOY_TYPE
+                    }
+                }
+            steps{
+                sshagent (credentials: ['run-eks-client']) {
+                    script{
+                        sh '''
+                            SOURCE_PATH=$WORKSPACE/pre-deploy/kubernetes-dashboard
+                            DESTINATION_PATH="/home/${SHIPPER_USERNAME}/projects/ship-eks/${BRANCH}"
+                            scp -o StrictHostKeyChecking=no -r $SOURCE_PATH ${SHIPPER_USERNAME}@${SHIPPER_TARGET}:$DESTINATION_PATH
+                        '''
+                        SOURCE_PATH="/home/${SHIPPER_USERNAME}/projects/ship-eks/${BRANCH}"
+                        sh "ssh -o StrictHostKeyChecking=no -l ${SHIPPER_USERNAME} ${SHIPPER_TARGET} 'helm upgrade --install kubernetes-dashboard ${SOURCE_PATH}/kubernetes-dashboard --set image.repository=$REGISTRY --set image.tag=${BUILD_TAG}  --set ingress.annotations.\"alb\\.ingress\\.kubernetes\\.io/certificate-arn\"=${AWS_CERTICATE_ARN}  --set replicaCount=${REPLICAS} --set 'ingress.hosts[0]=${DOMAIN_NAME}' -n ${NAMESPACE}'"
+                    }
+                }
+            }
+        }
+        stage('Dashboard for Prometheus'){
+            when {
+                    expression {
+                        'prometheus' in DEPLOY_TYPE
+                    }
+                }
+            steps{
+                sshagent (credentials: ['run-eks-client']) {
+                    script{
+                        sh '''
+                            SOURCE_PATH=$WORKSPACE/pre-deploy/prometheus
+                            DESTINATION_PATH="/home/${SHIPPER_USERNAME}/projects/ship-eks/${BRANCH}"
+                            scp -o StrictHostKeyChecking=no -r $SOURCE_PATH ${SHIPPER_USERNAME}@${SHIPPER_TARGET}:$DESTINATION_PATH
+                        '''
+                        SOURCE_PATH="/home/${SHIPPER_USERNAME}/projects/ship-eks/${BRANCH}"
+                        sh "ssh -o StrictHostKeyChecking=no -l ${SHIPPER_USERNAME} ${SHIPPER_TARGET} 'helm upgrade --install prometheus ${SOURCE_PATH}/prometheus --set server.ingress.annotations.\"alb\\.ingress\\.kubernetes\\.io/certificate-arn\"=${AWS_CERTICATE_ARN} --set server.ingress.hosts[0]=${DOMAIN_NAME} -f ${SOURCE_PATH}/prometheus/values-eks.yaml -n ${NAMESPACE}'"
+                    }
+                }
+            }
+        }
+        stage('Dashboard for Grafana'){
+            when {
+                    expression {
+                        'grafana' in DEPLOY_TYPE
+                    }
+                }
+            steps{
+                sshagent (credentials: ['run-eks-client']) {
+                    script{
+                        sh '''
+                            SOURCE_PATH=$WORKSPACE/pre-deploy/grafana
+                            DESTINATION_PATH="/home/${SHIPPER_USERNAME}/projects/ship-eks/${BRANCH}"
+                            scp -o StrictHostKeyChecking=no -r $SOURCE_PATH ${SHIPPER_USERNAME}@${SHIPPER_TARGET}:$DESTINATION_PATH
+                        '''
+                        SOURCE_PATH="/home/${SHIPPER_USERNAME}/projects/ship-eks/${BRANCH}"
+                        sh "ssh -o StrictHostKeyChecking=no -l ${SHIPPER_USERNAME} ${SHIPPER_TARGET} 'helm upgrade --install grafana ${SOURCE_PATH}/grafana --set ingress.annotations.\"alb\\.ingress\\.kubernetes\\.io/certificate-arn\"=${AWS_CERTICATE_ARN} --set ingress.hosts[0]=${DOMAIN_NAME}  --set replicaCount=${REPLICAS} -f ${SOURCE_PATH}/grafana/values-eks.yaml -n ${NAMESPACE}'"
+                    }
+                }
+            }
+        }
+    }
+    post { 
+        always { 
+            cleanWs()
+        }
+    }
+}
+
+def getRegistry(accessid,region,dockerappserver){
+    return accessid+".dkr.ecr."+region+".amazonaws.com/"+dockerappserver;
+}

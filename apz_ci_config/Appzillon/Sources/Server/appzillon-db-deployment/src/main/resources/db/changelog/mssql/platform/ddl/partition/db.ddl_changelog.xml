@@ -1,0 +1,2316 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.1.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
+    <changeSet author="platform" id="DDL_TB_ASCZ_SCREEN_LAYOUTS-_3.24.0-1">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASCZ_SCREEN_LAYOUTS"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASCZ_SCREEN_LAYOUTS">
+            <column computed="false" name="APP_ID" type="nvarchar(6)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK__TB_ASCZ___F0D9F43C12F5B366"/>
+            </column>
+            <column computed="false" name="SCREEN_ID" type="nvarchar(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK__TB_ASCZ___F0D9F43C12F5B366"/>
+            </column>
+            <column computed="false" name="LAYOUT_ID" type="nvarchar(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK__TB_ASCZ___F0D9F43C12F5B366"/>
+            </column>
+            <column computed="false" name="DEFAULT_TEMPLATE" type="nvarchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column computed="false" defaultValueComputed="getdate()" defaultValueConstraintName="DF__TB_ASCZ_S__CREAT__679D0D7D" name="CREATE_TS" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column computed="false" name="MAKER_ID" type="nvarchar(45)"/>
+            <column computed="false" defaultValueComputed="getdate()" defaultValueConstraintName="DF__TB_ASCZ_S__MAKER__689131B6" name="MAKER_TS" type="datetime"/>
+            <column computed="false" name="CHECKER_ID" type="nvarchar(45)"/>
+            <column computed="false" defaultValueComputed="getdate()" defaultValueConstraintName="DF__TB_ASCZ_S__CHECK__698555EF" name="CHECKER_TS" type="datetime"/>
+            <column computed="false" defaultValue="U" defaultValueConstraintName="DF__TB_ASCZ_S__AUTH___6A797A28" name="AUTH_STATUS" type="nvarchar(1)"/>
+            <column computed="false" defaultValueConstraintName="DF__TB_ASCZ_S__VERSI__6B6D9E61" defaultValueNumeric="1" name="VERSION_NO" type="int"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB_ASCZ_TEMPLATE_OBJECTS_3.24.0-2">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASCZ_TEMPLATE_OBJECTS"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASCZ_TEMPLATE_OBJECTS">
+            <column computed="false" name="APP_ID" type="nvarchar(6)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK__TB_ASCZ___D115B53569D8BA8F"/>
+            </column>
+            <column computed="false" name="SCREEN_ID" type="nvarchar(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK__TB_ASCZ___D115B53569D8BA8F"/>
+            </column>
+            <column computed="false" name="LAYOUT_ID" type="nvarchar(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK__TB_ASCZ___D115B53569D8BA8F"/>
+            </column>
+            <column computed="false" name="TEMPLATE_ID" type="nvarchar(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK__TB_ASCZ___D115B53569D8BA8F"/>
+            </column>
+            <column computed="false" name="PARENT_ID" type="nvarchar(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK__TB_ASCZ___D115B53569D8BA8F"/>
+            </column>
+            <column computed="false" name="CHILD_ID" type="nvarchar(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK__TB_ASCZ___D115B53569D8BA8F"/>
+            </column>
+            <column computed="false" name="CHILD_SEQ" type="int">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB_ASFS_FILE_DETAILS_3.24.0-3">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASFS_FILE_DETAILS"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASFS_FILE_DETAILS">
+            <column computed="false" name="APP_ID" type="nvarchar(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_TB_ADTP_FILE_DETAILS"/>
+            </column>
+            <column computed="false" name="SCREEN_ID" type="nvarchar(100)"/>
+            <column computed="false" name="USER_ID" type="nvarchar(100)"/>
+            <column computed="false" name="FILE_NAME" type="nvarchar(150)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_TB_ADTP_FILE_DETAILS"/>
+            </column>
+            <column computed="false" name="FILE_TYPE" type="nvarchar(20)"/>
+            <column computed="false" name="INTERFACE_ID" type="nvarchar(30)"/>
+            <column computed="false" name="CREATE_USER_ID" type="nvarchar(100)"/>
+            <column computed="false" defaultValueComputed="getdate()" defaultValueConstraintName="DF__TB_ASFS_F__LAST___2821A6E6" name="LAST_UPLOADED_DATE" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column computed="false" defaultValueComputed="getdate()" defaultValueConstraintName="DF__TB_ASFS_F__RECEN__2915CB1F" name="RECENT_UPLOADED_DATE" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB_ASHS_ROLE_CONTROLS_3.24.0-4">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASHS_ROLE_CONTROLS"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASHS_ROLE_CONTROLS">
+            <column computed="false" name="APP_ID" type="nvarchar(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK__TB_ASHS___3A03DEF1BE488C4E"/>
+            </column>
+            <column computed="false" name="ROLE_ID" type="nvarchar(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK__TB_ASHS___3A03DEF1BE488C4E"/>
+            </column>
+            <column computed="false" name="CONTROL_ID" type="nvarchar(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK__TB_ASHS___3A03DEF1BE488C4E"/>
+            </column>
+            <column computed="false" defaultValueComputed="NULL" defaultValueConstraintName="DF__TB_ASHS_R__CREAT__3F8F1C23" name="CREATED_BY" type="nvarchar(100)"/>
+            <column computed="false" defaultValueComputed="getdate()" defaultValueConstraintName="DF__TB_ASHS_R__CREAT__4083405C" name="CREATED_TS" type="datetime"/>
+            <column computed="false" defaultValueConstraintName="DF__TB_ASHS_R__VERSI__41776495" defaultValueNumeric="1" name="VERSION_NO" type="numeric(10, 0)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK__TB_ASHS___3A03DEF1BE488C4E"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB_ASHS_ROLE_INTF_3.24.0-5">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASHS_ROLE_INTF"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASHS_ROLE_INTF">
+            <column computed="false" name="APP_ID" type="nvarchar(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_TB_ASHS_ROLE_INTF"/>
+            </column>
+            <column computed="false" name="ROLE_ID" type="nvarchar(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_TB_ASHS_ROLE_INTF"/>
+            </column>
+            <column computed="false" name="INTERFACE_ID" type="nvarchar(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_TB_ASHS_ROLE_INTF"/>
+            </column>
+            <column computed="false" name="CREATE_USER_ID" type="nvarchar(100)"/>
+            <column computed="false" defaultValueComputed="getdate()" defaultValueConstraintName="DF__TB_ASHS_R__CREAT__168D0690" name="CREATE_TS" type="datetime"/>
+            <column computed="false" defaultValueConstraintName="DF__TB_ASHS_R__VERSI__17812AC9" defaultValueNumeric="1" name="VERSION_NO" type="numeric(10, 0)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_TB_ASHS_ROLE_INTF"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB_ASHS_ROLE_MASTER_3.24.0-6">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASHS_ROLE_MASTER"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASHS_ROLE_MASTER">
+            <column computed="false" name="ROLE_ID" type="nvarchar(255)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_TB_ASHS_ROLE_MASTER"/>
+            </column>
+            <column computed="false" name="APP_ID" type="nvarchar(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_TB_ASHS_ROLE_MASTER"/>
+            </column>
+            <column computed="false" name="ROLE_DESC" type="nvarchar(255)"/>
+            <column computed="false" defaultValue="A" defaultValueConstraintName="DF__TB_ASHS_R__INTER__1A5D9774" name="INTERFACE_ALLOWED" type="nvarchar(1)"/>
+            <column computed="false" defaultValue="A" defaultValueConstraintName="DF__TB_ASHS_R__SCREE__1B51BBAD" name="SCREEN_ALLOWED" type="nvarchar(1)"/>
+            <column computed="false" defaultValue="A" defaultValueConstraintName="DF__TB_ASHS_R__CONTR__1C45DFE6" name="CONTROL_ALLOWED" type="nvarchar(1)"/>
+            <column computed="false" name="CREATE_USER_ID" type="nvarchar(100)"/>
+            <column computed="false" defaultValueComputed="getdate()" defaultValueConstraintName="DF__TB_ASHS_R__CREAT__1D3A041F" name="CREATE_TS" type="datetime"/>
+            <column computed="false" defaultValueConstraintName="DF__TB_ASHS_R__VERSI__1E2E2858" defaultValueNumeric="1" name="VERSION_NO" type="numeric(10, 0)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_TB_ASHS_ROLE_MASTER"/>
+            </column>
+            <column computed="false" name="MAKER_ID" type="nvarchar(45)"/>
+            <column computed="false" defaultValueComputed="getdate()" defaultValueConstraintName="DF__TB_ASHS_R__MAKER__1F224C91" name="MAKER_TS" type="datetime"/>
+            <column computed="false" name="CHECKER_ID" type="nvarchar(45)"/>
+            <column computed="false" defaultValueComputed="getdate()" defaultValueConstraintName="DF__TB_ASHS_R__CHECK__201670CA" name="CHECKER_TS" type="datetime"/>
+            <column computed="false" defaultValue="U" defaultValueConstraintName="DF__TB_ASHS_R__AUTH___210A9503" name="AUTH_STATUS" type="nvarchar(45)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB__ASHS_ROLE_SCR_3.24.0-7">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASHS_ROLE_SCR"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASHS_ROLE_SCR">
+            <column computed="false" name="APP_ID" type="nvarchar(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_TB_ASHS_ROLE_SCR"/>
+            </column>
+            <column computed="false" name="SCREEN_ID" type="nvarchar(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_TB_ASHS_ROLE_SCR"/>
+            </column>
+            <column computed="false" name="ROLE_ID" type="nvarchar(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_TB_ASHS_ROLE_SCR"/>
+            </column>
+            <column computed="false" name="CREATE_USER_ID" type="nvarchar(100)"/>
+            <column computed="false" defaultValueComputed="getdate()" defaultValueConstraintName="DF__TB_ASHS_R__CREAT__23E701AE" name="CREATE_TS" type="datetime"/>
+            <column computed="false" defaultValueConstraintName="DF__TB_ASHS_R__VERSI__24DB25E7" defaultValueNumeric="1" name="VERSION_NO" type="numeric(10, 0)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_TB_ASHS_ROLE_SCR"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB__ASHS_SECURITY_PARAMETERS_3.24.0-8">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASHS_SECURITY_PARAMETERS"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASHS_SECURITY_PARAMETERS">
+            <column computed="false" name="APP_ID" type="nvarchar(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_TB_ASHS_SECURITY_PARAMETERS"/>
+            </column>
+            <column computed="false" name="MIN_NUM_NUM" type="numeric(10, 0)"/>
+            <column computed="false" name="MIN_NUM_SPCL_CHAR" type="numeric(10, 0)"/>
+            <column computed="false" name="MIN_NUM_UPPER_CASE_CHAR" type="numeric(10, 0)"/>
+            <column computed="false" name="MIN_LENGTH" type="numeric(10, 0)"/>
+            <column computed="false" name="MAX_LENGTH" type="numeric(10, 0)"/>
+            <column computed="false" name="PASS_CHANGE_FREQ" type="numeric(10, 0)"/>
+            <column computed="false" name="LAST_N_PASS_NOT_TO_USE" type="numeric(10, 0)"/>
+            <column computed="false" name="SESSION_TIMEOUT" type="numeric(10, 0)"/>
+            <column computed="false" name="NOOFFAILEDCOUNTS" type="numeric(10, 0)"/>
+            <column computed="false" name="CREATE_USER_ID" type="nvarchar(100)"/>
+            <column computed="false" defaultValueComputed="getdate()" defaultValueConstraintName="DF__TB_ASHS_S__CREAT__009DC571" name="CREATE_TS" type="datetime"/>
+            <column computed="false" defaultValueConstraintName="DF__TB_ASHS_S__VERSI__0191E9AA" defaultValueNumeric="1" name="VERSION_NO" type="numeric(10, 0)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_TB_ASHS_SECURITY_PARAMETERS"/>
+            </column>
+            <column computed="false" name="SERVER_TOKEN" type="nvarchar(255)"/>
+            <column computed="false" name="FAIL_COUNT_TIMEOUT" type="numeric(10, 0)"/>
+            <column computed="false" name="PASSWORD_COUNT" type="numeric(10, 0)"/>
+            <column computed="false" defaultValue="Y" defaultValueConstraintName="DF__TB_ASHS_S__DEFAU__02860DE3" name="DEFAULT_AUTHORIZATION" type="char(1)"/>
+            <column computed="false" name="RESTRICT_SPL_CHARS" type="nvarchar(100)"/>
+            <column computed="false" defaultValue="N" defaultValueConstraintName="DF__TB_ASHS_S__ALLOW__037A321C" name="ALLOW_USER_PASSWORD_ENTRY" type="nvarchar(1)"/>
+            <column computed="false" defaultValue="Y" defaultValueConstraintName="DF__TB_ASHS_S__AUTO___046E5655" name="AUTO_APPROVE" type="nvarchar(1)"/>
+            <column computed="false" defaultValue="BOTH" defaultValueConstraintName="DF__TB_ASHS_S__PWD_R__05627A8E" name="PWD_RSET_VALIDATE_PARAMS" type="nvarchar(45)"/>
+            <column computed="false" defaultValue="BOTH" defaultValueConstraintName="DF__TB_ASHS_S__PWD_R__06569EC7" name="PWD_RSET_COMM_CHANNEL" type="nvarchar(45)"/>
+            <column computed="false" defaultValue="N" defaultValueConstraintName="DF__TB_ASHS_S__PWD_R__074AC300" name="PWD_RSET_ACCEPT_USR_PWD" type="nvarchar(1)"/>
+            <column computed="false" defaultValue="Y" defaultValueConstraintName="DF__TB_ASHS_S__TXN_L__083EE739" name="TXN_LOG_REQ" type="nvarchar(45)"/>
+            <column computed="false" name="MAKER_ID" type="nvarchar(45)"/>
+            <column computed="false" defaultValueComputed="getdate()" defaultValueConstraintName="DF__TB_ASHS_S__MAKER__09330B72" name="MAKER_TS" type="datetime"/>
+            <column computed="false" name="CHECKER_ID" type="nvarchar(45)"/>
+            <column computed="false" defaultValueComputed="getdate()" defaultValueConstraintName="DF__TB_ASHS_S__CHECK__0A272FAB" name="CHECKER_TS" type="datetime"/>
+            <column computed="false" defaultValue="BOTH" defaultValueConstraintName="DF__TB_ASHS_S__PWD_C__0B1B53E4" name="PWD_COMM_CHANNEL" type="nvarchar(45)"/>
+            <column computed="false" defaultValue="U" defaultValueConstraintName="DF__TB_ASHS_S__AUTH___0C0F781D" name="AUTH_STATUS" type="nvarchar(45)"/>
+            <column computed="false" defaultValue="Y" defaultValueConstraintName="DF__TB_ASHS_S__MULTI__0D039C56" name="MULTIPLE_SESSION_ALLOWED" type="nvarchar(1)"/>
+            <column computed="false" defaultValue="Y" defaultValueConstraintName="DF__TB_ASHS_S__TXN_L__0DF7C08F" name="TXN_LOG_PAYLOAD" type="nvarchar(1)"/>
+            <column computed="false" name="OTP_LENGTH" type="numeric(10, 0)"/>
+            <column computed="false" name="OTP_VALIDATION_COUNT" type="numeric(10, 0)"/>
+            <column computed="false" name="OTP_EXPIRY" type="numeric(10, 0)"/>
+            <column computed="false" defaultValueComputed="NULL" defaultValueConstraintName="DF__TB_ASHS_S__OTP_R__0EEBE4C8" name="OTP_RESEND" type="nvarchar(10)"/>
+            <column computed="false" defaultValueComputed="NULL" defaultValueConstraintName="DF__TB_ASHS_S__OTP_F__0FE00901" name="OTP_FORMAT" type="nvarchar(20)"/>
+            <column computed="false" name="OTP_RESEND_COUNT" type="numeric(10, 0)"/>
+            <column computed="false" name="OTP_RESEND_LOCK_TIMEOUT" type="numeric(10, 0)"/>
+            <column computed="false" defaultValue="BOTH" defaultValueConstraintName="DF__TB_ASHS_S__PWD_C__10D42D3A" name="PWD_CHANGE_COMM_CHANNEL" type="nvarchar(30)"/>
+            <column computed="false" defaultValue="N" defaultValueConstraintName="DF__TB_ASHS_S__PASSW__11C85173" name="PASSWORD_ON_AUTHORIZATION" type="nvarchar(1)"/>
+            <column computed="false" defaultValue="Y" defaultValueConstraintName="DF__TB_ASHS_S__DATA___12BC75AC" name="DATA_INTEGRITY" type="nvarchar(1)"/>
+            <column computed="false" defaultValue="Y" defaultValueConstraintName="DF__TB_ASHS_S__FMW_T__13B099E5" name="FMW_TXN_REQ" type="nvarchar(1)"/>
+            <column computed="false" name="ACCESS_TOKEN_EXPIRY" type="numeric(10, 0)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB__ASHS_SMS_USER_3.24.0-9">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASHS_SMS_USER"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASHS_SMS_USER">
+            <column computed="false" name="APP_ID" type="nvarchar(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="TB_ASHS_SMS_USER_PK"/>
+            </column>
+            <column computed="false" name="MOBILE_NUMBER" type="nvarchar(20)"/>
+            <column computed="false" name="USER_ID" type="nvarchar(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="TB_ASHS_SMS_USER_PK"/>
+            </column>
+            <column computed="false" name="CREATED_BY" type="nvarchar(50)"/>
+            <column computed="false" defaultValueComputed="getdate()" defaultValueConstraintName="DF__TB_ASHS_S__CREAT__3BBE8B3F" name="CREATE_TS" type="datetime"/>
+            <column computed="false" defaultValueConstraintName="DF__TB_ASHS_S__VERSI__3CB2AF78" defaultValueNumeric="0" name="VERSION_NO" type="numeric(10, 0)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="TB_ASHS_SMS_USER_PK"/>
+            </column>
+            <column computed="false" name="SMS_REQ" type="nvarchar(1)"/>
+            <column computed="false" name="USSD_REQ" type="nvarchar(1)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB__ASHS_USER_3.24.0-10">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASHS_USER"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASHS_USER">
+            <column computed="false" name="USER_ID" type="nvarchar(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_TB_ASHS_USER"/>
+            </column>
+            <column computed="false" name="APP_ID" type="nvarchar(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_TB_ASHS_USER"/>
+            </column>
+            <column computed="false" name="PIN" type="nvarchar(300)"/>
+            <column computed="false" name="USER_NAME" type="nvarchar(100)"/>
+            <column computed="false" name="LAST_NAME" type="nvarchar(100)"/>
+            <column computed="false" name="LOGIN_STATUS" type="nvarchar(3)"/>
+            <column computed="false" name="FAIL_COUNT" type="numeric(10, 0)"/>
+            <column computed="false" defaultValue="Y" defaultValueConstraintName="DF__TB_ASHS_U__USER___27B79292" name="USER_ACTIVE" type="nvarchar(3)"/>
+            <column computed="false" defaultValue="N" defaultValueConstraintName="DF__TB_ASHS_U__USER___28ABB6CB" name="USER_LOCKED" type="nvarchar(3)"/>
+            <column computed="false" defaultValue="en" defaultValueConstraintName="DF__TB_ASHS_U__LANGU__299FDB04" name="LANGUAGE" type="nvarchar(2)"/>
+            <column computed="false" name="EXTERNALIDENTIFIER" type="nvarchar(30)"/>
+            <column computed="false" name="USER_ADDR1" type="nvarchar(50)"/>
+            <column computed="false" name="USER_ADDR2" type="nvarchar(50)"/>
+            <column computed="false" name="USER_ADDR3" type="nvarchar(50)"/>
+            <column computed="false" name="USER_ADDR4" type="nvarchar(50)"/>
+            <column computed="false" name="USER_EML1" type="nvarchar(255)"/>
+            <column computed="false" name="USER_EML2" type="nvarchar(255)"/>
+            <column computed="false" name="USER_PHNO1" type="nvarchar(20)"/>
+            <column computed="false" name="USER_PHNO2" type="nvarchar(20)"/>
+            <column computed="false" name="USER_LVL" type="numeric(11, 0)"/>
+            <column computed="false" name="USER_LOCK_TS" type="datetime"/>
+            <column computed="false" name="PIN_CHANGE_TS" type="datetime"/>
+            <column computed="false" name="PROFILE_PIC" type="nvarchar(MAX)"/>
+            <column computed="false" name="CREATE_USER_ID" type="nvarchar(100)"/>
+            <column computed="false" defaultValueComputed="getdate()" defaultValueConstraintName="DF__TB_ASHS_U__CREAT__2A93FF3D" name="CREATE_TS" type="datetime"/>
+            <column computed="false" defaultValueConstraintName="DF__TB_ASHS_U__VERSI__2B882376" defaultValueNumeric="1" name="VERSION_NO" type="numeric(10, 0)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_TB_ASHS_USER"/>
+            </column>
+            <column computed="false" name="MAKER_ID" type="nvarchar(45)"/>
+            <column computed="false" defaultValueComputed="getdate()" defaultValueConstraintName="DF__TB_ASHS_U__MAKER__2C7C47AF" name="MAKER_TS" type="datetime"/>
+            <column computed="false" name="CHECKER_ID" type="nvarchar(45)"/>
+            <column computed="false" defaultValueComputed="getdate()" defaultValueConstraintName="DF__TB_ASHS_U__CHECK__2D706BE8" name="CHECKER_TS" type="datetime"/>
+            <column computed="false" name="DATE_OF_BIRTH" type="date"/>
+            <column computed="false" defaultValue="U" defaultValueConstraintName="DF__TB_ASHS_U__AUTH___2E649021" name="AUTH_STATUS" type="nvarchar(45)"/>
+            <column computed="false" name="ADD_INFO1" type="nvarchar(255)"/>
+            <column computed="false" name="ADD_INFO2" type="nvarchar(255)"/>
+            <column computed="false" name="ADD_INFO3" type="nvarchar(255)"/>
+            <column computed="false" name="ADD_INFO4" type="nvarchar(255)"/>
+            <column computed="false" name="ADD_INFO5" type="nvarchar(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB__ASHS_USER_APP_ACCESS_3.24.0-11">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASHS_USER_APP_ACCESS"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASHS_USER_APP_ACCESS">
+            <column computed="false" name="APP_ID" type="nvarchar(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="TB_ASHS_USER_APP_ACCESS_PK"/>
+            </column>
+            <column computed="false" name="USER_ID" type="nvarchar(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="TB_ASHS_USER_APP_ACCESS_PK"/>
+            </column>
+            <column computed="false" name="ALLOWED_APP_ID" type="nvarchar(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="TB_ASHS_USER_APP_ACCESS_PK"/>
+            </column>
+            <column computed="false" defaultValue="D" defaultValueConstraintName="DF__TB_ASHS_U__APP_A__4A0CAA96" name="APP_ACCESS" type="nvarchar(1)"/>
+            <column computed="false" defaultValueComputed="NULL" defaultValueConstraintName="DF__TB_ASHS_U__CREAT__4B00CECF" name="CREATE_USER_ID" type="nvarchar(100)"/>
+            <column computed="false" defaultValueComputed="getdate()" defaultValueConstraintName="DF__TB_ASHS_U__CREAT__4BF4F308" name="CREATE_TS" type="datetime"/>
+            <column computed="false" defaultValueConstraintName="DF__TB_ASHS_U__VERSI__4CE91741" defaultValueNumeric="1" name="VERSION_NO" type="numeric(10, 0)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="TB_ASHS_USER_APP_ACCESS_PK"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB__ASHS_USER_DEVICES_3.24.0-12">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASHS_USER_DEVICES"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASHS_USER_DEVICES">
+            <column computed="false" name="APP_ID" type="nvarchar(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_TB_ASHS_USER_DEVICES"/>
+            </column>
+            <column computed="false" name="DEVICE_ID" type="nvarchar(255)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_TB_ASHS_USER_DEVICES"/>
+            </column>
+            <column computed="false" name="USER_ID" type="nvarchar(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_TB_ASHS_USER_DEVICES"/>
+            </column>
+            <column computed="false" name="DEVICE_STATUS" type="nvarchar(100)"/>
+            <column computed="false" name="CREATE_USER_ID" type="nvarchar(100)"/>
+            <column computed="false" defaultValueComputed="getdate()" defaultValueConstraintName="DF__TB_ASHS_U__CREAT__3140FCCC" name="CREATE_TS" type="datetime"/>
+            <column computed="false" name="MAKER_ID" type="nvarchar(45)"/>
+            <column computed="false" defaultValueComputed="getdate()" defaultValueConstraintName="DF__TB_ASHS_U__MAKER__32352105" name="MAKER_TS" type="datetime"/>
+            <column computed="false" name="CHECKER_ID" type="nvarchar(45)"/>
+            <column computed="false" defaultValueComputed="getdate()" defaultValueConstraintName="DF__TB_ASHS_U__CHECK__3329453E" name="CHECKER_TS" type="datetime"/>
+            <column computed="false" defaultValue="U" defaultValueConstraintName="DF__TB_ASHS_U__AUTH___341D6977" name="AUTH_STATUS" type="nvarchar(45)"/>
+            <column computed="false" defaultValueConstraintName="DF__TB_ASHS_U__VERSI__35118DB0" defaultValueNumeric="1" name="VERSION_NO" type="numeric(10, 0)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_TB_ASHS_USER_DEVICES"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB__ASHS_USER_PASSWORDS_3.24.0-13">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASHS_USER_PASSWORDS"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASHS_USER_PASSWORDS">
+            <column computed="false" name="USER_ID" type="nvarchar(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_ASHS_USER_PASSWORDS"/>
+            </column>
+            <column computed="false" name="APP_ID" type="nvarchar(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_ASHS_USER_PASSWORDS"/>
+            </column>
+            <column computed="false" name="PIN" type="nvarchar(255)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_ASHS_USER_PASSWORDS"/>
+            </column>
+            <column computed="false" name="CHANGE_TIME" type="datetime"/>
+            <column computed="false" name="CREATE_USER_ID" type="nvarchar(100)"/>
+            <column computed="false" defaultValueComputed="getdate()" defaultValueConstraintName="DF__TB_ASHS_U__CREAT__0968159C" name="CREATE_TS" type="datetime"/>
+            <column computed="false" defaultValueConstraintName="DF__TB_ASHS_U__VERSI__0A5C39D5" defaultValueNumeric="1" name="VERSION_NO" type="numeric(10, 0)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB__ASHS_USER_ROLE_3.24.0-14">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASHS_USER_ROLE"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASHS_USER_ROLE">
+            <column computed="false" name="USER_ID" type="nvarchar(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_TB_ASHS_USER_ROLE"/>
+            </column>
+            <column computed="false" name="ROLE_ID" type="nvarchar(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_TB_ASHS_USER_ROLE"/>
+            </column>
+            <column computed="false" name="APP_ID" type="nvarchar(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_TB_ASHS_USER_ROLE"/>
+            </column>
+            <column computed="false" name="CREATE_USER_ID" type="nvarchar(100)"/>
+            <column computed="false" defaultValueComputed="getdate()" defaultValueConstraintName="DF__TB_ASHS_U__CREAT__37EDFA5B" name="CREATE_TS" type="datetime"/>
+            <column computed="false" defaultValueConstraintName="DF__TB_ASHS_U__VERSI__38E21E94" defaultValueNumeric="1" name="VERSION_NO" type="numeric(10, 0)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_TB_ASHS_USER_ROLE"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB__ASHS_WORKFLOW_DET_3.24.0-15">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASHS_WORKFLOW_DET"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASHS_WORKFLOW_DET">
+            <column computed="false" name="TRANSACTION_REF_NO" type="nvarchar(30)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="TB_ASHS_WORKFLOW_DET_PK"/>
+            </column>
+            <column computed="false" name="VERSION_NO" type="numeric(10, 0)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="TB_ASHS_WORKFLOW_DET_PK"/>
+            </column>
+            <column computed="false" name="WORKFLOW_ID" type="nvarchar(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="TB_ASHS_WORKFLOW_DET_PK"/>
+            </column>
+            <column computed="false" name="APP_ID" type="nvarchar(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="TB_ASHS_WORKFLOW_DET_PK"/>
+            </column>
+            <column computed="false" name="CURRENT_STAGE" type="nvarchar(100)"/>
+            <column computed="false" name="SCREEN_ID" type="nvarchar(100)"/>
+            <column computed="false" name="NEXT_STAGE" type="nvarchar(100)"/>
+            <column computed="false" name="STATUS" type="nvarchar(20)"/>
+            <column computed="false" name="INTERFACE_ID" type="nvarchar(100)"/>
+            <column computed="false" name="USER_ID" type="nvarchar(100)"/>
+            <column computed="false" name="SCREEN_DATA" type="[nvarchar] (max)"/>
+            <column computed="false" name="STAGE_SEQ_NO" type="nvarchar(255)"/>
+            <column computed="false" name="ACTION" type="nvarchar(255)"/>
+            <column computed="false" name="CREATE_USER_ID" type="nvarchar(100)"/>
+            <column computed="false" defaultValueComputed="getdate()" defaultValueConstraintName="DF__TB_ASHS_W__CREAT__38580EAF" name="CREATE_TS" type="datetime"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB__ASHS_WORKFLOW_TXN_DETAILS_3.24.0-16">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASHS_WORKFLOW_TXN_DETAILS"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASHS_WORKFLOW_TXN_DETAILS">
+            <column computed="false" name="APP_ID" type="nvarchar(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK__TB_ASHS___155E50D685D98E84"/>
+            </column>
+            <column computed="false" name="WORKFLOW_REF_NO" type="nvarchar(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK__TB_ASHS___155E50D685D98E84"/>
+            </column>
+            <column computed="false" name="WORKFLOW_SEQ_NO" type="int">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK__TB_ASHS___155E50D685D98E84"/>
+            </column>
+            <column computed="false" name="WORKFLOW_ID" type="nvarchar(100)"/>
+            <column computed="false" name="STAGE_ID" type="nvarchar(50)"/>
+            <column computed="false" name="TASK_DATA" type="varchar(MAX)"/>
+            <column computed="false" name="USER_ID" type="nvarchar(50)"/>
+            <column computed="false" name="STATUS" type="nvarchar(50)"/>
+            <column computed="false" name="UPDATED_NEXT_STAGES" type="nvarchar(255)"/>
+            <column computed="false" name="LAST_ACTION" type="nvarchar(50)"/>
+            <column computed="false" name="CUSTOM_FIELD_1" type="nvarchar(100)"/>
+            <column computed="false" name="CUSTOM_FIELD_2" type="nvarchar(100)"/>
+            <column computed="false" name="CUSTOM_FIELD_3" type="nvarchar(100)"/>
+            <column computed="false" name="CUSTOM_FIELD_4" type="nvarchar(100)"/>
+            <column computed="false" name="CUSTOM_FIELD_5" type="nvarchar(100)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB__ASHS_WORKFLOW_TXN_MASTER_3.24.0-17">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASHS_WORKFLOW_TXN_MASTER"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASHS_WORKFLOW_TXN_MASTER">
+            <column computed="false" name="APP_ID" type="nvarchar(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK__TB_ASHS___3993524528161D03"/>
+            </column>
+            <column computed="false" name="WORKFLOW_REF_NO" type="nvarchar(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK__TB_ASHS___3993524528161D03"/>
+            </column>
+            <column computed="false" name="WORKFLOW_ID" type="nvarchar(100)"/>
+            <column computed="false" name="STATUS" type="nvarchar(50)"/>
+            <column computed="false" defaultValueComputed="getdate()" defaultValueConstraintName="DF__TB_ASHS_W__START__2B53194C" name="START_TS" type="datetime"/>
+            <column computed="false" name="MODIFIED_TS" type="datetime"/>
+            <column computed="false" name="END_TS" type="datetime"/>
+            <column computed="false" name="CUSTOM_FIELD_1" type="nvarchar(100)"/>
+            <column computed="false" name="CUSTOM_FIELD_2" type="nvarchar(100)"/>
+            <column computed="false" name="CUSTOM_FIELD_3" type="nvarchar(100)"/>
+            <column computed="false" name="CUSTOM_FIELD_4" type="nvarchar(100)"/>
+            <column computed="false" name="CUSTOM_FIELD_5" type="nvarchar(100)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB__ASLG_AUDIT_LOG_3.24.0-18">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASLG_AUDIT_LOG"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASLG_AUDIT_LOG">
+            <column computed="false" name="ACCESS_REF" type="nvarchar(255)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_TB_ASLG_AUDIT_LOG"/>
+            </column>
+            <column computed="false" name="APP_ID" type="nvarchar(100)"/>
+            <column computed="false" name="USER_ID" type="nvarchar(100)"/>
+            <column computed="false" name="DEVICE_ID" type="nvarchar(250)"/>
+            <column computed="false" name="SESSION_ID" type="nvarchar(100)"/>
+            <column computed="false" name="ACTION" type="nvarchar(30)"/>
+            <column computed="false" name="START_TIME_STAMP" type="nvarchar(30)"/>
+            <column computed="false" name="END_TIME_STAMP" type="nvarchar(30)"/>
+            <column computed="false" name="FIELD1" type="nvarchar(100)"/>
+            <column computed="false" name="FIELD2" type="nvarchar(100)"/>
+            <column computed="false" name="FIELD3" type="nvarchar(100)"/>
+            <column computed="false" name="FIELD4" type="nvarchar(100)"/>
+            <column computed="false" name="FIELD5" type="nvarchar(100)"/>
+            <column computed="false" defaultValueComputed="getdate()" defaultValueConstraintName="DF__TB_ASLG_A__CREAT__630D628A" name="CREATE_DATE" type="date"/>
+            <column computed="false" name="CREATE_USER_ID" type="nvarchar(100)"/>
+            <column computed="false" defaultValueConstraintName="DF__TB_ASLG_A__VERSI__640186C3" defaultValueNumeric="1" name="VERSION_NO" type="numeric(10, 0)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB__ASLG_CNVUI_TXN_LOG_3.24.0-19">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASLG_CNVUI_TXN_LOG"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASLG_CNVUI_TXN_LOG">
+            <column computed="false" name="TXN_REF" type="nvarchar(255)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="TB_ASLG_CNVUI_TXN_LOG_PK"/>
+            </column>
+            <column computed="false" name="APP_ID" type="nvarchar(100)"/>
+            <column computed="false" name="CNVUI_ID" type="nvarchar(100)"/>
+            <column computed="false" name="RESP_DLG_ID" type="nvarchar(100)"/>
+            <column computed="false" name="SCREEN_DATA" type="nvarchar(MAX)"/>
+            <column computed="false" defaultValueComputed="NULL" defaultValueConstraintName="DF__TB_ASLG_C__CREAT__11934749" name="CREATE_USER_ID" type="nvarchar(100)"/>
+            <column computed="false" defaultValueComputed="getdate()" defaultValueConstraintName="DF__TB_ASLG_C__CREAT__12876B82" name="CREATE_TS" type="datetime"/>
+            <column computed="false" defaultValueComputed="getdate()" defaultValueConstraintName="DF__TB_ASLG_C__UPDAT__137B8FBB" name="UPDATE_TS" type="datetime"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB__ASLG_DEVICE_LOCATION_3.24.0-20">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASLG_DEVICE_LOCATION"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASLG_DEVICE_LOCATION">
+            <column computed="false" name="APP_ID" type="nvarchar(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK__TB_ASLG___D86E697C82CE978A"/>
+            </column>
+            <column computed="false" name="DEVICE_ID" type="nvarchar(255)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK__TB_ASLG___D86E697C82CE978A"/>
+            </column>
+            <column computed="false" defaultValueComputed="NULL" defaultValueConstraintName="DF__TB_ASLG_D__LATIT__76DF510D" name="LATITUDE" type="nvarchar(255)"/>
+            <column computed="false" defaultValueComputed="NULL" defaultValueConstraintName="DF__TB_ASLG_D__LONGI__77D37546" name="LONGITUDE" type="nvarchar(255)"/>
+            <column computed="false" defaultValueComputed="getdate()" defaultValueConstraintName="DF__TB_ASLG_D__CREAT__78C7997F" name="CREATE_TS" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB__ASLG_FMW_TXN_DETAIL_3.24.0-21">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASLG_FMW_TXN_DETAIL"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASLG_FMW_TXN_DETAIL">
+            <column computed="false" name="TXN_REF" type="nvarchar(255)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_TB_ASLG_FMW_TXN_DETAIL"/>
+            </column>
+            <column computed="false" name="MASTER_TXN_REF" type="nvarchar(255)"/>
+            <column computed="false" name="INTERFACE_ID" type="nvarchar(50)"/>
+            <column computed="false" name="REQ_LD_REFNO" type="nvarchar(100)"/>
+            <column computed="false" name="REQ_NO_RECS" type="int"/>
+            <column computed="false" name="RES_LD_REFNO" type="nvarchar(100)"/>
+            <column computed="false" name="RES_NO_RECS" type="int"/>
+            <column computed="false" name="ENDPOINT_TYPE" type="nvarchar(255)"/>
+            <column computed="false" name="ST_TM" type="datetime"/>
+            <column computed="false" name="END_TM" type="datetime"/>
+            <column computed="false" name="STATUS" type="nvarchar(1)"/>
+            <column computed="false" defaultValueComputed="getdate()" defaultValueConstraintName="DF__TB_ASLG_F__CREAT__199E7D65" name="CREATE_TS" type="datetime"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB__ASLG_JMS_REQ_RESP_3.24.0-22">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASLG_JMS_REQ_RESP"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASLG_JMS_REQ_RESP">
+            <column computed="false" name="TRANS_ID" type="numeric(10, 0)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_TB_ASLG_JMS_REQ_RESP"/>
+            </column>
+            <column computed="false" name="INTERFACE_ID" type="nvarchar(150)"/>
+            <column computed="false" name="APP_ID" type="nvarchar(100)"/>
+            <column computed="false" name="REQ_TYPE" type="nvarchar(150)"/>
+            <column computed="false" name="RES_TYPE" type="nvarchar(150)"/>
+            <column computed="false" name="SENT_DATE" type="date"/>
+            <column computed="false" name="RECEIVED_DATE" type="date"/>
+            <column computed="false" name="MSG_ID" type="nvarchar(250)"/>
+            <column computed="false" name="REQ_Q" type="nvarchar(250)"/>
+            <column computed="false" name="RESP_Q" type="nvarchar(250)"/>
+            <column computed="false" name="MSG_STATUS" type="numeric(10, 0)"/>
+            <column computed="false" name="MSG_SENT" type="[nvarchar] (max)"/>
+            <column computed="false" name="MSG_RECEIVED" type="[nvarchar] (max)"/>
+            <column computed="false" name="RESP_DESC" type="nvarchar(250)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB__ASLG_SMS_TXN_3.24.0-23">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASLG_SMS_TXN"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASLG_SMS_TXN">
+            <column computed="false" name="SMS_TXNREF" type="nvarchar(255)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK__TB_ASLG___B4A3B35D82C54110"/>
+            </column>
+            <column computed="false" name="APP_ID" type="nvarchar(100)"/>
+            <column computed="false" name="MOBILE_NUMBER" type="nvarchar(13)"/>
+            <column computed="false" name="REQUEST" type="nvarchar(4000)"/>
+            <column computed="false" name="MESSAGE_ID" type="nvarchar(20)"/>
+            <column computed="false" name="ORIGINATION" type="nvarchar(20)"/>
+            <column computed="false" name="START_TM" type="datetime"/>
+            <column computed="false" name="RESPONSE" type="nvarchar(4000)"/>
+            <column computed="false" name="END_TM" type="datetime"/>
+            <column computed="false" name="CREATED_BY" type="nvarchar(20)"/>
+            <column computed="false" defaultValueComputed="getdate()" defaultValueConstraintName="DF__TB_ASLG_S__CREAT__6AAE8452" name="CREATE_TS" type="datetime"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB__ASLG_TXN_DETAIL_3.24.0-24">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASLG_TXN_DETAIL"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASLG_TXN_DETAIL">
+            <column computed="false" name="TXN_REF" type="nvarchar(255)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_TB_ASLG_TXN_DETAIL"/>
+            </column>
+            <column computed="false" name="USER_ID" type="nvarchar(100)"/>
+            <column computed="false" name="USER_APP_ID" type="nvarchar(100)"/>
+            <column computed="false" name="APP_USER_ID" type="nvarchar(100)"/>
+            <column computed="false" name="SESSION_ID" type="nvarchar(255)"/>
+            <column computed="false" name="DEVICE_ID" type="nvarchar(255)"/>
+            <column computed="false" name="ST_TM" type="datetime"/>
+            <column computed="false" name="END_TM" type="datetime"/>
+            <column computed="false" name="INTERFACE_ID" type="nvarchar(50)"/>
+            <column computed="false" name="APP_ID" type="nvarchar(100)"/>
+            <column computed="false" name="TXN_STAT" type="nvarchar(20)"/>
+            <column computed="false" name="REQ_LD_REFNO" type="nvarchar(100)"/>
+            <column computed="false" name="REQ_NO_RECS" type="int"/>
+            <column computed="false" name="RES_LD_REFNO" type="nvarchar(100)"/>
+            <column computed="false" name="RES_NO_RECS" type="int"/>
+            <column computed="false" defaultValueComputed="NULL" defaultValueConstraintName="DF__TB_ASLG_T__INFO1__0D38A680" name="INFO1" type="nvarchar(255)"/>
+            <column computed="false" defaultValueComputed="NULL" defaultValueConstraintName="DF__TB_ASLG_T__INFO2__0E2CCAB9" name="INFO2" type="nvarchar(255)"/>
+            <column computed="false" defaultValueComputed="NULL" defaultValueConstraintName="DF__TB_ASLG_T__INFO3__0F20EEF2" name="INFO3" type="nvarchar(255)"/>
+            <column computed="false" defaultValueComputed="NULL" defaultValueConstraintName="DF__TB_ASLG_T__INFO4__1015132B" name="INFO4" type="nvarchar(255)"/>
+            <column computed="false" defaultValueComputed="NULL" defaultValueConstraintName="DF__TB_ASLG_T__INFO5__11093764" name="INFO5" type="nvarchar(255)"/>
+            <column computed="false" name="CREATE_BY" type="nvarchar(200)"/>
+            <column computed="false" name="SOURCE" type="nvarchar(255)"/>
+            <column computed="false" name="LONGITUDE" type="nvarchar(255)"/>
+            <column computed="false" name="LATITUDE" type="nvarchar(255)"/>
+            <column computed="false" name="ORIGINATION" type="nvarchar(255)"/>
+            <column computed="false" name="STATUS" type="nvarchar(255)"/>
+            <column computed="false" name="SUBLOCALITY" type="nvarchar(255)"/>
+            <column computed="false" name="ADMIN_AREA_LVL_1" type="nvarchar(255)"/>
+            <column computed="false" name="ADMIN_AREA_LVL_2" type="nvarchar(255)"/>
+            <column computed="false" name="COUNTRY" type="nvarchar(255)"/>
+            <column computed="false" name="FORMATTED_ADDRESS" type="nvarchar(255)"/>
+            <column computed="false" defaultValueComputed="NULL" defaultValueConstraintName="DF__TB_ASLG_T__EXT_S__11FD5B9D" name="EXT_ST_TM" type="datetime"/>
+            <column computed="false" defaultValueComputed="NULL" defaultValueConstraintName="DF__TB_ASLG_T__EXT_E__12F17FD6" name="EXT_END_TM" type="datetime"/>
+            <column computed="false" defaultValueComputed="getdate()" defaultValueConstraintName="DF__TB_ASLG_T__CREAT__13E5A40F" name="CREATE_TS" type="datetime"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB__ASLG_TXT_MSLG_LOG_3.24.0-25">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASLG_TXT_MSLG_LOG"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASLG_TXT_MSLG_LOG">
+            <column computed="false" name="TXT_TXNREF" type="nvarchar(255)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK__TB_ASLG___90E8783A79DDF6FF"/>
+            </column>
+            <column computed="false" name="APP_ID" type="nvarchar(100)"/>
+            <column computed="false" name="MOBILE_NUMBER" type="nvarchar(20)"/>
+            <column computed="false" name="REQUEST" type="nvarchar(1000)"/>
+            <column computed="false" name="PORT" type="nvarchar(10)"/>
+            <column computed="false" name="ORIGINATION" type="nvarchar(20)"/>
+            <column computed="false" name="START_TM" type="datetime"/>
+            <column computed="false" name="RESPONSE" type="nvarchar(200)"/>
+            <column computed="false" name="END_TM" type="datetime"/>
+            <column computed="false" name="CREATED_BY" type="nvarchar(20)"/>
+            <column computed="false" defaultValueComputed="getdate()" defaultValueConstraintName="DF__TB_ASLG_T__CREAT__70675DA8" name="CREATE_TS" type="datetime"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB__ASLG_USSD_TXN_3.24.0-26">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASLG_USSD_TXN"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASLG_USSD_TXN">
+            <column computed="false" name="USSD_TXNREF" type="nvarchar(255)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK__TB_ASLG___C8D441CE436262EF"/>
+            </column>
+            <column computed="false" name="APP_ID" type="nvarchar(100)"/>
+            <column computed="false" name="MOBILE_NUMBER" type="nvarchar(13)"/>
+            <column computed="false" name="REQUEST" type="nvarchar(200)"/>
+            <column computed="false" name="ACTION" type="nvarchar(3000)"/>
+            <column computed="false" name="STEP" type="nvarchar(100)"/>
+            <column computed="false" name="ORIGINATION" type="nvarchar(20)"/>
+            <column computed="false" name="START_TM" type="datetime"/>
+            <column computed="false" name="RESPONSE" type="nvarchar(200)"/>
+            <column computed="false" name="END_TM" type="datetime"/>
+            <column computed="false" name="CREATED_BY" type="nvarchar(20)"/>
+            <column computed="false" defaultValueComputed="getdate()" defaultValueConstraintName="DF__TB_ASLG_U__CREAT__6D8AF0FD" name="CREATE_TS" type="datetime"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB__ASMI_APP_ACCESS_TOKEN_3.24.0-27">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASMI_APP_ACCESS_TOKEN"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASMI_APP_ACCESS_TOKEN">
+            <column computed="false" name="APP_ID" type="nvarchar(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="TB_ASMI_APP_ACCESS_TOKEN_PK"/>
+            </column>
+            <column computed="false" name="USER_ID" type="nvarchar(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="TB_ASMI_APP_ACCESS_TOKEN_PK"/>
+            </column>
+            <column computed="false" name="ACCESS_TOKEN" type="nvarchar(255)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="TB_ASMI_APP_ACCESS_TOKEN_PK"/>
+            </column>
+            <column computed="false" name="CLIENT_NONCE" type="nvarchar(255)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="TB_ASMI_APP_ACCESS_TOKEN_PK"/>
+            </column>
+            <column computed="false" defaultValueComputed="getdate()" defaultValueConstraintName="DF__TB_ASMI_A__CREAT__320016DB" name="CREATE_TS" type="datetime"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB__ASMI_APP_DTLS_3.24.0-28">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASMI_APP_DTLS"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASMI_APP_DTLS">
+            <column computed="false" name="APP_ID" type="nvarchar(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_TB_ASMI_APP_DTLS"/>
+            </column>
+            <column computed="false" name="APP_DESC" type="nvarchar(200)"/>
+            <column computed="false" name="OS_ID" type="nvarchar(50)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_TB_ASMI_APP_DTLS"/>
+            </column>
+            <column computed="false" name="CREATE_BY" type="nvarchar(100)"/>
+            <column computed="false" defaultValueComputed="getdate()" defaultValueConstraintName="DF__TB_ASMI_A__CREAT__7B4F006F" name="CREATE_TS" type="datetime"/>
+            <column computed="false" defaultValueConstraintName="DF__TB_ASMI_A__VERSI__7C4324A8" defaultValueNumeric="1" name="VERSION_NO" type="numeric(18, 0)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB__ASMI_APP_FILES_3.24.0-29">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASMI_APP_FILES"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASMI_APP_FILES">
+            <column computed="false" name="APP_ID" type="nvarchar(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="TB_ASMI_APP_FILES_PK"/>
+            </column>
+            <column computed="false" name="APP_VERSION" type="nvarchar(10)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="TB_ASMI_APP_FILES_PK"/>
+            </column>
+            <column computed="false" name="OS" type="nvarchar(20)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="TB_ASMI_APP_FILES_PK"/>
+            </column>
+            <column computed="false" name="FILE_NAME" type="nvarchar(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="TB_ASMI_APP_FILES_PK"/>
+            </column>
+            <column computed="false" name="FILE_PATH" type="nvarchar(255)"/>
+            <column computed="false" name="ACTION" type="nvarchar(10)"/>
+            <column computed="false" name="CREATE_USER_ID" type="nvarchar(100)"/>
+            <column computed="false" defaultValueComputed="getdate()" defaultValueConstraintName="DF__TB_ASMI_A__CREAT__2FC2C8AE" name="CREATE_TS" type="datetime"/>
+            <column computed="false" defaultValueConstraintName="DF__TB_ASMI_A__VERSI__30B6ECE7" defaultValueNumeric="1" name="VERSION_NO" type="numeric(10, 0)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB__ASMI_APP_ID_VERSION_3.24.0-30">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASMI_APP_ID_VERSION"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASMI_APP_ID_VERSION">
+            <column computed="false" name="APP_ID" type="nvarchar(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="TB_ASMI_APP_ID_VERSION_PK"/>
+            </column>
+            <column computed="false" name="OS" type="nvarchar(20)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="TB_ASMI_APP_ID_VERSION_PK"/>
+            </column>
+            <column computed="false" name="APP_ID_VERSION" type="nvarchar(10)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="TB_ASMI_APP_ID_VERSION_PK"/>
+            </column>
+            <column computed="false" name="CREATE_USER_ID" type="nvarchar(50)"/>
+            <column computed="false" defaultValueComputed="getdate()" defaultValueConstraintName="DF__TB_ASMI_A__CREAT__643690ED" name="CREATE_TS" type="datetime"/>
+            <column computed="false" defaultValueConstraintName="DF__TB_ASMI_A__VERSI__652AB526" defaultValueNumeric="1" name="VERSION_NO" type="numeric(10, 0)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB__ASMI_APP_MASTER_3.24.0-31">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASMI_APP_MASTER"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASMI_APP_MASTER">
+            <column computed="false" name="APP_ID" type="nvarchar(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="TB_ASMI_APP_MASTER_PK"/>
+            </column>
+            <column computed="false" name="PARENT_APPID" type="nvarchar(100)"/>
+            <column computed="false" name="APP_NAME" type="nvarchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column computed="false" name="CONTAINER_APP" type="nvarchar(1)"/>
+            <column computed="false" name="OTA_REQ" type="nvarchar(1)"/>
+            <column computed="false" name="REMOTE_DEBUG" type="nvarchar(1)"/>
+            <column computed="false" defaultValueComputed="getdate()" defaultValueConstraintName="DF__TB_ASMI_A__EXPIR__4FC583EC" name="EXPIRY_DATE" type="datetime"/>
+            <column computed="false" name="APP_DESCRIPTION" type="nvarchar(200)"/>
+            <column computed="false" name="DEFAULT_LANGUAGE" type="nvarchar(20)"/>
+            <column computed="false" name="CREATE_USER_ID" type="nvarchar(20)"/>
+            <column computed="false" defaultValueComputed="getdate()" defaultValueConstraintName="DF__TB_ASMI_A__CREAT__50B9A825" name="CREATE_TS" type="datetime"/>
+            <column computed="false" defaultValueConstraintName="DF__TB_ASMI_A__VERSI__51ADCC5E" defaultValueNumeric="1" name="VERSION_NO" type="numeric(10, 0)"/>
+            <column computed="false" name="BASE_APP" type="nvarchar(1)"/>
+            <column computed="false" name="MICRO_APP_TYPE" type="nvarchar(10)"/>
+            <column computed="false" defaultValue="N" defaultValueConstraintName="DF__TB_ASMI_A__PRIMA__52A1F097" name="PRIMARY_MICRO_APP" type="nvarchar(1)"/>
+            <column computed="false" name="APP_ICON" type="nvarchar(MAX)"/>
+            <column computed="false" name="APP_VERSION" type="nvarchar(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column computed="false" name="IDE_VERSION" type="nvarchar(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column computed="false" name="MAKER_ID" type="nvarchar(45)"/>
+            <column computed="false" defaultValueComputed="getdate()" defaultValueConstraintName="DF__TB_ASMI_A__MAKER__539614D0" name="MAKER_TS" type="datetime"/>
+            <column computed="false" name="CHECKER_ID" type="nvarchar(45)"/>
+            <column computed="false" defaultValueComputed="getdate()" defaultValueConstraintName="DF__TB_ASMI_A__CHECK__548A3909" name="CHECKER_TS" type="datetime"/>
+            <column computed="false" defaultValue="U" defaultValueConstraintName="DF__TB_ASMI_A__AUTH___557E5D42" name="AUTH_STATUS" type="nvarchar(45)"/>
+            <column computed="false" name="WELCOME_MSG" type="nvarchar(255)"/>
+            <column computed="false" name="ANDROID_SIGNATURE" type="nvarchar(200)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB__ASMI_APP_OS_VERSION_3.24.0-32">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASMI_APP_OS_VERSION"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASMI_APP_OS_VERSION">
+            <column computed="false" name="APP_ID" type="nvarchar(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="TB_ASMI_APP_OS_VERSION_PK"/>
+            </column>
+            <column computed="false" name="OS" type="nvarchar(20)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="TB_ASMI_APP_OS_VERSION_PK"/>
+            </column>
+            <column computed="false" name="APP_VERSION" type="nvarchar(10)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="TB_ASMI_APP_OS_VERSION_PK"/>
+            </column>
+            <column computed="false" name="CREATE_USER_ID" type="nvarchar(50)"/>
+            <column computed="false" defaultValueComputed="getdate()" defaultValueConstraintName="DF__TB_ASMI_A__CREAT__33935992" name="CREATE_TS" type="datetime"/>
+            <column computed="false" defaultValueConstraintName="DF__TB_ASMI_A__VERSI__34877DCB" defaultValueNumeric="1" name="VERSION_NO" type="numeric(10, 0)"/>
+            <column computed="false" defaultValue="IGNORE" defaultValueConstraintName="DF__TB_ASMI_A__APP_A__357BA204" name="APP_ACTION" type="nvarchar(10)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB__ASMI_APP_USER_3.24.0-33">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASMI_APP_USER"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASMI_APP_USER">
+            <column computed="false" name="USER_ID" type="nvarchar(50)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="TB_ASMI_APP_USER_PK"/>
+            </column>
+            <column computed="false" name="PARENT_APP_ID" type="nvarchar(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="TB_ASMI_APP_USER_PK"/>
+            </column>
+            <column computed="false" name="CHILD_APP_ID" type="nvarchar(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="TB_ASMI_APP_USER_PK"/>
+            </column>
+            <column computed="false" name="CREATE_USER_ID" type="nvarchar(50)"/>
+            <column computed="false" defaultValueComputed="getdate()" defaultValueConstraintName="DF__TB_ASMI_A__CREAT__2BF237CA" name="CREATE_TS" type="datetime"/>
+            <column computed="false" defaultValueConstraintName="DF__TB_ASMI_A__VERSI__2CE65C03" defaultValueNumeric="1" name="VERSION_NO" type="numeric(10, 0)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB__ASMI_CAPTCHA_DTLS_3.24.0-34">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASMI_CAPTCHA_DTLS"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASMI_CAPTCHA_DTLS">
+            <column computed="false" name="CAPTCHA_REF" type="numeric(10, 0)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK__TB_ASMI___BF7701ACB573214C"/>
+            </column>
+            <column computed="false" name="APP_ID" type="nvarchar(100)"/>
+            <column computed="false" name="CAPTCHA_STRING" type="nvarchar(255)"/>
+            <column computed="false" name="AUDIO_CAPTCHA" type="nvarchar(255)"/>
+            <column computed="false" name="INTERFACE_ID" type="nvarchar(100)"/>
+            <column computed="false" name="SESSION_ID" type="nvarchar(255)"/>
+            <column computed="false" defaultValueComputed="getdate()" defaultValueConstraintName="DF__TB_ASMI_C__CREAT__7BA4062A" name="CREATE_TS" type="datetime"/>
+            <column computed="false" name="VALIDATE_TS" type="datetime"/>
+            <column computed="false" defaultValue="NP" defaultValueConstraintName="DF__TB_ASMI_C__CAPTC__7C982A63" name="CAPTCHA_STATUS" type="nvarchar(2)"/>
+            <column computed="false" defaultValueConstraintName="DF__TB_ASMI_C__VERSI__7D8C4E9C" defaultValueNumeric="0" name="VERSION_NO" type="numeric(18, 0)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB__ASMI_CNVUI_MASTER_3.24.0-35">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASMI_CNVUI_MASTER"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASMI_CNVUI_MASTER">
+            <column computed="false" name="APP_ID" type="nvarchar(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="TB_ASMI_CNVUI_MASTER_PK"/>
+            </column>
+            <column computed="false" name="CNVUI_ID" type="nvarchar(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="TB_ASMI_CNVUI_MASTER_PK"/>
+            </column>
+            <column computed="false" name="CNVUI_DESC" type="nvarchar(100)"/>
+            <column computed="false" defaultValueComputed="NULL" defaultValueConstraintName="DF__TB_ASMI_C__CREAT__0068BB47" name="CREATE_USER_ID" type="nvarchar(100)"/>
+            <column computed="false" defaultValueComputed="getdate()" defaultValueConstraintName="DF__TB_ASMI_C__CREAT__015CDF80" name="CREATE_TS" type="datetime"/>
+            <column computed="false" defaultValueConstraintName="DF__TB_ASMI_C__VERSI__025103B9" defaultValueNumeric="1" name="VERSION_NO" type="numeric(10, 0)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB__ASMI_CNVUI_SCR_3.24.0-36">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASMI_CNVUI_SCR"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASMI_CNVUI_SCR">
+            <column computed="false" name="APP_ID" type="nvarchar(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="TB_ASMI_CNVUI_SCR_PK"/>
+            </column>
+            <column computed="false" name="SCREEN_ID" type="nvarchar(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="TB_ASMI_CNVUI_SCR_PK"/>
+            </column>
+            <column computed="false" name="SCREEN_DESC" type="nvarchar(100)"/>
+            <column computed="false" name="SCREEN_DEF" type="nvarchar(MAX)"/>
+            <column computed="false" name="SCREEN_DESIGN" type="nvarchar(MAX)"/>
+            <column computed="false" name="SCREEN_HTML" type="nvarchar(MAX)"/>
+            <column computed="false" name="SCREEN_LAYOUT" type="nvarchar(MAX)"/>
+            <column computed="false" name="TEMPLATE" type="nvarchar(MAX)"/>
+            <column computed="false" defaultValueComputed="NULL" defaultValueConstraintName="DF__TB_ASMI_C__CREAT__0CCE922C" name="CREATE_USER_ID" type="nvarchar(100)"/>
+            <column computed="false" defaultValueComputed="getdate()" defaultValueConstraintName="DF__TB_ASMI_C__CREAT__0DC2B665" name="CREATE_TS" type="datetime"/>
+            <column computed="false" defaultValueConstraintName="DF__TB_ASMI_C__VERSI__0EB6DA9E" defaultValueNumeric="1" name="VERSION_NO" type="numeric(10, 0)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB__ASMI_CONTROLS_MASTER_3.24.0-37">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASMI_CONTROLS_MASTER"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASMI_CONTROLS_MASTER">
+            <column computed="false" name="APP_ID" type="nvarchar(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK__TB_ASMI___6EC6104F3F40DD1E"/>
+            </column>
+            <column computed="false" name="CONTROL_ID" type="nvarchar(255)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK__TB_ASMI___6EC6104F3F40DD1E"/>
+            </column>
+            <column computed="false" defaultValueComputed="NULL" defaultValueConstraintName="DF__TB_ASMI_C__CONTR__7343CA53" name="CONTROL_DESC" type="nvarchar(255)"/>
+            <column computed="false" defaultValueComputed="NULL" defaultValueConstraintName="DF__TB_ASMI_C__CREAT__7437EE8C" name="CREATED_BY" type="nvarchar(100)"/>
+            <column computed="false" defaultValueComputed="getdate()" defaultValueConstraintName="DF__TB_ASMI_C__CREAT__752C12C5" name="CREATED_TS" type="datetime"/>
+            <column computed="false" name="MAKER_ID" type="nvarchar(45)"/>
+            <column computed="false" defaultValueComputed="getdate()" defaultValueConstraintName="DF__TB_ASMI_C__MAKER__762036FE" name="MAKER_TS" type="datetime"/>
+            <column computed="false" name="CHECKER_ID" type="nvarchar(45)"/>
+            <column computed="false" defaultValueComputed="getdate()" defaultValueConstraintName="DF__TB_ASMI_C__CHECK__77145B37" name="CHECKER_TS" type="datetime"/>
+            <column computed="false" defaultValue="U" defaultValueConstraintName="DF__TB_ASMI_C__AUTH___78087F70" name="AUTH_STATUS" type="nvarchar(45)"/>
+            <column computed="false" defaultValueConstraintName="DF__TB_ASMI_C__VERSI__78FCA3A9" defaultValueNumeric="1" name="VERSION_NO" type="numeric(10, 0)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB__ASMI_COOKIES_3.24.0-38">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASMI_COOKIES"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASMI_COOKIES">
+            <column computed="false" name="APP_ID" type="nvarchar(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="TB_ASMI_COOKIES_PK"/>
+            </column>
+            <column computed="false" name="USER_ID" type="nvarchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column computed="false" name="USR_SELECTOR" type="nvarchar(50)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="TB_ASMI_COOKIES_PK"/>
+            </column>
+            <column computed="false" name="USR_VALIDATOR" type="nvarchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column computed="false" defaultValueComputed="getdate()" defaultValueConstraintName="DF__TB_ASMI_C__CREAT__34DC8386" name="CREATE_TS" type="datetime"/>
+            <column computed="false" defaultValueComputed="getdate()" defaultValueConstraintName="DF__TB_ASMI_C__EXPIR__35D0A7BF" name="EXPIRY_TS" type="datetime"/>
+            <column computed="false" defaultValueConstraintName="DF__TB_ASMI_C__VERSI__36C4CBF8" defaultValueNumeric="1" name="VERSION_NO" type="numeric(10, 0)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB__ASMI_CS_NONCEDETAILS_3.24.0-39">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASMI_CS_NONCEDETAILS"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASMI_CS_NONCEDETAILS">
+            <column computed="false" name="DEVICE_ID" type="nvarchar(100)"/>
+            <column computed="false" name="APP_ID" type="nvarchar(100)"/>
+            <column computed="false" name="REQUEST_ID" type="nvarchar(255)"/>
+            <column computed="false" name="CLIENT_NONCE" type="nvarchar(100)"/>
+            <column computed="false" name="SERVER_NONCE" type="nvarchar(100)"/>
+            <column computed="false" name="STATUS" type="nvarchar(100)"/>
+            <column computed="false" name="SERVER_TOKEN" type="nvarchar(100)"/>
+            <column computed="false" defaultValueComputed="getdate()" defaultValueConstraintName="DF__TB_ASMI_C__CREAT__0A08CAC8" name="CREATE_TS" type="datetime"/>
+            <column computed="false" name="CREATED_ON" type="date"/>
+        </createTable>
+        <modifySql>
+            <append value="CREATE PARTITION FUNCTION [Hashing_partition] (TINYINT) AS RANGE LEFT FOR VALUES (0, 1, 2, 3, 4, 5, 6, 7);
+
+  CREATE PARTITION SCHEME [ps_Hashing_partition] AS PARTITION [Hashing_partition] ALL TO ('PRIMARY');
+
+  ALTER TABLE [TB_ASMI_CS_NONCEDETAILS]
+    ADD [HASH_VALUE] AS (CONVERT([tinyint], abs(binary_checksum([DEVICE_ID])%(12)),(0)))
+    PERSISTED NOT NULL;
+
+  CREATE CLUSTERED INDEX [TB_ASMI_CS_NONCEDETAILS_INDEX_1]
+    ON [TB_ASMI_CS_NONCEDETAILS]
+    ([DEVICE_ID] ASC, [HASH_VALUE])
+    ON ps_Hashing_partition(HASH_VALUE);
+
+  create unique index TB_ASMI_CS_NONCEDETAILS_IDX01 on TB_ASMI_CS_NONCEDETAILS(DEVICE_ID, APP_ID, REQUEST_ID, CLIENT_NONCE, SERVER_NONCE,CREATED_ON, HASH_VALUE);"/>
+        </modifySql>
+   </changeSet>
+    <changeSet author="platform" id="DDL_TB__ASMI_DESIGN_OBJECTS_3.24.0-40">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASMI_DESIGN_OBJECTS"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASMI_DESIGN_OBJECTS">
+            <column computed="false" name="APP_ID" type="nvarchar(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK__TB_ASMI___D0824DFEB0C19AB7"/>
+            </column>
+            <column computed="false" name="SCREEN_ID" type="nvarchar(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK__TB_ASMI___D0824DFEB0C19AB7"/>
+            </column>
+            <column computed="false" name="LAYOUT_ID" type="nvarchar(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK__TB_ASMI___D0824DFEB0C19AB7"/>
+            </column>
+            <column computed="false" name="DESIGN_ID" type="nvarchar(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK__TB_ASMI___D0824DFEB0C19AB7"/>
+            </column>
+            <column computed="false" name="PARENT_ID" type="nvarchar(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK__TB_ASMI___D0824DFEB0C19AB7"/>
+            </column>
+            <column computed="false" name="CHILD_ID" type="nvarchar(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK__TB_ASMI___D0824DFEB0C19AB7"/>
+            </column>
+            <column computed="false" name="CHILD_SEQ" type="int">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB__ASMI_DEVICE_GRPS_3.24.0-41">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASMI_DEVICE_GRPS"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASMI_DEVICE_GRPS">
+            <column computed="false" name="APP_ID" type="nvarchar(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK__TB_ASMI___14E23DE397AF59FF"/>
+            </column>
+            <column computed="false" name="DEVICE_GROUP_ID" type="nvarchar(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK__TB_ASMI___14E23DE397AF59FF"/>
+            </column>
+            <column computed="false" name="DEVICE_GROUP_DESCRIPTION" type="nvarchar(1000)">
+                <constraints nullable="false"/>
+            </column>
+            <column computed="false" name="OS" type="nvarchar(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column computed="false" name="HEIGHT" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column computed="false" name="WIDTH" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column computed="false" defaultValueComputed="NULL" defaultValueConstraintName="DF__TB_ASMI_D__ORIEN__5B373698" name="ORIENTATION_LOCK" type="nvarchar(10)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB__ASMI_DEVICE_MASTER_3.24.0-42">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASMI_DEVICE_MASTER"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASMI_DEVICE_MASTER">
+            <column computed="false" name="APP_ID" type="nvarchar(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="TB_ASMI_DEVICE_MASTER_PK"/>
+            </column>
+            <column computed="false" name="DEVICE_ID" type="nvarchar(200)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="TB_ASMI_DEVICE_MASTER_PK"/>
+            </column>
+            <column computed="false" name="OS" type="nvarchar(20)"/>
+            <column computed="false" name="OS_VERSION" type="nvarchar(50)"/>
+            <column computed="false" name="MOBILE_NUMBER1" type="nvarchar(20)"/>
+            <column computed="false" name="MOBILE_NUMBER2" type="nvarchar(20)"/>
+            <column computed="false" name="MODEL" type="nvarchar(100)"/>
+            <column computed="false" name="MAKE" type="nvarchar(100)"/>
+            <column computed="false" name="SCREEN_RESOLUTION" type="nvarchar(100)"/>
+            <column computed="false" defaultValue="N" defaultValueConstraintName="DF__TB_ASMI_D__WIPED__5F3CD1A6" name="WIPED_OUT" type="nvarchar(1)"/>
+            <column computed="false" defaultValueComputed="getdate()" defaultValueConstraintName="DF__TB_ASMI_D__CREAT__6030F5DF" name="CREATE_TS" type="datetime"/>
+            <column computed="false" name="DEVICE_NAME" type="nvarchar(100)"/>
+            <column computed="false" name="LONGITUDE" type="nvarchar(100)"/>
+            <column computed="false" name="LATITUDE" type="nvarchar(100)"/>
+            <column computed="false" name="APP_VERSION" type="nvarchar(50)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB__ASMI_DLG_MASTER_3.24.0-43">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASMI_DLG_MASTER"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASMI_DLG_MASTER">
+            <column computed="false" name="APP_ID" type="nvarchar(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="TB_ASMI_DLG_MASTER_PK"/>
+            </column>
+            <column computed="false" name="CNVUI_ID" type="nvarchar(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="TB_ASMI_DLG_MASTER_PK"/>
+            </column>
+            <column computed="false" name="DLG_ID" type="nvarchar(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="TB_ASMI_DLG_MASTER_PK"/>
+            </column>
+            <column computed="false" name="DLG_DESC" type="nvarchar(100)"/>
+            <column computed="false" name="DLG_TYPE" type="nvarchar(100)"/>
+            <column computed="false" name="DLG_SEQ" type="numeric(10, 0)"/>
+            <column computed="false" name="NXT_DLG_ID" type="nvarchar(100)"/>
+            <column computed="false" name="RESP_DLG_ID" type="nvarchar(100)"/>
+            <column computed="false" name="RESP_TYPE" type="nvarchar(100)"/>
+            <column computed="false" name="SCREEN_ID" type="nvarchar(100)"/>
+            <column computed="false" name="INTERFACE_ID" type="nvarchar(100)"/>
+            <column computed="false" defaultValueComputed="NULL" defaultValueConstraintName="DF__TB_ASMI_D__CREAT__052D7064" name="CREATE_USER_ID" type="nvarchar(100)"/>
+            <column computed="false" defaultValueComputed="getdate()" defaultValueConstraintName="DF__TB_ASMI_D__CREAT__0621949D" name="CREATE_TS" type="datetime"/>
+            <column computed="false" name="MAKER_ID" type="nvarchar(45)"/>
+            <column computed="false" defaultValueComputed="getdate()" defaultValueConstraintName="DF__TB_ASMI_D__MAKER__0715B8D6" name="MAKER_TS" type="datetime"/>
+            <column computed="false" name="CHECKER_ID" type="nvarchar(45)"/>
+            <column computed="false" defaultValueComputed="getdate()" defaultValueConstraintName="DF__TB_ASMI_D__CHECK__0809DD0F" name="CHECKER_TS" type="datetime"/>
+            <column computed="false" defaultValue="U" defaultValueConstraintName="DF__TB_ASMI_D__AUTH___08FE0148" name="AUTH_STATUS" type="nvarchar(45)"/>
+            <column computed="false" defaultValueConstraintName="DF__TB_ASMI_D__VERSI__09F22581" defaultValueNumeric="1" name="VERSION_NO" type="numeric(10, 0)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB__ASMI_INTF_MASTER_3.24.0-44">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASMI_INTF_MASTER"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASMI_INTF_MASTER">
+            <column computed="false" name="INTERFACE_ID" type="nvarchar(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_TB_ASMI_INTF_MASTER"/>
+            </column>
+            <column computed="false" name="APP_ID" type="nvarchar(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_TB_ASMI_INTF_MASTER"/>
+            </column>
+            <column computed="false" name="CATEGORY" type="nvarchar(30)"/>
+            <column computed="false" name="TYPE" type="nvarchar(30)"/>
+            <column computed="false" name="DESCRIPTION" type="nvarchar(100)"/>
+            <column computed="false" defaultValue="Y" defaultValueConstraintName="DF__TB_ASMI_I__AUTHR__1C7AEA10" name="AUTHRZ_REQ" type="nvarchar(1)"/>
+            <column computed="false" name="CREATE_USER_ID" type="nvarchar(100)"/>
+            <column computed="false" defaultValueComputed="getdate()" defaultValueConstraintName="DF__TB_ASMI_I__CREAT__1D6F0E49" name="CREATE_TS" type="datetime"/>
+            <column computed="false" defaultValueConstraintName="DF__TB_ASMI_I__VERSI__1E633282" defaultValueNumeric="1" name="VERSION_NO" type="numeric(10, 0)"/>
+            <column computed="false" name="MAKER_ID" type="nvarchar(45)"/>
+            <column computed="false" defaultValueComputed="getdate()" defaultValueConstraintName="DF__TB_ASMI_I__MAKER__1F5756BB" name="MAKER_TS" type="datetime"/>
+            <column computed="false" name="CHECKER_ID" type="nvarchar(45)"/>
+            <column computed="false" defaultValueComputed="getdate()" defaultValueConstraintName="DF__TB_ASMI_I__CHECK__204B7AF4" name="CHECKER_TS" type="datetime"/>
+            <column computed="false" defaultValue="U" defaultValueConstraintName="DF__TB_ASMI_I__AUTH___213F9F2D" name="AUTH_STATUS" type="nvarchar(45)"/>
+            <column computed="false" defaultValue="N" defaultValueConstraintName="DF__TB_ASMI_I__CAPTC__2233C366" name="CAPTCHA_REQ" type="nvarchar(5)"/>
+            <column computed="false" defaultValue="N" name="CAPTCHA_TYPE" type="nvarchar(7)"/>
+            <column computed="false" name="INTERFACE_DEF" type="[nvarchar] (max)"/>
+            <column computed="false" defaultValue="Y" defaultValueConstraintName="DF__TB_ASMI_I__DG_TX__2327E79F" name="DG_TXN_LOG_REQ" type="nvarchar(1)"/>
+            <column computed="false" defaultValue="Y" defaultValueConstraintName="DF__TB_ASMI_I__TXN_L__241C0BD8" name="TXN_LOG_REQ" type="nvarchar(1)"/>
+            <column computed="false" defaultValue="NONE" defaultValueConstraintName="DF__TB_ASMI_I__TXN_L__25103011" name="TXN_LOG_PAYLOAD_REQ" type="nvarchar(10)"/>
+            <column computed="false" defaultValue="Y" defaultValueConstraintName="DF__TB_ASMI_I__FMW_T__2604544A" name="FMW_TXN_REQ" type="nvarchar(1)"/>
+            <column computed="false" defaultValue="NONE" defaultValueConstraintName="DF__TB_ASMI_I__FMW_T__26F87883" name="FMW_TXN_PAYLOAD_REQ" type="nvarchar(10)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB__ASMI_LOV_QUERIES_3.24.0-45">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASMI_LOV_QUERIES"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASMI_LOV_QUERIES">
+            <column computed="false" name="APP_ID" type="nvarchar(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_TB_ASMI_LOV_QUERIES"/>
+            </column>
+            <column computed="false" name="QUERY_ID" type="nvarchar(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_TB_ASMI_LOV_QUERIES"/>
+            </column>
+            <column computed="false" name="QUERY_STRING" type="nvarchar(1000)"/>
+            <column computed="false" name="DB_JNDI_NAME" type="nvarchar(50)"/>
+            <column computed="false" defaultValue="SQL" defaultValueConstraintName="DF__TB_ASMI_L__QUERY__7F1F9153" name="QUERY_TYPE" type="nvarchar(3)"/>
+            <column computed="false" name="BINDVAR_COLS" type="nvarchar(300)"/>
+            <column computed="false" name="BINDVAR_DATA_TYPES" type="nvarchar(300)"/>
+            <column computed="false" name="FILTER_COLS" type="nvarchar(300)"/>
+            <column computed="false" name="ORDERBY_COL" type="nvarchar(40)"/>
+            <column computed="false" defaultValue="ASC" defaultValueConstraintName="DF__TB_ASMI_L__ORDER__0013B58C" name="ORDERBY_TYPE" type="nvarchar(5)"/>
+            <column computed="false" defaultValueComputed="getdate()" defaultValueConstraintName="DF__TB_ASMI_L__CREAT__0107D9C5" name="CREATE_TS" type="datetime"/>
+            <column computed="false" defaultValueComputed="getdate()" defaultValueConstraintName="DF__TB_ASMI_L__UPDAT__01FBFDFE" name="UPDATE_TS" type="datetime"/>
+            <column computed="false" name="CREATE_BY" type="nvarchar(50)"/>
+            <column computed="false" defaultValueComputed="NULL" defaultValueConstraintName="DF__TB_ASMI_L__SESSI__02F02237" name="SESSION_REQD" type="nvarchar(1)"/>
+            <column computed="false" defaultValueConstraintName="DF__TB_ASMI_L__VERSI__03E44670" defaultValueNumeric="1" name="VERSION_NO" type="numeric(18, 0)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB__ASMI_OS_DTLS_3.24.0-46">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASMI_OS_DTLS"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASMI_OS_DTLS">
+            <column computed="false" name="OS_ID" type="nvarchar(50)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_TB_ASMI_OS_DTLS"/>
+            </column>
+            <column computed="false" name="OS_DESC" type="nvarchar(200)"/>
+            <column computed="false" name="CREATE_BY" type="nvarchar(100)"/>
+            <column computed="false" defaultValueComputed="getdate()" defaultValueConstraintName="DF__TB_ASMI_O__CREAT__06C0B31B" name="CREATE_TS" type="datetime"/>
+            <column computed="false" defaultValueConstraintName="DF__TB_ASMI_O__VERSI__07B4D754" defaultValueNumeric="1" name="VERSION_NO" type="numeric(18, 0)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB__ASMI_ROLE_CONTROLS_3.24.0-47">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASMI_ROLE_CONTROLS"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASMI_ROLE_CONTROLS">
+            <column computed="false" name="APP_ID" type="nvarchar(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK__TB_ASMI___7C4E91A24C59D3AF"/>
+            </column>
+            <column computed="false" name="ROLE_ID" type="nvarchar(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK__TB_ASMI___7C4E91A24C59D3AF"/>
+            </column>
+            <column computed="false" name="CONTROL_ID" type="nvarchar(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK__TB_ASMI___7C4E91A24C59D3AF"/>
+            </column>
+            <column computed="false" defaultValueComputed="NULL" defaultValueConstraintName="DF__TB_ASMI_R__CREAT__7BD91054" name="CREATED_BY" type="nvarchar(100)"/>
+            <column computed="false" defaultValueComputed="getdate()" defaultValueConstraintName="DF__TB_ASMI_R__CREAT__7CCD348D" name="CREATED_TS" type="datetime"/>
+            <column computed="false" defaultValueConstraintName="DF__TB_ASMI_R__VERSI__7DC158C6" defaultValueNumeric="1" name="VERSION_NO" type="numeric(10, 0)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB__ASMI_ROLE_INTF_3.24.0-48">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASMI_ROLE_INTF"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASMI_ROLE_INTF">
+            <column computed="false" name="APP_ID" type="nvarchar(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_TB_ASMI_ROLE_INTF"/>
+            </column>
+            <column computed="false" name="ROLE_ID" type="nvarchar(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_TB_ASMI_ROLE_INTF"/>
+            </column>
+            <column computed="false" name="INTERFACE_ID" type="nvarchar(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_TB_ASMI_ROLE_INTF"/>
+            </column>
+            <column computed="false" name="CREATE_USER_ID" type="nvarchar(100)"/>
+            <column computed="false" defaultValueComputed="getdate()" defaultValueConstraintName="DF__TB_ASMI_R__CREAT__29D4E52E" name="CREATE_TS" type="datetime"/>
+            <column computed="false" defaultValueConstraintName="DF__TB_ASMI_R__VERSI__2AC90967" defaultValueNumeric="1" name="VERSION_NO" type="numeric(10, 0)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB__ASMI_ROLE_MASTER_3.24.0-49">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASMI_ROLE_MASTER"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASMI_ROLE_MASTER">
+            <column computed="false" name="ROLE_ID" type="nvarchar(255)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_TB_ASMI_ROLE_MASTER"/>
+            </column>
+            <column computed="false" name="APP_ID" type="nvarchar(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_TB_ASMI_ROLE_MASTER"/>
+            </column>
+            <column computed="false" name="ROLE_DESC" type="nvarchar(255)"/>
+            <column computed="false" defaultValue="A" defaultValueConstraintName="DF__TB_ASMI_R__INTER__2DA57612" name="INTERFACE_ALLOWED" type="nvarchar(1)"/>
+            <column computed="false" defaultValue="A" defaultValueConstraintName="DF__TB_ASMI_R__SCREE__2E999A4B" name="SCREEN_ALLOWED" type="nvarchar(1)"/>
+            <column computed="false" defaultValue="A" defaultValueConstraintName="DF__TB_ASMI_R__CONTR__2F8DBE84" name="CONTROL_ALLOWED" type="nvarchar(1)"/>
+            <column computed="false" name="CREATE_USER_ID" type="nvarchar(100)"/>
+            <column computed="false" defaultValueComputed="getdate()" defaultValueConstraintName="DF__TB_ASMI_R__CREAT__3081E2BD" name="CREATE_TS" type="datetime"/>
+            <column computed="false" defaultValueConstraintName="DF__TB_ASMI_R__VERSI__317606F6" defaultValueNumeric="1" name="VERSION_NO" type="numeric(10, 0)"/>
+            <column computed="false" name="MAKER_ID" type="nvarchar(45)"/>
+            <column computed="false" defaultValueComputed="getdate()" defaultValueConstraintName="DF__TB_ASMI_R__MAKER__326A2B2F" name="MAKER_TS" type="datetime"/>
+            <column computed="false" name="CHECKER_ID" type="nvarchar(45)"/>
+            <column computed="false" defaultValueComputed="getdate()" defaultValueConstraintName="DF__TB_ASMI_R__CHECK__335E4F68" name="CHECKER_TS" type="datetime"/>
+            <column computed="false" defaultValue="U" defaultValueConstraintName="DF__TB_ASMI_R__AUTH___345273A1" name="AUTH_STATUS" type="nvarchar(45)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB__ASMI_ROLE_SCR_3.24.0-50">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASMI_ROLE_SCR"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASMI_ROLE_SCR">
+            <column computed="false" name="APP_ID" type="nvarchar(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_TB_ASMI_ROLE_SCR"/>
+            </column>
+            <column computed="false" name="SCREEN_ID" type="nvarchar(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_TB_ASMI_ROLE_SCR"/>
+            </column>
+            <column computed="false" name="ROLE_ID" type="nvarchar(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_TB_ASMI_ROLE_SCR"/>
+            </column>
+            <column computed="false" name="CREATE_USER_ID" type="nvarchar(100)"/>
+            <column computed="false" defaultValueComputed="getdate()" defaultValueConstraintName="DF__TB_ASMI_R__CREAT__372EE04C" name="CREATE_TS" type="datetime"/>
+            <column computed="false" defaultValueConstraintName="DF__TB_ASMI_R__VERSI__38230485" defaultValueNumeric="1" name="VERSION_NO" type="numeric(10, 0)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB__ASMI_ROLE_WORKFLOWS_3.24.0-51">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASMI_ROLE_WORKFLOWS"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASMI_ROLE_WORKFLOWS">
+            <column computed="false" name="APP_ID" type="nvarchar(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK__TB_ASMI___A985D6EAEF72F432"/>
+            </column>
+            <column computed="false" name="ROLE_ID" type="nvarchar(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK__TB_ASMI___A985D6EAEF72F432"/>
+            </column>
+            <column computed="false" name="WORKFLOW_ID" type="nvarchar(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK__TB_ASMI___A985D6EAEF72F432"/>
+            </column>
+            <column computed="false" name="STAGE_ID" type="nvarchar(50)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK__TB_ASMI___A985D6EAEF72F432"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB__ASMI_SCHEDULER_JOB_3.24.0-52">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASMI_SCHEDULER_JOB"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASMI_SCHEDULER_JOB">
+            <column computed="false" defaultValueComputed="NULL" defaultValueConstraintName="DF__TB_ASMI_S__APP_I__5BA14AEC" name="APP_ID" type="nvarchar(45)"/>
+            <column computed="false" name="JOB_NAME" type="nvarchar(255)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK__TB_ASMI___D2C792E961EBFFA4"/>
+            </column>
+            <column computed="false" defaultValueComputed="NULL" defaultValueConstraintName="DF__TB_ASMI_S__JOB_C__5C956F25" name="JOB_CLASS" type="nvarchar(255)"/>
+            <column computed="false" defaultValueComputed="NULL" defaultValueConstraintName="DF__TB_ASMI_S__JOB_D__5D89935E" name="JOB_DATA" type="nvarchar(255)"/>
+            <column computed="false" defaultValue="P" defaultValueConstraintName="DF__TB_ASMI_S__JOB_S__5E7DB797" name="JOB_STATUS" type="nvarchar(45)"/>
+            <column computed="false" name="JOB_CREATED_TS" type="datetime"/>
+            <column computed="false" name="JOB_EXECUTED_TS" type="datetime"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB__ASMI_SCHEDULER_JOB_EXP_3.24.0-53">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASMI_SCHEDULER_JOB_EXP"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASMI_SCHEDULER_JOB_EXP">
+            <column computed="false" name="JOB_NAME" type="nvarchar(45)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK__TB_ASMI___D2C792E9F22A17D7"/>
+            </column>
+            <column computed="false" defaultValueComputed="NULL" defaultValueConstraintName="DF__TB_ASMI_S__START__4F3B7407" name="START_DATE" type="nvarchar(45)"/>
+            <column computed="false" defaultValueComputed="NULL" defaultValueConstraintName="DF__TB_ASMI_S__END_D__502F9840" name="END_DATE" type="nvarchar(45)"/>
+            <column computed="false" defaultValueComputed="NULL" defaultValueConstraintName="DF__TB_ASMI_S__EXP_S__5123BC79" name="EXP_START_SEC" type="nvarchar(45)"/>
+            <column computed="false" defaultValueComputed="NULL" defaultValueConstraintName="DF__TB_ASMI_S__EXP_S__5217E0B2" name="EXP_SEC" type="nvarchar(45)"/>
+            <column computed="false" defaultValueComputed="NULL" defaultValueConstraintName="DF__TB_ASMI_S__EXP_M__530C04EB" name="EXP_MIN" type="nvarchar(45)"/>
+            <column computed="false" defaultValueComputed="NULL" defaultValueConstraintName="DF__TB_ASMI_S__EXP_H__54002924" name="EXP_HR" type="nvarchar(45)"/>
+            <column computed="false" defaultValueComputed="NULL" defaultValueConstraintName="DF__TB_ASMI_S__EXP_D__54F44D5D" name="EXP_DOM" type="nvarchar(45)"/>
+            <column computed="false" defaultValueComputed="NULL" defaultValueConstraintName="DF__TB_ASMI_S__EXP_M__55E87196" name="EXP_MONTH" type="nvarchar(45)"/>
+            <column computed="false" defaultValueComputed="NULL" defaultValueConstraintName="DF__TB_ASMI_S__EXP_D__56DC95CF" name="EXP_DOW" type="nvarchar(45)"/>
+            <column computed="false" defaultValueComputed="NULL" defaultValueConstraintName="DF__TB_ASMI_S__EXP_Y__57D0BA08" name="EXP_YEAR" type="nvarchar(45)"/>
+            <column computed="false" defaultValueComputed="NULL" defaultValueConstraintName="DF__TB_ASMI_S__EXPRE__58C4DE41" name="EXPRESSION" type="nvarchar(45)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB__ASMI_SCREEN_LAYOUTS_3.24.0-54">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASMI_SCREEN_LAYOUTS"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASMI_SCREEN_LAYOUTS">
+            <column computed="false" name="APP_ID" type="nvarchar(6)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK__TB_ASMI___F0D9F43C8B0EBF56"/>
+            </column>
+            <column computed="false" name="SCREEN_ID" type="nvarchar(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK__TB_ASMI___F0D9F43C8B0EBF56"/>
+            </column>
+            <column computed="false" name="LAYOUT_ID" type="nvarchar(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK__TB_ASMI___F0D9F43C8B0EBF56"/>
+            </column>
+            <column computed="false" name="LAYOUT_NAME" type="nvarchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column computed="false" name="LAYOUT_ICON" type="nvarchar(MAX)"/>
+            <column computed="false" name="DEFAULT_TEMPLATE" type="nvarchar(100)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB__ASMI_SCREEN_MICRO_APP_3.24.0-55">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASMI_SCREEN_MICRO_APP"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASMI_SCREEN_MICRO_APP">
+            <column computed="false" name="APP_ID" type="nvarchar(6)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK__TB_ASMI___5B6DD1132A34EF9A"/>
+            </column>
+            <column computed="false" name="SCREEN_ID" type="nvarchar(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK__TB_ASMI___5B6DD1132A34EF9A"/>
+            </column>
+            <column computed="false" name="MICRO_APP_ID" type="nvarchar(6)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK__TB_ASMI___5B6DD1132A34EF9A"/>
+            </column>
+            <column computed="false" defaultValueComputed="getdate()" defaultValueConstraintName="DF__TB_ASMI_S__CREAT__5FFBEBB5" name="CREATE_TS" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB__ASMI_SCREEN_WIDGETS_3.24.0-56">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASMI_SCREEN_WIDGETS"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASMI_SCREEN_WIDGETS">
+            <column computed="false" name="APP_ID" type="nvarchar(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK__TB_ASMI___A77CEDA6EAEC431C"/>
+            </column>
+            <column computed="false" name="SCREEN_ID" type="nvarchar(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK__TB_ASMI___A77CEDA6EAEC431C"/>
+            </column>
+            <column computed="false" name="CALLFORM_ID" type="nvarchar(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK__TB_ASMI___A77CEDA6EAEC431C"/>
+            </column>
+            <column computed="false" defaultValueComputed="getdate()" defaultValueConstraintName="DF__TB_ASMI_S__CREAT__62D85860" name="CREATE_TS" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB__ASMI_SCR_MASTER_3.24.0-57">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASMI_SCR_MASTER"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASMI_SCR_MASTER">
+            <column computed="false" name="SCREEN_ID" type="nvarchar(255)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_TB_ASMI_SCR_MASTER"/>
+            </column>
+            <column computed="false" name="APP_ID" type="nvarchar(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_TB_ASMI_SCR_MASTER"/>
+            </column>
+            <column computed="false" name="SCREEN_DESC" type="nvarchar(255)"/>
+            <column computed="false" name="CREATE_USER_ID" type="nvarchar(100)"/>
+            <column computed="false" defaultValueComputed="getdate()" defaultValueConstraintName="DF__TB_ASMI_S__CREAT__3AFF7130" name="CREATE_TS" type="datetime"/>
+            <column computed="false" defaultValueConstraintName="DF__TB_ASMI_S__VERSI__3BF39569" defaultValueNumeric="1" name="VERSION_NO" type="numeric(10, 0)"/>
+            <column computed="false" name="MAKER_ID" type="nvarchar(45)"/>
+            <column computed="false" defaultValueComputed="getdate()" defaultValueConstraintName="DF__TB_ASMI_S__MAKER__3CE7B9A2" name="MAKER_TS" type="datetime"/>
+            <column computed="false" name="CHECKER_ID" type="nvarchar(45)"/>
+            <column computed="false" defaultValueComputed="getdate()" defaultValueConstraintName="DF__TB_ASMI_S__CHECK__3DDBDDDB" name="CHECKER_TS" type="datetime"/>
+            <column computed="false" defaultValue="U" defaultValueConstraintName="DF__TB_ASMI_S__AUTH___3ED00214" name="AUTH_STATUS" type="nvarchar(45)"/>
+            <column computed="false" defaultValueComputed="NULL" defaultValueConstraintName="DF__TB_ASMI_S__SCREE__3FC4264D" name="SCREEN_TYPE" type="nvarchar(10)"/>
+            <column computed="false" defaultValueComputed="NULL" defaultValueConstraintName="DF__TB_ASMI_S__SCREE__40B84A86" name="SCREEN_NAME" type="nvarchar(100)"/>
+            <column computed="false" name="SCREEN_ICON" type="nvarchar(MAX)"/>
+            <column computed="false" defaultValueComputed="NULL" defaultValueConstraintName="DF__TB_ASMI_S__CUSTO__41AC6EBF" name="CUSTOMISABLE" type="nvarchar(1)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB__ASMI_SECURITY_PARAMETERS_3.24.0-58">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASMI_SECURITY_PARAMETERS"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASMI_SECURITY_PARAMETERS">
+            <column computed="false" name="APP_ID" type="nvarchar(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_TB_ASMI_SECURITY_PARAMETERS"/>
+            </column>
+            <column computed="false" name="MIN_NUM_NUM" type="numeric(10, 0)"/>
+            <column computed="false" name="MIN_NUM_SPCL_CHAR" type="numeric(10, 0)"/>
+            <column computed="false" name="MIN_NUM_UPPER_CASE_CHAR" type="numeric(10, 0)"/>
+            <column computed="false" name="MIN_NUM_LOWER_CASE_CHAR" type="numeric(10, 0)"/>
+            <column computed="false" name="MIN_LENGTH" type="numeric(10, 0)"/>
+            <column computed="false" name="MAX_LENGTH" type="numeric(10, 0)"/>
+            <column computed="false" name="PASS_CHANGE_FREQ" type="numeric(10, 0)"/>
+            <column computed="false" name="LAST_N_PASS_NOT_TO_USE" type="numeric(10, 0)"/>
+            <column computed="false" name="SESSION_TIMEOUT" type="numeric(10, 0)"/>
+            <column computed="false" name="NOOFFAILEDCOUNTS" type="numeric(10, 0)"/>
+            <column computed="false" name="CREATE_USER_ID" type="nvarchar(100)"/>
+            <column computed="false" defaultValueComputed="getdate()" defaultValueConstraintName="DF__TB_ASMI_S__CREAT__6EB41F60" name="CREATE_TS" type="datetime"/>
+            <column computed="false" defaultValueConstraintName="DF__TB_ASMI_S__VERSI__6FA84399" defaultValueNumeric="1" name="VERSION_NO" type="numeric(10, 0)"/>
+            <column computed="false" name="SERVER_TOKEN" type="nvarchar(255)"/>
+            <column computed="false" name="FAIL_COUNT_TIMEOUT" type="numeric(10, 0)"/>
+            <column computed="false" name="PASSWORD_COUNT" type="numeric(10, 0)"/>
+            <column computed="false" defaultValue="Y" defaultValueConstraintName="DF__TB_ASMI_S__DEFAU__709C67D2" name="DEFAULT_AUTHORIZATION" type="char(1)"/>
+            <column computed="false" name="RESTRICT_SPL_CHARS" type="nvarchar(100)"/>
+            <column computed="false" defaultValue="N" defaultValueConstraintName="DF__TB_ASMI_S__ALLOW__71908C0B" name="ALLOW_USER_PASSWORD_ENTRY" type="nvarchar(1)"/>
+            <column computed="false" defaultValue="Y" defaultValueConstraintName="DF__TB_ASMI_S__AUTO___7284B044" name="AUTO_APPROVE" type="nvarchar(1)"/>
+            <column computed="false" defaultValue="BOTH" defaultValueConstraintName="DF__TB_ASMI_S__PWD_R__7378D47D" name="PWD_RSET_VALIDATE_PARAMS" type="nvarchar(45)"/>
+            <column computed="false" defaultValue="BOTH" defaultValueConstraintName="DF__TB_ASMI_S__PWD_R__746CF8B6" name="PWD_RSET_COMM_CHANNEL" type="nvarchar(45)"/>
+            <column computed="false" defaultValue="N" defaultValueConstraintName="DF__TB_ASMI_S__PWD_R__75611CEF" name="PWD_RSET_ACCEPT_USR_PWD" type="nvarchar(1)"/>
+            <column computed="false" defaultValue="Y" defaultValueConstraintName="DF__TB_ASMI_S__TXN_L__76554128" name="TXN_LOG_REQ" type="nvarchar(45)"/>
+            <column computed="false" name="MAKER_ID" type="nvarchar(45)"/>
+            <column computed="false" defaultValueComputed="getdate()" defaultValueConstraintName="DF__TB_ASMI_S__MAKER__77496561" name="MAKER_TS" type="datetime"/>
+            <column computed="false" name="CHECKER_ID" type="nvarchar(45)"/>
+            <column computed="false" defaultValueComputed="getdate()" defaultValueConstraintName="DF__TB_ASMI_S__CHECK__783D899A" name="CHECKER_TS" type="datetime"/>
+            <column computed="false" defaultValue="BOTH" defaultValueConstraintName="DF__TB_ASMI_S__PWD_C__7931ADD3" name="PWD_COMM_CHANNEL" type="nvarchar(45)"/>
+            <column computed="false" defaultValue="U" defaultValueConstraintName="DF__TB_ASMI_S__AUTH___7A25D20C" name="AUTH_STATUS" type="nvarchar(45)"/>
+            <column computed="false" defaultValue="Y" defaultValueConstraintName="DF__TB_ASMI_S__MULTI__7B19F645" name="MULTIPLE_SESSION_ALLOWED" type="nvarchar(1)"/>
+            <column computed="false" defaultValue="NONE" defaultValueConstraintName="DF__TB_ASMI_S__TXN_L__7C0E1A7E" name="TXN_LOG_PAYLOAD" type="nvarchar(10)"/>
+            <column computed="false" name="OTP_LENGTH" type="numeric(10, 0)"/>
+            <column computed="false" name="OTP_VALIDATION_COUNT" type="numeric(10, 0)"/>
+            <column computed="false" name="OTP_EXPIRY" type="numeric(10, 0)"/>
+            <column computed="false" defaultValueComputed="NULL" defaultValueConstraintName="DF__TB_ASMI_S__OTP_R__7D023EB7" name="OTP_RESEND" type="nvarchar(10)"/>
+            <column computed="false" defaultValueComputed="NULL" defaultValueConstraintName="DF__TB_ASMI_S__OTP_F__7DF662F0" name="OTP_FORMAT" type="nvarchar(20)"/>
+            <column computed="false" name="OTP_RESEND_COUNT" type="numeric(10, 0)"/>
+            <column computed="false" name="OTP_RESEND_LOCK_TIMEOUT" type="numeric(10, 0)"/>
+            <column computed="false" defaultValueConstraintName="DF__TB_ASMI_S__OTP_R__7EEA8729" defaultValueNumeric="0" name="OTP_REGEN_COUNT" type="numeric(10, 0)"/>
+            <column computed="false" defaultValue="BOTH" defaultValueConstraintName="DF__TB_ASMI_S__PWD_C__7FDEAB62" name="PWD_CHANGE_COMM_CHANNEL" type="nvarchar(30)"/>
+            <column computed="false" defaultValue="N" defaultValueConstraintName="DF__TB_ASMI_S__PASSW__00D2CF9B" name="PASSWORD_ON_AUTHORIZATION" type="nvarchar(1)"/>
+            <column computed="false" defaultValue="Y" defaultValueConstraintName="DF__TB_ASMI_S__DATA___01C6F3D4" name="DATA_INTEGRITY" type="nvarchar(1)"/>
+            <column computed="false" defaultValue="Y" defaultValueConstraintName="DF__TB_ASMI_S__FMW_T__02BB180D" name="FMW_TXN_REQ" type="nvarchar(45)"/>
+            <column computed="false" defaultValue="NONE" defaultValueConstraintName="DF__TB_ASMI_S__FMW_T__03AF3C46" name="FMW_TXN_PAYLOAD" type="nvarchar(10)"/>
+            <column computed="false" defaultValueConstraintName="DF__TB_ASMI_S__ACCES__04A3607F" defaultValueNumeric="0" name="ACCESS_TOKEN_EXPIRY" type="numeric(10, 0)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB__ASMI_SMS_USER_3.24.0-59">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASMI_SMS_USER"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASMI_SMS_USER">
+            <column computed="false" name="APP_ID" type="nvarchar(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="TB_ASMI_SMS_USER_PK"/>
+            </column>
+            <column computed="false" name="USER_ID" type="nvarchar(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="TB_ASMI_SMS_USER_PK"/>
+            </column>
+            <column computed="false" name="MOBILE_NUMBER" type="nvarchar(20)"/>
+            <column computed="false" name="CREATED_BY" type="nvarchar(50)"/>
+            <column computed="false" defaultValueComputed="getdate()" defaultValueConstraintName="DF__TB_ASMI_S__CREAT__66DDF36E" name="CREATE_TS" type="datetime"/>
+            <column computed="false" defaultValueConstraintName="DF__TB_ASMI_S__VERSI__67D217A7" defaultValueNumeric="0" name="VERSION_NO" type="numeric(10, 0)"/>
+            <column computed="false" name="SMS_REQ" type="nvarchar(1)"/>
+            <column computed="false" name="USSD_REQ" type="nvarchar(1)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB__ASMI_USER_3.24.0-60">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASMI_USER"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASMI_USER">
+            <column computed="false" name="USER_ID" type="nvarchar(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_TB_ASMI_USER"/>
+            </column>
+            <column computed="false" name="APP_ID" type="nvarchar(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_TB_ASMI_USER"/>
+            </column>
+            <column computed="false" name="PIN" type="nvarchar(300)"/>
+            <column computed="false" name="USER_NAME" type="nvarchar(100)"/>
+            <column computed="false" name="LAST_NAME" type="nvarchar(100)"/>
+            <column computed="false" name="LOGIN_STATUS" type="nvarchar(3)"/>
+            <column computed="false" name="FAIL_COUNT" type="numeric(10, 0)"/>
+            <column computed="false" defaultValue="Y" defaultValueConstraintName="DF__TB_ASMI_U__USER___4488DB6A" name="USER_ACTIVE" type="nvarchar(3)"/>
+            <column computed="false" defaultValue="N" defaultValueConstraintName="DF__TB_ASMI_U__USER___457CFFA3" name="USER_LOCKED" type="nvarchar(3)"/>
+            <column computed="false" defaultValue="en" defaultValueConstraintName="DF__TB_ASMI_U__LANGU__467123DC" name="LANGUAGE" type="nvarchar(2)"/>
+            <column computed="false" name="EXTERNALIDENTIFIER" type="nvarchar(30)"/>
+            <column computed="false" name="USER_ADDR1" type="nvarchar(50)"/>
+            <column computed="false" name="USER_ADDR2" type="nvarchar(50)"/>
+            <column computed="false" name="USER_ADDR3" type="nvarchar(50)"/>
+            <column computed="false" name="USER_ADDR4" type="nvarchar(50)"/>
+            <column computed="false" name="USER_EML1" type="nvarchar(255)"/>
+            <column computed="false" name="USER_EML2" type="nvarchar(255)"/>
+            <column computed="false" name="USER_PHNO1" type="nvarchar(20)"/>
+            <column computed="false" name="USER_PHNO2" type="nvarchar(20)"/>
+            <column computed="false" name="USER_LVL" type="numeric(11, 0)"/>
+            <column computed="false" name="USER_LOCK_TS" type="datetime"/>
+            <column computed="false" name="PIN_CHANGE_TS" type="datetime"/>
+            <column computed="false" name="PROFILE_PIC" type="nvarchar(MAX)"/>
+            <column computed="false" name="CREATE_USER_ID" type="nvarchar(100)"/>
+            <column computed="false" defaultValueComputed="getdate()" defaultValueConstraintName="DF__TB_ASMI_U__CREAT__47654815" name="CREATE_TS" type="datetime"/>
+            <column computed="false" defaultValueConstraintName="DF__TB_ASMI_U__VERSI__48596C4E" defaultValueNumeric="1" name="VERSION_NO" type="numeric(10, 0)"/>
+            <column computed="false" name="MAKER_ID" type="nvarchar(45)"/>
+            <column computed="false" defaultValueComputed="getdate()" defaultValueConstraintName="DF__TB_ASMI_U__MAKER__494D9087" name="MAKER_TS" type="datetime"/>
+            <column computed="false" name="CHECKER_ID" type="nvarchar(45)"/>
+            <column computed="false" defaultValueComputed="getdate()" defaultValueConstraintName="DF__TB_ASMI_U__CHECK__4A41B4C0" name="CHECKER_TS" type="datetime"/>
+            <column computed="false" name="DATE_OF_BIRTH" type="date"/>
+            <column computed="false" defaultValue="U" defaultValueConstraintName="DF__TB_ASMI_U__AUTH___4B35D8F9" name="AUTH_STATUS" type="nvarchar(45)"/>
+            <column computed="false" name="ADD_INFO1" type="nvarchar(255)"/>
+            <column computed="false" name="ADD_INFO2" type="nvarchar(255)"/>
+            <column computed="false" name="ADD_INFO3" type="nvarchar(255)"/>
+            <column computed="false" name="ADD_INFO4" type="nvarchar(255)"/>
+            <column computed="false" name="ADD_INFO5" type="nvarchar(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB__ASMI_USER_APP_ACCESS_3.24.0-61">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASMI_USER_APP_ACCESS"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASMI_USER_APP_ACCESS">
+            <column computed="false" name="APP_ID" type="nvarchar(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="TB_ASMI_USER_APP_ACCESS_PK"/>
+            </column>
+            <column computed="false" name="USER_ID" type="nvarchar(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="TB_ASMI_USER_APP_ACCESS_PK"/>
+            </column>
+            <column computed="false" name="ALLOWED_APP_ID" type="nvarchar(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="TB_ASMI_USER_APP_ACCESS_PK"/>
+            </column>
+            <column computed="false" defaultValue="D" defaultValueConstraintName="DF__TB_ASMI_U__APP_A__4453D140" name="APP_ACCESS" type="nvarchar(1)"/>
+            <column computed="false" defaultValueComputed="NULL" defaultValueConstraintName="DF__TB_ASMI_U__CREAT__4547F579" name="CREATE_USER_ID" type="nvarchar(100)"/>
+            <column computed="false" defaultValueComputed="getdate()" defaultValueConstraintName="DF__TB_ASMI_U__CREAT__463C19B2" name="CREATE_TS" type="datetime"/>
+            <column computed="false" defaultValueConstraintName="DF__TB_ASMI_U__VERSI__47303DEB" defaultValueNumeric="1" name="VERSION_NO" type="numeric(10, 0)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB__ASMI_USER_DEVICES_3.24.0-62">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASMI_USER_DEVICES"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASMI_USER_DEVICES">
+            <column computed="false" name="APP_ID" type="nvarchar(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_TB_ASMI_USER_DEVICES"/>
+            </column>
+            <column computed="false" name="DEVICE_ID" type="nvarchar(255)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_TB_ASMI_USER_DEVICES"/>
+            </column>
+            <column computed="false" name="USER_ID" type="nvarchar(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_TB_ASMI_USER_DEVICES"/>
+            </column>
+            <column computed="false" defaultValueComputed="NULL" defaultValueConstraintName="DF__TB_ASMI_U__NOTIF__4E1245A4" name="NOTIF_REG_ID" type="nvarchar(255)"/>
+            <column computed="false" name="DEVICE_STATUS" type="nvarchar(100)"/>
+            <column computed="false" name="CREATE_USER_ID" type="nvarchar(100)"/>
+            <column computed="false" defaultValueComputed="getdate()" defaultValueConstraintName="DF__TB_ASMI_U__CREAT__4F0669DD" name="CREATE_TS" type="datetime"/>
+            <column computed="false" name="MAKER_ID" type="nvarchar(45)"/>
+            <column computed="false" defaultValueComputed="getdate()" defaultValueConstraintName="DF__TB_ASMI_U__MAKER__4FFA8E16" name="MAKER_TS" type="datetime"/>
+            <column computed="false" name="CHECKER_ID" type="nvarchar(45)"/>
+            <column computed="false" defaultValueComputed="getdate()" defaultValueConstraintName="DF__TB_ASMI_U__CHECK__50EEB24F" name="CHECKER_TS" type="datetime"/>
+            <column computed="false" defaultValue="U" defaultValueConstraintName="DF__TB_ASMI_U__AUTH___51E2D688" name="AUTH_STATUS" type="nvarchar(45)"/>
+            <column computed="false" defaultValueConstraintName="DF__TB_ASMI_U__VERSI__52D6FAC1" defaultValueNumeric="1" name="VERSION_NO" type="numeric(10, 0)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB__ASMI_USER_ROLE_3.24.0-63">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASMI_USER_ROLE"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASMI_USER_ROLE">
+            <column computed="false" name="USER_ID" type="nvarchar(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_TB_ASMI_USER_ROLE"/>
+            </column>
+            <column computed="false" name="ROLE_ID" type="nvarchar(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_TB_ASMI_USER_ROLE"/>
+            </column>
+            <column computed="false" name="APP_ID" type="nvarchar(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_TB_ASMI_USER_ROLE"/>
+            </column>
+            <column computed="false" name="CREATE_USER_ID" type="nvarchar(100)"/>
+            <column computed="false" defaultValueComputed="getdate()" defaultValueConstraintName="DF__TB_ASMI_U__CREAT__55B3676C" name="CREATE_TS" type="datetime"/>
+            <column computed="false" defaultValueConstraintName="DF__TB_ASMI_U__VERSI__56A78BA5" defaultValueNumeric="1" name="VERSION_NO" type="numeric(10, 0)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB__ASMI_WORKFLOW_DEFN_3.24.0-64">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASMI_WORKFLOW_DEFN"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASMI_WORKFLOW_DEFN">
+            <column computed="false" name="APP_ID" type="nvarchar(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK__TB_ASMI___C88EF02D38FBB984"/>
+            </column>
+            <column computed="false" name="WORKFLOW_ID" type="nvarchar(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK__TB_ASMI___C88EF02D38FBB984"/>
+            </column>
+            <column computed="false" name="WORKFLOW_DESC" type="nvarchar(255)"/>
+            <column computed="false" name="VERSION_NO" type="int"/>
+            <column computed="false" name="MAKER_ID" type="nvarchar(255)"/>
+            <column computed="false" defaultValueComputed="getdate()" defaultValueConstraintName="DF__TB_ASMI_W__MAKER__19346911" name="MAKER_TS" type="datetime"/>
+            <column computed="false" name="CHECKER_ID" type="nvarchar(255)"/>
+            <column computed="false" name="CHECKER_TS" type="datetime"/>
+            <column computed="false" name="AUTH_STATUS" type="nvarchar(1)"/>
+            <column computed="false" name="ACTIVE" type="char(1)"/>
+            <column computed="false" name="TXN_TYPE" type="nvarchar(100)"/>
+            <column computed="false" name="ONCE_AUTH" type="nvarchar(1)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB__ASMI_WORKFLOW_LINKED_STAGES_3.24.0-65">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASMI_WORKFLOW_LINKED_STAGES"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASMI_WORKFLOW_LINKED_STAGES">
+            <column computed="false" name="APP_ID" type="nvarchar(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK__TB_ASMI___3C0D807C11C41B86"/>
+            </column>
+            <column computed="false" name="WORKFLOW_ID" type="nvarchar(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK__TB_ASMI___3C0D807C11C41B86"/>
+            </column>
+            <column computed="false" name="STAGE_ID" type="nvarchar(50)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK__TB_ASMI___3C0D807C11C41B86"/>
+            </column>
+            <column computed="false" name="LINKAGE_TYPE" type="char(1)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK__TB_ASMI___3C0D807C11C41B86"/>
+            </column>
+            <column computed="false" name="LINKED_STAGE_ID" type="nvarchar(50)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK__TB_ASMI___3C0D807C11C41B86"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB__ASMI_WORKFLOW_RULES_3.24.0-66">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASMI_WORKFLOW_RULES"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASMI_WORKFLOW_RULES">
+            <column computed="false" name="APP_ID" type="nvarchar(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK__TB_ASMI___BD9667A6A7AA9920"/>
+            </column>
+            <column computed="false" name="WORKFLOW_ID" type="nvarchar(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK__TB_ASMI___BD9667A6A7AA9920"/>
+            </column>
+            <column computed="false" name="RULE_ID" type="nvarchar(50)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK__TB_ASMI___BD9667A6A7AA9920"/>
+            </column>
+            <column computed="false" name="RULE_DESC" type="nvarchar(255)"/>
+            <column computed="false" name="RULE_BEAN" type="nvarchar(255)"/>
+            <column computed="false" name="VERSION_NO" type="int"/>
+            <column computed="false" name="MAKER_ID" type="nvarchar(45)"/>
+            <column computed="false" defaultValueComputed="getdate()" defaultValueConstraintName="DF__TB_ASMI_W__MAKER__1C10D5BC" name="MAKER_TS" type="datetime"/>
+            <column computed="false" name="CHECKER_ID" type="nvarchar(45)"/>
+            <column computed="false" name="CHECKER_TS" type="datetime"/>
+            <column computed="false" name="AUTH_STATUS" type="nvarchar(1)"/>
+            <column computed="false" name="ACTIVE" type="char(1)"/>
+            <column computed="false" name="ONCE_AUTH" type="nvarchar(1)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB__ASMI_WORKFLOW_STAGES_3.24.0-67">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASMI_WORKFLOW_STAGES"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASMI_WORKFLOW_STAGES">
+            <column computed="false" name="APP_ID" type="nvarchar(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK__TB_ASMI___CC4F1C7997347711"/>
+            </column>
+            <column computed="false" name="WORKFLOW_ID" type="nvarchar(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK__TB_ASMI___CC4F1C7997347711"/>
+            </column>
+            <column computed="false" name="STAGE_ID" type="nvarchar(50)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK__TB_ASMI___CC4F1C7997347711"/>
+            </column>
+            <column computed="false" name="STAGE_SEQ_NO" type="int"/>
+            <column computed="false" name="STAGE_TYPE" type="nvarchar(50)"/>
+            <column computed="false" name="STAGE_DESC" type="nvarchar(255)"/>
+            <column computed="false" name="RULE_ID" type="nvarchar(50)"/>
+            <column computed="false" name="SCREEN_ID" type="nvarchar(50)"/>
+            <column computed="false" name="IS_AUTH_MATRIX_REQD" type="nvarchar(1)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB__ASNF_APP_OS_NOTIF_CODE_3.24.0-68">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASNF_APP_OS_NOTIF_CODE"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASNF_APP_OS_NOTIF_CODE">
+            <column computed="false" name="APP_ID" type="nvarchar(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="TB_ASNF_APP_OS_NOTIF_CODE_PK"/>
+            </column>
+            <column computed="false" name="OS_ID" type="nvarchar(45)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="TB_ASNF_APP_OS_NOTIF_CODE_PK"/>
+            </column>
+            <column computed="false" name="NOTIF_CODE" type="nvarchar(255)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="TB_ASNF_APP_OS_NOTIF_CODE_PK"/>
+            </column>
+            <column computed="false" name="ACTION_CODE" type="nvarchar(255)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="TB_ASNF_APP_OS_NOTIF_CODE_PK"/>
+            </column>
+            <column computed="false" name="ACTION_DISPLAY" type="nvarchar(255)"/>
+            <column computed="false" defaultValueComputed="getdate()" defaultValueConstraintName="DF__TB_ASNF_A__CREAT__585AC9ED" name="CREATE_TS" type="datetime"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB__ASNF_DEVICES_MASTER_3.24.0-69">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASNF_DEVICES_MASTER"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASNF_DEVICES_MASTER">
+            <column computed="false" name="APP_ID" type="nvarchar(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_TB_ASNF_DEVICES_MASTER"/>
+            </column>
+            <column computed="false" name="NOTIF_REG_ID" type="nvarchar(255)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_TB_ASNF_DEVICES_MASTER"/>
+            </column>
+            <column computed="false" name="DEVICE_ID" type="nvarchar(255)"/>
+            <column computed="false" name="DEVICE_NAME" type="nvarchar(255)"/>
+            <column computed="false" name="OS_ID" type="nvarchar(50)"/>
+            <column computed="false" name="OS_VERSION" type="nvarchar(255)"/>
+            <column computed="false" name="STATUS" type="nvarchar(20)"/>
+            <column computed="false" name="CREATED_BY" type="nvarchar(255)"/>
+            <column computed="false" defaultValueComputed="getdate()" defaultValueConstraintName="DF__TB_ASNF_D__CREAT__0D6DB0AA" name="CREATED_TS" type="datetime"/>
+            <column computed="false" defaultValueConstraintName="DF__TB_ASNF_D__VERSI__0E61D4E3" defaultValueNumeric="1" name="VERSION_NO" type="numeric(10, 0)"/>
+            <column computed="false" name="MAKER_ID" type="nvarchar(45)"/>
+            <column computed="false" defaultValueComputed="getdate()" defaultValueConstraintName="DF__TB_ASNF_D__MAKER__0F55F91C" name="MAKER_TS" type="datetime"/>
+            <column computed="false" name="CHECKER_ID" type="nvarchar(45)"/>
+            <column computed="false" defaultValueComputed="getdate()" defaultValueConstraintName="DF__TB_ASNF_D__CHECK__104A1D55" name="CHECKER_TS" type="datetime"/>
+            <column computed="false" defaultValue="U" defaultValueConstraintName="DF__TB_ASNF_D__AUTH___113E418E" name="AUTH_STATUS" type="nvarchar(45)"/>
+            <column computed="false" defaultValueComputed="NULL" defaultValueConstraintName="DF__TB_ASNF_D__NOTIF__123265C7" name="NOTIF_MSG_SERVER" type="nvarchar(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB__ASNF_GROUP_DEVICES_3.24.0-70">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASNF_GROUP_DEVICES"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASNF_GROUP_DEVICES">
+            <column computed="false" name="APP_ID" type="nvarchar(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_TB_ASNF_GROUP_DEVICES"/>
+            </column>
+            <column computed="false" name="GROUP_ID" type="nvarchar(255)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_TB_ASNF_GROUP_DEVICES"/>
+            </column>
+            <column computed="false" name="NOTIF_REG_ID" type="nvarchar(255)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_TB_ASNF_GROUP_DEVICES"/>
+            </column>
+            <column computed="false" name="CREATED_BY" type="nvarchar(255)"/>
+            <column computed="false" defaultValueComputed="getdate()" defaultValueConstraintName="DF__TB_ASNF_G__CREAT__150ED272" name="CREATED_TS" type="datetime"/>
+            <column computed="false" name="VERSION_NO" type="numeric(10, 0)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB__ASNF_GROUP_MASTER_3.24.0-71">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASNF_GROUP_MASTER"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASNF_GROUP_MASTER">
+            <column computed="false" name="APP_ID" type="nvarchar(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_TB_ASNF_GROUP_MASTER"/>
+            </column>
+            <column computed="false" name="GROUP_ID" type="nvarchar(255)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_TB_ASNF_GROUP_MASTER"/>
+            </column>
+            <column computed="false" name="GROUP_DESC" type="nvarchar(500)"/>
+            <column computed="false" name="CREATED_BY" type="nvarchar(50)"/>
+            <column computed="false" defaultValueComputed="getdate()" defaultValueConstraintName="DF__TB_ASNF_G__CREAT__17EB3F1D" name="CREATED_TS" type="datetime"/>
+            <column computed="false" defaultValueConstraintName="DF__TB_ASNF_G__VERSI__18DF6356" defaultValueNumeric="1" name="VERSION_NO" type="int"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB__ASNF_TXN_DEVICES_3.24.0-72">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASNF_TXN_DEVICES"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASNF_TXN_DEVICES">
+            <column computed="false" name="NOTIF_ID" type="numeric(10, 0)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_TB_ASNF_TXN_DEVICES"/>
+            </column>
+            <column computed="false" name="APP_ID" type="nvarchar(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_TB_ASNF_TXN_DEVICES"/>
+            </column>
+            <column computed="false" name="NOTIF_REG_ID" type="nvarchar(255)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_TB_ASNF_TXN_DEVICES"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB__ASNF_TXN_GROUPS_3.24.0-73">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASNF_TXN_GROUPS"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASNF_TXN_GROUPS">
+            <column computed="false" name="NOTIF_ID" type="numeric(10, 0)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_TB_ASNF_TXN_GROUPS"/>
+            </column>
+            <column computed="false" name="APP_ID" type="nvarchar(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_TB_ASNF_TXN_GROUPS"/>
+            </column>
+            <column computed="false" name="GROUP_ID" type="nvarchar(255)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_TB_ASNF_TXN_GROUPS"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB__ASNF_TXN_LOG_3.24.0-74">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASNF_TXN_LOG"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASNF_TXN_LOG">
+            <column computed="false" name="NOTIF_ID" type="numeric(10, 0)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_TB_ASNF_TXN_LOG"/>
+            </column>
+            <column computed="false" name="APP_ID" type="nvarchar(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_TB_ASNF_TXN_LOG"/>
+            </column>
+            <column computed="false" name="USER_ID" type="nvarchar(100)"/>
+            <column computed="false" name="NOTIF_REG_ID" type="nvarchar(255)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_TB_ASNF_TXN_LOG"/>
+            </column>
+            <column computed="false" name="DEVICE_ID" type="nvarchar(255)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_TB_ASNF_TXN_LOG"/>
+            </column>
+            <column computed="false" name="STATUS" type="char(150)"/>
+            <column computed="false" name="CREATED_BY" type="nvarchar(150)"/>
+            <column computed="false" defaultValueComputed="getdate()" defaultValueConstraintName="DF__TB_ASNF_T__CREAT__1F8C60E5" name="CREATED_TS" type="datetime"/>
+            <column computed="false" name="VERSION_NO" type="numeric(10, 0)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB__ASNF_TXN_MASTER_3.24.0-75">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASNF_TXN_MASTER"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASNF_TXN_MASTER">
+            <column computed="false" name="NOTIF_ID" type="numeric(10, 0)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_TB_ASNF_TXN_MASTER"/>
+            </column>
+            <column computed="false" name="APP_ID" type="nvarchar(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_TB_ASNF_TXN_MASTER"/>
+            </column>
+            <column computed="false" name="NOTIF_MSG" type="nvarchar(255)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_TB_ASNF_TXN_MASTER"/>
+            </column>
+            <column computed="false" name="TITLE" type="nvarchar(255)"/>
+            <column computed="false" name="SUBTITLE" type="nvarchar(255)"/>
+            <column computed="false" name="IMAGE_URL" type="nvarchar(255)"/>
+            <column computed="false" name="CATEGORY" type="nvarchar(255)"/>
+            <column computed="false" defaultValueComputed="getdate()" defaultValueConstraintName="DF__TB_ASNF_T__CREAT__2268CD90" name="CREATE_TS" type="datetime"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB__ASTP_AR_MASTER_3.24.0-76">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASTP_AR_MASTER"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASTP_AR_MASTER">
+            <column computed="false" defaultValueComputed="NULL" defaultValueConstraintName="DF__TB_ASTP_A__APP_I__45B209CD" name="APP_ID" type="nvarchar(255)"/>
+            <column autoIncrement="true" computed="false" name="ID" type="numeric(10, 0)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK__TB_ASTP___3214EC2789F5DE0F"/>
+            </column>
+            <column computed="false" defaultValueComputed="NULL" defaultValueConstraintName="DF__TB_ASTP_A__REGIO__46A62E06" name="REGION_CODE" type="nvarchar(255)"/>
+            <column computed="false" defaultValueComputed="NULL" defaultValueConstraintName="DF__TB_ASTP_A__CATEG__479A523F" name="CATEGORY" type="nvarchar(255)"/>
+            <column computed="false" defaultValueComputed="NULL" defaultValueConstraintName="DF__TB_ASTP_A__LATIT__488E7678" name="LATITUDE" type="nvarchar(255)"/>
+            <column computed="false" defaultValueComputed="NULL" defaultValueConstraintName="DF__TB_ASTP_A__LONGI__49829AB1" name="LONGITUDE" type="nvarchar(255)"/>
+            <column computed="false" defaultValueComputed="NULL" defaultValueConstraintName="DF__TB_ASTP_A__TITLE__4A76BEEA" name="TITLE" type="nvarchar(255)"/>
+            <column computed="false" defaultValueComputed="NULL" defaultValueConstraintName="DF__TB_ASTP_A__ADDIT__4B6AE323" name="ADDITIONAL_INFO" type="nvarchar(255)"/>
+            <column computed="false" defaultValueComputed="NULL" defaultValueConstraintName="DF__TB_ASTP_A__DESCR__4C5F075C" name="DESCRIPTION" type="nvarchar(255)"/>
+            <column computed="false" name="IMAGE" type="nvarchar(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB__ASTP_BEACON_MASTER_3.24.0-77">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASTP_BEACON_MASTER"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASTP_BEACON_MASTER">
+            <column computed="false" defaultValueComputed="NULL" defaultValueConstraintName="DF__TB_ASTP_B__APP_I__3B347B5A" name="APP_ID" type="nvarchar(100)"/>
+            <column computed="false" name="ID" type="numeric(18, 0)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK__TB_ASTP___3214EC27AC445BAF"/>
+            </column>
+            <column computed="false" defaultValueComputed="NULL" defaultValueConstraintName="DF__TB_ASTP_B__DEVIC__3C289F93" name="DEVICE_ID" type="nvarchar(225)"/>
+            <column computed="false" defaultValueComputed="NULL" defaultValueConstraintName="DF__TB_ASTP_B__USER___3D1CC3CC" name="USER_ID" type="nvarchar(100)"/>
+            <column computed="false" name="ENTRY_TIME" type="datetime"/>
+            <column computed="false" defaultValueComputed="NULL" defaultValueConstraintName="DF__TB_ASTP_B__STATU__3E10E805" name="STATUS" type="nvarchar(45)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB__ASTP_LAST_LOGIN_3.24.0-78">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASTP_LAST_LOGIN"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASTP_LAST_LOGIN">
+            <column computed="false" name="USER_ID" type="nvarchar(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_TB_ASTP_LAST_LOGIN"/>
+            </column>
+            <column computed="false" name="APP_ID" type="nvarchar(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_TB_ASTP_LAST_LOGIN"/>
+            </column>
+            <column computed="false" name="DEVICE_ID" type="nvarchar(255)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_TB_ASTP_LAST_LOGIN"/>
+            </column>
+            <column computed="false" name="REQUEST_KEY" type="nvarchar(255)"/>
+            <column computed="false" name="SESSION_ID" type="nvarchar(255)"/>
+            <column computed="false" name="LAST_REQ_TIME" type="datetime"/>
+            <column computed="false" name="LOGIN_TIME" type="datetime"/>
+            <column computed="false" defaultValueComputed="getdate()" defaultValueConstraintName="DF__TB_ASTP_L__CREAT__5983F850" name="CREATE_TS" type="datetime"/>
+            <column computed="false" defaultValueConstraintName="DF__TB_ASTP_L__VERSI__5A781C89" defaultValueNumeric="1" name="VERSION_NO" type="numeric(10, 0)"/>
+            <column computed="false" name="OTP" type="nvarchar(200)"/>
+            <column computed="false" defaultValueComputed="getdate()" defaultValueConstraintName="DF__TB_ASTP_L__OTP_G__5B6C40C2" name="OTP_GENERATION_TIME" type="datetime"/>
+            <column computed="false" name="OTP_STATUS" type="nvarchar(1)"/>
+            <column computed="false" defaultValueConstraintName="DF__TB_ASTP_L__OTP_V__5C6064FB" defaultValueNumeric="0" name="OTP_VALIDATION_COUNT" type="numeric(10, 0)"/>
+            <column computed="false" name="LONGITUDE" type="nvarchar(255)"/>
+            <column computed="false" name="LATITUDE" type="nvarchar(255)"/>
+            <column computed="false" name="SUBLOCALITY" type="nvarchar(255)"/>
+            <column computed="false" name="ADMIN_AREA_LVL_1" type="nvarchar(255)"/>
+            <column computed="false" name="ADMIN_AREA_LVL_2" type="nvarchar(255)"/>
+            <column computed="false" name="COUNTRY" type="nvarchar(255)"/>
+            <column computed="false" name="FORMATTED_ADDRESS" type="nvarchar(255)"/>
+            <column computed="false" name="ORIGINATION" type="nvarchar(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB__ASTP_LD_RECS_3.24.0-79">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASTP_LD_RECS"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASTP_LD_RECS">
+            <column computed="false" name="REF_NO" type="nvarchar(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_TB_ASTP_LD_RECS"/>
+            </column>
+            <column computed="false" name="SEQ_NO" type="int">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_TB_ASTP_LD_RECS"/>
+            </column>
+            <column computed="false" name="DATA1" type="nvarchar(MAX)"/>
+            <column computed="false" name="DATA2" type="nvarchar(MAX)"/>
+            <column computed="false" name="DATA3" type="nvarchar(MAX)"/>
+            <column computed="false" name="DATA4" type="nvarchar(MAX)"/>
+            <column computed="false" name="DATA5" type="nvarchar(MAX)"/>
+            <column computed="false" defaultValueComputed="getdate()" defaultValueConstraintName="DF__TB_ASTP_L__CREAT__16C210BA" name="CREATE_TS" type="datetime"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB__ASTP_OTP_ENGINE_3.24.0-80">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASTP_OTP_ENGINE"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASTP_OTP_ENGINE">
+            <column computed="false" name="REF_NO" type="numeric(18, 0)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="TB_ASTP_OTP_ENGINE_PK"/>
+            </column>
+            <column computed="false" name="APP_ID" type="nvarchar(100)"/>
+            <column computed="false" name="USER_ID" type="nvarchar(255)"/>
+            <column computed="false" name="INTERFACE_ID" type="nvarchar(255)"/>
+            <column computed="false" name="SESSION_ID" type="nvarchar(255)"/>
+            <column computed="false" name="OTP" type="nvarchar(255)"/>
+            <column computed="false" name="OTP_GEN_TS" type="datetime"/>
+            <column computed="false" name="OTP_EXP_TS" type="datetime"/>
+            <column computed="false" defaultValue="N" defaultValueConstraintName="DF__TB_ASTP_O__OTP_S__40ED54B0" name="OTP_STATUS" type="nvarchar(255)"/>
+            <column computed="false" name="OTP_VAL_TS" type="datetime"/>
+            <column computed="false" name="REQ_LD_REFNO" type="nvarchar(100)"/>
+            <column computed="false" name="REQ_NO_RECS" type="numeric(18, 0)"/>
+            <column computed="false" name="REQ_PAYLOAD_STATUS" type="nvarchar(200)"/>
+            <column computed="false" name="REQ_PAYLOAD_PROCESS_TS" type="datetime"/>
+            <column computed="false" name="OTP_VALIDATION_COUNT" type="numeric(18, 0)"/>
+            <column computed="false" name="OTP_RESENT_COUNT" type="numeric(18, 0)"/>
+            <column computed="false" defaultValueConstraintName="DF__TB_ASTP_O__OTP_R__41E178E9" defaultValueNumeric="0" name="OTP_REGEN_COUNT" type="numeric(18, 0)"/>
+            <column computed="false" name="OTP_RESEND_LOCK" type="nvarchar(1)"/>
+            <column computed="false" name="OTP_RESEND_LOCK_TS" type="datetime"/>
+            <column computed="false" defaultValueConstraintName="DF__TB_ASTP_O__VERSI__42D59D22" defaultValueNumeric="0" name="VERSION_NO" type="numeric(18, 0)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB__ASTP_SEQ_GEN_3.24.0-81">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASTP_SEQ_GEN"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASTP_SEQ_GEN">
+            <column computed="false" name="SEQUENCE_NAME" type="nvarchar(50)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_TB_ASTP_SEQ_GEN"/>
+            </column>
+            <column computed="false" name="SEQUENCE_VALUE" type="numeric(18, 0)"/>
+            <column computed="false" name="CREATE_BY" type="nvarchar(20)"/>
+            <column computed="false" defaultValueComputed="getdate()" defaultValueConstraintName="DF__TB_ASTP_S__CREAT__0A9143FF" name="CREATE_TS" type="datetime"/>
+            <column computed="false" name="VERSION_NO" type="numeric(18, 0)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB__ASTP_SESSION_STORAGE_3.24.0-82">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASTP_SESSION_STORAGE"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASTP_SESSION_STORAGE">
+            <column computed="false" name="APP_ID" type="nvarchar(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK__TB_ASTP___AF952A651749D822"/>
+            </column>
+            <column computed="false" name="USER_ID" type="nvarchar(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK__TB_ASTP___AF952A651749D822"/>
+            </column>
+            <column computed="false" name="SESSION_ID" type="nvarchar(255)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK__TB_ASTP___AF952A651749D822"/>
+            </column>
+            <column computed="false" name="DEVICE_ID" type="nvarchar(255)"/>
+            <column computed="false" name="SESSION_KEY" type="nvarchar(255)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK__TB_ASTP___AF952A651749D822"/>
+            </column>
+            <column computed="false" name="SESSION_VALUE" type="[nvarchar] (max)">
+                <constraints nullable="false"/>
+            </column>
+            <column computed="false" name="CREATED_BY" type="nvarchar(100)"/>
+            <column computed="false" defaultValueComputed="getdate()" defaultValueConstraintName="DF__TB_ASTP_S__CREAT__7032537E" name="CREATE_TS" type="datetime"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB__ASTP_WORKFLOW_DET_3.24.0-83">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASTP_WORKFLOW_DET"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASTP_WORKFLOW_DET">
+            <column computed="false" name="TRANSACTION_REF_NO" type="nvarchar(30)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="TB_ASTP_WORKFLOW_DET_PK"/>
+            </column>
+            <column computed="false" name="VERSION_NO" type="numeric(10, 0)"/>
+            <column computed="false" name="WORKFLOW_ID" type="nvarchar(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="TB_ASTP_WORKFLOW_DET_PK"/>
+            </column>
+            <column computed="false" name="APP_ID" type="nvarchar(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="TB_ASTP_WORKFLOW_DET_PK"/>
+            </column>
+            <column computed="false" name="CURRENT_STAGE" type="nvarchar(100)"/>
+            <column computed="false" name="SCREEN_ID" type="nvarchar(100)"/>
+            <column computed="false" name="NEXT_STAGE" type="nvarchar(100)"/>
+            <column computed="false" name="STATUS" type="nvarchar(20)"/>
+            <column computed="false" name="INTERFACE_ID" type="nvarchar(100)"/>
+            <column computed="false" name="USER_ID" type="nvarchar(100)"/>
+            <column computed="false" name="SCREEN_DATA" type="[nvarchar] (max)"/>
+            <column computed="false" name="STAGE_SEQ_NO" type="nvarchar(255)"/>
+            <column computed="false" name="ACTION" type="nvarchar(255)"/>
+            <column computed="false" name="CREATE_USER_ID" type="nvarchar(100)"/>
+            <column computed="false" defaultValueComputed="getdate()" defaultValueConstraintName="DF__TB_ASTP_W__CREAT__25453A3B" name="CREATE_TS" type="datetime"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB__ASTP_WORKFLOW_EVENT_3.24.0-84">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASTP_WORKFLOW_EVENT"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASTP_WORKFLOW_EVENT">
+            <column computed="false" name="APP_ID" type="nvarchar(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK__TB_ASTP___364FABE1569CE22A"/>
+            </column>
+            <column computed="false" name="WORKFLOW_REF_NO" type="nvarchar(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK__TB_ASTP___364FABE1569CE22A"/>
+            </column>
+            <column computed="false" name="WORKFLOW_SEQ_NO" type="int">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK__TB_ASTP___364FABE1569CE22A"/>
+            </column>
+            <column computed="false" name="EVENT_SEQ_NO" type="int">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK__TB_ASTP___364FABE1569CE22A"/>
+            </column>
+            <column computed="false" name="WORKFLOW_ID" type="nvarchar(100)"/>
+            <column computed="false" name="STAGE_ID" type="nvarchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column computed="false" name="EVENT_ID" type="nvarchar(50)"/>
+            <column computed="false" name="TASK_DATA" type="nvarchar(MAX)"/>
+            <column computed="false" name="USER_ID" type="nvarchar(50)"/>
+            <column computed="false" defaultValueComputed="getdate()" defaultValueConstraintName="DF__TB_ASTP_W__EVENT__23B1F784" name="EVENT_TS" type="datetime"/>
+            <column computed="false" name="REMARKS" type="nvarchar(255)"/>
+            <column computed="false" name="CUSTOM_FIELD_1" type="nvarchar(100)"/>
+            <column computed="false" name="CUSTOM_FIELD_2" type="nvarchar(100)"/>
+            <column computed="false" name="CUSTOM_FIELD_3" type="nvarchar(100)"/>
+            <column computed="false" name="CUSTOM_FIELD_4" type="nvarchar(100)"/>
+            <column computed="false" name="CUSTOM_FIELD_5" type="nvarchar(100)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB__ASTP_WORKFLOW_TXN_DETAIL_3.24.0-85">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASTP_WORKFLOW_TXN_DETAIL"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASTP_WORKFLOW_TXN_DETAIL">
+            <column computed="false" name="APP_ID" type="nvarchar(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK__TB_ASTP___155E50D60F7F7C1C"/>
+            </column>
+            <column computed="false" name="WORKFLOW_REF_NO" type="nvarchar(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK__TB_ASTP___155E50D60F7F7C1C"/>
+            </column>
+            <column computed="false" name="STAGE_ID" type="nvarchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column computed="false" name="WORKFLOW_ID" type="nvarchar(100)"/>
+            <column computed="false" name="WORKFLOW_SEQ_NO" type="int">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK__TB_ASTP___155E50D60F7F7C1C"/>
+            </column>
+            <column computed="false" name="TASK_DATA" type="varchar(MAX)"/>
+            <column computed="false" name="USER_ID" type="nvarchar(50)"/>
+            <column computed="false" name="STATUS" type="nvarchar(50)"/>
+            <column computed="false" name="UPDATED_NEXT_STAGES" type="nvarchar(255)"/>
+            <column computed="false" name="LAST_EVENT_NO" type="int"/>
+            <column computed="false" defaultValueComputed="getdate()" defaultValueConstraintName="DF__TB_ASTP_W__START__20D58AD9" name="START_TS" type="datetime"/>
+            <column computed="false" name="END_TS" type="datetime"/>
+            <column computed="false" name="REMARKS" type="nvarchar(255)"/>
+            <column computed="false" name="CUSTOM_FIELD_1" type="nvarchar(100)"/>
+            <column computed="false" name="CUSTOM_FIELD_2" type="nvarchar(100)"/>
+            <column computed="false" name="CUSTOM_FIELD_3" type="nvarchar(100)"/>
+            <column computed="false" name="CUSTOM_FIELD_4" type="nvarchar(100)"/>
+            <column computed="false" name="CUSTOM_FIELD_5" type="nvarchar(100)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB__ASTP_WORKFLOW_TXN_MASTER_3.24.0-86">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_ASTP_WORKFLOW_TXN_MASTER"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_ASTP_WORKFLOW_TXN_MASTER">
+            <column computed="false" name="APP_ID" type="nvarchar(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK__TB_ASTP___399352451E19B0E8"/>
+            </column>
+            <column computed="false" name="WORKFLOW_REF_NO" type="nvarchar(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK__TB_ASTP___399352451E19B0E8"/>
+            </column>
+            <column computed="false" name="WORKFLOW_ID" type="nvarchar(100)"/>
+            <column computed="false" name="STATUS" type="nvarchar(50)"/>
+            <column computed="false" defaultValueComputed="getdate()" defaultValueConstraintName="DF__TB_ASTP_W__START__268E642F" name="START_TS" type="datetime"/>
+            <column computed="false" name="MODIFIED_TS" type="datetime"/>
+            <column computed="false" name="END_TS" type="datetime"/>
+            <column computed="false" name="CUSTOM_FIELD_1" type="nvarchar(100)"/>
+            <column computed="false" name="CUSTOM_FIELD_2" type="nvarchar(100)"/>
+            <column computed="false" name="CUSTOM_FIELD_3" type="nvarchar(100)"/>
+            <column computed="false" name="CUSTOM_FIELD_4" type="nvarchar(100)"/>
+            <column computed="false" name="CUSTOM_FIELD_5" type="nvarchar(100)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB__DBTP_TXN_MASTER_3.24.0-87">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_DBTP_TXN_MASTER"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_DBTP_TXN_MASTER">
+            <column computed="false" name="TXN_REF_NO" type="nvarchar(255)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK__TB_DBTP___566A731F6B171C4F"/>
+            </column>
+            <column computed="false" name="APP_ID" type="nvarchar(6)">
+                <constraints nullable="false"/>
+            </column>
+            <column computed="false" name="USER_ID" type="nvarchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column computed="false" name="CUSTOMER_ID" type="nvarchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column computed="false" name="AMOUNT" type="decimal(22, 3)">
+                <constraints nullable="false"/>
+            </column>
+            <column computed="false" name="TXN_TYPE" type="nvarchar(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column computed="false" defaultValue="U" defaultValueConstraintName="DF__TB_DBTP_T__TXN_S__730EC029" name="TXN_STATUS" type="nvarchar(1)"/>
+            <column computed="false" defaultValueComputed="getdate()" defaultValueConstraintName="DF__TB_DBTP_T__CREAT__7402E462" name="CREATION_TS" type="datetime"/>
+            <column computed="false" name="COMPLETION_TS" type="datetime"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="platform" id="DDL_TB__OS_3.24.0-88">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TB_OS"/>
+            </not>
+        </preConditions>
+        <createTable tableName="TB_OS">
+            <column computed="false" name="OS_ID" type="nvarchar(15)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK__TB_OS__85A506EDEFEB1B27"/>
+            </column>
+            <column computed="false" defaultValueComputed="getdate()" defaultValueConstraintName="DF__TB_OS__CREATE_TS__615A2442" name="CREATE_TS" type="datetime"/>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

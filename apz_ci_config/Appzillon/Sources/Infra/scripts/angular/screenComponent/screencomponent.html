@@ -1,0 +1,19 @@
+<div *ngIf="checkScreenType()"  class='rolepage' id={{props.id}}>
+	<div id="backdrop" class="backdrop"></div>
+			<ng-container [ngTemplateOutlet]="ngcontent" >
+		</ng-container>
+			<div id="Appzil_FirstPagetooltip" class="sno">
+	      <p id="tooltext"></p>
+	   </div>
+</div>
+<ng-container *ngIf="!checkScreenType()">
+	<ng-container [ngTemplateOutlet]="ngcontent" >
+		</ng-container> 
+	<div id="Appzil_FirstPagetooltip" class="sno">
+	     <p id="tooltext"></p>
+	  </div>
+</ng-container>
+
+<ng-template #ngcontent>
+	<ng-content></ng-content>
+</ng-template>

@@ -1,0 +1,86 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "fluentd-elasticsearch.fullname" . }}
+  labels:
+    {{- include "fluentd-elasticsearch.labels" . | nindent 4 }}
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "fluentd-elasticsearch.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "fluentd-elasticsearch.selectorLabels" . | nindent 8 }}
+    spec:
+      imagePullSecrets:
+        - name: {{ .Values.artifactType }}-secret
+      serviceAccountName: {{ .Values.serviceAccount.name }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+      - name: {{ .Chart.Name }}
+        securityContext:
+          {{- toYaml .Values.securityContext | nindent 12 }}
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        resources:
+          {{- toYaml .Values.resources | nindent 12 }}
+        env:
+        - name: ES_USERNAME
+          valueFrom:
+            secretKeyRef:
+              key: username
+              name: elastic-secret
+        - name: ES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              key: password
+              name: elastic-secret
+        - name: NAMESPACE
+          value: {{ .Values.nameSpace }}
+        - name: SERVER_APP
+          value: {{ .Values.serverApp }}
+        - name : WEB_APP
+          value: {{ .Values.webApp }}
+        volumeMounts:
+          - name: config-elastic-volume
+            mountPath: /fluentd/etc/
+          - name: apz-web-server-logs
+            mountPath: {{ .Values.logPath }}
+          - name: fluentd-elastic-ssl
+            readOnly: true
+            mountPath: /fluentd-elastic-tls/
+        
+      terminationGracePeriodSeconds: {{ .Values.terminationGracePeriodSeconds }}
+      imagePullSecrets:
+            - name: {{ .Values.artifactType }}-elasticsearch-secret
+      volumes:
+        - name: config-elastic-volume
+          configMap:
+            name: fluentd-elastic-conf 
+        - name: apz-web-server-logs
+          persistentVolumeClaim:
+            claimName: {{ .Values.pvcLogName }}
+        - name: fluentd-elastic-ssl
+          secret:
+            secretName: fluentd-elastic-tls
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}

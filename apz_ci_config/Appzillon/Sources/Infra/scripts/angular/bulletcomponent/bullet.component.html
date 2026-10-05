@@ -1,0 +1,54 @@
+<ng-container *ngIf="props.cntrType=='FORM' ">
+        <ul #formWrapperClass  id="{{props.id}} + '_ul'" clickstoppropagation>
+            <li  #formlabelWrapper >
+                <label #formlabelProps  >
+                    {{props.labelProps.title}}
+                </label>
+            </li>
+            <li #formContentWrapper >
+                <span  class="span wrapper">
+                    <ng-container *ngTemplateOutlet="bulletContent"></ng-container>
+                </span>
+            </li>
+        </ul>
+</ng-container>
+
+<ng-container *ngIf="props.cntrType == 'NAVBAR' || props.cntrType == 'LIST'">
+        <span class="span wrapper" >
+        <ng-container *ngTemplateOutlet="bulletContent"></ng-container>
+        </span>
+</ng-container>
+
+<ng-container *ngIf= "props.cntrType=='TABLE'">
+        <td [attr.id]="(rowIndex != undefined) ?('td_'+ props.id + '_' + rowIndex):('td_'+ props.id)" class="{{props.tdClasses}}">
+                <span class="span wrapper" >
+                        <ng-container *ngTemplateOutlet="bulletContent"></ng-container>
+                </span>
+        </td>
+</ng-container>
+
+<ng-template #bulletContent>
+    <ng-container *ngIf="props.attrs.orderedlist=='Y'">
+        <span id="{{id+'_span_ext'}}" class="{{'ecn ett-blt '+apprCls}}">
+            <ol [id]="id"  class="{{ordlCls+tooltipCls+cssCls+showClass}}" >
+                    <ng-container *ngFor="let option of bulletOptions ">                
+                            <li id="{{option.bulletname+'_li'}}">
+                                <p>{{option.bulletname}}</p>
+                            </li>
+                    </ng-container>
+            </ol>
+        </span>
+    </ng-container>
+    <ng-container *ngIf="props.attrs.orderedlist=='N'">
+        <span id="{{id+'_span_ext'}}" class="{{'ecn ett-blt '+apprCls}}">
+            <ul [id]="id"  class="{{ordlCls+tooltipCls+cssCls+showClass}}" >
+                <ng-container *ngFor="let option of bulletOptions ">                
+                        <li id="{{option.bulletname+'_li'}}">
+                            <p>{{option.bulletname}}</p>
+                        </li>
+                </ng-container>
+            </ul>
+        </span>
+    </ng-container>
+    
+</ng-template>

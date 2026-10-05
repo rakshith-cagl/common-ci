@@ -1,0 +1,1 @@
+variable "dashboard_dns" {}

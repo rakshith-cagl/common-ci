@@ -1,0 +1,120 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 28
+    buildToolsVersion "26.0.3"
+    defaultConfig {
+        minSdkVersion 19
+        multiDexEnabled true
+        targetSdkVersion 28
+        versionCode ANDVERSIONCODE
+        versionName "APPVERSION"
+       testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+    }
+	/*signingConfigs {
+ release {
+ storeFile file("demoapp.keystore")
+ storePassword 'samsung'
+keyAlias 'samsung'
+keyPassword 'samsung'
+}
+ }
+
+    buildTypes {
+        release {
+		 signingConfig signingConfigs.release
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }*/
+
+	splits {
+        abi {
+            enable false
+            reset()
+            include 'armeabi-v7a','arm64-v8a','x86','x86_64'
+            universalApk true
+        }
+    }
+
+
+    aaptOptions {
+        cruncherEnabled = false
+    }
+    repositories {
+        //mavenCentral()
+        //maven { url 'https://maven.fabric.io/public' }
+        //maven { url "https://maven.google.com" }
+		//maven {
+        //    url "https://s3.amazonaws.com/repo.commonsware.com"
+        //}
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+
+    sourceSets { main { assets.srcDirs = ['src/main/assets', 'assets/'] } }
+    useLibrary 'org.apache.http.legacy'
+}
+
+dependencies {
+
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+ androidTestCompile('androidx.test.espresso:espresso-core:3.1.0', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    compile 'com.commonsware.cwac:provider:0.4.3'
+
+    compile 'androidx.appcompat:appcompat:1.0.0'
+    compile 'androidx.legacy:legacy-support-v4:1.0.0'
+    compile 'androidx.constraintlayout:constraintlayout:1.1.3'
+    testCompile 'junit:junit:4.12'
+    compile 'com.google.android.gms:play-services-location:17.0.0'
+    compile 'org.apache.commons:commons-lang3:3.6'
+    compile 'com.scottyab:rootbeer-lib:0.0.7'
+    compile 'androidx.multidex:multidex:2.0.0'
+    androidTestImplementation 'androidx.multidex:multidex-instrumentation:2.0.0'
+	APPZILLONDEPENDENCIES
+}
+
+/*
+// Map for the version code that gives each ABI a value.
+ext.abiCodes = ['armeabi-v7a':321,'arm64-v8a':641, x86:322, x86_64:642]
+
+// For per-density APKs, create a similar map like this:
+// ext.densityCodes = ['mdpi': 1, 'hdpi': 2, 'xhdpi': 3]
+
+import com.android.build.OutputFile
+
+// For each APK output variant, override versionCode with a combination of
+// ext.abiCodes * 1000 + variant.versionCode. In this example, variant.versionCode
+// is equal to defaultConfig.versionCode. If you configure product flavors that
+// define their own versionCode, variant.versionCode uses that value instead.
+android.applicationVariants.all { variant ->
+
+    // Assigns a different version code for each output APK
+    // other than the universal APK.
+    variant.outputs.each { output ->
+
+        // Stores the value of ext.abiCodes that is associated with the ABI for this variant.
+        def baseAbiVersionCode =
+                // Determines the ABI for this variant and returns the mapped value.
+                project.ext.abiCodes.get(output.getFilter(OutputFile.ABI))
+
+        // Because abiCodes.get() returns null for ABIs that are not mapped by ext.abiCodes,
+        // the following code does not override the version code for universal APKs.
+        // However, because we want universal APKs to have the lowest version code,
+        // this outcome is desirable.
+        if (baseAbiVersionCode != null) {
+
+            // Assigns the new version code to versionCodeOverride, which changes the version code
+            // for only the output APK, not for the variant itself. Skipping this step simply
+            // causes Gradle to use the value of variant.versionCode for the APK.
+            output.versionCodeOverride =
+                     (variant.versionCode * 1000) + baseAbiVersionCode
+        }
+    }
+}
+*/

@@ -1,0 +1,64 @@
+{
+    "user": "ci",
+    "status": "S",
+    "rebuildstatus": "N",
+    "buildfolder": "E:\\Share\\NewApp 19-Dec",
+    "buildmode": "DEBUG",
+    "dataintegrity": "Y",
+    "randomKey": "",
+    "prjApps": {
+    "base": [{
+      "id": "Micro",
+      "name": "Micro",
+      "folder": "E:\\Share\\Micro"
+    }]
+  },
+    "envobj": {
+    "name": "Env"
+    },
+    "apps": [
+        {
+            "id": "New",
+            "name": "New",
+            "folder": "E:\\Share\\NewApp 19-Dec"
+        }
+    ],
+    "oss": [
+        {
+            "name": "SERVER",
+            "typeclass": "SERVER",
+            "state": "YETTOSTART",
+            "status": "S",
+            "appservertype": "Tomcat",
+            "admindbtype": "MYSQL",
+            "appdbtype": "MYSQL",
+            "warfilename": "AppzillonServer",
+            "serverurl": "http://localhost:8181/AppzillonServer/Appzillon",
+            "typeoflogging": "LOCAL",
+            "logpath": "D:\\LOG",
+            "logginglevel": "DEBUG",
+            "rolloverlog": "",
+            "logfilemaxsize": "",
+            "defrolloverstrategy": "10",
+            "kafkatopic": "",
+            "kafkaservers": "IP1:PORT1,IP2:PORT2, IPn:PORTn",
+            "maxramalloc": "200",
+            "recordbatchsize": "20",
+            "bundleserverprops": "Y",
+            "multitenancy": "N",
+            "genconvhtml": "N",
+            "metadatadsn": "AppzillonServerDS",
+            "admindsn": "AppzillonServerDS",
+            "staticanalyzer": false,
+            "enablemonitoring": false,
+            "httpkeystorepath": "",
+            "httpkeystorepwd": "",
+            "httpkeypwd": "",
+            "truststorepath": "",
+            "truststorepwd": "",
+            "smsport": "",
+            "devicedestinationport": "",
+            "privateKey": ""
+        }
+    ]
+}

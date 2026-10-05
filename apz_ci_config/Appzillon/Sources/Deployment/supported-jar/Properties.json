@@ -1,0 +1,15 @@
+{
+  "BaseAppName": "AppzillonAdmin",
+  "ServerWarName": "Common",
+  "ServerType": "Tomcat",
+  "AppzillonBuildPath": "/home/i-exceed.com/user/Documents/Appzillon-3.x/data/opt/Appzillon/app",
+  "BuildAppPath": "/home/i-exceed.com/user/Documents/CIBuild/Appzillon/Bin/Preferences/BuildParams_Apps.json",
+  "BuildServerPath": "/home/i-exceed.com/user/Documents/CIBuild/Appzillon/Bin/Preferences/BuildParams_Server.json",
+  "ServerDebugLevel": "",
+  "DBType": "SQLSERVER",
+  "BundleWebProps": "N",
+  "BundleServerProps": "N",
+  "DisableSessionStickyness": "Y",
+  "IncludeMicroApp": "Y",
+  "codecoverage": ""
+}

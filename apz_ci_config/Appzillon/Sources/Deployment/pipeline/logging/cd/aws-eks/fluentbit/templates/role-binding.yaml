@@ -1,0 +1,13 @@
+{{- $fullName := include "fluentbit.fullname" . -}}
+apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: ClusterRoleBinding
+metadata:
+  name: {{ $fullName }}
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: {{ $fullName }}
+subjects:
+- kind: ServiceAccount
+  name: {{ include "fluentbit.serviceAccountName" . }}
+  namespace: {{ .Values.nameSpace }}

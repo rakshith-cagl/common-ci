@@ -1,0 +1,33 @@
+<ng-container *ngIf="props.cntrType=='FORM' ">
+    <ul #formWrapperClass  id="{{props.id}} + '_ul'">
+            <li  #formlabelWrapper >
+               <label #formlabelProps  >
+                        {{props.labelProps.title}}
+                </label>
+            </li>
+            <li #formContentWrapper >
+                <span #formSpanWrapper >
+                        <ng-container *ngTemplateOutlet="separatorContent"></ng-container>
+                </span>
+            </li>
+     </ul> 
+</ng-container>
+
+    
+<ng-container *ngIf="props.cntrType == 'NAVBAR' || props.cntrType == 'LIST'">
+                <ng-container *ngTemplateOutlet="separatorContent"></ng-container>
+</ng-container>
+
+
+<ng-template #separatorContent>
+    <ng-container *ngIf="attrs.withtext=='Y'">
+            <div [id]="id" className="{{'ett-sett with-text'+' '+cssCls+' '+apprCls}}">
+		<span>{{value}}</span>
+	    </div>
+    </ng-container>
+
+    <ng-container *ngIf="attrs.withtext=='N'">
+            <hr [id]="id" className="{{'ett-sept'+' '+cssCls+' '+apprCls}}"/>
+    </ng-container>
+</ng-template>
+

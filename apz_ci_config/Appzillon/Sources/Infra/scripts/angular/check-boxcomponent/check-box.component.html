@@ -1,0 +1,94 @@
+<ng-container *ngIf="props.cntrType=='FORM' && !(props.parentType=='CHECKBOXGROUP')">
+    <ul #formWrapperClass   [id]="id + '_ul'" clickstoppropagation>
+        <li  #formlabelWrapper >
+            <ng-container *ngIf="(props.hasLabelIcon === 'Y' && props.labelIconProps.iconPos==='LEFT')"  [ngTemplateOutlet]="labelIconContent">
+            </ng-container>
+
+            <label #formlabelProps  [innerHtml]="props.labelProps.title">
+            </label>
+            
+            <ng-container *ngIf="(props.hasLabelIcon === 'Y' && props.labelIconProps.iconPos!=='LEFT')"  [ngTemplateOutlet]="labelIconContent">
+            </ng-container>
+        </li>
+        <li #formContentWrapper >
+            <span [id]="id + '_span'" #formSpanWrapper >
+                <span id="{{id + '_xlabelspan'}}" #checkBoxWrapper>
+                    <ng-container  [ngTemplateOutlet]="checkBoxContent">
+                    </ng-container>
+                    <label id="{{id + '_lbl'}}"  htmlFor="{{id}}" #label>{{props.label.value}}</label>
+                    <ng-container *ngIf="props.HintRequired == 'Y'"> <span id="{{id + '_hnt'}}" class="htx">{{props.hintValue}}</span></ng-container>
+                
+                </span>
+            </span>
+        </li>
+    </ul>
+</ng-container>
+    
+<ng-container *ngIf="props.cntrType == 'NAVBAR' || props.cntrType == 'LIST'">
+    <span #navSapnwrapper >
+        <span id="{{id + '_xlabelspan'}}" #checkBoxWrapper>     
+            <ng-container  [ngTemplateOutlet]="checkBoxContent">
+            </ng-container>
+            <label id="{{id + '_lbl'}}"  htmlFor="{{id}}" #label>{{props.label.value}}</label>
+                <ng-container *ngIf="props.HintRequired == 'Y'"> <span id="{{id + '_hnt'}}" class="htx">{{props.hintValue}}</span></ng-container>
+        </span>
+    </span>
+</ng-container>        
+
+<ng-container *ngIf= "props.cntrType=='TABLE'">
+    <td [attr.id]="(rowIndex != undefined) ?('td_'+ props.id + '_' + rowIndex):('td_'+ props.id)" class="{{props.tdClasses}}">
+        <span [id]="id + '_span'" class="{{props.spanWrapper.className}}">
+            <span id="{{id + '_xlabelspan'}}" #checkBoxWrapper>
+                <ng-container  [ngTemplateOutlet]="checkBoxContent">
+                </ng-container>
+                    <label id="{{id + '_lbl'}}" htmlFor="{{id}}" class="{{props.label.direct.className}}">{{props.label.value}}</label>
+                <ng-container *ngIf="props.HintRequired == 'Y'"> <span id="{{id + '_hnt'}}" class="htx">{{props.hintValue}}</span></ng-container>
+            </span>
+        </span>
+    </td>
+</ng-container>
+
+<ng-container *ngIf="props.parentType=='CHECKBOXGROUP' && props.cntrType=='FORM'">
+    <ul #formWrapperClass  [id]="id + '_ul'">
+        <li #formContentWrapper >
+                <span id="{{id + '_xlabelspan'}}" #checkBoxWrapper>
+                        
+                        <ng-container *ngIf="isUiElm()">
+                                <input [id]="id" type="{{props.type}}" (change)="saveValue(props,$event)" [(ngModel)]="value" attr.rowno="{{index}}" [attr.aria-labelledby]="id + '_lbl'" 
+                                [attr.checkedval]="props.content.direct.checkedval" [attr.uncheckedval]="props.content.direct.uncheckedval"
+                                [attr.indeterminateval]="props.content.direct.indeterminateval"
+                                delegateEvent [blurEvent]="blur" [focusEvent]="focus" #content/>
+                            </ng-container>
+                        <ng-container *ngIf="!isUiElm()">
+                            <input [id]="id" (change)="saveValue(props,$event)" [(ngModel)]="values[elm]"  attr.rowno="{{index}}" [attr.aria-labelledby]="props.id + '_lbl'"
+                            [attr.checkedval]="'y'" [attr.uncheckedval]="'n'"
+                                [attr.indeterminateval]="'i'" delegateEvent [blurEvent]="blur" [focusEvent]="focus" #content />
+                        </ng-container>
+                   
+                    <label id="{{id + '_lbl'}}"  htmlFor="{{id}}" #label [innerHtml]="props.label.value"></label>
+                    <ng-container *ngIf="props.HintRequired == 'Y'"> <span id="{{id + '_hnt'}}" class="htx">{{props.hintValue}}</span></ng-container>
+                </span>
+        </li>
+    </ul>
+</ng-container>
+    
+<ng-template #labelIconContent>
+    <button class="ett-bttn tsp sml lbtn px20" (click)="iconClickEvent($event)">
+        <svg [attr.class]="props.labelIconProps.direct.className" #contentIcon>
+            <use attr.xlink:href="{{'#'+ props.labelIconProps.name}}" xlink:href="" />
+        </svg>
+    </button>
+</ng-template>
+
+<ng-template #checkBoxContent>
+    <ng-container *ngIf="isUiElm()">
+        <input [id]="id" type="{{props.type}}" (change)="saveValue(props,$event)" [(ngModel)]="value" attr.rowno="{{index}}" [attr.aria-labelledby]="id + '_lbl'" 
+        [attr.checkedval]="props.content.direct.checkedval" [attr.uncheckedval]="props.content.direct.uncheckedval"
+        [attr.indeterminateval]="props.content.direct.indeterminateval" delegateEvent [blurEvent]="blur" [focusEvent]="focus" #content/>
+    </ng-container>
+    <ng-container *ngIf="!isUiElm()">
+        <input [id]="id" type="{{props.type}}" (change)="saveValue(props,$event)" [(ngModel)]="values[elm]"  attr.rowno="{{index}}" [attr.aria-labelledby]="id + '_lbl'" 
+        [attr.checkedval]="'y'" [attr.uncheckedval]="'n'"
+        [attr.indeterminateval]="'i'" delegateEvent [blurEvent]="blur" [focusEvent]="focus" #content />
+    </ng-container>
+</ng-template>   

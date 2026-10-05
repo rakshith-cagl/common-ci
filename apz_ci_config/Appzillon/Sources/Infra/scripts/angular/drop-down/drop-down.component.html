@@ -1,0 +1,204 @@
+<ng-template #dropdowns >
+<ng-container *ngIf="props.type === 'SIMPLE'">
+	<ng-container [ngTemplateOutlet]="simple">
+	</ng-container>
+</ng-container>
+<ng-container *ngIf="props.type === 'AUTOCOMPLETE'">
+		<ng-container [ngTemplateOutlet]="autocomplete" >
+		</ng-container>
+</ng-container>
+<ng-container *ngIf="props.type === 'MULTISELECTTAGS'">
+		<ng-container [ngTemplateOutlet]="multiSelectTag">
+		</ng-container>
+</ng-container>
+<ng-container *ngIf="props.type === 'MULTISELECTCHECKBOX'">
+		<ng-container [ngTemplateOutlet]="multiSelectCheck">
+		</ng-container>
+</ng-container>
+<ng-container *ngIf="props.type === 'WITHSUBOPTIONS'">
+		<ng-container [ngTemplateOutlet]="withSuboptions">
+		</ng-container>
+</ng-container>
+<ng-container *ngIf="props.type === 'NATIVE'">
+		<ng-container [ngTemplateOutlet]="native">
+		</ng-container>
+</ng-container>
+</ng-template>
+<ng-template #simple>
+	<div [id]="id + '_ext'" #simpleDivWrapper>
+			<ng-container *ngIf="isUiElm()">
+					<input #simpleInputContent  [id]="id" [(ngModel)]="selectedValue.desc" delegateEvent [blurEvent]="blur" [focusEvent]="focus"
+					[attr.rowno]="index"/> 
+			</ng-container>
+			<ng-container *ngIf="!isUiElm()">
+					<input #simpleInputContent  [id]="id" [(ngModel)]="selectedValue.desc " (ngModelChange)="setHandler()"
+					[attr.rowno]="index" delegateEvent [blurEvent]="blur" [focusEvent]="focus"/> 
+			</ng-container>
+			<span [id]="id + '_span'" class="sub-elt1" >
+				<svg aria-hidden="true" role="presentation" class="icon icon-down px34">
+					<use  xlink:href="#icon-down" />
+				</svg>
+			</span>
+			<div [id]="id + '_div'" class="sub-ctr" [attr.original-id]="id">
+				<ul  [id]="id + '_so'" role="menu">
+					<ng-container *ngFor="let options of staticOptions; let i = index">
+						
+						<li [attr.key]="i" (click)="onSelectOption($event.target,$event,props.id)" [attr.class]="(options.val === selectedValue.val)? 'is-selected':'' " [id]="id + '_option_' + options.val" [attr.data-value]="options.val">{{options.desc }}</li>
+					</ng-container>
+
+				</ul>
+			</div>
+	</div>
+</ng-template>
+<ng-template #autocomplete >
+	<div  #autoCompleteDivWrapper>
+		<ng-container *ngIf="!isUiElm()">
+           <select [id]="id" [(value)]="values[elm]" delegateEvent [blurEvent]="blur" [focusEvent]="focus"
+			 [attr.rowno]="index" #selectTagAuto>
+ 			 	<ng-container *ngFor="let options of staticOptions; let i = index">
+						<option [attr.key]="i" [id]="id + '_option_' + options.val" [value]="options.val" (click)="setHandler()">{{options.desc}}</option>
+				</ng-container>				
+			</select>
+		</ng-container>
+		<ng-container *ngIf="isUiElm()">
+			<select [id]="id" [(value)]="props.value" delegateEvent [blurEvent]="blur" [focusEvent]="focus"
+				 [attr.rowno]="index" #selectTagAuto>
+					  <ng-container *ngFor="let options of staticOptions; let i = index">
+							<option [attr.key]="i" [id]="id + '_option_' + options.val" [value]="options.val">{{options.desc}}</option>
+					</ng-container>				
+			</select>	
+		</ng-container>
+	</div>
+</ng-template>
+
+<ng-template #multiSelectTag>
+	<div  #multiSelectTagsDivWrapper>
+		<ng-container *ngIf="!isUiElm()">
+		<select [id]="id" multiple="multiple" [(value)]="values[elm]" delegateEvent [blurEvent]="blur" [focusEvent]="focus"
+			(change)="setHandler()" [attr.rowno]="index" #selectMSTags> 
+				<ng-container [ngTemplateOutlet]="content">
+				</ng-container>
+				<ng-container *ngFor="let options of staticOptions; let i = index">
+					<option [attr.key]="i"  [id]="id + '_option_' + options.val" [value]="options.val" (click)="setHandler()" [attr.selected]="checkedIputs(options.val)?true:null">{{options.desc}}</option>
+			</ng-container>	
+			</select> 
+				
+		</ng-container>
+		<ng-container *ngIf="isUiElm()">
+			<select [id]="id"  multiple="multiple" [(value)]="props.value" delegateEvent [blurEvent]="blur" [focusEvent]="focus"
+				(change)="setHandler()" [attr.rowno]="index" #selectMSTags> 
+					<ng-container *ngFor="let options of staticOptions; let i = index">
+						<option [attr.key]="i" [id]="id + '_option_' + options.val" [value]="options.val" (click)="setHandler()" [attr.selected]="checkedIputs(options.val)?true:null">{{options.desc}}</option>
+				</ng-container>	
+				</select>
+		</ng-container>
+	</div>
+</ng-template>
+
+<ng-template #multiSelectCheck>
+	<div [id]="id + '_ext'"   #multiSelectcheckboxDivWrapper> 
+			<input [id]="id"  [(ngModel)]="multiChBxVal"  delegateEvent [blurEvent]="blur" [focusEvent]="focus"
+			  [attr.rowno]="index" #multiSelectCheckInputContent />
+			<span [id]="id + '_span'" class="sub-elt1">
+				<svg aria-hidden="true" role="presentation" class="icon icon-down px34">
+					<use  xlink:href="#icon-down" />
+				</svg>
+			</span>
+			<div [id]="id + '_div'" attr.original-id = "{{id}}" #multiSelectCheckOptionsDivWrapper>
+				<ul  [id]="id + '_so'" role="menu" (click)="onMultiSelectOption($event.target,$event,id)">
+		<ng-container *ngFor="let options of staticOptions; let i = index">
+
+		<li [id]="id+'_option_'+options.desc"  class="form-group--checkbox " [attr.data-value]="options.val"  tabindex="0" [attr.selected]="checkedIputs(options.val)?true:null">
+			<input [id]="id+'_option_'+ options.desc+'_input'" [attr.value]="options.desc" type="checkbox" [checked]="checkedIputs(options.val)">
+			<label [id]="id+'_option_'+ options.desc+'_label'" [for]="id+'_option_'+options.desc+'_input'" [attr.aria-label]="options.desc">{{options.desc}}</label>
+		</li>
+		</ng-container>
+				</ul>
+			</div>
+	</div>
+</ng-template>
+<ng-template #withSuboptions>
+	<div [id]="id + '_ext'"  #withSubOptDivWrapper> 
+			<input [id]="id" [(ngModel)]="selectedValue.desc" delegateEvent [blurEvent]="blur" [focusEvent]="focus"
+			  [attr.rowno]="index" #suboptionsInputContent />
+			<span [id]="id + '_span'" class="sub-elt1">
+				<svg aria-hidden="true" role="presentation" class="icon icon-down px34">
+					<use  xlink:href="#icon-down"/>
+				</svg>
+			</span>
+			<div [id]="id + '_div'" attr.original-id = "{{id}}" #withSubOptionsDivWrapper> 
+				<ul   [id]="id + '_so'" role="menu">	
+	<ng-container *ngFor="let options of staticOptions; let i = index">
+			<li [id]="id+'_option_'+options.desc" [ngClass]=" {'is-selected':checkedIputs(options.val)}" (click)="onSelectOption($event.target,$event,props.id)" [attr.data-value]="options.val" tabIndex="0" [attr.selected]="checkedIputs(options.val)?true:null">
+					<span id="Angula__NewInterfaceDpd__i__testDpd__elmDpd6_option_1_span" [id]="id+'_option_'+options.desc+'_span'" class="menu-expand"></span>{{options.desc}}</li>
+	 </ng-container>
+		</ul>
+			</div>
+	</div>
+</ng-template>
+<ng-template #native>
+	<ng-container *ngIf="!isUiElm()">
+		<select [id]="id"  [(ngModel)]="values[elm]" (change)="setHandler()" delegateEvent [blurEvent]="blur" [focusEvent]="focus"
+			[attr.rowno]="index" #selectNative>
+				<ng-container *ngFor="let options of staticOptions; let i = index">
+					<option [attr.key]="i" [id]="id + '_option_' + options.val" [value]="options.val">{{options.desc}}</option>
+				</ng-container>
+		</select>
+	</ng-container>
+	<ng-container *ngIf="isUiElm()">
+			<select [id]="id"  [(ngModel)]="props.value" delegateEvent [blurEvent]="blur" [focusEvent]="focus"
+				[attr.rowno]="index" #selectNative>
+					<ng-container *ngFor="let options of staticOptions; let i = index">
+						<option [attr.key]="i" [id]="id + '_option_' + options.val" [value]="options.val">{{options.desc}}</option>
+					</ng-container>
+			</select>
+	</ng-container>
+</ng-template>
+
+<ng-template #content>
+	<ng-content></ng-content>
+</ng-template>
+
+<ng-container *ngIf="props.cntrType=='FORM' ">
+    <ul #formWrapperClass  id="{{props.id + '_ul'}}" clickstoppropagation>
+        <li  #formlabelWrapper >            
+            <ng-container *ngIf="(props.hasLabelIcon === 'Y' && props.labelIconProps.iconPos==='LEFT')"  [ngTemplateOutlet]="labelIconContent">
+            </ng-container>
+
+            <label #formlabelProps  [innerHtml]="props.labelProps.title">
+            </label>
+            
+            <ng-container *ngIf="(props.hasLabelIcon === 'Y' && props.labelIconProps.iconPos!=='LEFT')"  [ngTemplateOutlet]="labelIconContent">
+            </ng-container>
+        </li>
+        <li #formContentWrapper >
+            <span [attr.id]="props.id + '_span_'+ index" #formSpanWrapper >
+                    <ng-container [ngTemplateOutlet]="dropdowns">
+					</ng-container>
+            </span>
+        </li>
+    </ul>
+</ng-container>
+
+<ng-container *ngIf="props.cntrType == 'NAVBAR' || props.cntrType == 'LIST'">
+        <span [attr.id]="props.id + '_span_'+ index" #navSapnwrapper >
+            <ng-container [ngTemplateOutlet]="dropdowns">
+			</ng-container>
+        </span>            
+</ng-container>
+<ng-container *ngIf= "props.cntrType=='TABLE'">
+	
+    <td [attr.id]="('td_'+ props.id + '_' + rowIndex)" class="{{props.tdClasses}}">
+            <span [attr.id]="(props.id + '_span_'+ rowIndex)" #tableSpanWrapper>
+               <ng-container [ngTemplateOutlet]="dropdowns" ></ng-container>
+            </span>
+    </td>
+</ng-container>
+
+<ng-template #labelIconContent>
+    <button class="ett-bttn tsp sml lbtn px20" (click)="iconClickEvent($event)">
+        <svg [attr.class]="props.labelIconProps.direct.className" #contentIcon>
+            <use attr.xlink:href="{{'#'+ props.labelIconProps.name}}" xlink:href="" />
+        </svg>
+    </button>
+</ng-template> 

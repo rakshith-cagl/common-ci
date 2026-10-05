@@ -1,0 +1,9 @@
+﻿  pch.cpp
+  Database.cpp
+  Statement.cpp
+     Creating library D:\TertoiseSVN\Appzlion 3.5.10\Studio\appzillonstudio-client\Appzillon\Sources\Containers\Windows10\x64\Release\SQLiteWinRTUWP\SQLiteWinRT.lib and object D:\TertoiseSVN\Appzlion 3.5.10\Studio\appzillonstudio-client\Appzillon\Sources\Containers\Windows10\x64\Release\SQLiteWinRTUWP\SQLiteWinRT.exp
+  Generating code
+  All 4914 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Finished generating code
+  SQLiteWinRT.vcxproj -> D:\TertoiseSVN\Appzlion 3.5.10\Studio\appzillonstudio-client\Appzillon\Sources\Containers\Windows10\x64\Release\SQLiteWinRTUWP\SQLiteWinRT.dll
+  SQLiteWinRT.vcxproj -> D:\TertoiseSVN\Appzlion 3.5.10\Studio\appzillonstudio-client\Appzillon\Sources\Containers\Windows10\x64\Release\SQLiteWinRTUWP\SQLiteWinRT.pdb (Full PDB)

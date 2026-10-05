@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:keepScreenOn="true"
+    android:background="@color/transparent">
+
+  <com.iexceed.plugins.autocapturedocument.CameraSourcePreview
+      android:id="@+id/camera_preview"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent">
+
+    <com.iexceed.plugins.autocapturedocument.FrameGraphicOverlay
+        android:id="@+id/frame_preview_graphic_overlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <com.iexceed.plugins.autocapturedocument.GraphicOverlay
+        android:id="@+id/camera_preview_graphic_overlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        />
+
+
+    <FrameLayout
+        android:id="@+id/static_overlay_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+      <androidx.constraintlayout.widget.ConstraintLayout
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:id="@+id/constraintP"
+          >
+
+        <ToggleButton
+            android:id="@+id/captureMode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/transparent"
+            android:checked="false"
+            android:textAllCaps="false"
+            android:textOff="Manual"
+            android:textOn="Auto"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/pagetitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/captureMode" />
+
+
+        <!--<ProgressBar
+            android:id="@+id/search_progress_bar"
+            android:layout_width="@dimen/search_progress_bar_size"
+            android:layout_height="@dimen/search_progress_bar_size"
+            android:layout_gravity="center"
+            android:indeterminate="true"
+            android:indeterminateTint="@color/white"
+            android:indeterminateTintMode="src_in"
+            android:visibility="gone" />-->
+
+        <FrameLayout
+            android:id="@+id/edge_frame"
+            android:layout_width="match_parent"
+            android:layout_height="350dp"
+            android:background="@drawable/edge_frame"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+
+            >
+
+        </FrameLayout>
+
+
+        <TextView
+            android:id="@+id/msgTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="@color/white"
+            android:textSize="30sp"
+            app:layout_constraintVertical_chainStyle="spread"
+            app:layout_constraintBottom_toTopOf="@id/messages"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/guide" />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintGuide_percent="0.65"
+            android:orientation="horizontal"
+            />
+
+
+        <TextView
+            android:id="@+id/messages"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="5dp"
+            android:layout_marginStart="5dp"
+            android:gravity="center"
+            android:text=""
+            android:textColor="@color/white"
+            android:textSize="22sp"
+            app:layout_constraintBottom_toTopOf="@id/scanningTextMsg"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintVertical_chainStyle="spread"
+            app:layout_constraintTop_toBottomOf="@id/msgTitle" />
+
+        <TextView
+            android:id="@+id/scanningTextMsg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="helooooooooooooo"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            app:layout_constraintVertical_chainStyle="spread"
+            app:layout_constraintBottom_toTopOf="@id/captureButton"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/messages" />
+
+        <ImageButton
+            android:id="@+id/captureButton"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:background="@drawable/lens"
+            android:onClick="takePicture"
+            android:scaleType="fitXY"
+            android:visibility="invisible"
+            android:layout_marginTop="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintVertical_chainStyle="spread"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/scanningTextMsg" />
+
+      </androidx.constraintlayout.widget.ConstraintLayout>
+    </FrameLayout>
+
+  </com.iexceed.plugins.autocapturedocument.CameraSourcePreview>
+
+  <!--<include
+      layout="@layout/top_action_bar_in_live_camera"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_gravity="top"/>-->
+
+  <!--<com.iexceed.android.objdetectorml.java.productsearch.BottomSheetScrimView
+      android:id="@+id/bottom_sheet_scrim_view"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:visibility="gone"/>
+-->
+  <!-- <include
+       android:id="@+id/bottom_sheet"
+       layout="@layout/product_bottom_sheet"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       app:behavior_hideable="true"
+       app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"/>-->
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,1 @@
+{"typeclass":"CUSTOMELEMENT","name":"CardNumber","type":"CUSTOMELEMENT","childs":[],"icon":"CardNumber.png","widgettype":"ELEMENT","containers":["FORM","TABLE","LIST","NAVBAR"]}

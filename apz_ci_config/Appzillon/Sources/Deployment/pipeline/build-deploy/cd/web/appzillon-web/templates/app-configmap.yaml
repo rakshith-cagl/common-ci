@@ -1,0 +1,7 @@
+{{- $appid := .Values.appId -}}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ lower $appid }}-app-configmap
+data:
+{{ ($.Files.Glob (printf "%s/containerprops.properties" $appid)).AsConfig | indent 2 }}

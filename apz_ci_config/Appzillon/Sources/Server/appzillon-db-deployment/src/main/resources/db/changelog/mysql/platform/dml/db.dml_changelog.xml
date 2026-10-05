@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
+    <property name="now" value="now()" dbms="mysql"/>
+   <changeSet id="DML_TB_ASTP_SEQ_GEN_3.24.0-1" author="platform">
+        <insert tableName="TB_ASTP_SEQ_GEN"  dbms="mysql">
+            <column name="SEQUENCE_NAME" value="ADMIN_DOMAIN"/>
+            <column name="SEQUENCE_VALUE" value="1"/>
+            <column name="CREATE_BY" value="NULL"/>
+            <column name="CREATE_TS" value="${now}"/>
+            <column name="VERSION_NO" value="1"/>
+        </insert>
+        <insert tableName="TB_ASTP_SEQ_GEN" dbms="mysql">
+            <column name="SEQUENCE_NAME" value="GROUP_NO"/>
+            <column name="SEQUENCE_VALUE" value="1"/>
+            <column name="CREATE_BY" value="NULL"/>
+            <column name="CREATE_TS" value="${now}"/>
+            <column name="VERSION_NO" value="1"/>
+        </insert>
+        <insert tableName="TB_ASTP_SEQ_GEN" dbms="mysql">
+            <column name="SEQUENCE_NAME" value="NOTIFICATION_NO"/>
+            <column name="SEQUENCE_VALUE" value="1"/>
+            <column name="CREATE_BY" value="NULL"/>
+            <column name="CREATE_TS" value="${now}"/>
+            <column name="VERSION_NO" value="1"/>
+        </insert>
+        <insert tableName="TB_ASTP_SEQ_GEN" dbms="mysql">
+            <column name="SEQUENCE_NAME" value="TXNREF"/>
+            <column name="SEQUENCE_VALUE" value="1"/>
+            <column name="CREATE_BY" value="NULL"/>
+            <column name="CREATE_TS" value="${now}"/>
+            <column name="VERSION_NO" value="1"/>
+        </insert>
+        <insert tableName="TB_ASTP_SEQ_GEN" dbms="mysql">
+            <column name="SEQUENCE_NAME" value="WORKFLOW"/>
+            <column name="SEQUENCE_VALUE" value="1"/>
+            <column name="CREATE_BY" value="NULL"/>
+            <column name="CREATE_TS" value="${now}"/>
+            <column name="VERSION_NO" value="1"/>
+        </insert>
+        <insert tableName="TB_ASTP_SEQ_GEN" dbms="mysql">
+            <column name="SEQUENCE_NAME" value="JMS_TXN_ID"/>
+            <column name="SEQUENCE_VALUE" value="1"/>
+            <column name="CREATE_BY" value="NULL"/>
+            <column name="CREATE_TS" value="${now}"/>
+            <column name="VERSION_NO" value="1"/>
+        </insert>
+        <insert tableName="TB_ASTP_SEQ_GEN" dbms="mysql">
+            <column name="SEQUENCE_NAME" value="ACCESS_REF"/>
+            <column name="SEQUENCE_VALUE" value="1"/>
+            <column name="CREATE_BY" value="NULL"/>
+            <column name="CREATE_TS" value="${now}"/>
+            <column name="VERSION_NO" value="1"/>
+        </insert>
+        <insert tableName="TB_ASTP_SEQ_GEN" dbms="mysql">
+            <column name="SEQUENCE_NAME" value="BEACON_REF"/>
+            <column name="SEQUENCE_VALUE" value="1"/>
+            <column name="CREATE_BY" value="NULL"/>
+            <column name="CREATE_TS" value="${now}"/>
+            <column name="VERSION_NO" value="1"/>
+        </insert>
+        <insert tableName="TB_ASTP_SEQ_GEN" dbms="mysql">
+            <column name="SEQUENCE_NAME" value="ISO8583_F11"/>
+            <column name="SEQUENCE_VALUE" value="1"/>
+            <column name="CREATE_BY" value="NULL"/>
+            <column name="CREATE_TS" value="${now}"/>
+            <column name="VERSION_NO" value="1"/>
+        </insert>
+        <insert tableName="TB_ASTP_SEQ_GEN" dbms="mysql">
+            <column name="SEQUENCE_NAME" value="OTP_REF_NO"/>
+            <column name="SEQUENCE_VALUE" value="1"/>
+            <column name="CREATE_BY" value="NULL"/>
+            <column name="CREATE_TS" value="${now}"/>
+            <column name="VERSION_NO" value="1"/>
+        </insert>
+        <insert tableName="TB_ASTP_SEQ_GEN" dbms="mysql">
+            <column name="SEQUENCE_NAME" value="AR_REF"/>
+            <column name="SEQUENCE_VALUE" value="1"/>
+            <column name="CREATE_BY" value="NULL"/>
+            <column name="CREATE_TS" value="${now}"/>
+            <column name="VERSION_NO" value="1"/>
+        </insert>
+        <insert tableName="TB_ASTP_SEQ_GEN" dbms="mysql">
+            <column name="SEQUENCE_NAME" value="SMS_TXNREF"/>
+            <column name="SEQUENCE_VALUE" value="1"/>
+            <column name="CREATE_BY" value="NULL"/>
+            <column name="CREATE_TS" value="${now}"/>
+            <column name="VERSION_NO" value="1"/>
+        </insert>
+        <insert tableName="TB_ASTP_SEQ_GEN" dbms="mysql">
+            <column name="SEQUENCE_NAME" value="USSD_TXNREF"/>
+            <column name="SEQUENCE_VALUE" value="1"/>
+            <column name="CREATE_BY" value="NULL"/>
+            <column name="CREATE_TS" value="${now}"/>
+            <column name="VERSION_NO" value="1"/>
+        </insert>
+        <insert tableName="TB_ASTP_SEQ_GEN" dbms="mysql">
+            <column name="SEQUENCE_NAME" value="TXT_TXNREF"/>
+            <column name="SEQUENCE_VALUE" value="1"/>
+            <column name="CREATE_BY" value="NULL"/>
+            <column name="CREATE_TS" value="${now}"/>
+            <column name="VERSION_NO" value="1"/>
+        </insert>
+        <insert tableName="TB_ASTP_SEQ_GEN" dbms="mysql">
+            <column name="SEQUENCE_NAME" value="SOURCE_MSG_ID"/>
+            <column name="SEQUENCE_VALUE" value="1"/>
+            <column name="CREATE_BY" value="NULL"/>
+            <column name="CREATE_TS" value="${now}"/>
+            <column name="VERSION_NO" value="1"/>
+        </insert>
+        <insert tableName="TB_ASTP_SEQ_GEN" dbms="mysql">
+            <column name="SEQUENCE_NAME" value="CAPTCHA_REF_NO"/>
+            <column name="SEQUENCE_VALUE" value="1"/>
+            <column name="CREATE_BY" value="NULL"/>
+            <column name="CREATE_TS" value="${now}"/>
+            <column name="VERSION_NO" value="1"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="DML_TB_OS_3.24.0-2" author="platform">
+        <insert tableName="TB_OS" dbms="mysql">
+            <column name="OS_ID" value="ANDROID"/>
+            <column name="CREATE_TS" value="${now}"/>
+        </insert>
+        <insert tableName="TB_OS" dbms="mysql">
+            <column name="OS_ID" value="IOS"/>
+            <column name="CREATE_TS" value="${now}"/>
+        </insert>
+        <insert tableName="TB_OS" dbms="mysql">
+            <column name="OS_ID" value="WINDOWS"/>
+            <column name="CREATE_TS" value="${now}"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,87 @@
+<ng-container *ngIf="props.cntrType=='FORM' ">
+    <ul id="{{props.id}} + '_ul'" #formWrapperClass clickstoppropagation>
+        <li  #formlabelWrapper >
+        	 <ng-container *ngIf="(props.hasLabelIcon === 'Y' && props.labelIconProps.iconPos==='LEFT')"  [ngTemplateOutlet]="labelIconContent">
+            </ng-container>
+            <label #formlabelProps [innerHtml]="props.labelProps.title">
+            </label>
+            <ng-container *ngIf="(props.hasLabelIcon === 'Y' && props.labelIconProps.iconPos!=='LEFT')"  [ngTemplateOutlet]="labelIconContent">
+	        </ng-container>
+        </li>
+        <li #formContentWrapper >
+            <ng-container [ngTemplateOutlet]="radioBtn"></ng-container>
+        </li>
+    </ul>  
+            
+</ng-container>
+
+<ng-container *ngIf="props.cntrType == 'NAVBAR' || props.cntrType == 'LIST'">
+            <ng-container [ngTemplateOutlet]="radioBtn"></ng-container>	
+</ng-container>
+
+<ng-container *ngIf= "props.cntrType=='TABLE'">
+    <td [attr.id]="(rowIndex != undefined) ?('td_'+ props.id + '_' + rowIndex):('td_'+ props.id)" class="{{props.tdClasses}}">
+                            <ng-container [ngTemplateOutlet]="radioBtn"></ng-container>	   
+    </td>
+</ng-container>
+
+<ng-template #radioBtn>
+<ng-container *ngIf="props.radioType == 'APPZILLON' || props.radioType == 'NATIVE' ">
+    <span [id]="id" [attr.value]="values[elm]" [attr.apztype]="props.spanWrapper.apztype" [attr.rowno]="rdRowIndex" [class]="props.spanWrapper.className" #spanWrapper>
+        <ng-container *ngFor="let options of staticOptions">
+                <span id="{{id + '_option_' + options.val + '_lbl_' + rdRowIndex}}" [attr.for]="id + '_option_' + options.val" [attr.key]="rdRowIndex" >
+                    <ng-container *ngIf="isUiElm()">
+                    <input [id]="id + '_option_' + options.val" [value]="options.val"  type="radio"
+                   [checked]="getCheckedVal(options.val)" attr.aria-labelledby="{{id + '_option_' + options.val + '_span_' + rdRowIndex}}"
+                   name="{{id}}" (change)="radioClicked($event)" #content delegateEvent [blurEvent]="blur" [focusEvent]="focus" attr.rowno="{{rdRowIndex}}"/>
+                   </ng-container>
+                   <ng-container *ngIf="!isUiElm()">
+                        <input [id]="id + '_option_' + options.val" [value]="options.val"   type="radio" attr.rowno="{{rdRowIndex}}"
+                        attr.aria-labelledby="{{id + '_option_' + options.val + '_span_' + rdRowIndex}}" 
+                        [checked]="getCheckedVal(options.val)"  name="{{id}}" (change)="radioClicked($event)" #content delegateEvent [blurEvent]="blur" [focusEvent]="focus"/>
+                    </ng-container>
+
+                    <label id="{{id + '_option_' + options.val + '_span_' + rdRowIndex}}" class="rlb"  [for]="id + '_option_' + options.val" title="{{options.desc}}">
+                       {{options.desc}} 
+                   </label>
+                </span>	
+        </ng-container>
+    </span> 
+</ng-container> 
+<ng-container *ngIf="props.radioType == 'BUTTONBAR'">
+        <span [id]="id" [attr.value]="values[elm]" [attr.apztype]="props.spanWrapper.apztype" [attr.rowno]="rdRowIndex" [class]="props.spanWrapper.className" #spanWrapper>
+            <div [id]="id" [attr.apztype]="props.buttonBarProps.direct.apztype" [attr.rowno]="rdRowIndex" [attr.data-toggle]="props.buttonBarProps.direct['data-toggle']" [class]="props.buttonBarProps.direct.className" #buttonBarProps>
+                <ng-container *ngFor="let options of staticOptions">
+                    <div id="{{id + '_option_' + options.val + '_lbl_' + rdRowIndex}}" class="rdio-btn-grp" >
+                        <ng-container *ngIf="isUiElm()">
+                        <input [id]="id + '_option_' + options.val" [value]="options.val"  type="radio" attr.rowno="{{rdRowIndex}}"
+                       [checked]="getCheckedVal(options.val)" attr.aria-labelledby="{{id + '_option_' + options.val + '_span_' + rdRowIndex}}"
+                       name="{{id}}" (change)="radioClicked($event)" #content delegateEvent [blurEvent]="blur" [focusEvent]="focus"/>
+                       </ng-container>
+                       <ng-container *ngIf="!isUiElm()">
+                            <input [id]="id + '_option_' + options.val" [value]="options.val"   type="radio" attr.rowno="{{rdRowIndex}}"
+                            attr.aria-labelledby="{{id + '_option_' + options.val + '_span_' + rdRowIndex}}"
+                            [checked]="getCheckedVal(options.val)"  name="{{id}}" (change)="radioClicked($event)" #content delegateEvent [blurEvent]="blur" [focusEvent]="focus"/>
+                        </ng-container>
+
+                        <label id="{{id + '_option_' + options.val + '_span_' + rdRowIndex}}" class="rdio-btn"  [for]="id + '_option_' + options.val" title="{{options.desc}}">
+                           {{options.desc}} 
+                       </label>
+                    </div>	
+                </ng-container>
+            </div> 
+        </span>
+    </ng-container> 
+    
+    <ng-container *ngIf="props.radioHintRequired == 'Y'">
+                    <span id="{{id + '_hnt'}}" class="htx">{{props.radioHint.value}}</span>
+    </ng-container>
+</ng-template>
+
+<ng-template #labelIconContent>
+    <button class="ett-bttn tsp sml lbtn px20" (click)="iconClickEvent($event)">
+        <svg [attr.class]="props.labelIconProps.direct.className" #contentIcon>
+            <use attr.xlink:href="{{'#'+ props.labelIconProps.name}}" xlink:href="" />
+        </svg>
+    </button>
+</ng-template> 

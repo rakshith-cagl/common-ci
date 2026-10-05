@@ -1,0 +1,150 @@
+<html>
+   <head></head>
+   <!---------------------------------------------------------------------- 
+      This is the property page which will be displayed when the related widget is selected in the Designer
+      ------------------------------------------------------------------------>
+   <body>
+      <div class="wrapper">
+         <ul class="srb prophd">
+            <li class="">
+               <!---------------------------------------------------------------------- 
+                  Provide the heading for the properties page by keeping the content inside the next <h3> tag.
+                  ------------------------------------------------------------------------>
+               <h3>Element Properties</h3>
+            </li>
+            <li class="rht">
+               <a class="debtn active" id="showprop" title="Properties"><i class="icon-propmo px18" onclick=""></i> </a>
+               <a class="debtn" id="showdata" title="Database"><i class="icon-db px18" onclick=""></i> </a>
+               <a class="debtn" title="Refresh"><i class="icon-ref px18" onclick="utils.refreshSelectedObjProperties()"></i> </a>
+            </li>
+         </ul>
+         <div id="maintab" class="tabcontent visible">
+            <!---------------------------------------------------------------------- 
+               There will be three types of Properties for Elements. 
+               Main, Events, Advanced. These will be provided as the Tab Headings
+               Group the widget properties under Main and Advanced categories by following the below provided rules.
+               Events Tab has a growable table of events, so better not add the widget properties under that Tab.
+               ------------------------------------------------------------------------>
+            <a id="mainPropCollapse" class="accordionheading" href="javascript:;">Properties</a>
+            <div id="mainPropAccordian">
+               <!---------------------------------------------------------------------- 
+                  Add the Main Properties in this div
+                  As there are some predefined properties, create new widget related properties
+                  Follow the below structure to create the properties
+                  Ex: <ul class="srb control-group sno">
+                          <li class="scb-col45">
+                             <label class="control-label">Widget Property Name Comes Here</label>
+                          </li>
+                          <li>
+                          // Widget property comes in this li, 
+                          // Whether it is a dropdown, inputbox specify a unique ID as it will be saved based on its ID only.
+                          // This is the ID which should be passed to widgetutils.setProperty() and widgetutils.getProperty() in the related js
+                             <input id="id" type="text" disabled="disabled" class="" value="" />
+                          </li>
+                       </ul>
+                  ------------------------------------------------------------------------>
+               <ul class="srb control-group sno">
+                  <li class="scb-col45">
+                     <label class="control-label">Designer ID</label>
+                  </li>
+                  <li>
+                     <input id="id" type="text" disabled="disabled" class="" value="" />
+                  </li>
+               </ul>
+               <ul class="srb control-group sno">
+                  <li class="scb-col45">
+                     <label class="control-label">Designer Parent ID</label>
+                  </li>
+                  <li>
+                     <input id="pid" type="text" disabled="disabled" class="" value="" />
+                  </li>
+               </ul>
+               <ul class="srb control-group">
+                  <li class="scb-col45">
+                     <label class="control-label">ID </label>
+                  </li>
+                  <li>
+                     <input id="name" type="text" class="" value="" />
+                  </li>
+               </ul>
+               <ul class="srb control-group">
+                  <li class="scb-col45">
+                     <label class="control-label">Title</label>
+                  </li>
+                  <li>
+                     <input id="title" type="text" class="" value="" />
+                  </li>
+                  <li style="width:19px">
+                     <a class='ebtn-mini etxt-info px16 ebtn-icon' onclick="widgetutils.getLITCode('title');"><i class='icon-edit'></i></a>
+                  </li>
+               </ul>
+               <ul class="srb control-group">
+                  <li class="scb-col45">
+                     <label class="control-label">CSS Classes</label>
+                  </li>
+                  <li>
+                     <input id="cssclasses" class="" type="text" />
+                  </li>
+               </ul>
+            </div>
+    
+            <a id="eventscollapse" class="accordionheading" href="javascript:;">Events</a>
+            <!---------------------------------------------------------------------- 
+               Add Events  here 
+               ------------------------------------------------------------------------>
+            <div id="eventsaccordian" style="display: none;">
+               <div class="tools">
+                  <a style="" onclick="widgetutils.addRowElements();" href="javascript:;"><i class="icon-plus-sign" ></i></a>
+                  <a style="" onclick="widgetutils.deleteRow();" href="javascript:;"><i class="icon-minus-sign"></i></a>
+               </div>
+               <TABLE id="eventstable" class="ptable ">
+                  <thead>
+                     <tr>
+                        <th>
+                           <input type="checkbox" id="selectall" />
+                        </th>
+                        <th style="width:138px">Event Name</th>
+                        <th style="width:138px">Function</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td>
+                           <input id="selectevent" type="checkbox" class="selectevent" />
+                        </td>
+                        <td>
+                           <SELECT id="name" name="name" style="width:136px">
+                              <OPTION value="ONLOAD">onload</OPTION>
+                              <OPTION value="ONUNLOAD">onunload</OPTION>
+                              <OPTION value="ONBLUR">onblur</OPTION>
+                              <OPTION value="ONCHANGE">onchange</OPTION>
+                              <OPTION value="ONFOCUS">onfocus</OPTION>
+                              <OPTION value="ONRESET">onreset</OPTION>
+                              <OPTION value="ONSELECT">onselect</OPTION>
+                              <OPTION value="ONSUBMIT">onsubmit</OPTION>
+                              <OPTION value="ONABOARD">onaboard</OPTION>
+                              <OPTION value="ONKEYDOWN">onkeydown</OPTION>
+                              <OPTION value="ONKEYPRESS">onkeypress</OPTION>
+                              <OPTION value="ONKEYUP">onkeyup</OPTION>
+                              <OPTION value="ONCLICK" selected>onclick</OPTION>
+                              <OPTION value="ONDBCLICK">ondbclick</OPTION>
+                              <OPTION value="ONMOUSEDOWN">onmousedown</OPTION>
+                              <OPTION value="ONMOUSEMOVE">onmousemove</OPTION>
+                              <OPTION value="ONMOUSEUP">onmouseup</OPTION>
+                              <OPTION value="ONMOUSEOVER">onmouseover</OPTION>
+                           </SELECT>
+                        </td>
+                        <td>
+                           <INPUT id="function" type="text" name="txt" style="width:136px" />
+                        </td>
+                     </tr>
+                  </tbody>
+               </TABLE>
+            </div>
+         </div>
+         <div id="datatab" class="tabcontent">
+            <div id="dmlprop_div"> </div>
+         </div>
+      </div>
+   </body>
+</html>

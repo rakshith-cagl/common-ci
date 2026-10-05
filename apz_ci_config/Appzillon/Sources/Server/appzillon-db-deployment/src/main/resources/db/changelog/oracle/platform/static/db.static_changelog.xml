@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
+
+    <changeSet id="DML_STATIC_3.24.0-1" author="platform">
+        <sqlFile path="classpath:db/changelog/oracle/platform/static/Staticdata_delete_insert.sql" splitStatements="true"/>
+    </changeSet>
+
+    <changeSet id="DML_STATIC_3.24.0-3" author="platform">
+        <sqlFile dbms="!h2, oracle, mysql"
+                 encoding="UTF-8"
+                 endDelimiter="/"
+                 path="classpath:db/changelog/oracle/platform/static/Staticdata_function.sql"
+                 relativeToChangelogFile="false"
+                 splitStatements="true"
+                 stripComments="true"/>
+    </changeSet>
+
+
+
+</databaseChangeLog>

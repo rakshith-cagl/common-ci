@@ -1,0 +1,12 @@
+{
+  "files_start" : {
+  	"All":["file1.js", "file2.js"], 
+  	"appid_1":[],
+  	"appid_2":[]
+  },
+  "files_end" : {
+  	"All":[],
+    "appid_1":[],
+    "appid_2":[]		
+  }
+}

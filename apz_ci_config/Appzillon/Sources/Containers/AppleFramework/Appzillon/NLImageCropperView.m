@@ -1,0 +1,461 @@
+//
+//  NLImageCropperView.m
+//  NLImageCropper
+//
+// Copyright © 2012, Mirza Bilal (bilal@mirzabilal.com)
+// All rights reserved.
+//  Permission is hereby granted, free of charge, to any person obtaining a copy
+// Redistribution and use in source and binary forms, with or without modification,
+// are permitted provided that the following conditions are met:
+// 1.    Redistributions of source code must retain the above copyright notice,
+//       this list of conditions and the following disclaimer.
+// 2.    Redistributions in binary form must reproduce the above copyright notice,
+//       this list of conditions and the following disclaimer in the documentation
+//       and/or other materials provided with the distribution.
+// 3.    Neither the name of Mirza Bilal nor the names of its contributors may be used
+//       to endorse or promote products derived from this software without specific
+//       prior written permission.
+// THIS SOFTWARE IS PROVIDED BY MIRZA BILAL "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES,
+// INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
+// FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL MIRZA BILAL BE LIABLE FOR
+// ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
+// BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+// PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER
+// IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
+// ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+#import "NLImageCropperView.h"
+#import <QuartzCore/QuartzCore.h>
+
+#define MIN_IMG_SIZE 30
+#define EDGE_THRESHOLD 10
+
+@implementation NLImageCropperView
+@synthesize cropBox;
+
+- (void)setCropRegionRect:(CGRect)cropRect
+{
+    _cropRect = cropRect;
+    _translatedCropRect =CGRectMake(cropRect.origin.x/_scalingFactor, cropRect.origin.y/_scalingFactor, cropRect.size.width/_scalingFactor, cropRect.size.height/_scalingFactor);
+    [_cropView setCropRegionRect:_translatedCropRect];
+}
+
+- (id)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    _image = nil;
+    if (self) {
+        // Initialization code
+    }
+    [self setBackgroundColor:[UIColor darkGrayColor]];
+    _imageView = [[UIImageView alloc] initWithFrame:self.bounds];
+    _cropView = [[NLCropViewLayer alloc] initWithFrame:_imageView.bounds];
+    [_cropView setBackgroundColor:[UIColor clearColor]];
+    
+    [self setAutoresizesSubviews:YES];
+    [self setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
+    [self addSubview:_imageView];
+    [self addSubview:_cropView];
+    //    [self setCropRegionRect:CGRectMake(10, 10, 100, 100)];
+    _scalingFactor = 1.0;
+    _movePoint = NoPoint;
+    _lastMovePoint = CGPointMake(0, 0);
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(deviceOrientationDidChange:)name: UIDeviceOrientationDidChangeNotification object:nil];
+#ifdef ARC
+    [_imageView release];
+    [_cropView release];
+#endif
+    return self;
+}
+
+- (void) setFrame:(CGRect)frame
+{
+    [super setFrame:frame];
+    if (_image != nil) {
+        [self reLayoutView];
+    }
+}
+- (void) setImage:(UIImage*)image
+{
+    _image = image;
+    [self reLayoutView];
+    [_imageView setImage:_image];
+}
+-(UIImage*)getImage{
+    return _image;
+}
+- (void) reLayoutView
+{
+    float imgWidth = _image.size.width;
+    float imgHeight = _image.size.height;
+    float viewWidth = self.bounds.size.width - 2*IMAGE_BOUNDRY_SPACE;
+    float viewHeight = self.bounds.size.height - 2*IMAGE_BOUNDRY_SPACE;
+    
+    float widthRatio = imgWidth / viewWidth;
+    float heightRatio = imgHeight / viewHeight;
+    _scalingFactor = widthRatio > heightRatio ? widthRatio : heightRatio;
+    _imageView.bounds = CGRectMake(0, 0, imgWidth / _scalingFactor, imgHeight/_scalingFactor);
+    _imageView.center = CGPointMake(self.bounds.size.width/2, self.bounds.size.height/2);
+    _imageView.layer.shadowColor = [UIColor blackColor].CGColor;
+    _imageView.layer.shadowOffset = CGSizeMake(3, 3);
+    _imageView.layer.shadowOpacity = 0.6;
+    _imageView.layer.shadowRadius = 1.0;
+    _cropView.bounds = _imageView.bounds;
+    _cropView.frame = _imageView.frame;
+    
+    [self setCropRegionRect:_cropRect];
+}
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    [super touchesBegan:touches withEvent:event];
+    CGPoint locationPoint = [[touches anyObject] locationInView:_imageView];
+    if(locationPoint.x < 0 || locationPoint.y < 0 || locationPoint.x > _imageView.bounds.size.width || locationPoint.y > _imageView.bounds.size.height)
+    {
+        _movePoint = NoPoint;
+        return;
+    }
+    _lastMovePoint = locationPoint;
+    
+    if(((locationPoint.x - EDGE_THRESHOLD) <= _translatedCropRect.origin.x) &&
+       ((locationPoint.x + EDGE_THRESHOLD) >= _translatedCropRect.origin.x))
+    {
+        if(((locationPoint.y - EDGE_THRESHOLD) <= _translatedCropRect.origin.y) &&
+           ((locationPoint.y + EDGE_THRESHOLD) >= _translatedCropRect.origin.y))
+            _movePoint = LeftTop;
+        else if ((locationPoint.y - EDGE_THRESHOLD) <= (_translatedCropRect.origin.y + _translatedCropRect.size.height) &&
+                 (locationPoint.y + EDGE_THRESHOLD) >= (_translatedCropRect.origin.y + _translatedCropRect.size.height))
+            _movePoint = LeftBottom;
+        else
+            _movePoint = NoPoint;
+    }
+    else if(((locationPoint.x - EDGE_THRESHOLD) <= (_translatedCropRect.origin.x + _translatedCropRect.size.width)) &&
+            ((locationPoint.x + EDGE_THRESHOLD) >= (_translatedCropRect.origin.x + _translatedCropRect.size.width)))
+    {
+        if(((locationPoint.y - EDGE_THRESHOLD) <= _translatedCropRect.origin.y) &&
+           ((locationPoint.y + EDGE_THRESHOLD) >= _translatedCropRect.origin.y))
+            _movePoint = RightTop;
+        else if ((locationPoint.y - EDGE_THRESHOLD) <= (_translatedCropRect.origin.y + _translatedCropRect.size.height) &&
+                 (locationPoint.y + EDGE_THRESHOLD) >= (_translatedCropRect.origin.y + _translatedCropRect.size.height))
+            _movePoint = RightBottom;
+        else
+            _movePoint = NoPoint;
+    }
+    else if ((locationPoint.x > _translatedCropRect.origin.x) && (locationPoint.x < (_translatedCropRect.origin.x + _translatedCropRect.size.width)) &&
+             (locationPoint.y > _translatedCropRect.origin.y) && (locationPoint.y < (_translatedCropRect.origin.y + _translatedCropRect.size.height)))
+    {
+        _movePoint = MoveCenter;
+    }
+    else
+        _movePoint = NoPoint;
+}
+
+- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    [super touchesMoved:touches withEvent:event];
+    
+    CGPoint locationPoint = [[touches anyObject] locationInView:_imageView];
+    if(locationPoint.x < 0 || locationPoint.y < 0 || locationPoint.x > _imageView.bounds.size.width || locationPoint.y > _imageView.bounds.size.height)
+    {
+        _movePoint = NoPoint;
+        return;
+    }
+    if ([cropBox isEqualToString:@"square"]) {
+        [self drawSquareWithLocation:locationPoint];
+    }else{
+        [self drawRectanlgeWithLocation:locationPoint];
+    }
+    
+    [_cropView setNeedsDisplay];
+    _cropRect = CGRectMake(_translatedCropRect.origin.x*_scalingFactor, _translatedCropRect.origin.y*_scalingFactor, _translatedCropRect.size.width*_scalingFactor, _translatedCropRect.size.height*_scalingFactor);
+    [self setCropRegionRect:_cropRect];
+    
+}
+-(void)drawRectanlgeWithLocation:(CGPoint)locationPoint{
+    float x,y;
+    switch (_movePoint) {
+        case LeftTop:
+            if(((locationPoint.x + MIN_IMG_SIZE) >= (_translatedCropRect.origin.x + _translatedCropRect.size.width)) ||
+               ((locationPoint.y + MIN_IMG_SIZE)>= (_translatedCropRect.origin.y + _translatedCropRect.size.height)))
+                return;
+            _translatedCropRect = CGRectMake(locationPoint.x, locationPoint.y,
+                                             _translatedCropRect.size.width + (_translatedCropRect.origin.x - locationPoint.x),
+                                             _translatedCropRect.size.height + (_translatedCropRect.origin.y - locationPoint.y));
+            break;
+        case LeftBottom:
+            if(((locationPoint.x + MIN_IMG_SIZE) >= (_cropRect.origin.x + _translatedCropRect.size.width)) ||
+               ((locationPoint.y - _translatedCropRect.origin.y) <= MIN_IMG_SIZE))
+                return;
+            _translatedCropRect = CGRectMake(locationPoint.x, _translatedCropRect.origin.y,
+                                             _translatedCropRect.size.width + (_translatedCropRect.origin.x - locationPoint.x),
+                                             locationPoint.y - _translatedCropRect.origin.y);
+            break;
+        case RightTop:
+//            if(((locationPoint.x - _translatedCropRect.origin.x) <= MIN_IMG_SIZE) ||
+//               ((locationPoint.y + MIN_IMG_SIZE)>= (_translatedCropRect.origin.y + _translatedCropRect.size.height)))
+            if(((locationPoint.x - _translatedCropRect.origin.x) <= MIN_IMG_SIZE) || ((locationPoint.y + MIN_IMG_SIZE)>= (_translatedCropRect.origin.y + _translatedCropRect.size.height))) return; _translatedCropRect = CGRectMake(_translatedCropRect.origin.x, locationPoint.y, locationPoint.x - _translatedCropRect.origin.x, _translatedCropRect.size.height + (_translatedCropRect.origin.y - locationPoint.y));
+
+                return;
+            _translatedCropRect = CGRectMake(_translatedCropRect.origin.x, locationPoint.y,
+                                             locationPoint.x - _cropRect.origin.x,
+                                             _translatedCropRect.size.height + (_translatedCropRect.origin.y - locationPoint.y));
+            break;
+        case RightBottom:
+            if(((locationPoint.x - _translatedCropRect.origin.x) <= MIN_IMG_SIZE) ||
+               ((locationPoint.y - _translatedCropRect.origin.y) <= MIN_IMG_SIZE))
+                return;
+            _translatedCropRect = CGRectMake(_translatedCropRect.origin.x, _translatedCropRect.origin.y,
+                                             locationPoint.x - _translatedCropRect.origin.x,
+                                             locationPoint.y - _translatedCropRect.origin.y);
+            break;
+        case MoveCenter:
+            
+            x = _lastMovePoint.x - locationPoint.x;
+            y = _lastMovePoint.y - locationPoint.y;
+            if(((_translatedCropRect.origin.x-x) > 0) && ((_translatedCropRect.origin.x + _translatedCropRect.size.width - x) <
+                                                          _cropView.bounds.size.width) &&
+               ((_translatedCropRect.origin.y-y) > 0) && ((_translatedCropRect.origin.y + _translatedCropRect.size.height - y) < _cropView.bounds.size.height))
+            {
+                
+                _translatedCropRect = CGRectMake(_translatedCropRect.origin.x - x, _translatedCropRect.origin.y - y, _translatedCropRect.size.width, _translatedCropRect.size.height);
+            }
+            _lastMovePoint = locationPoint;
+            break;
+        default: //NO Point
+            return;
+            break;
+    }
+}
+-(void)drawSquareWithLocation:(CGPoint)locationPoint{
+    float x,y;
+    float newWidth, newHeight, imgWidth, imgHeight = 0;
+    CGRect translatedCropRectTemp;
+    switch (_movePoint) {
+        case LeftTop:
+            if(((locationPoint.x + MIN_IMG_SIZE) >= (_translatedCropRect.origin.x + _translatedCropRect.size.width)) ||
+               ((locationPoint.y + MIN_IMG_SIZE)>= (_translatedCropRect.origin.y + _translatedCropRect.size.height)))
+                return;
+            
+            newWidth=(_translatedCropRect.size.width + (_translatedCropRect.origin.x - locationPoint.x));
+            newHeight=(_translatedCropRect.size.height + (_translatedCropRect.origin.y- locationPoint.y));
+            imgWidth  = _imageView.bounds.size.width;
+            imgHeight = _imageView.bounds.size.height;
+            if(newWidth >= newHeight){
+                newHeight = newWidth;
+            }else{
+                newWidth = newHeight;
+            }
+            if((locationPoint.x + newWidth) >= imgWidth){
+                newWidth = imgWidth - locationPoint.x - 1;
+            }
+            if((locationPoint.y + newHeight) >= imgHeight){
+                newHeight = newHeight - locationPoint.y - 1;
+            }
+            if(newWidth >= newHeight){
+                newWidth = newHeight;
+            }else{
+                newHeight = newWidth;
+            }
+            newWidth=fabsf(newWidth);
+            newHeight=fabsf(newHeight);
+            translatedCropRectTemp=CGRectMake(locationPoint.x, locationPoint.y,
+                                              newWidth,
+                                              newHeight);
+            if ([self iaRectangleResizable:translatedCropRectTemp]) {
+                _translatedCropRect = CGRectMake(locationPoint.x, locationPoint.y,
+                                                 newWidth,
+                                                 newHeight);
+            }
+            break;
+        case LeftBottom:
+            if(((locationPoint.x + MIN_IMG_SIZE) >= (_cropRect.origin.x + _translatedCropRect.size.width)) ||
+               ((locationPoint.y - _translatedCropRect.origin.y) <= MIN_IMG_SIZE))
+                return;
+            newWidth= _translatedCropRect.size.width + (_translatedCropRect.origin.x - locationPoint.x);
+            newHeight= locationPoint.y - _translatedCropRect.origin.y;
+            imgWidth  = _imageView.bounds.size.width;
+            imgHeight = _imageView.bounds.size.height;
+            if(newWidth >= newHeight){
+                newHeight = newWidth;
+            }else{
+                newWidth = newHeight;
+            }
+            if(newWidth >= newHeight){
+                newWidth = newHeight;
+            }else{
+                newHeight = newWidth;
+            }
+            newWidth=fabsf(newWidth);
+            newHeight=fabsf(newHeight);
+            translatedCropRectTemp=CGRectMake(locationPoint.x, _translatedCropRect.origin.y,
+                                              newWidth,
+                                              newHeight);
+            if ([self iaRectangleResizable:translatedCropRectTemp]) {
+                _translatedCropRect = CGRectMake(locationPoint.x, _translatedCropRect.origin.y,
+                                                 newWidth,
+                                                 newHeight);
+            }
+            break;
+        case RightTop:
+            if(((locationPoint.x - _translatedCropRect.origin.x) <= MIN_IMG_SIZE) ||
+               ((locationPoint.y + MIN_IMG_SIZE)>= (_translatedCropRect.origin.y + _translatedCropRect.size.height)))
+                return;
+            
+            newWidth= locationPoint.x - _translatedCropRect.origin.x;
+            newHeight= _translatedCropRect.size.height + (_translatedCropRect.origin.y - locationPoint.y);
+            
+            imgWidth  = _imageView.bounds.size.width;
+            imgHeight = _imageView.bounds.size.height;
+            
+            
+            if(newWidth != newHeight){
+                newHeight = newWidth;
+            }
+            newWidth=fabsf(newWidth);
+            newHeight=fabsf(newHeight);
+            translatedCropRectTemp=CGRectMake(_translatedCropRect.origin.x, locationPoint.y,
+                                              newWidth,
+                                              newHeight);
+            if ([self iaRectangleResizable:translatedCropRectTemp]) {
+                _translatedCropRect = CGRectMake(_translatedCropRect.origin.x, locationPoint.y,
+                                                 newWidth,
+                                                 newHeight);
+            }
+            break;
+        case RightBottom:
+            if(((locationPoint.x - _translatedCropRect.origin.x) <= MIN_IMG_SIZE) ||
+               ((locationPoint.y - _translatedCropRect.origin.y) <= MIN_IMG_SIZE))
+                return;
+            
+            newWidth= locationPoint.x - _translatedCropRect.origin.x;
+            newHeight= locationPoint.y - _translatedCropRect.origin.y;
+            
+            imgWidth  = _imageView.bounds.size.width;
+            imgHeight = _imageView.bounds.size.height;
+            
+            if(newWidth >= newHeight){
+                newHeight = newWidth;
+            }else{
+                newWidth = newHeight;
+            }
+            if(newWidth >= newHeight){
+                newWidth = newHeight;
+            }else{
+                newHeight = newWidth;
+            }
+            translatedCropRectTemp=CGRectMake(_translatedCropRect.origin.x, _translatedCropRect.origin.y,
+                                              newWidth,
+                                              newHeight);
+            if ([self iaRectangleResizable:translatedCropRectTemp]) {
+                _translatedCropRect = CGRectMake(_translatedCropRect.origin.x, _translatedCropRect.origin.y,
+                                                 newWidth,
+                                                 newHeight);
+            }
+            
+            
+            break;
+        case MoveCenter:
+            
+            x = _lastMovePoint.x - locationPoint.x;
+            y = _lastMovePoint.y - locationPoint.y;
+            if(((_translatedCropRect.origin.x-x) > 0) && ((_translatedCropRect.origin.x + _translatedCropRect.size.width - x) <_cropView.bounds.size.width) &&
+               ((_translatedCropRect.origin.y-y) > 0) && ((_translatedCropRect.origin.y + _translatedCropRect.size.height - y) < _cropView.bounds.size.height))
+            {
+                
+                _translatedCropRect = CGRectMake(_translatedCropRect.origin.x - x, _translatedCropRect.origin.y - y, _translatedCropRect.size.width, _translatedCropRect.size.height);
+            }
+            _lastMovePoint = locationPoint;
+            break;
+        default: //NO Point
+            return;
+            break;
+    }
+}
+- (UIImage *)getCroppedImage {
+    CGRect imageRect = CGRectMake(_cropRect.origin.x*_image.scale,
+                                  _cropRect.origin.y*_image.scale,
+                                  _cropRect.size.width*_image.scale,
+                                  _cropRect.size.height*_image.scale);
+    
+    CGImageRef imageRef = CGImageCreateWithImageInRect([_image CGImage], imageRect);
+    UIImage *result = [UIImage imageWithCGImage:imageRef
+                                          scale:_image.scale
+                                    orientation:_image.imageOrientation];
+    CGImageRelease(imageRef);
+    [self removeObserverMethod];
+    return result;
+}
+
+-(void)removeObserverMethod{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    _cropView=nil;
+    _imageView=nil;
+}
+-(BOOL)iaRectangleResizable:(CGRect)translatedCropRectTemp{
+    BOOL isResizable=false;
+    if ((translatedCropRectTemp.origin.x > (_imageView.bounds.origin.x-5)) &&(translatedCropRectTemp.origin.y > (_imageView.bounds.origin.y-5))&& ((translatedCropRectTemp.size.height +translatedCropRectTemp.origin.y) < (_imageView.bounds.size.height-5)) && ((translatedCropRectTemp.size.width+translatedCropRectTemp.origin.x) < (_imageView.bounds.size.width-5))) {
+        isResizable=true;
+    }
+    return isResizable;
+}
+#pragma mark -
+#pragma mark Device Orientation
+
+- (void)currentDeviceOrientation
+{
+    UIDeviceOrientation orientation = [[UIDevice currentDevice] orientation];
+    
+    if (orientation != UIDeviceOrientationUnknown && orientation != UIDeviceOrientationFaceUp && orientation != UIDeviceOrientationFaceDown) {
+        switch (orientation) {
+            case UIDeviceOrientationLandscapeLeft:
+                _orientation = UIInterfaceOrientationLandscapeRight;
+                break;
+            case UIDeviceOrientationLandscapeRight:
+                _orientation = UIInterfaceOrientationLandscapeLeft;
+                break;
+            case UIDeviceOrientationPortraitUpsideDown:
+                _orientation = UIInterfaceOrientationPortraitUpsideDown;
+                break;
+            case UIDeviceOrientationPortrait:
+                _orientation = UIInterfaceOrientationPortrait;
+                break;
+            default:
+                break;
+        }
+    }
+}
+
+- (void)deviceOrientationDidChange:(NSNotification *)notification
+{
+    [self currentDeviceOrientation];
+    UIDeviceOrientation orientation = [[UIDevice currentDevice] orientation];
+    if (orientation != UIDeviceOrientationUnknown && orientation != UIDeviceOrientationFaceUp && orientation != UIDeviceOrientationFaceDown) {
+        NSUInteger iosVersion = [[[UIDevice currentDevice] systemVersion]integerValue];
+        if (iosVersion>7) {
+            width =[[UIScreen mainScreen] bounds].size.width;
+        }else{
+            if(_orientation==1 ||_orientation==2){
+                //IOS6 has does not rotate in upsidedown mode
+                if (!(iosVersion==6&&_orientation==2)) {
+                    width =[[UIScreen mainScreen] bounds].size.width;
+                }
+                
+            }
+            else{
+                width =[[UIScreen mainScreen] bounds].size.height;
+            }
+        }
+        UIButton* originalButton=(UIButton*)[self viewWithTag:556];
+        CGRect originalButtonFrame = originalButton.frame;
+        originalButtonFrame.origin.x =width/2-42;
+        originalButton.frame = originalButtonFrame;
+        UIButton* cancelButton=(UIButton*)[self viewWithTag:555];
+        CGRect cancelButtonFrame = cancelButton.frame;
+        cancelButtonFrame.origin.x =width -(cancelButtonFrame.size.width+5);
+        cancelButton.frame = cancelButtonFrame;
+        
+        [self setNeedsDisplay];
+    }
+}
+
+
+@end

@@ -1,0 +1,393 @@
+template.LandingPage_Mobile.createLayout = function() {
+    template.addHeader(null, "HEADER");
+    template.addRow("headerGridRow", "HEADER", null, "GRIDROW");
+    template.addColumn("headerGridCol", "headerGridRow", null, "GRIDCOLHEADER");
+    template.addPanel("headerPanel", "headerGridCol", "SIMPLE", null, "SIMPLEPANEL");
+    template.addPanelSection("headerPanelSection", "headerPanel", null, "PANELSECTION");
+    template.addContainer("headerNavbar", "headerPanelSection", "NAVBAR", null, "NAVBAR");
+    main.pointers["headerNavbar"].variation="TRANSPARENT";
+    template.addRow("headerNavbarSecRow", "headerNavbar", null, "SECTIONROW");
+    template.addColumn("headerLogoCol", "headerNavbarSecRow", null, "SECTIONHALF");
+    main.pointers["headerLogoCol"].width="CUSTOM";
+    main.pointers["headerLogoCol"].customwidth="100";
+    template.addElement("appLogo", "headerLogoCol", "IMAGE", null, "LOGO");
+    template.addColumn("headerTextSecCol", "headerNavbarSecRow", null, "SECTIONCOL1");
+    main.pointers["headerTextSecCol"].width="";
+    template.addElement("welcomMsg", "headerTextSecCol", "TEXT", null, "TEXT");
+    alert("1");
+    if (datamodel.name != undefined) {
+        main.pointers["welcomMsg"].defaultvalue = "Welcome , User";
+    }
+    alert("2");
+    template.addColumn("headerProfileImageCol", "headerNavbarSecRow", null, "SECTIONCOL1");
+    main.pointers["headerProfileImageCol"].width="CUSTOM";
+    main.pointers["headerProfileImageCol"].customwidth="100";
+    template.addElement("LandingPage__i__tbCustMaster__custimage", "headerProfileImageCol", "IMAGE", null, "PROFILEIMAGE", "LandingPage", "Request",
+        "tbCustMaster", "custimage");
+    if (datamodel.name != undefined) {
+        main.pointers["LandingPage__i__tbCustMaster__custimage"].defaultvalue = "";
+    }
+    alert("3");
+    template.addColumn("headerNotifyButtonSecCol", "headerNavbarSecRow", null, "SECTIONCOL1");
+    main.pointers["headerNotifyButtonSecCol"].width="CUSTOM";
+    main.pointers["headerNotifyButtonSecCol"].customwidth="40";
+    main.pointers["headerNotifyButtonSecCol"].contentalignment="CENTER";
+    template.addElement("headerNotifyButton", "headerNotifyButtonSecCol", "BUTTON", null, "NOTIFYBUTTON");
+    main.pointers["headerNotifyButton"].iconsize ="PX34";
+    main.pointers["headerNotifyButton"].buttonasicon ="Y";
+    template.addColumn("headerLogoutButtonSecCol", "headerNavbarSecRow", null, "SECTIONCOL1");
+     main.pointers["headerLogoutButtonSecCol"].width="CUSTOM";
+    main.pointers["headerLogoutButtonSecCol"].customwidth="40";
+    main.pointers["headerLogoutButtonSecCol"].contentalignment="CENTER";
+    template.addElement("headerLogoutButton", "headerLogoutButtonSecCol", "BUTTON", null, "LOGOUTBUTTON");
+    main.pointers["headerLogoutButton"].title = "";
+    main.pointers["headerLogoutButton"].semantics = "INHERIT";
+    main.pointers["headerLogoutButton"].icon = "icon-signout";
+    main.pointers["headerLogoutButton"].buttonasicon = "Y";
+    main.pointers["headerLogoutButton"].contentalignment = "CENTER";
+    main.pointers["headerLogoutButton"].verticalalignment = "MIDDLE";
+    main.pointers["headerLogoutButton"].width = "100";
+    main.pointers["headerLogoutButton"].iconsize = "PX34";
+    main.pointers["headerLogoutButton"].customwidthtype = "PX";
+    main.pointers["headerLogoutButton"].events = [{
+        "name": "ONCLICK",
+        "function": "apz.app.logOut();"
+    }];
+    template.addBody(null, "BODY");
+    lcolrequired = true;
+    lcount = 0;
+    alert("4");
+    var lservicetyp = "";
+    var lnoofifaces = datamodel.interfaces.length;
+    alert("lnoofifaces:" + lnoofifaces);
+    if (lnoofifaces > 0) {
+        var lfirstifaceobj = datamodel.interfaces[0];
+        lservicetyp = lfirstifaceobj.servicetype;
+        //alert("Creating Screen");
+        //var lgobtnadded = false;
+        var lgobtnrequird = false;
+        template.addRow("ParentRow", "BODY", null, "GRIDROW");
+        template.addColumn("ParentColumn", "ParentRow", null, "GRIDCOL");
+        template.addPanel("ParentPanel", "ParentColumn", "SIMPLE", null, "SIMPLEPANEL");
+        template.addPanelSection("ParentPanelSection", "ParentPanel", null, "PANELSECTION");
+        alert("6");
+        template.addRow("ChartHeaderRow", "ParentPanelSection", null, "GRIDROW");
+        main.pointers["ChartHeaderRow"].widgetcategory = "GRID";
+        main.pointers["ChartHeaderRow"].type = "GRIDROW";
+        template.addColumn("ChartHeaderCol", "ChartHeaderRow", null, "GRIDCOL");
+        main.pointers["ChartHeaderCol"].widgetcategory = "GRID";
+        main.pointers["ChartHeaderCol"].type = "GRIDCOLUMN";
+        template.addPanel("ChartHeaderPanel", "ChartHeaderCol", "SIMPLE", null, "SIMPLEPANEL");
+        template.addPanelSection("ChartHeaderPanelSection", "ChartHeaderPanel", null, "PANELSECTION");
+        template.addContainer("ChartHeaderNavbar1", "ChartHeaderPanelSection", "NAVBAR", null, "NAVBAR");
+        template.addRow("ChartHeaderNavbarSecRow", "ChartHeaderNavbar1", null, "SECTIONROW");
+        template.addColumn("ChartHeaderNameCol", "ChartHeaderNavbarSecRow", null, "SECTIONHALF");
+        main.pointers["ChartHeaderNameCol"].width = 100;
+        template.addElement("chartName", "ChartHeaderNameCol", "TEXT", null, "TEXT");
+        main.pointers["chartName"].defaultvalue = "Accounts Overview";
+        main.pointers["chartName"].elementtype = "HEADING4";
+        alert("6");
+        /* template.addContainer("Form1", "Form1PanelSection", "FORM", null, "FORM");
+        template.addRow("SectionRow", "Form1", null, "SECTIONROW");
+        template.addColumn("SectionCol", "SectionRow", null, "SECTIONCOL");
+        template.addElement("BillerId", "SectionCol", "INPUTBOX", null, "FORMINPUTBOX");
+        template.addElement("BillerName", "SectionCol", "INPUTBOX", null, "FORMINPUTBOX");
+        main.pointers["BillerName"].title = "Biller Name";*/
+        for (var iface = 0; iface < lnoofifaces; iface++) {
+            lifaceobj = datamodel.interfaces[iface];
+            var lnoofnodes = 0;
+            var ldmlobj = {};
+            var lnodeobj = {};
+            var lnoofdmls = lifaceobj.dmls.length;
+            if (lnoofdmls > 0) {
+                for (var d = 0; d < lnoofdmls; d++) {
+                    ldmlobj = lifaceobj.dmls[d];
+                    if (ldmlobj.type == "REQUESTDATAMODEL" && ldmlobj.nodes != undefined) {
+                        lnoofnodes = ldmlobj.nodes.length;
+                        for (var lnode = 0; lnode < lnoofnodes; lnode++) {
+                            dmtype = "REQUESTDATAMODEL";
+                            lgobtnrequird = true;
+                            alert("ldmlobj.nodes[lnode]:" + ldmlobj.nodes[lnode].name);
+                            if (ldmlobj.nodes[lnode].name == "vwAccountDet") {
+                                lnodeobj = ldmlobj.nodes[lnode];
+                                createNodeWidgets(lnodeobj);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        alert("9");
+        buildFooter(lfirstifaceobj);
+        alert("10");
+    }
+}
+
+function createNodeWidgets(pnodeobj) {
+    alert("7");
+    var lnoofelms = pnodeobj.elements.length;
+    var lnodename = pnodeobj.name;
+    if (lnoofelms > 0) {
+        lcount = lcount + 1;
+        if ((pnodeobj.relationtype) == ("1:1")) {
+            container = "FORM";
+        } else {
+            container = "LIST";
+        }
+        var lcommonid = pnodeobj.name + "__" + lcount;
+        var lgrid = "GR__" + lcommonid;
+        var lgcid = "GC__" + lcommonid;
+        var lpanel = "P__" + lcommonid;
+        var lpanelsec = "PC__" + lcommonid;
+        template.addRow(lgrid, "ParentPanelSection", null, "GRIDROW");
+        main.pointers[lgrid].widgetcategory = "GRID";
+        main.pointers[lgrid].type = "GRIDROW";
+        //	alert('Chandu'+dmtype);
+        if ((dmtype == "RESPONSEDATAMODEL")) {
+            //	main.pointers[lgrid].options = "HIDDEN";
+        }
+        template.addColumn(lgcid, lgrid, null, "GRIDCOL");
+        main.pointers[lgcid].widgetcategory = "GRID";
+        main.pointers[lgcid].type = "GRIDCOLUMN";
+        if (lnodename == "createBillingTransaction") {
+            main.pointers[lgcid].collapsible = "N";
+            main.pointers[lgcid].titlestyle = "NONE";
+        } else {
+            main.pointers[lgcid].contentboxtitle = lnodename;
+            main.pointers[lgcid].collapsible = "Y";
+        }
+        template.addPanel(lpanel, lgcid, "SIMPLE", null, "SIMPLEPANEL");
+        template.addPanelSection(lpanelsec, lpanel, null, "PANELSECTION");
+        main.pointers[lpanelsec].appearance = "BORDERED";
+        main.pointers[lpanelsec].theme = "CARD";
+        main.pointers[lpanelsec].state = "OPEN";
+        var lcontainerId = "CON__" + lcommonid;
+        template.addContainer(lcontainerId, lpanelsec, "LIST", null, "LIST");
+        main.pointers[lcontainerId].widgettype = "CHART";
+        if ((dmtype == "RESPONSEDATAMODEL") || container == "TABLE") {
+            main.pointers[lcontainerId].readonly = "Y";
+        }
+        main.pointers[lcontainerId].title = "";
+        alert("pnodeobj.relationtype:" + pnodeobj.relationtype);
+        if ((pnodeobj.relationtype) != ("1:1")) {
+            main.pointers[lcontainerId].interfacename = lifaceobj.name;
+            main.pointers[lcontainerId].datamodeltype = dmtype;
+            main.pointers[lcontainerId].xnode = pnodeobj.name;
+            main.pointers[lcontainerId].ynode = pnodeobj.name;
+            main.pointers[lcontainerId].xelement = "accountType";
+            main.pointers[lcontainerId].yelement = "totalbal";
+            main.pointers[lcontainerId]["chartyelements"] = [{
+                "title": "Balances",
+                "node": pnodeobj.name,
+                "element": "totalbal"
+            }];
+            main.pointers[lcontainerId].chartxtitle = "Account Type";
+            /*if (lnoofelms > 1) {
+                main.pointers[lcontainerId].yaxiselements = new Array();
+                var lyelms = main.pointers[lcontainerId].yaxiselements[0] = {};
+                lyelms.chartytitle = "Balances";
+                lyelms.node = pnodeobj.name;
+                lyelms.yelement = "totalbal";
+            }*/
+            main.pointers[lcontainerId].xfunc = "DISTINCT";
+            main.pointers[lcontainerId].yfunc = "SUM";
+            main.pointers[lcontainerId].zfunc = "DISTINCT";
+            main.pointers[lcontainerId].chartstylesheet = "Doughnut2D";
+            main.pointers[lcontainerId].charttype = "Doughnut2D";
+        }
+        var lsrid = "SR__" + lcommonid;
+        var lscid = "SC__" + lcommonid;
+        template.addRow(lsrid, lcontainerId, null, "SECTIONROW");
+        template.addColumn(lscid, lsrid, null, "SECTIONCOL2");
+        main.pointers[lscid].width = 100;
+        /*
+        template.addRow("AccountSummaryHeaderRow", "ParentPanelSection", null, "GRIDROW");
+        main.pointers["AccountSummaryHeaderRow"].widgetcategory = "GRID";
+        main.pointers["AccountSummaryHeaderRow"].type = "GRIDROW";
+        template.addColumn("AccountSummaryHeaderCol", "AccountSummaryHeaderRow", null, "GRIDCOL");
+        main.pointers["AccountSummaryHeaderCol"].widgetcategory = "GRID";
+        main.pointers["AccountSummaryHeaderCol"].type = "GRIDCOLUMN";
+        main.pointers["AccountSummaryHeaderCol"].width = 100;
+        template.addPanel("AccountSummaryPanel", "AccountSummaryHeaderCol", "SIMPLE", null, "SIMPLEPANEL");
+        template.addPanelSection("AccountSummaryPanelSection", "AccountSummaryPanel", null, "PANELSECTION");
+        template.addContainer("AccountSummaryNavbar1", "AccountSummaryPanelSection", "NAVBAR", null, "NAVBAR");
+        main.pointers["AccountSummaryNavbar1"].variation = "TRANSPARENT";
+        template.addRow("AccountSummaryNavbarSecRow", "AccountSummaryNavbar1", null, "SECTIONROW");
+        template.addColumn("AccountSummaryNameCol", "AccountSummaryNavbarSecRow", null, "SECTIONHALF");
+        main.pointers["AccountSummaryNameCol"].width = 100;
+        template.addElement("AccountSummaryName", "AccountSummaryNameCol", "TEXT", null, "TEXT");
+        main.pointers["AccountSummaryName"].defaultvalue = "Accounts Summary";
+        main.pointers["AccountSummaryName"].elementtype = "HEADING4";*/
+        
+        lgrid = "GR__" + lcommonid + 1;
+        lgcid = "GC__" + lcommonid + 1;
+        lpanel = "P__" + lcommonid + 1;
+        lpanelsec = "PC__" + lcommonid + 1;
+        lsrid = "SR__" + lcommonid + 1;
+        lcontainerId = "CON__" + lcommonid + 1;
+        template.addRow(lgrid, "ParentPanelSection", null, "GRIDROW");
+        main.pointers[lgrid].widgetcategory = "GRID";
+        main.pointers[lgrid].type = "GRIDROW";
+        template.addColumn(lgcid, lgrid, null, "GRIDCOL");
+        main.pointers[lgcid].widgetcategory = "GRID";
+        main.pointers[lgcid].type = "GRIDCOLUMN";
+        template.addPanel(lpanel, lgcid, "SIMPLE", null, "SIMPLEPANEL");
+        template.addPanelSection(lpanelsec, lpanel, null, "PANELSECTION");
+        main.pointers[lpanelsec].appearance = "BORDERED";
+        main.pointers[lpanelsec].theme = "CARD";
+        main.pointers[lpanelsec].state = "OPEN";
+        
+        template.addContainer(lcontainerId, lpanelsec, container, null, container); //??????
+        main.pointers[lcontainerId].title = "Accounts Summary";
+        template.addRow(lsrid, lcontainerId, null, "SECTIONROW");
+        for (var lelm = 0; lelm < lnoofelms; lelm++) {
+            var lelmobj = pnodeobj.elements[lelm];
+            if (lelmobj.name == "accountType") {
+                lscid = "SC__" + lcommonid + 1;
+                template.addColumn(lscid, lsrid, null, "SECTIONHALF");
+                createElementWidgets(pnodeobj, lelmobj, lscid);
+            } else if (lelmobj.name == "totalbal") {
+                lscid = "SC__" + lcommonid + 2;
+                template.addColumn(lscid, lsrid, null, "SECTIONHALF");
+                createElementWidgets(pnodeobj, lelmobj, lscid);
+            }
+        }
+        alert("8");
+    }
+}
+
+function createElementWidgets(pnodeobj, pelement, ppid) {
+    var lelmname = pelement.name;
+    var lwidgettype = "INPUTBOX";
+    var lnodename = pnodeobj.name;
+    var lelmid = utils.getNameforWidget(lifaceobj.name, dmtype, lnodename, lelmname);
+    alert("lelmname:" + lelmname);
+    alert("dmtype:" + dmtype);
+    if (dmtype == "Response") {
+        if (container == "FORM") {
+            lwidgettype = "INPUTBOX";
+        } else {
+            lwidgettype = "TEXT";
+        }
+    } else {
+        if (pelement.staticoptions.length > 0) {
+            lwidgettype = "DROPDOWN";
+        } else if (pelement.datatype == "DATE") {
+            lwidgettype = "INPUTBOX";
+        } else {
+            lwidgettype = "TEXT";
+        }
+    }
+    template.addElement(lelmid, ppid, lwidgettype, null, lwidgettype, lifaceobj.name, dmtype, lnodename, lelmname);
+    if (dmtype == "RESPONSEDATAMODEL") {
+        main.pointers[lelmid].state = "READONLY";
+    } else if (pelement.datatype == "DATE") {
+        main.pointers[lelmid].lookandfeel = "GENERIC";
+        main.pointers[lelmid].state = "ENABLED";
+    } else if (lwidgettype == "DROPDOWN") {
+        main.pointers[lelmid].lookandfeel = "OSSPECIFIC";
+        main.pointers[lelmid].state = "ENABLED";
+    } else {
+        main.pointers[lelmid].state = "ENABLED";
+    }
+    main.pointers[lelmid].labelwidth = "0";
+    main.pointers[lelmid].columnwidth = "100";
+    main.pointers[lelmid].nodename = lnodename;
+    main.pointers[lelmid].elementname = lelmname;
+}
+
+function buildFooter(piface) {
+    template.addFooter(null, "FOOTER");
+    template.addRow("footerGridRow", "FOOTER", null, "GRIDROW");
+    template.addColumn("footerGridCol", "footerGridRow", null, "GRIDCOLHEADER");
+    alert("foo");
+    template.addPanel("footerPanel", "footerGridCol", "SIMPLE", null, "SIMPLEPANEL");
+    alert("foo6");
+    template.addPanelSection("footerPanelSection", "footerPanel", null, "PANELSECTION");
+    template.addContainer("footerNavbar", "footerPanelSection", "NAVBAR", null, "NAVBAR");
+    main.pointers["footerNavbar"].variation = "TRANSPARENT";
+    alert("foo1");
+    template.addRow("footerNavbarSecRow", "footerNavbar", null, "SECTIONROW");
+    template.addColumn("footerMyTaskButtonSecCol", "footerNavbarSecRow", null, "SECTIONCOL3");
+    main.pointers["footerMyTaskButtonSecCol"].contentalignment ="CENTER";
+    main.pointers["footerMyTaskButtonSecCol"].width = "25";
+    main.pointers["footerMyTaskButtonSecCol"].customwidth = "";
+    alert("foo2");
+    template.addElement("footerMyTasksButton", "footerMyTaskButtonSecCol", "BUTTON", null, "BUTTON");
+    main.pointers["footerMyTasksButton"].title = "My Tasks";
+    main.pointers["footerMyTasksButton"].semantics = "INHERIT";
+    main.pointers["footerMyTasksButton"].icon = "icon-check";
+    main.pointers["footerMyTasksButton"].iconsize = "PX24";
+    main.pointers["footerMyTasksButton"].buttonasicon = "Y";
+    main.pointers["footerMyTasksButton"].contentalignment = "CENTER";
+    main.pointers["footerMyTasksButton"].verticalalignment = "MIDDLE";
+    main.pointers["footerMyTasksButton"].events = [{
+        "name": "ONCLICK",
+        "function": "apz.launchScreen('MyTasks',0);"
+    }];
+    alert("foo3");
+    template.addColumn("footerFTButtonSecCol", "footerNavbarSecRow", null, "SECTIONCOL3");
+    main.pointers["footerFTButtonSecCol"].width = "25";
+    main.pointers["footerFTButtonSecCol"].customwidth = "";
+    template.addElement("footerFTButton", "footerFTButtonSecCol", "BUTTON", null, "BUTTON");
+    main.pointers["footerFTButton"].title = "Fund Transfer";
+    main.pointers["footerFTButton"].semantics = "INHERIT";
+    main.pointers["footerFTButton"].icon = "icon-retweet";
+    main.pointers["footerFTButton"].iconsize = "PX24";
+    main.pointers["footerFTButton"].buttonasicon = "Y";
+    main.pointers["footerFTButton"].contentalignment = "CENTER";
+    main.pointers["footerFTButton"].verticalalignment = "MIDDLE";
+    main.pointers["footerFTButton"].events = [{
+        "name": "ONCLICK",
+        "function": "apz.launchScreen('Payments',0);"
+    }];
+    alert("foo4");
+    template.addColumn("footerPayButtonSecCol", "footerNavbarSecRow", null, "SECTIONCOL3");
+    main.pointers["footerPayButtonSecCol"].width = "25";
+    main.pointers["footerPayButtonSecCol"].customwidth = "";
+    template.addElement("footerPayButton", "footerPayButtonSecCol", "BUTTON", null, "BUTTON");
+    main.pointers["footerPayButton"].title = "Payments";
+    main.pointers["footerPayButton"].semantics = "INHERIT";
+    main.pointers["footerPayButton"].icon = "icon-external-link";
+    main.pointers["footerPayButton"].iconsize = "PX24";
+    main.pointers["footerPayButton"].buttonasicon = "Y";
+    main.pointers["footerPayButton"].contentalignment = "CENTER";
+    main.pointers["footerPayButton"].verticalalignment = "MIDDLE";
+    main.pointers["footerPayButton"].events = [{
+        "name": "ONCLICK",
+        "function": "apz.launchScreen('Payments',0);"
+    }];
+    alert("foo5");
+    template.addColumn("footerSettingsButtonSecCol", "footerNavbarSecRow", null, "SECTIONCOL3");
+    main.pointers["footerSettingsButtonSecCol"].width = "25";
+    main.pointers["footerSettingsButtonSecCol"].customwidth = "";
+    template.addElement("footerSettingsButton", "footerSettingsButtonSecCol", "BUTTON", null, "BUTTON");
+    main.pointers["footerSettingsButton"].title = "Services";
+    main.pointers["footerSettingsButton"].semantics = "INHERIT";
+    main.pointers["footerSettingsButton"].icon = "icon-cog";
+    main.pointers["footerSettingsButton"].iconsize = "PX24";
+    main.pointers["footerSettingsButton"].buttonasicon = "Y";
+    main.pointers["footerSettingsButton"].contentalignment = "CENTER";
+    main.pointers["footerSettingsButton"].verticalalignment = "MIDDLE";
+    main.pointers["footerSettingsButton"].events = [{
+        "name": "ONCLICK",
+        "function": "apz.launchScreen('Settings',0);"
+    }];
+    alert("foo77");
+};
+
+function getNewName(pname) {
+    var lname = pname;
+    var lstatus = utils.isObjByNameAvailable(pname);
+    if (lstatus) {
+        var lnamepos = lname.lastIndexOf("_") + 1;
+        var lprefix = lname.substring(0, lnamepos);
+        var lcount = parseInt(lname.substring(lnamepos, lname.length));
+        lname = lprefix + lcount;
+        while (utils.isObjByNameAvailable(lname)) {
+            lcount = lcount + 1;
+            lname = lprefix + lcount;
+        }
+    }
+    return lname;
+}

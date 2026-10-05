@@ -1,0 +1,6 @@
+WinContainer.nativeServiceExt = function (json)
+{
+	
+	
+	
+};

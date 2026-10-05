@@ -1,0 +1,52 @@
+<ng-container *ngIf="props.cntrType=='FORM' ">
+    <ul #formWrapperClass  id="{{props.id}} + _ul" clickstoppropagation>
+        <li  #formlabelWrapper >
+            <label #formlabelProps [innerHTML]="props.labelProps.title">
+                
+            </label>
+        </li>
+        <li #formContentWrapper >
+            <span><!-- #formSpanWrapper -->
+                 <label [id]="id" #content><ng-container *ngTemplateOutlet="labelContent"></ng-container></label>
+            </span>
+        </li>
+    </ul>
+</ng-container>
+
+<ng-container *ngIf="props.cntrType == 'NAVBAR' || props.cntrType == 'LIST'">
+  
+        <label [id]="id" #content><ng-container *ngTemplateOutlet="labelContent"></ng-container></label>
+    
+</ng-container>
+
+<ng-container *ngIf= "props.cntrType=='TABLE'">
+        <td [attr.id]="(rowIndex != undefined) ?('td_'+ props.id + '_' + rowIndex):('td_'+ props.id)" class="{{props.tdClasses}}">
+                <span >
+            <label [id]="id" #content><ng-container *ngTemplateOutlet="labelContent"></ng-container></label>
+        </span>
+    </td>
+</ng-container>
+    
+<ng-template #labelContent>
+		<ng-container *ngIf="props.hasIcon=='Y'">
+			<ng-container *ngIf="props.iconPosition=='RIGHT'">
+                   <div [innerHTML]="value"></div>
+                    <span #contentIcon>
+					<svg  role="presentation" aria-hidden="true" [attr.class]="props.contentIcon.direct.className">
+                            <use attr.xlink:href="{{'#'+props.contentIcon.direct.name}}"  xlink:href=""></use>
+                    </svg>
+                    </span>
+            </ng-container>
+            <ng-container *ngIf="props.iconPosition=='LEFT'">
+                    <span #contentIcon>
+					<svg  role="presentation" aria-hidden="true" [attr.class]="props.contentIcon.direct.className">
+                            <use attr.xlink:href="{{'#'+props.contentIcon.direct.name}}"  xlink:href=""></use>
+                    </svg>
+                    </span>
+                        <div [innerHTML]="value"></div> 
+            </ng-container>
+        </ng-container>
+        <ng-container *ngIf="props.hasIcon=='N'">
+            <div [innerHTML]="value"></div>
+        </ng-container>
+</ng-template>

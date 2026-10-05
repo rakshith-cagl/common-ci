@@ -1,0 +1,34 @@
+<dl id={{id}}_ctrl_grp_div  [attr.key]="id" class={{props.wrapperClasses.className}}>
+    <dt id={{id}}_lbl  
+    class= {{props.labelProps.direct.className}} #labelProps>
+    {{props.labelProps.title}}
+    </dt>
+   <ng-container [ngTemplateOutlet]="readOnlyContent"></ng-container>
+</dl>
+
+<ng-template #readOnlyContent>
+    <ng-container *ngIf="(props.widgettype == 'DROPDOWN' || props.widgettype == 'RADIO' || props.widgettype == 'CHECKBOX');else restWidget">
+        <ng-container *ngIf="(staticOptions.length > 0);else widgetWOStatic">
+            <ng-container *ngFor="let option of staticOptions;let index = index">
+                <dd [id]="id + '_option_' + option.val" [attr.value]="option.val" [attr.key]="index" 
+                [class] = "getClassName(option.val)">{{option.desc}} </dd>
+            </ng-container>
+        </ng-container>
+    </ng-container>
+</ng-template>
+<ng-template #restWidget>
+     <ng-container *ngIf="!isUiElm()">
+            <dd id={{id}}  colidx="-1" dtyp="STRING"  [innerHtml]="values[elm]" #otherWidget></dd>
+     </ng-container>
+     <ng-container *ngIf="isUiElm()">
+            <dd id={{id}}  colidx="-1" dtyp="STRING"  [innerHtml]="value" #otherWidget></dd>
+     </ng-container>
+</ng-template>
+<ng-template #widgetWOStatic>
+        <ng-container *ngIf="!isUiElm()">
+                <dd id={{id}} colidx="-1" dtyp="STRING"  [innerHtml]="values[elm]" #nonStaticContent></dd>
+        </ng-container>
+        <ng-container *ngIf="isUiElm()">
+                <dd id={{id}} colidx="-1" dtyp="STRING"  [innerHtml]="value" #nonStaticContent></dd>
+        </ng-container>
+</ng-template>

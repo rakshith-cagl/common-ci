@@ -1,0 +1,70 @@
+<ng-template #toggleContent>
+    
+    <ng-container *ngIf="props.ToggleType === 'WITHLABEL' ; else withoutLabel">
+        <div [id]="id" [attr.rowno]="index" [attr.apztype]="'toggleswitch'" #labelToggleWrapper>
+            <input [id]="id+'_00'"  (click)="onChangeLabel($event)" [name]="id" [attr.rowno]="index" #firstLabelBotton delegateEvent [blurEvent]="blur" [focusEvent]="focus" />
+            <label [for]="id+'_00'" #firstLabel>{{props.firstLabel.direct.value}}</label>
+            <input [id]="id+'_11'" (click)="onChangeLabel($event)" [name]="id" [attr.rowno]="index" #secondLabelBotton delegateEvent [blurEvent]="blur" [focusEvent]="focus"/>
+            <label [for]="id+'_11'" #secondLabel>{{props.secondLabel.direct.value}}</label>
+            <span class="tslide"></span>
+        </div>
+    </ng-container>
+
+</ng-template>
+<ng-template #withoutLabel>
+    <label [id]="id+'_ctrl_label'" #withoutLabelToggleWrapper>
+        <ng-container *ngIf="isUiElm()"> 
+           <input [id]="id"  (change)="onCheckedChange($event)" attr.checkedval="{{props.content.direct.checkedval}}" attr.uncheckedval="{{props.content.direct.uncheckedval}}"   [value]="value" [attr.apztype]="'toggleswitch'" type="CHECKBOX" 
+          [attr.rowno]="index" #withoutLabelInput delegateEvent [blurEvent]="blur" [focusEvent]="focus"/>
+        </ng-container> 
+        <ng-container *ngIf="!isUiElm()"> 
+                <input [id]="id" attr.checkedval="{{props.content.direct.checkedval}}" attr.uncheckedval="{{props.content.direct.uncheckedval}}"  [attr.value]="values[elm]" (change)="onCheckedChange($event)" [attr.apztype]="'toggleswitch'" type="CHECKBOX" 
+               [attr.rowno]="index" #withoutLabelInput delegateEvent [blurEvent]="blur" [focusEvent]="focus" />
+        </ng-container>
+        <div class="slider"></div>
+    </label>
+</ng-template>
+<ng-template #hintContent>
+    <span [id]="id+'_hnt'" class="htx">{{props.toggleHint.value}}</span>
+</ng-template>
+
+<ng-container *ngIf="props.cntrType=='FORM' ">
+        <ul #toggleFormWrapperClass  id="{{props.id + '_ul'}}" clickstoppropagation>
+            <li  #toggleFormlabelWrapper>
+            	<ng-container *ngIf="(props.hasLabelIcon === 'Y' && props.labelIconProps.iconPos==='LEFT')"  [ngTemplateOutlet]="labelIconContent">
+            	</ng-container>
+                <label #toggleFormlabelProps  [innerHtml]="props.labelProps.title">
+                </label>
+                <ng-container *ngIf="(props.hasLabelIcon === 'Y' && props.labelIconProps.iconPos!=='LEFT')"  [ngTemplateOutlet]="labelIconContent">
+            	</ng-container>
+            </li>
+            <li #toggleFormContentWrapper >
+                <span #toggleFormSpanWrapper class="span wrapper">
+                        <ng-container [ngTemplateOutlet]="toggleContent">
+                        </ng-container>
+                </span>
+            </li>
+        </ul>
+</ng-container>
+    
+<ng-container *ngIf="props.cntrType == 'NAVBAR' || props.cntrType == 'LIST'">
+            <span #navSapnwrapper class="span wrapper" >
+                <ng-container [ngTemplateOutlet]="toggleContent">
+                </ng-container>
+            </span>            
+</ng-container>
+<ng-container *ngIf= "props.cntrType=='TABLE'">
+    
+        <td [attr.id]="('td_'+ props.id + '_' + rowIndex)" class="{{props.tdClasses}}">
+                <span [id]="(props.id + '_span_'+ rowIndex)"  #tableSpanWrapper class="span wrapper">
+                   <ng-container [ngTemplateOutlet]="toggleContent"></ng-container>
+                </span>
+        </td>
+</ng-container>
+<ng-template #labelIconContent>
+    <button class="ett-bttn tsp sml lbtn px20" (click)="iconClickEvent($event)">
+        <svg [attr.class]="props.labelIconProps.direct.className" #contentIcon>
+            <use attr.xlink:href="{{'#'+ props.labelIconProps.name}}" xlink:href="" />
+        </svg>
+    </button>
+</ng-template> 

@@ -1,0 +1,32 @@
+{{ if .Values.rbac.clusterAdmin -}}
+---
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: cluster-admin-user-role
+rules:
+  - apiGroups:
+    - '*'
+    resources:
+      - '*'
+    verbs:
+      - '*'
+  - nonResourceURLs:
+    - '*'
+    verbs:
+      - '*'
+---
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: cluster-admin-user-role-binding
+  namespace: {{ .Values.nameSpace }}
+subjects:
+  - kind: User
+    name: {{ .Values.userName }}
+    apiGroup: ""
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: cluster-admin-user-role
+{{- end -}}

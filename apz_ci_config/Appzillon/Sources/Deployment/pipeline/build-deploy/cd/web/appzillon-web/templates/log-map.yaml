@@ -1,0 +1,7 @@
+{{- $appid := .Values.appId -}}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ lower $appid }}-log-map
+data:
+{{ ($.Files.Glob (printf "%s/logback.xml" $appid)).AsConfig | indent 2 }}

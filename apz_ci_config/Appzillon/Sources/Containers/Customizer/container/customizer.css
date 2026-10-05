@@ -1,0 +1,478 @@
+ /* Phones */
+.deviceDesignDiv[max-width~="640px"] .crt-form.pri > .ttl, .crt-form.pri > .ttl > li.ttl-ctr, .crt-form.pri > .ttl > li.pgn-ctr,
+.deviceDesignDiv[max-width~="640px"] .crt-form.sec > .ttl, .crt-form.sec > .ttl > li.ttl-ctr, .crt-form.sec > .ttl > li.pgn-ctr ,
+.deviceDesignDiv[max-width~="640px"] .crt-form.ter > .ttl, .crt-form.ter > .ttl > li.ttl-ctr, .crt-form.ter > .ttl > li.pgn-ctr {
+	display:block; 
+	clear: both; 
+	width:100%
+}
+.deviceDesignDiv[min-width~="320px"] .gcb-sml1,
+.deviceDesignDiv[min-width~="320px"] .gcb-sml2,
+.deviceDesignDiv[min-width~="320px"] .gcb-sml3,
+.deviceDesignDiv[min-width~="320px"] .gcb-sml4,
+.deviceDesignDiv[min-width~="320px"] .gcb-sml5,
+.deviceDesignDiv[min-width~="320px"] .gcb-sml6,
+.deviceDesignDiv[min-width~="320px"] .gcb-sml7,
+.deviceDesignDiv[min-width~="320px"] .gcb-sml8,
+.deviceDesignDiv[min-width~="320px"] .gcb-sml9,
+.deviceDesignDiv[min-width~="320px"] .gcb-sml10,
+.deviceDesignDiv[min-width~="320px"] .gcb-sml11,
+.deviceDesignDiv[min-width~="320px"] .gcb-sml12 {
+		float: left;  
+	    min-height: 1px;
+}
+.deviceDesignDiv[min-width~="320px"] .gcb-sml1 {width: 8.33333333%;}
+.deviceDesignDiv[min-width~="320px"] .gcb-sml2 {width: 16.66666667%;}
+.deviceDesignDiv[min-width~="320px"] .gcb-sml3 {width: 25%;}
+.deviceDesignDiv[min-width~="320px"] .gcb-sml4 {width: 33.33333333%;}
+.deviceDesignDiv[min-width~="320px"] .gcb-sml5 {width: 41.66666667%;}
+.deviceDesignDiv[min-width~="320px"] .gcb-sml6 {width: 50%;}
+.deviceDesignDiv[min-width~="320px"] .gcb-sml7 {width: 58.33333333%;}
+.deviceDesignDiv[min-width~="320px"] .gcb-sml8 {width: 66.66666667%;}
+.deviceDesignDiv[min-width~="320px"] .gcb-sml9 {width: 75%;}
+.deviceDesignDiv[min-width~="320px"] .gcb-sml10 {width: 83.33333333%;}
+.deviceDesignDiv[min-width~="320px"] .gcb-sml11 {width: 91.66666667%;}
+.deviceDesignDiv[min-width~="320px"] .gcb-sml12 {width: 100%;}	
+
+ /* Tablets */
+.deviceDesignDiv[min-width~="700px"] .gcb-med1,
+.deviceDesignDiv[min-width~="700px"] .gcb-med2,
+.deviceDesignDiv[min-width~="700px"] .gcb-med3,
+.deviceDesignDiv[min-width~="700px"] .gcb-med4,
+.deviceDesignDiv[min-width~="700px"] .gcb-med5,
+.deviceDesignDiv[min-width~="700px"] .gcb-med6,
+.deviceDesignDiv[min-width~="700px"] .gcb-med7,
+.deviceDesignDiv[min-width~="700px"] .gcb-med8,
+.deviceDesignDiv[min-width~="700px"] .gcb-med9,
+.deviceDesignDiv[min-width~="700px"] .gcb-med10,
+.deviceDesignDiv[min-width~="700px"] .gcb-med11,
+.deviceDesignDiv[min-width~="700px"] .gcb-med12 {
+		float: left;  
+	    min-height: 1px;
+}
+.deviceDesignDiv[min-width~="700px"] .gcb-med1 {width: 8.33333333%;}
+.deviceDesignDiv[min-width~="700px"] .gcb-med2 {width: 16.66666667%;}
+.deviceDesignDiv[min-width~="700px"] .gcb-med3 {width: 25%;}
+.deviceDesignDiv[min-width~="700px"] .gcb-med4 {width: 33.33333333%;}
+.deviceDesignDiv[min-width~="700px"] .gcb-med5 {width: 41.66666667%;}
+.deviceDesignDiv[min-width~="700px"] .gcb-med6 {width: 50%;}
+.deviceDesignDiv[min-width~="700px"] .gcb-med7 {width: 58.33333333%;}
+.deviceDesignDiv[min-width~="700px"] .gcb-med8 {width: 66.66666667%;}
+.deviceDesignDiv[min-width~="700px"] .gcb-med9 {width: 75%;}
+.deviceDesignDiv[min-width~="700px"] .gcb-med10 {width: 83.33333333%;}
+.deviceDesignDiv[min-width~="700px"] .gcb-med11 {width: 91.66666667%;}
+.deviceDesignDiv[min-width~="700px"] .gcb-med12 {width: 100%;}
+
+ /* Desktops */
+.deviceDesignDiv[min-width~="992px"] .gcb-lar1,
+.deviceDesignDiv[min-width~="992px"] .gcb-lar2,
+.deviceDesignDiv[min-width~="992px"] .gcb-lar3,
+.deviceDesignDiv[min-width~="992px"] .gcb-lar4,
+.deviceDesignDiv[min-width~="992px"] .gcb-lar5,
+.deviceDesignDiv[min-width~="992px"] .gcb-lar6,
+.deviceDesignDiv[min-width~="992px"] .gcb-lar7,
+.deviceDesignDiv[min-width~="992px"] .gcb-lar8,
+.deviceDesignDiv[min-width~="992px"] .gcb-lar9,
+.deviceDesignDiv[min-width~="992px"] .gcb-lar10,
+.deviceDesignDiv[min-width~="992px"] .gcb-lar11,
+.deviceDesignDiv[min-width~="992px"] .gcb-lar12 {
+		float: left;  
+	    min-height: 1px;
+}
+.deviceDesignDiv[min-width~="992px"] .gcb-lar1 {width: 8.33333333%;}
+.deviceDesignDiv[min-width~="992px"] .gcb-lar2 {width: 16.66666667%;}
+.deviceDesignDiv[min-width~="992px"] .gcb-lar3 {width: 25%;}
+.deviceDesignDiv[min-width~="992px"] .gcb-lar4 {width: 33.33333333%;}
+.deviceDesignDiv[min-width~="992px"] .gcb-lar5 {width: 41.66666667%;}
+.deviceDesignDiv[min-width~="992px"] .gcb-lar6 {width: 50%;}
+.deviceDesignDiv[min-width~="992px"] .gcb-lar7 {width: 58.33333333%;}
+.deviceDesignDiv[min-width~="992px"] .gcb-lar8 {width: 66.66666667%;}
+.deviceDesignDiv[min-width~="992px"] .gcb-lar9 {width: 75%;}
+.deviceDesignDiv[min-width~="992px"] .gcb-lar10 {width: 83.33333333%;}
+.deviceDesignDiv[min-width~="992px"] .gcb-lar11 {width: 91.66666667%;}
+.deviceDesignDiv[min-width~="992px"] .gcb-lar12 {width: 100%;}
+
+ /* Widescreen */
+.deviceDesignDiv[min-width~="1200px"] .gcb-xxl1,
+.deviceDesignDiv[min-width~="1200px"] .gcb-xxl2,
+.deviceDesignDiv[min-width~="1200px"] .gcb-xxl3,
+.deviceDesignDiv[min-width~="1200px"] .gcb-xxl4,
+.deviceDesignDiv[min-width~="1200px"] .gcb-xxl5,
+.deviceDesignDiv[min-width~="1200px"] .gcb-xxl6,
+.deviceDesignDiv[min-width~="1200px"] .gcb-xxl7,
+.deviceDesignDiv[min-width~="1200px"] .gcb-xxl8,
+.deviceDesignDiv[min-width~="1200px"] .gcb-xxl9,
+.deviceDesignDiv[min-width~="1200px"] .gcb-xxl10,
+.deviceDesignDiv[min-width~="1200px"] .gcb-xxl11,
+.deviceDesignDiv[min-width~="1200px"] .gcb-xxl12 {
+		float: left;  
+	    min-height: 1px;
+}
+.deviceDesignDiv[min-width~="1200px"] .gcb-xxl1 {width: 8.33333333%;}
+.deviceDesignDiv[min-width~="1200px"] .gcb-xxl2 {width: 16.66666667%;}
+.deviceDesignDiv[min-width~="1200px"] .gcb-xxl3 {width: 25%;}
+.deviceDesignDiv[min-width~="1200px"] .gcb-xxl4 {width: 33.33333333%;}
+.deviceDesignDiv[min-width~="1200px"] .gcb-xxl5 {width: 41.66666667%;}
+.deviceDesignDiv[min-width~="1200px"] .gcb-xxl6 {width: 50%;}
+.deviceDesignDiv[min-width~="1200px"] .gcb-xxl7 {width: 58.33333333%;}
+.deviceDesignDiv[min-width~="1200px"] .gcb-xxl8 {width: 66.66666667%;}
+.deviceDesignDiv[min-width~="1200px"] .gcb-xxl9 {width: 75%;}
+.deviceDesignDiv[min-width~="1200px"] .gcb-xxl10 {width: 83.33333333%;}
+.deviceDesignDiv[min-width~="1200px"] .gcb-xxl11 {width: 91.66666667%;}
+.deviceDesignDiv[min-width~="1200px"] .gcb-xxl12 {width: 100%;}
+
+/* Small Devices, Phones */
+.deviceDesignDiv[min-width~="320px"] .scb-sml0 {
+	width:0%;
+}
+.deviceDesignDiv[min-width~="320px"] .srb li.scb-sml0,
+.deviceDesignDiv[min-width~="320px"] .srb span.scb-sml0,
+.deviceDesignDiv[min-width~="320px"] .srb dt.scb-sml0 {
+	display: none;
+}
+.deviceDesignDiv[min-width~="320px"] .scb-sml5 {width:5%;}
+.deviceDesignDiv[min-width~="320px"] .scb-sml10 {width:10%;}
+.deviceDesignDiv[min-width~="320px"] .scb-sml15 {width:15%;}
+.deviceDesignDiv[min-width~="320px"] .scb-sml20 {width:20%;}
+.deviceDesignDiv[min-width~="320px"] .scb-sml25 {width:25%;}
+.deviceDesignDiv[min-width~="320px"] .scb-sml30 {width:30%;}
+.deviceDesignDiv[min-width~="320px"] .scb-sml35 {width:35%;}
+.deviceDesignDiv[min-width~="320px"] .scb-sml40 {width:40%;}
+.deviceDesignDiv[min-width~="320px"] .scb-sml45 {width:45%;}
+.deviceDesignDiv[min-width~="320px"] .scb-sml50 {width:50%;}
+.deviceDesignDiv[min-width~="320px"] .scb-sml55 {width:55%;}
+.deviceDesignDiv[min-width~="320px"] .scb-sml60 {width:60%;}
+.deviceDesignDiv[min-width~="320px"] .scb-sml65 {width:65%;}
+.deviceDesignDiv[min-width~="320px"] .scb-sml70 {width:70%;}
+.deviceDesignDiv[min-width~="320px"] .scb-sml75 {width:75%;}
+.deviceDesignDiv[min-width~="320px"] .scb-sml80 {width:80%;}
+.deviceDesignDiv[min-width~="320px"] .scb-sml85 {width:85%;}
+.deviceDesignDiv[min-width~="320px"] .scb-sml90 {width:90%;}
+.deviceDesignDiv[min-width~="320px"] .scb-sml95 {width:95%;}
+.deviceDesignDiv[min-width~="320px"] .scb-sml100 {width:100%;}	
+.deviceDesignDiv[min-width~="320px"] .srb.eoc li.scb-sml0,
+.deviceDesignDiv[min-width~="320px"] .srb.eoc  span.scb-sml0,
+.deviceDesignDiv[min-width~="320px"] .srb.eoc  dt.scb-sml0 {}
+
+ /* Small Devices, Tablets */
+.deviceDesignDiv[min-width~="700px"] .scb-med0 {width:0%;}
+.deviceDesignDiv[min-width~="700px"] .srb li.scb-med0,
+.deviceDesignDiv[min-width~="700px"] .srb span.scb-med0,
+.deviceDesignDiv[min-width~="700px"] .srb dt.scb-med0 {}
+.deviceDesignDiv[min-width~="700px"] .scb-med5 {width:5%;}
+.deviceDesignDiv[min-width~="700px"] .scb-med10 {width:10%;}
+.deviceDesignDiv[min-width~="700px"] .scb-med15 {width:15%;}
+.deviceDesignDiv[min-width~="700px"] .scb-med20 {width:20%;}
+.deviceDesignDiv[min-width~="700px"] .scb-med25 {width:25%;}
+.deviceDesignDiv[min-width~="700px"] .scb-med30 {width:30%;}
+.deviceDesignDiv[min-width~="700px"] .scb-med35 {width:35%;}
+.deviceDesignDiv[min-width~="700px"] .scb-med40 {width:40%;}
+.deviceDesignDiv[min-width~="700px"] .scb-med45 {width:45%;}
+.deviceDesignDiv[min-width~="700px"] .scb-med50 {width:50%;}
+.deviceDesignDiv[min-width~="700px"] .scb-med55 {width:55%;}
+.deviceDesignDiv[min-width~="700px"] .scb-med60 {width:60%;}
+.deviceDesignDiv[min-width~="700px"] .scb-med65 {width:65%;}
+.deviceDesignDiv[min-width~="700px"] .scb-med70 {width:70%;}
+.deviceDesignDiv[min-width~="700px"] .scb-med75 {width:75%;}
+.deviceDesignDiv[min-width~="700px"] .scb-med80 {width:80%;}
+.deviceDesignDiv[min-width~="700px"] .scb-med85 {width:85%;}
+.deviceDesignDiv[min-width~="700px"] .scb-med90 {width:90%;}
+.deviceDesignDiv[min-width~="700px"] .scb-med95 {width:95%;}
+.deviceDesignDiv[min-width~="700px"] .scb-med100 {width:100%;}	
+.deviceDesignDiv[min-width~="700px"] .srb.eoc li.scb-med0,
+.deviceDesignDiv[min-width~="700px"] .srb.eoc  span.scb-med0,
+.deviceDesignDiv[min-width~="700px"] .srb.eoc  dt.scb-med0 {}
+
+ /* Medium Devices, Desktops */
+.deviceDesignDiv[min-width~="992px"] .scb-lar0{width:0%}
+.deviceDesignDiv[min-width~="992px"] .srb li.scb-lar0,
+.deviceDesignDiv[min-width~="992px"] .srb span.scb-lar0,
+.deviceDesignDiv[min-width~="992px"] .srb dt.scb-lar0 {}
+.deviceDesignDiv[min-width~="992px"] .scb-lar5 {width:5%}
+.deviceDesignDiv[min-width~="992px"] .scb-lar10 {width:10%}
+.deviceDesignDiv[min-width~="992px"] .scb-lar15 {width:15%}
+.deviceDesignDiv[min-width~="992px"] .scb-lar20 {width:20%}
+.deviceDesignDiv[min-width~="992px"] .scb-lar25 {width:25%}
+.deviceDesignDiv[min-width~="992px"] .scb-lar30 {width:30%}
+.deviceDesignDiv[min-width~="992px"] .scb-lar35 {width:35%}
+.deviceDesignDiv[min-width~="992px"] .scb-lar40 {width:40%}
+.deviceDesignDiv[min-width~="992px"] .scb-lar45 {width:45%}
+.deviceDesignDiv[min-width~="992px"] .scb-lar50 {width:50%}
+.deviceDesignDiv[min-width~="992px"] .scb-lar55 {width:55%}
+.deviceDesignDiv[min-width~="992px"] .scb-lar60 {width:60%}
+.deviceDesignDiv[min-width~="992px"] .scb-lar65 {width:65%}
+.deviceDesignDiv[min-width~="992px"] .scb-lar70 {width:70%}
+.deviceDesignDiv[min-width~="992px"] .scb-lar75 {width:75%}
+.deviceDesignDiv[min-width~="992px"] .scb-lar80 {width:80%}
+.deviceDesignDiv[min-width~="992px"] .scb-lar85 {width:85%}
+.deviceDesignDiv[min-width~="992px"] .scb-lar90  {width:90%}
+.deviceDesignDiv[min-width~="992px"] .scb-lar95 {width:95%}
+.deviceDesignDiv[min-width~="992px"] .scb-lar100 {width:100%}	
+.deviceDesignDiv[min-width~="992px"] .srb.eoc li.scb-lar0,
+.deviceDesignDiv[min-width~="992px"] .srb.eoc  span.scb-lar0,
+.deviceDesignDiv[min-width~="992px"] .srb.eoc  dt.scb-lar0 {}
+
+/* Large Devices, Wide Screens */
+.deviceDesignDiv[min-width~="1200px"] .scb-xxl0{width:0%}
+.deviceDesignDiv[min-width~="1200px"] .srb li.scb-xxl0,
+.deviceDesignDiv[min-width~="1200px"] .srb span.scb-xxl0,
+.deviceDesignDiv[min-width~="1200px"] .srb dt.scb-xxl0 {}
+.deviceDesignDiv[min-width~="1200px"] .scb-xxl5 {width:5%}
+.deviceDesignDiv[min-width~="1200px"] .scb-xxl10 {width:10%}
+.deviceDesignDiv[min-width~="1200px"] .scb-xxl15 {width:15%}
+.deviceDesignDiv[min-width~="1200px"] .scb-xxl20 {width:20%}
+.deviceDesignDiv[min-width~="1200px"] .scb-xxl25 {width:25%}
+.deviceDesignDiv[min-width~="1200px"] .scb-xxl30 {width:30%}
+.deviceDesignDiv[min-width~="1200px"] .scb-xxl35 {width:35%}
+.deviceDesignDiv[min-width~="1200px"] .scb-xxl40 {width:40%}
+.deviceDesignDiv[min-width~="1200px"] .scb-xxl45 {width:45%}
+.deviceDesignDiv[min-width~="1200px"] .scb-xxl50 {width:50%}
+.deviceDesignDiv[min-width~="1200px"] .scb-xxl55 {width:55%}
+.deviceDesignDiv[min-width~="1200px"] .scb-xxl60 {width:60%}
+.deviceDesignDiv[min-width~="1200px"] .scb-xxl65 {width:65%}
+.deviceDesignDiv[min-width~="1200px"] .scb-xxl70 {width:70%}
+.deviceDesignDiv[min-width~="1200px"] .scb-xxl75 {width:75%}
+.deviceDesignDiv[min-width~="1200px"] .scb-xxl80 {width:80%}
+.deviceDesignDiv[min-width~="1200px"] .scb-xxl85 {width:85%}
+.deviceDesignDiv[min-width~="1200px"] .scb-xxl90 {width:90%}
+.deviceDesignDiv[min-width~="1200px"] .scb-xxl95{width:95%}
+.deviceDesignDiv[min-width~="1200px"] .scb-xxl100{width:100%}	
+.deviceDesignDiv[min-width~="1200px"] .srb.eoc li.scb-xxl0,
+.deviceDesignDiv[min-width~="1200px"] .srb.eoc  span.scb-xxl0,
+.deviceDesignDiv[min-width~="1200px"] .srb.eoc  dt.scb-xxl0 {}
+
+
+/* Small Devices, Phones */
+.deviceDesignDiv[min-width~="320px"] .etw-sml0 {width:0%; display: none;}
+.deviceDesignDiv[min-width~="320px"] .srb.wrapped > li.etw-sml0, .srb.wrapped > span.etw-sml0, .srb.wrapped > dd.etw-sml0, .srb.wrapped > dt.etw-sml0{width:0%; display: none;}
+.deviceDesignDiv[min-width~="320px"] .srb > li.etw-sml0, .srb > span.etw-sml0, .srb > dd.etw-sml0, .srb > dt.etw-sml0{width:0%; display: none;}
+.deviceDesignDiv[min-width~="320px"] .etw-sml5 {width:5%}
+.deviceDesignDiv[min-width~="320px"] .etw-sml10{width:10%}
+.deviceDesignDiv[min-width~="320px"] .etw-sml15{width:15%}
+.deviceDesignDiv[min-width~="320px"] .etw-sml20{width:20%}
+.deviceDesignDiv[min-width~="320px"] .etw-sml25{width:25%}
+.deviceDesignDiv[min-width~="320px"] .etw-sml30{width:30%}
+.deviceDesignDiv[min-width~="320px"] .etw-sml35{width:35%}
+.deviceDesignDiv[min-width~="320px"] .etw-sml40{width:40%}
+.deviceDesignDiv[min-width~="320px"] .etw-sml45{width:45%}
+.deviceDesignDiv[min-width~="320px"] .etw-sml50{width:50%}
+.deviceDesignDiv[min-width~="320px"] .etw-sml55{width:55%}
+.deviceDesignDiv[min-width~="320px"] .etw-sml60{width:60%}
+.deviceDesignDiv[min-width~="320px"] .etw-sml65{width:65%}
+.deviceDesignDiv[min-width~="320px"] .etw-sml70{width:70%}
+.deviceDesignDiv[min-width~="320px"] .etw-sml75{width:75%}
+.deviceDesignDiv[min-width~="320px"] .etw-sml80{width:80%}
+.deviceDesignDiv[min-width~="320px"] .etw-sml85{width:85%}
+.deviceDesignDiv[min-width~="320px"] .etw-sml90{width:90%}
+.deviceDesignDiv[min-width~="320px"] .etw-sml95{width:95%}
+.deviceDesignDiv[min-width~="320px"] .etw-sml100{width:100%}
+
+ /* Small Devices, Tablets */
+.deviceDesignDiv[min-width~="700px"] .etw-med0{width:0%; display: none;}
+.deviceDesignDiv[min-width~="700px"] .srb.wrapped > li.etw-med0, .srb.wrapped > span.etw-med0, .srb.wrapped > dd.etw-med0, .srb.wrapped > dt.etw-med0{width:0%; display: none;}
+.deviceDesignDiv[min-width~="700px"] .srb > li.etw-med0, .srb > span.etw-med0, .srb > dd.etw-med0, .srb > dt.etw-med0{width:0%; display: none;}
+.deviceDesignDiv[min-width~="700px"] .etw-med5{width:5%}
+.deviceDesignDiv[min-width~="700px"] .etw-med10{width:10%}
+.deviceDesignDiv[min-width~="700px"] .etw-med15{width:15%}
+.deviceDesignDiv[min-width~="700px"] .etw-med20{width:20%}
+.deviceDesignDiv[min-width~="700px"] .etw-med25{width:25%}
+.deviceDesignDiv[min-width~="700px"] .etw-med30{width:30%}
+.deviceDesignDiv[min-width~="700px"] .etw-med35{width:35%}
+.deviceDesignDiv[min-width~="700px"] .etw-med40{width:40%}
+.deviceDesignDiv[min-width~="700px"] .etw-med45{width:45%}
+.deviceDesignDiv[min-width~="700px"] .etw-med50{width:50%}
+.deviceDesignDiv[min-width~="700px"] .etw-med55{width:55%}
+.deviceDesignDiv[min-width~="700px"] .etw-med60{width:60%}
+.deviceDesignDiv[min-width~="700px"] .etw-med65{width:65%}
+.deviceDesignDiv[min-width~="700px"] .etw-med70{width:70%}
+.deviceDesignDiv[min-width~="700px"] .etw-med75{width:75%}
+.deviceDesignDiv[min-width~="700px"] .etw-med80{width:80%}
+.deviceDesignDiv[min-width~="700px"] .etw-med85{width:85%}
+.deviceDesignDiv[min-width~="700px"] .etw-med90{width:90%}
+.deviceDesignDiv[min-width~="700px"] .etw-med95{width:95%}
+.deviceDesignDiv[min-width~="700px"] .etw-med100{width:100%}	
+
+ /* Medium Devices, Desktops */
+.deviceDesignDiv[min-width~="992px"] .etw-lar0{width:0%; display: none;}
+.deviceDesignDiv[min-width~="992px"] .srb.wrapped > li.etw-lar0, .srb.wrapped > span.etw-lar0, .srb.wrapped > dd.etw-lar0, .srb.wrapped > dt.etw-lar0{width:0%; display: none;}
+.deviceDesignDiv[min-width~="992px"] .srb > li.etw-lar0, .srb > span.etw-lar0, .srb > dd.etw-lar0, .srb > dt.etw-lar0{width:0%; display: none;}
+.deviceDesignDiv[min-width~="992px"] .etw-lar5{width:5%}
+.deviceDesignDiv[min-width~="992px"] .etw-lar10{width:10%}
+.deviceDesignDiv[min-width~="992px"] .etw-lar15{width:15%}
+.deviceDesignDiv[min-width~="992px"] .etw-lar20{width:20%}
+.deviceDesignDiv[min-width~="992px"] .etw-lar25{width:25%}
+.deviceDesignDiv[min-width~="992px"] .etw-lar30{width:30%}
+.deviceDesignDiv[min-width~="992px"] .etw-lar35{width:35%}
+.deviceDesignDiv[min-width~="992px"] .etw-lar40{width:40%}
+.deviceDesignDiv[min-width~="992px"] .etw-lar45{width:45%}
+.deviceDesignDiv[min-width~="992px"] .etw-lar50{width:50%}
+.deviceDesignDiv[min-width~="992px"] .etw-lar55{width:55%}
+.deviceDesignDiv[min-width~="992px"] .etw-lar60{width:60%}
+.deviceDesignDiv[min-width~="992px"] .etw-lar65{width:65%}
+.deviceDesignDiv[min-width~="992px"] .etw-lar70{width:70%}
+.deviceDesignDiv[min-width~="992px"] .etw-lar75{width:75%}
+.deviceDesignDiv[min-width~="992px"] .etw-lar80{width:80%}
+.deviceDesignDiv[min-width~="992px"] .etw-lar85{width:85%}
+.deviceDesignDiv[min-width~="992px"] .etw-lar90{width:90%}
+.deviceDesignDiv[min-width~="992px"] .etw-lar95{width:95%}
+.deviceDesignDiv[min-width~="992px"] .etw-lar100{width:100%}	
+
+
+/* Large Devices, Wide Screens */
+.deviceDesignDiv[min-width~="1200px"].etw-xxl0{width:0%; display: none;}
+.deviceDesignDiv[min-width~="1200px"] .srb.wrapped > li.etw-xxl0, .srb.wrapped > span.etw-xxl0, .srb.wrapped > dd.etw-xxl0, .srb.wrapped > dt.etw-xxl0{width:0%; display: none;}
+.deviceDesignDiv[min-width~="1200px"] .srb > li.etw-xxl0, .srb > span.etw-xxl0, .srb > dd.etw-xxl0, .srb > dt.etw-xxl0{width:0%; display: none;}
+.deviceDesignDiv[min-width~="1200px"] .etw-xxl5{width:5%}
+.deviceDesignDiv[min-width~="1200px"] .etw-xxl10{width:10%}
+.deviceDesignDiv[min-width~="1200px"] .etw-xxl15{width:15%}
+.deviceDesignDiv[min-width~="1200px"] .etw-xxl20{width:20%}
+.deviceDesignDiv[min-width~="1200px"] .etw-xxl25{width:25%}
+.deviceDesignDiv[min-width~="1200px"] .etw-xxl30{width:30%}
+.deviceDesignDiv[min-width~="1200px"] .etw-xxl35{width:35%}
+.deviceDesignDiv[min-width~="1200px"] .etw-xxl40{width:40%}
+.deviceDesignDiv[min-width~="1200px"] .etw-xxl45{width:45%}
+.deviceDesignDiv[min-width~="1200px"] .etw-xxl50{width:50%}
+.deviceDesignDiv[min-width~="1200px"] .etw-xxl55{width:55%}
+.deviceDesignDiv[min-width~="1200px"] .etw-xxl60{width:60%}
+.deviceDesignDiv[min-width~="1200px"] .etw-xxl65{width:65%}
+.deviceDesignDiv[min-width~="1200px"] .etw-xxl70{width:70%}
+.deviceDesignDiv[min-width~="1200px"] .etw-xxl75{width:75%}
+.deviceDesignDiv[min-width~="1200px"] .etw-xxl80{width:80%}
+.deviceDesignDiv[min-width~="1200px"] .etw-xxl85{width:85%}
+.deviceDesignDiv[min-width~="1200px"] .etw-xxl90{width:90%}
+.deviceDesignDiv[min-width~="1200px"] .etw-xxl95{width:95%}
+.deviceDesignDiv[min-width~="1200px"] .etw-xxl100{width:100%}
+
+
+/*Modal window */
+.deviceDesignDiv[min-width~="768px"] .modal-window {margin: 2em auto 0;} 
+.deviceDesignDiv[min-width~="768px"] .modal-dialog {margin: 20vh auto 0; border-radius: 10px}
+.deviceDesignDiv[min-width~="768px"] .modal-sm {width: 300px;}
+
+.deviceDesignDiv[min-width~="992px"] .modal-lg {width: 900px;}
+
+/* Fixes */
+.deviceDesignDiv[min-width~="320px"] .grb > .colcenter:first-child, .grb .grb > .colcenter:first-child, .colcenter:first-child {margin: auto}
+.deviceDesignDiv[min-width~="320px"] .grb .colcenter { margin:auto; float:none}
+.deviceDesignDiv[min-width~="320px"] .grb.colcenter > div {margin:auto; float:none}
+
+.deviceDesignDiv[min-width~="700px"] .grb > .colcenter:first-child, .grb .grb > .colcenter:first-child, .colcenter:first-child {margin: auto}
+.deviceDesignDiv[min-width~="700px"] .grb .colcenter { margin:auto; float:none}
+.deviceDesignDiv[min-width~="700px"] .grb.colcenter > div {margin:auto; float:none}
+
+.deviceDesignDiv[min-width~="992px"] .grb > .colcenter:first-child, .grb .grb > .colcenter:first-child, .colcenter:first-child {margin: auto}
+.deviceDesignDiv[min-width~="992px"] .grb .colcenter { margin:auto; float:none}
+.deviceDesignDiv[min-width~="992px"] .grb.colcenter > div {margin:auto; float:none}
+
+.deviceDesignDiv[min-width~="1200px"] .grb > .colcenter:first-child, .grb .grb > .colcenter:first-child, .colcenter:first-child {margin: auto}
+.deviceDesignDiv[min-width~="1200px"] .grb .colcenter { margin:auto; float:none}
+.deviceDesignDiv[min-width~="1200px"] .grb.colcenter > div {margin:auto; float:none}
+
+/* Designer Css */
+
+/*----- Customizer Accordion-------*/
+
+.cust-accd { /*padding-bottom: 15px; margin-top: 10px;*/ }
+.cust-accd .plt-acco { margin: auto 0; }
+.cust-accd .crt-list.parentContainer.pri { padding:0; }
+.cust-accd .crt-list.parentContainer.pri > ul.pri > li { padding: 5px; overflow: hidden; }
+.cust-accd .crt-list.parentContainer.pri > ul.pri > li:nth-child(2n+1) { }
+.cust-accd .crt-list.parentContainer.pri > ul.pri > li > span { position: relative; }
+.cust-accd .crt-list.parentContainer.pri > ul.pri > li > span > span:first-child {  }
+.cust-accd .crt-list.parentContainer.pri > ul.pri > li > span img { display: inline-block;  }
+.cust-accd .crt-list.parentContainer.pri > ul.pri > li > span p {  }
+
+.cust-accd .pst-acco.box.pri > .ttl { border:0; }
+.cust-accd .pst-acco.box.pri > .ttl li.tls { width: 40px; }
+.cust-accd .crt-list.parentContainer.pri > ul.pri > li p { font-size: 14px; }
+.cust-accd .crt-list.parentContainer.pri > ul.pri > li img { height: 32px; }
+.cust-accd .plt-acco.box > div { padding: 5px 5px 0; }
+.cust-accd .plt-acco.box > div:first-child { border-top: 1px solid #ddd; }
+
+
+/*----- Customizer Outer-------*/
+
+.cust-out > div > .plt-simp { margin:0; }
+.cust-out { background-color: #fff; min-height: 100vh; box-shadow: -2px 0 3px #ccc; }
+.cust-out .pst-simp.pri.pa0 { box-shadow:none; }
+.cust-out .pst-simp.pri.pa0 > .crt-navb.pri:first-child { background-color: #FFF; }
+.cust-out .pst-simp.pri.pa0 > .crt-navb.pri li { /*padding: 5px;*/ }
+.cust-out .pst-simp.pri.pa0 > .crt-navb.pri li .ett-bttn { min-width: 65px; }
+.cust-out .pst-simp.pri.pa0 > .crt-navb.pri:first-child li .ett-bttn { border: 0 none; width:calc(33.3% - 1px); float:left; border-radius:0;padding:0.643em; margin:0; border-right:1px solid #EDEDED; font-size: 14px; }
+.cust-out .pst-simp.pri.pa0 > .crt-navb.pri:first-child li .ett-bttn:hover { background-color: #FFF; }
+.cust-out .pst-simp.pri.pa0 > .crt-navb.pri:first-child li .ett-bttn .ett-icon.icon-close { fill:#FF5656; stroke: #ff5656; stroke-width: 3px; width:12px; height:12px; }
+.cust-out .pst-simp.pri.pa0 > .crt-navb.pri:first-child li .ett-bttn .ett-icon.icon-pencil { fill:#F6A405; stroke: #F6A405; stroke-width: 1px; width:15px; height:15px; }
+.cust-out .pst-simp.pri.pa0 > .crt-navb.pri:first-child li .ett-bttn .ett-icon.icon-save { fill:#03B272; stroke: #03B272; stroke-width: 2px; width:16px; height:16px; }
+.cust-out .pst-simp.pri.pa0 > .crt-navb.pri:first-child li .ett-bttn .ett-icon.icon-signout { fill:#FF2626; stroke: #FF2626; stroke-width: 1px; width:20px; height:20px; }
+
+.cust-out .pst-simp.pri.pa0 > .crt-navb.pri:first-child li .ett-bttn svg { min-height: auto; min-width: auto; }
+.cust-out .pst-simp.pri.pa0 > .crt-navb.pri:first-child li .ett-bttn:last-child { float: right; border-right:0; text-align: right; }
+.cust-out .pst-simp.pri.pa0 > .crt-navb.tsp:first-child { }
+.cust-out .pst-simp.pri.pa0 > .crt-navb.tsp:first-child .button-group-buttons { float: left; text-align: center; width: 100%;}
+.cust-out .pst-simp.pri.pa0 > .crt-navb.tsp:first-child .etb-rdgp.sec .rdio-btn-grp { float: none; display: inline; }
+.cust-out .pst-simp.pri.pa0 > .crt-navb.tsp:first-child .ett-rdgp.sec .rdio-btn { font-size: 13px; padding: 0.24em 0.8em; }
+
+.cust-out .pst-simp.pri.pa0 > .crt-navb.tsp:nth-child(3) .ett-slct.sec { border-color:#0692EA; }
+.cust-out .ett-slct.ter {background:transparent; border:0; }
+
+.cust-out > div > div > .pst-simp.pri > div:first-child .srb.pri { border-bottom: 1px solid #e2e2e2; }
+.cust-out .pst-simp.pri.pa0 > .crt-navb.pri:nth-child(2) > ul:first-child li .ett-bttn { background-color: #0693ea; border-radius: 50%; color: #fff; font-size: 14px; height:35px; min-width: auto; width: 37px; }
+.cust-out .pst-simp.pri.pa0 > .crt-navb.pri:nth-child(2) { padding-top: 5px; }
+
+/*----- Customizer Login-------*/
+
+.custLogin.cus-log2 { padding: 7vh 0 5vh 0; }
+.custLogin.cus-log2 > div { float: none; margin: 0 auto; max-width: 400px; }
+.custLogin.cus-log2 .ett-hypl.pri { color:#FFF; }
+
+.custLogin.cus-log2 .crt-form.hor.pri .srb.pri { margin-bottom: 10px; }
+.custLogin.cus-log2 .ett-bttn.sec { background-color: rgba(0, 0, 0, 0.35); border-color: rgba(0, 0, 0, 0.25); }
+
+.custLogin.cus-log2 .pst-simp.tsp { background-color:rgba(255,255,255,0.35); box-shadow: 0 0 5px #aaa; }
+.custLogin.cus-log2 .pst-simp.tsp .crt-navb.sec { border-bottom: 0 none; background-color: transparent; height: 90px;  position: relative; }
+.custLogin.cus-log2 .pst-simp.tsp .crt-form.ver.pri { border: 0 none;  padding: 35px 40px 15px 40px; }
+
+.custLogin.cus-log2 .ett-bttn.sec { margin-top:20px; margin-bottom:20px; background-color:#07acfc; }
+.custLogin.cus-log2 .ett-slct { margin-bottom:15px; }
+
+.custLogin.cus-log2 { background-image: url("../../../../../appzillon/styles/themes/appzillon/img/bg-body.jpg"); background-repeat:no-repeat; background-size:cover; position:fixed; height:100%; width:100%; }
+
+.cust-out .currentTemplate img { box-shadow: 0 1px 9px 0 rgb(6, 147, 234); }
+.cust-out .currentTemplate div { box-shadow: 0 1px 9px 0 rgb(6, 147, 234); }
+.cust-out .swiper-slide > div { background-color: #fff; line-height: 100px; margin: 0 auto !important; width: 100px !important; }
+.cust-out .swiper-wrapper {text-align:center; padding:10px 10px 20px 10px}
+.cust-out .swiper-wrapper img {width:100px;}
+.cust-out .swiper-container-horizontal > .swiper-pagination-bullets, .swiper-pagination-custom, .swiper-pagination-fraction{bottom:0; left:10px }
+
+.cust-out .pst-simp.pri.pa0 > .crt-navb.tsp:nth-child(3) .swiper-button-next, .cust-out .pst-simp.pri.pa0 > .crt-navb.tsp:nth-child(3) .swiper-button-prev { background-size: 10px 17px; }
+.cust-out .pst-simp.pri.pa0 > .crt-navb.tsp:nth-child(3) > ul:last-child button { margin-right: 10px; }
+.cust-accd .plt-acco.box > div h4 { text-transform: uppercase; font-size: 15px !important; }
+
+.cust-out .pst-acco.box.ter .ctr, .pst-acco.box.sec .ctr, .pst-acco.box.pri .ctr {border:none}
+.cust-out .swiper-slide {  cursor:pointer; }
+
+.cust-out > div > div > .pst-simp.pri > div:first-child .srb.pri > li { padding:0; background-color: #fff; display: block; }
+.cust-out > div > div > .pst-simp.pri > div:nth-child(2) .srb:last-child .ett-bttn { margin-bottom: 12px; }
+.cust-out > div > div > .pst-simp.pri > div:nth-child(2) .srb > li { padding:0; }
+.cust-out > div > div > .pst-simp.pri > div:nth-child(2) .srb > li:first-child { padding-left: 10px; }
+.cust-out > div > div > .pst-simp.pri > div:nth-child(2) .srb > li:last-child { padding-right: 10px; text-align:right; }
+.cust-out .currentTemplate div {-webkit-box-shadow: 0px 1px 9px 0px rgba(6,147,234,1) }
+.cust-out .currentTemplate img {-webkit-box-shadow: 0px 1px 9px 0px rgba(6,147,234,1) }
+
+.cus-log2.custLogin > div > div > div > div:first-child img { display:none; }
+.cus-log2.custLogin > div > div > div > div:first-child li {
+    	background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IiB2aWV3Qm94PSIwIDAgNDUgNDUiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDQ1IDQ1OyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+PHN0eWxlIHR5cGU9InRleHQvY3NzIj4uc3Qwe2ZpbGw6dXJsKCNTVkdJRF8xXyk7fS5zdDF7ZmlsbDojRkZGRkZGO30uc3Qye2ZpbGw6I0RCREJEQjt9LnN0M3tmaWxsOiM4MDgwODA7fTwvc3R5bGU+PGc+PGxpbmVhckdyYWRpZW50IGlkPSJTVkdJRF8xXyIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiIHgxPSIzNi41NzQ0IiB5MT0iMzYuNTc0NCIgeDI9IjQuNzgwMyIgeTI9IjQuNzgwMyI+PHN0b3AgIG9mZnNldD0iMCIgc3R5bGU9InN0b3AtY29sb3I6IzBGREJBMSIvPjxzdG9wICBvZmZzZXQ9IjEiIHN0eWxlPSJzdG9wLWNvbG9yOiMwM0JBRjkiLz48L2xpbmVhckdyYWRpZW50PjxyZWN0IHg9IjAiIHk9IjAiIGNsYXNzPSJzdDAiIHdpZHRoPSI0NSIgaGVpZ2h0PSI0NSIvPjxnPjxnPjxwb2x5Z29uIGNsYXNzPSJzdDEiIHBvaW50cz0iOS4yLDMxLjIgMjguOSwxMS40IDIyLjUsNC45IDkuMSwxOC4yICIvPjxwb2x5Z29uIGNsYXNzPSJzdDEiIHBvaW50cz0iMzUuNywxOC4xIDM1LjYsMTguMSAxNS45LDM3LjggMjguOSwzNy44IDM1LjcsMzAuOSAiLz48cG9seWdvbiBjbGFzcz0ic3QyIiBwb2ludHM9IjM1LjcsMTguMSAyOSwxMS40IDIyLjUsMTcuOSAyOS4yLDI0LjYgIi8+PHBvbHlnb24gY2xhc3M9InN0MiIgcG9pbnRzPSIyMi4zLDMxLjQgMTUuNywyNC43IDkuMiwzMS4yIDE1LjksMzcuOCAiLz48cG9seWdvbiBjbGFzcz0ic3QzIiBwb2ludHM9IjI5LDExLjQgMjQuMSwxOS41IDIyLjUsMTcuOSAiLz48cG9seWdvbiBjbGFzcz0ic3QzIiBwb2ludHM9IjE1LjcsMjQuNyAxMC44LDMyLjkgOS4yLDMxLjIgIi8+PC9nPjwvZz48L2c+PC9zdmc+);
+    background-repeat: no-repeat; background-size: cover; display: block; height: 70px; left: calc(50% - 35px); position: absolute; text-align: center;
+    width: 70px !important; }
+
+.tempimgzoom { left: calc(50% - 200px); height:300px; position: absolute; top: 10vh; width:400px; }
+.tempimgzoom img { float: left; height: 300px; margin: 20px; width: calc(100% - 40px); }
+.tempBg { background: rgba(0, 0, 0, 0.35); height: 100%; left: 0; position: absolute; top: 0; width: 100%;}
+
+/* Fix for left Icon in carousel */
+.swiper-button-prev,
+.swiper-container-rtl .swiper-button-next {
+    background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2027%2044'%3E%3Cpath%20d%3D'M0%2C22L22%2C0l2.1%2C2.1L4.2%2C22l19.9%2C19.9L22%2C44L0%2C22L0%2C22L0%2C22z'%20fill%3D'%23007aff'%2F%3E%3C%2Fsvg%3E");
+    left: 10px;
+    right: auto
+}

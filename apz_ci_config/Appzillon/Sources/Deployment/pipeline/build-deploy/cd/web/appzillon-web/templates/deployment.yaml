@@ -1,0 +1,125 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "appzillon-web.fullname" . }}
+  labels:
+    {{- include "appzillon-web.labels" . | nindent 4 }}
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "appzillon-web.selectorLabels" . | nindent 6 }}
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+    type: RollingUpdate
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "appzillon-web.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ .Values.serviceAccount.name }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.ports.containerPort }}
+              protocol: {{ .Values.ports.protocol }}
+          lifecycle:
+            preStop:
+              exec:
+                command: ["sleep", "30"]
+          livenessProbe:
+            httpGet:
+              path: {{ .Values.contextPath }}/health
+              port: {{ .Values.liveness.port }}
+            initialDelaySeconds: {{ .Values.liveness.initialDelaySeconds }}
+            periodSeconds: {{ .Values.liveness.periodSeconds }}
+            timeoutSeconds: {{ .Values.liveness.timeoutSeconds }}
+          readinessProbe:
+            httpGet:
+              path: {{ .Values.contextPath }}/health
+              port: {{ .Values.readiness.port }}
+            initialDelaySeconds: {{ .Values.readiness.initialDelaySeconds }}
+            periodSeconds: {{ .Values.readiness.periodSeconds }}
+            timeoutSeconds: {{ .Values.readiness.timeoutSeconds }}
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+          env:
+          - name: JAVA_AGENT_PORT
+            value: "8871"
+          - name: REDIS_PASSWD
+            valueFrom:
+              secretKeyRef:
+                key: passwd
+                name: {{ lower .Values.appId }}-redis-creds
+          - name: JAVA_OPTS
+            value: "-Djavax.net.ssl.trustStore={{ .Values.envMountPath }}/{{ .Values.appId }}/redis-certs/redis_truststore.jks -Djavax.net.ssl.trustStorePassword=$REDIS_PASSWD"
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+          volumeMounts:
+            - name: log4j
+              mountPath: {{ .Values.envMountPath }}/{{ .Values.appId }}/logback.xml
+              subPath: logback.xml
+              readOnly: true
+            - name: containerprops
+              mountPath: {{ .Values.envMountPath }}/{{ .Values.appId }}/containerprops.properties
+              subPath: containerprops.properties
+              readOnly: true
+            - name: redis-cache-props
+              mountPath: {{ .Values.envMountPath }}/{{ .Values.appId }}/redis.properties
+              subPath: redis.properties
+              readOnly: true                
+            - name: payload-encryption-secret
+              mountPath: {{ .Values.envMountPath }}/{{ .Values.appId }}/public.pem
+              subPath: public.pem 
+              readOnly: true
+              readOnly: true
+            - name: redis-cache-secret
+              mountPath: {{ .Values.envMountPath }}/{{ .Values.appId }}/redis-certs/
+              readOnly: true
+    
+      terminationGracePeriodSeconds: {{ .Values.terminationGracePeriodSeconds }}
+      volumes:
+        - name: log4j
+          configMap:
+            name: {{ lower .Values.appId }}-log-map
+        - name: containerprops
+          configMap:
+            name: {{ lower .Values.appId }}-app-configmap
+        - name: redis-cache-props
+          configMap:
+            name: {{ lower .Values.appId }}-redis-configmap            
+        - name: payload-encryption-secret
+          secret:
+            secretName: {{ lower .Values.appId }}-public-pem
+        - name: redis-cache-secret
+          secret:
+            secretName: {{ lower .Values.appId }}-redis-secret

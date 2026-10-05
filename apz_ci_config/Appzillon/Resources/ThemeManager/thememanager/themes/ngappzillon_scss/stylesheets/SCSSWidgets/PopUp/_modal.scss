@@ -1,0 +1,55 @@
+@use "../Abstract" as a;
+
+.modal {padding-top: 100px;width: 100%;height: 100%;background-color: rgb(0, 0, 0);background-color: rgba(0, 0, 0, 0.4); }
+
+.modal.fade.left,.modal.fade.right {padding:0;width: 100%;height: 100%;background-color: rgb(0, 0, 0);background-color: rgba(0, 0, 0, 0.4); }
+
+
+
+
+
+/*.modal-content {background-color: #fefefe;margin: auto;padding: 0;border: 1px solid #888;width: 80%;*/
+/*    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);-webkit-animation-name: animatetop;*/
+/*            -webkit-animation-duration: 0.4s;animation-name: animatetop;animation-duration: 0.4s;}*/
+.close {font-size: 28px;font-weight: bold;border: none;background: transparent;}
+.close:hover,.close:focus {color: #000;text-decoration: none;cursor: pointer;} 
+.modal-scroll {padding-right: 0;}
+.modal-header {display: table;}
+.modal-header li {display: table-cell;width: 100%;vertical-align: middle;}
+.modal-header{padding:5px 15px;cursor:all-scroll; background-color:#f4f4f4;  }
+.modal-header li:last-child{width: 1em;display: table-cell}
+.modal-header h1{margin-bottom: 0px; font-weight:400}
+.modal-header .ett-bttn.med { padding-left: 0.25em; padding-right: 0.25em; }
+.modal-header .px24 {height:19px ; width:19px}
+ .modal-dialog {background-color: #ffffff;border:none;box-shadow: 0 12px 15px 0 rgba(0,0,0,0.25);margin: 0 auto} 
+.modal-content{padding: 15px;min-height:100px;max-height: 50vh;overflow:auto;}
+.modal-content p {margin:0px;display:block;}
+.modal-footer{padding:1em;margin:0px;} 
+.modal-footer > button {margin: 0 0.2em;}
+.modal-dialog h1 {margin-top: 0; font-size: 1.1rem; }
+.modal-backdrop {background-color: #fff;}
+.modal-footer {text-align: center;}
+.modal-dialog {text-align: left;} 
+.modal-dialog > h3 { border-bottom: 1px solid #ccc; font-weight: 500; padding: 10px;}
+.modal-dialog > p { margin-top:1em }
+.modal-dialog .modal-footer {text-align: left;border: none;margin-top: 0;}
+.modal-footer .btn + .btn {margin-left: 5px;margin-bottom: 0;}
+.modal-footer .btn-group .btn + .btn {margin-left: -1px;}
+.modal-footer .btn-block + .btn-block {margin-left: 0;}
+.modal-scrollbar-measure {width: 50px;height: 50px;} 
+
+@media (min-width: 768px) {
+  .modal-dialog {margin: 2em auto 0;}
+    
+  .modal.fade.left .modal-dialog{margin: 0;height: 100vh} 
+  .modal.fade.right .modal-dialog{margin: 0;height: 100vh;right: 0;/*position: absolute;*/}
+    
+    
+  .modal-dialog {margin: 20vh auto 0; }
+  .modal-sm {width: 300px;}
+}
+@media (min-width: 992px) {
+    .modal-lg {width: 900px;}
+} 
+.gutter .modal.srb{display:none;} /*fix gutter clash*/
+

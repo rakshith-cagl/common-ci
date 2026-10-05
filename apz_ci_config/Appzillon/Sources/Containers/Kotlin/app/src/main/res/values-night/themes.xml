@@ -1,0 +1,6 @@
+<resources>
+    <!-- Base application theme. -->
+    <style name="Theme.ContainerAppKotlin" parent="Theme.AppCompat.NoActionBar">
+      
+    </style>
+</resources>

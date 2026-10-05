@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title></title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style type="text/css" media="screen">
+.sno{display:none !important}
+.ssp{visibility:hidden !important}
+</style>
+APPZILLONCSSFILES
+
+</head>
+<body class="fulsv" APPZILLONANGULARTAGS>
+APPZILLONSVGCONTENT
+APPZILLONMSGCONTENT
+APPZILLONLOVCONTENT
+	<div id="apzloader" class="sno"
+		style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; background-color: #fff; z-index: 99999; opacity: 0.2">
+		<div id="status" class="fa fa-spin-sp"
+			style="width: 200px; height: 200px; position: absolute; left: 50%; top: 50%; background-image: url(APPZILLONLOADERIMG); background-repeat: no-repeat; background-position: center; margin: -100px 0 0 -100px;">
+			&nbsp;</div>
+	</div>
+
+	<div id="pt-main">
+		<div id="page_1" ></div>
+		<div id="page_2" ></div>
+		APPZILLONQUNITTAGS
+	</div>
+	<!-- Hardcoding script tag and require scripts as per last discussion 10-Aug-2018-->
+	<!-- script type="text/javascript" charset="utf-8"  src="appzillon/controllers/appzillon/require.js"></script> -->
+	<script language="javascript">
+	$(document).ready(function() {
+			require.config({
+				paths: {
+					apzJqueryFile:'appzillon/controllers/jquery/jquery',
+					mobiscroll:'appzillon/controllers/mobiscroll/mobiscroll',
+				    jqueryUI:'appzillon/controllers/appzillon/jquery-ui.min',
+				    dbtableresp:'appzillon/controllers/appzillon/dataTables.responsive',
+				    'datatables.net':'appzillon/controllers/appzillon/jquery.dataTables.min',
+				    fixedHeaderTable:'appzillon/controllers/appzillon/jquery.fixedheadertable',
+				    popover:'appzillon/controllers/appzillon/popover',
+				    tooltip:'appzillon/controllers/appzillon/jquery.tooltip',
+				    select2:'appzillon/controllers/appzillon/select2.min',
+				    swiper:'appzillon/controllers/appzillon/swiper.min',
+				    alert:'appzillon/controllers/appzillon/alertify',
+				    modern:'appzillon/controllers/appzillon/modernizr',
+				    date:'appzillon/controllers/appzillon/date',
+				    appzillon:'appzillon/controllers/appzillon/appzillon',
+				    log:'appzillon/controllers/appzillon/log',
+				    uiutils:'appzillon/controllers/appzillon/uiutils',
+				    plugins:'appzillon/controllers/appzillon/plugins',
+				    data:'appzillon/controllers/appzillon/data_appzillon',
+				    mca:'appzillon/controllers/appzillon/mca',
+				    anim:'appzillon/controllers/appzillon/animations',
+				    val:'appzillon/controllers/appzillon/val',
+				    ns:'appzillon/controllers/appzillon/ns'
+				},
+				shim: {
+					'mobiscroll':['apzJquery'],
+					'jqueryMin':['apzJquery'],
+					'jqueryUI':['apzJquery'],
+					'datatables':['apzJquery'],
+					'dbtableresp':['apzJquery','datatables.net'],
+					'fixedHeaderTable':['apzJquery'],
+					'popover':['apzJquery'],
+					'tooltip':['apzJquery'],
+					'select2':['apzJquery'],
+					'swiper':['apzJquery'],
+					'alert':['apzJquery'],
+					'modern':['apzJquery'],
+					'date':['apzJquery'],
+					'appzillon':['apzJquery'],	
+					'date':['appzillon'],
+					'log':['appzillon'],
+					'uiutils':['appzillon'],
+					'plugins':['appzillon'],
+					'data':['appzillon'],
+					'mca':['appzillon'],
+					'anim':['appzillon'],
+					'val':['appzillon'],
+					'ns':['appzillon']
+			    }
+			});
+			require(['apzJqueryFile'], function(jq){
+				apzJquery =$.noConflict();
+				jQuery=$; 
+				   define('apzJquery', [], function() {
+				      return apzJquery;
+				   });
+				require(['mobiscroll','jqueryUI','dbtableresp','datatables.net','fixedHeaderTable','popover','tooltip','select2','swiper','alert',
+					'modern','date','appzillon','log','uiutils','plugins','data','mca','anim','val','ns'], 
+					function(){
+					    apz = new Apz();
+			            apz.deviceOs = "MCA";
+						apz.mca.getProcessJson({});
+					});	  
+			});
+		});
+	</script>
+
+</body>
+
+</html>

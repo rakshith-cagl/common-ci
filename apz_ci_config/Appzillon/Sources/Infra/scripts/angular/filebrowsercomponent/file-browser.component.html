@@ -1,0 +1,74 @@
+<ng-container *ngIf="props.cntrType == 'FORM'">
+        <ul id="{{props.id}} + '_ul'" #wrapperClasses clickstoppropagation>
+            <li #labelWrapper >
+            	<ng-container *ngIf="(props.hasLabelIcon === 'Y' && props.labelIconProps.iconPos==='LEFT')"  [ngTemplateOutlet]="labelIconContent">
+            	</ng-container>
+                <label #labelProps [innerHtml]="props.labelProps.title">
+                </label>
+                <ng-container *ngIf="(props.hasLabelIcon === 'Y' && props.labelIconProps.iconPos!=='LEFT')"  [ngTemplateOutlet]="labelIconContent">
+            	</ng-container>
+            </li>
+            <li #contentWrapper>
+                    <ng-container [ngTemplateOutlet]="UploadButtonContain"></ng-container>
+            </li>
+        </ul>
+</ng-container>
+
+<ng-container *ngIf="props.cntrType == 'NAVBAR' || props.cntrType == 'LIST'">
+        <ng-container [ngTemplateOutlet]="UploadButtonContain"></ng-container>
+</ng-container>
+
+<ng-container *ngIf= "props.cntrType == 'TABLE'">
+    <td [attr.id]="(rowIndex != undefined) ?('td_'+ props.id + '_' + rowIndex):('td_'+ props.id)" class="{{props.tdClasses}}">
+            <ng-container [ngTemplateOutlet]="UploadButtonContain"></ng-container>
+    </td>
+</ng-container>
+
+
+<ng-template #UploadButtonContain>
+<ng-container>
+        <ul #fileButtonWrapper><!-- {...props.fileButtonWrapper.direct} -->
+            <li>
+                <a #fileButton><!-- {...props.fileButton.direct} -->
+                    <input [id]="id" type="file" 
+                    (change)="setSelectedFileName(props, $event.currentTarget)" 
+                    attr.rowno="{{index}}"
+                    #BrowseButton delegateEvent [blurEvent]="blur" [focusEvent]="focus"/><!-- {...props.BrowseButton.direct} {...props.apzevents}   -->
+                    Browse... <!--{"Browse..."}-->
+                        </a>
+              <ng-container [ngTemplateOutlet]="UploadButtons"></ng-container> <!--{UploadButton(props)}-->
+            </li>
+            <ng-container [ngTemplateOutlet]="SelectedFile"></ng-container> <!-- {SelectedFile(props)} -->
+        </ul>
+</ng-container>
+</ng-template>
+
+<ng-template #UploadButtons>
+<ng-container *ngIf="props.UploadButtonRequired == 'Y'">
+    <a role="button" aria-label="Upload" href="javascript:;" title="Upload" #UploadButton  (click)="buttonClickEvent($event)"><!--{...props.UploadButton.direct}--> 
+        <svg aria-hidden="true" class="icon icon-upload px24">
+            <use xlink:href="#icon-upload"></use>
+        </svg> 
+        Upload
+    </a>
+</ng-container>
+</ng-template>
+<ng-template #SelectedFile>
+    <ng-container *ngIf="props.UploadButtonRequired == 'Y'">
+     <!-- //NOSONAR -->  <li>
+            <span class="filevalue" id="selectedfiles">
+                <svg aria-hidden="true" role="presentation" class="icon  px24">
+                    <use attr.xlink:href="#"></use>
+                </svg>
+            </span>
+        </li>
+    </ng-container>
+</ng-template>
+
+<ng-template #labelIconContent>
+    <button class="ett-bttn tsp sml lbtn px20" (click)="labelIconClickEvent($event)">
+        <svg [attr.class]="props.labelIconProps.direct.className" #contentIcon>
+            <use attr.xlink:href="{{'#'+ props.labelIconProps.name}}" xlink:href="" />
+        </svg>
+    </button>
+</ng-template> 

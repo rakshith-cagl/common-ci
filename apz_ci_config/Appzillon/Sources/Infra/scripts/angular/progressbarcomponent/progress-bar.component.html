@@ -1,0 +1,77 @@
+<ng-container *ngIf="props.cntrType=='FORM' ">
+        <ul #formWrapperClass  id="{{props.id}}_ul" clickstoppropagation>
+            <li  #formlabelWrapper >
+            	<ng-container *ngIf="(props.hasLabelIcon === 'Y' && props.labelIconProps.iconPos==='LEFT')"  [ngTemplateOutlet]="labelIconContent">
+            	</ng-container>
+                <label #formlabelProps  [innerHtml]="props.labelProps.title">
+                </label>
+                 <ng-container *ngIf="(props.hasLabelIcon === 'Y' && props.labelIconProps.iconPos!=='LEFT')"  [ngTemplateOutlet]="labelIconContent">
+	            </ng-container>
+            </li>
+            <li #formContentWrapper >
+                
+                    <ng-container *ngTemplateOutlet="progressBody"></ng-container>
+                
+            </li>
+        </ul>
+</ng-container>
+
+<ng-container *ngIf="props.cntrType == 'NAVBAR' || props.cntrType == 'LIST'">
+       
+            <ng-container *ngTemplateOutlet="progressBody"></ng-container>
+ 
+</ng-container>
+
+<ng-container *ngIf= "props.cntrType=='TABLE'">
+    <td [attr.id]="(rowIndex != undefined) ?('td_'+ props.id + '_' + rowIndex):('td_'+ props.id)" class="{{props.tdClasses}}">
+     
+            <ng-container *ngTemplateOutlet="progressBody"></ng-container>
+        
+    </td>
+</ng-container>
+
+<ng-template #progressBody>
+    <ng-container *ngIf="props.progressBarType == 'GENERIC'">
+        <div [id]="id+'_div_wrapper'" #ProgressWrapper>
+            <div [attr.rowno]="index" [id]="id+'_div'" #divContent>
+                <ng-container *ngIf="isUiElm()">           
+                    <div [id]="id"   [attr.apztype] = "'progress'" [attr.rowno]="index" [ngStyle]="props.contentstyle.style"  #content delegateEvent [blurEvent]="blur" [focusEvent]="focus">
+                             {{value}}
+                    </div>
+                </ng-container>
+                <ng-container *ngIf="!isUiElm()"> 
+                    <div [id]="id" [innerHtml]="values[elm]" [attr.apztype] = "'progress'" [attr.value]="values[elm]" [attr.rowno]="index"
+                     [style.width]="widthvaltext + '%'" #content delegateEvent [blurEvent]="blur" [focusEvent]="focus">
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+    </ng-container>
+    <ng-container *ngIf="props.progressBarType == 'OSSPECIFIC'">
+        <div [id]="id+'_div_wrapper'" #ProgressWrapper>
+            <div [id]="id+'_div'" [attr.rowno]="index" #divContent>
+                <ng-container *ngIf="isUiElm()">
+                    <progress [id]="id" [attr.apztype] = "'progress'" [ngStyle]="props.content.direct.style" delegateEvent [blurEvent]="blur" [focusEvent]="focus" #content>
+                    </progress>  
+                </ng-container>
+                <ng-container *ngIf="!isUiElm()">   
+                    <progress [id]="id" [innerHtml]="values[elm]" [attr.apztype] = "'progress'" [attr.value]="values[elm]"   [attr.rowno]="index" #content delegateEvent [blurEvent]="blur" [focusEvent]="focus">
+                    </progress>
+                </ng-container>
+            </div>
+        </div>
+    </ng-container>
+        
+    <ng-container *ngIf="props.ProgressHintRequired=='Y'">
+        <span id="{{id + '_hnt'}}" class="htx">
+            {{props.ProgressHint.value}}
+        </span>
+    </ng-container>
+</ng-template>
+<ng-template #labelIconContent>
+    <button class="ett-bttn tsp sml lbtn px20" (click)="iconClickEvent($event)">
+        <svg [attr.class]="props.labelIconProps.direct.className" #contentIcon>
+            <use attr.xlink:href="{{'#'+ props.labelIconProps.name}}" xlink:href="" />
+        </svg>
+    </button>
+</ng-template> 

@@ -1,0 +1,128 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <DefineConstants>APPZILLONPLUGINTOKEN</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|AnyCPU">
+      <Configuration>Debug</Configuration>
+      <Platform>AnyCPU</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|ARM">
+      <Configuration>Debug</Configuration>
+      <Platform>ARM</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x86">
+      <Configuration>Debug</Configuration>
+      <Platform>x86</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|AnyCPU">
+      <Configuration>Release</Configuration>
+      <Platform>AnyCPU</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|ARM">
+      <Configuration>Release</Configuration>
+      <Platform>ARM</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x86">
+      <Configuration>Release</Configuration>
+      <Platform>x86</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>ff100839-ea44-47ed-ae2b-bc7c158a6902</ProjectGuid>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup Condition="'$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0'">
+    <VisualStudioVersion>12.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\$(WMSJSProjectDirectory)\Microsoft.VisualStudio.$(WMSJSProject).Default.props" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\$(WMSJSProjectDirectory)\Microsoft.VisualStudio.$(WMSJSProject).props" />
+  <PropertyGroup>
+    <TargetPlatformIdentifier>Windows</TargetPlatformIdentifier>
+    <TargetPlatformVersion>8.1</TargetPlatformVersion>
+    <RequiredPlatformVersion>8.1</RequiredPlatformVersion>
+    <MinimumVisualStudioVersion>12.0</MinimumVisualStudioVersion>
+    <DefaultLanguage>en-US</DefaultLanguage>
+    <PackageCertificateKeyFile>Windows_StoreKey.pfx</PackageCertificateKeyFile>
+    <AppxBundle>Always</AppxBundle>
+    <NuGetPackageImportStamp>3eeb62c7</NuGetPackageImportStamp>
+  </PropertyGroup>
+  <ItemGroup>
+    <AppxManifest Include="package.appxmanifest">
+      <SubType>Designer</SubType>
+    </AppxManifest>
+    <Content Include="Plugins\SignaturePad.js" Condition="$(DefineConstants.Contains('SIGNATUREPAD'))" />
+    <Content Include="Plugins\Barcode.js" Condition="$(DefineConstants.Contains('BARCODE'))"/>
+    <Content Include="Plugins\Calendar.js" Condition="$(DefineConstants.Contains('CALENDAR'))"/>
+    <Content Include="Plugins\Camera.js" Condition="$(DefineConstants.Contains('CAMERA'))"/>
+    <Content Include="Plugins\Contact.js" Condition="$(DefineConstants.Contains('CONTACTS'))"/>
+    <Content Include="Plugins\PdfPlugin.js" />
+    <Content Include="Plugins\Storage.js" />
+    <Content Include="Plugins\VideoRecording.js" Condition="$(DefineConstants.Contains('MEDIA'))"/>
+    <Content Include="Plugins\Voice.js" Condition="$(DefineConstants.Contains('VOICE'))"/>
+    <Content Include="Plugins\wl.js" />
+    <Content Include="Native\native.js" />
+    <Content Include="Native\default.js" />
+    <Content Include="images\SplashScreen.png" />
+	<Content Include="images\refresh.gif" />
+    <Content Include="images\Square150x150.png" />
+    <Content Include="images\Square30x30.png" />
+    <Content Include="images\Square70x70.png" />
+    <Content Include="images\StoreLogo.png" />
+    <Content Include="images\Wide310x150.png" />
+    <Content Include="images\green.png" />
+    <None Include="Windows_StoreKey.pfx" />
+  </ItemGroup>
+  <ItemGroup>
+    <SDKReference Include="Microsoft.WinJS.2.0, Version=1.0" />
+    <SDKReference Include="Microsoft.VCLibs, version=12.0" />
+    <SDKReference Include="Bing.Speech, Version=1.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="SQLite3" Condition=" '$(Configuration)|$(Platform)' == 'Release|ARM' ">
+      <HintPath>SQLite3_Release_ARM\SQLite3.winmd</HintPath>
+      <IsWinMDFile>true</IsWinMDFile>
+      <Implementation>SQLite3Component.dll</Implementation>
+    </Reference>
+    <Reference Include="SQLite3" Condition=" '$(Configuration)|$(Platform)' == 'Release|x64' ">
+      <HintPath>SQLite3_Release_x64\SQLite3.winmd</HintPath>
+      <IsWinMDFile>true</IsWinMDFile>
+      <Implementation>SQLite3Component.dll</Implementation>
+    </Reference>
+    <Reference Include="SQLite3" Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+      <HintPath>SQLite3_Release_x86\SQLite3.winmd</HintPath>
+      <IsWinMDFile>true</IsWinMDFile>
+      <Implementation>SQLite3Component.dll</Implementation>
+    </Reference>
+    <Reference Include="ShaCode">
+      <HintPath>..\Appzillon.Shared\ShaCode.winmd</HintPath>
+      <IsWinMDFile>true</IsWinMDFile>
+    </Reference>
+    <Reference Include="ZXing" Condition="$(DefineConstants.Contains('BARCODE'))" >
+      <HintPath>..\Appzillon.Shared\ZXing.winmd</HintPath>
+      <IsWinMDFile>true</IsWinMDFile>
+    </Reference>
+  </ItemGroup>
+  <Import Project="..\Appzillon.Shared\Appzillon.Shared.projitems" Label="Shared" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\$(WMSJSProjectDirectory)\Microsoft.VisualStudio.$(WMSJSProject).targets" />
+  <!-- To modify your build process, add your task inside one of the targets below then uncomment
+       that target and the DisableFastUpToDateCheck PropertyGroup. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  <PropertyGroup>
+    <DisableFastUpToDateCheck>true</DisableFastUpToDateCheck>
+  </PropertyGroup>
+  -->
+</Project>

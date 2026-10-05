@@ -1,0 +1,32 @@
+<ng-container *ngIf="props.cntrType=='FORM'">
+        <ul id="{{props.id}}_ul" #wrapperClasses clickstoppropagation>
+            <li #labelWrapper >
+                <label #labelProps [innerHtml]="props.labelProps.title">
+                </label>
+            </li>
+            <li #contentWrapper>
+                <span #spanWrapper>
+                    <ng-container *ngTemplateOutlet="sortAccountContent"></ng-container>
+                </span>
+            </li>
+        </ul>
+    </ng-container>
+    
+    <ng-container *ngIf="props.cntrType == 'NAVBAR'">
+            <span #spanWrapper >
+                    <ng-container *ngTemplateOutlet="sortAccountContent"></ng-container>
+            </span>
+        </ng-container>
+    
+    
+    <ng-template #sortAccountContent>
+    <span [id]="id" [attr.class]="spanClasses" [attr.rowno]="rowno">
+        <ul>
+            <li>
+                <input [id]="id+'_00'" [class]="inputClases" type="text" [value]="value"
+                (change)="saveValue(props,$event.currentTarget)"
+                (keydown)="apz.SortCodeAccount.validateInput($event.currentTarget,$event)" delegateEvent [blurEvent]="blur" [focusEvent]="focus"/>
+            </li>
+        </ul>
+    </span>
+    </ng-template>

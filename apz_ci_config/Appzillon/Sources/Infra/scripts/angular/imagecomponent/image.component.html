@@ -1,0 +1,37 @@
+<ng-container *ngIf="props.cntrType=='FORM' ">
+        <ul #formWrapperClass  id="{{props.id}} + _ul" clickstoppropagation>
+            <li  #formlabelWrapper >
+                <label #formlabelProps  >
+                    {{props.labelProps.title}}
+                </label>
+            </li>
+            <li #formContentWrapper >
+                <ng-container [ngTemplateOutlet]="imageContain"></ng-container>
+            </li>
+        </ul>
+</ng-container>
+
+
+<ng-container *ngIf="props.cntrType == 'NAVBAR' || props.cntrType == 'LIST'">
+        <ng-container [ngTemplateOutlet]="imageContain"></ng-container>
+</ng-container>
+
+<ng-container *ngIf= "props.cntrType=='TABLE'">
+        <td [attr.id]="(rowIndex != undefined) ?('td_'+ props.id + '_' + rowIndex):('td_'+ props.id)" class="{{props.tdClasses}}">
+                <ng-container [ngTemplateOutlet]="imageContain"></ng-container>
+        </td>
+</ng-container>
+
+<ng-template #imageContain>
+        <ng-container *ngIf="props.SvgContAvailable == 'Y'">
+                <span type="SVG" #spanContent>{{props.spanContent.direct.svgCont}}</span>
+                <img [id]="id" alt="Image" class="sno" [attr.rowno]="index" delegateEvent [blurEvent]="blur" [focusEvent]="focus" #imageContent>
+        </ng-container>
+        <ng-container *ngIf="props.SvgContAvailable == 'N'">
+                <img [id]="id" alt="Image" [attr.rowno]="index" #imageContent delegateEvent [blurEvent]="blur" [focusEvent]="focus">
+                <span type="SVG" class="sno" #spanContent></span>
+        </ng-container>
+        <ng-container *ngIf="props.ImageHintRequired == 'Y'">
+                <span id="{{id+'_hnt'}}" class="htx">{{props.ImageHint.value}}</span>
+        </ng-container>
+</ng-template>

@@ -1,0 +1,67 @@
+<ng-template #tagstemplateContent>
+            <div #tagsWrapper>
+                <ng-container *ngIf="isUiElm()">
+                        <input [id]="id"  [(value)]="value" 
+                        [attr.rowno]="index" #tagsInputContent delegateEvent [blurEvent]="blur" [focusEvent]="focus"/>
+                </ng-container>
+                <ng-container *ngIf="!isUiElm()">
+                        <input [id]="id"   [value]="getDataValue()" 
+                        [attr.rowno]="index" #tagsInputContent delegateEvent/>
+                </ng-container>
+                <svg [attr.class]="props.IconContent.direct.className">
+                    <use [attr.xlink:href]="'#'+ props.IconContent.name" xlink:href=""/>
+                </svg>
+            </div>
+            <ng-container *ngIf="props.tagsHintRequired === 'Y'">
+                    <ng-container [ngTemplateOutlet]="hintContent">
+                    </ng-container>
+            </ng-container>
+</ng-template>
+
+<ng-template #hintContent>
+    <span [id]="id+'_hnt'" class="htx">{{props.tagsHint.value}}</span>
+</ng-template>
+
+
+
+<ng-container *ngIf="props.cntrType=='FORM' ">
+        <ul #tagsFormWrapperClass  id="{{props.id + '_ul'}}" clickstoppropagation>
+            <li  #tagsFormlabelWrapper>
+                <ng-container *ngIf="(props.hasLabelIcon === 'Y' && props.labelIconProps.iconPos==='LEFT')"  [ngTemplateOutlet]="labelIconContent">
+            	</ng-container>
+                <label #tagsFormlabelProps  [innerHtml]="props.labelProps.title">
+                </label>
+                <ng-container *ngIf="(props.hasLabelIcon === 'Y' && props.labelIconProps.iconPos!=='LEFT')"  [ngTemplateOutlet]="labelIconContent">
+            	</ng-container>
+            </li>
+            <li #tagsFormContentWrapper >
+                <span #tagsFormSpanWrapper >
+                        <ng-container [ngTemplateOutlet]="tagstemplateContent">
+                        </ng-container>
+                </span>
+            </li>
+        </ul>
+</ng-container>
+    
+<ng-container *ngIf="props.cntrType == 'NAVBAR' || props.cntrType == 'LIST'">
+            <span #navSapnwrapper >
+                <ng-container [ngTemplateOutlet]="tagstemplateContent">
+                </ng-container>
+            </span>            
+</ng-container>
+<ng-container *ngIf= "props.cntrType=='TABLE'">
+    
+        <td [attr.id]="('td_'+ props.id + '_' + rowIndex)" class="{{props.tdClasses}}">
+                <span [id]="(props.id + '_span_'+ rowIndex)" #tableSpanWrapper>
+                   <ng-container [ngTemplateOutlet]="tagstemplateContent"></ng-container>
+                </span>
+        </td>
+</ng-container>
+
+<ng-template #labelIconContent>
+    <button class="ett-bttn tsp sml lbtn px20" (click)="iconClickEvent($event)">
+        <svg [attr.class]="props.labelIconProps.direct.className" #contentIcon>
+            <use attr.xlink:href="{{'#'+ props.labelIconProps.name}}" xlink:href="" />
+        </svg>
+    </button>
+</ng-template> 

@@ -1,0 +1,195 @@
+def values=[]
+node {
+    values = params["DEPLOY_TYPES"].split(",")
+}
+
+pipeline {
+   parameters{
+      extendedChoice defaultValue: '', description: 'Choose any of the below options to clean up the deployments', multiSelectDelimiter: ',', name: 'DEPLOY_TYPES', quoteValue: false, saveJSONParameterToFile: false, type: 'PT_CHECKBOX', value: 'web,server,fluentd_rsyslog,fluentbit,prometheus,grafana', visibleItemCount: 6
+      choice(name:'ARTIFACTORY_TYPE', choices: ['jfrog', 'harbor'], description: 'Select Artifactory  Type')
+      string defaultValue: 'appzillon-develop', description: '', name: 'OC_PROJECT', trim: false
+      string defaultValue: 'sha256~aW7khl35APbmumcnNNFHZE3hcxEo6n5EO26hr_XxEvA', description: '', name: 'OC_TOKEN', trim: false
+      string defaultValue: 'https://api.iexceed-platform.apzplatforms.com:6443', description: '', name: 'OC_CLIENT_URL', trim: false
+      string defaultValue: 'ec2-user', description: '', name: 'SHIPPER_USERNAME', trim: false
+      string defaultValue: '18.216.193.145', description: '', name: 'SHIPPER_TARGET', trim: false
+      string defaultValue: 'appzillon-admin-server', description: '', name: 'SERVER_APP', trim: false
+      string defaultValue: 'appzillon-admin', description: '', name: 'WEB_APP', trim: false
+   }
+    
+    agent any
+        stages {
+            stage('web') {
+                when {
+                    expression {
+                        'web' in values
+                    }
+                }
+                steps {
+                    sshagent (credentials: ['run-oc-client']) {
+                        script{
+                            sh '''
+                                COMMAND1="oc login --token=${OC_TOKEN} --server=${OC_CLIENT_URL} --insecure-skip-tls-verify"
+                                ssh -o StrictHostKeyChecking=no -l ${SHIPPER_USERNAME} ${SHIPPER_TARGET} $COMMAND1
+
+                                COMMAND2="oc project ${OC_PROJECT}"
+                                ssh -o StrictHostKeyChecking=no -l ${SHIPPER_USERNAME} ${SHIPPER_TARGET} $COMMAND2
+                            '''
+                            
+                            sh "ssh -o StrictHostKeyChecking=no -l ${SHIPPER_USERNAME} ${SHIPPER_TARGET} 'helm uninstall ${WEB_APP} -n ${OC_PROJECT}'"
+                        }
+                    }
+                    
+                }
+            }
+            stage('server') {
+                when {
+                    expression {
+                        'server' in values
+                    }
+                }
+                steps {
+                    sshagent (credentials: ['run-oc-client']) {
+                        script{
+                            sh '''
+                                COMMAND1="oc login --token=${OC_TOKEN} --server=${OC_CLIENT_URL} --insecure-skip-tls-verify"
+                                ssh -o StrictHostKeyChecking=no -l ${SHIPPER_USERNAME} ${SHIPPER_TARGET} $COMMAND1
+
+                                COMMAND2="oc project ${OC_PROJECT}"
+                                ssh -o StrictHostKeyChecking=no -l ${SHIPPER_USERNAME} ${SHIPPER_TARGET} $COMMAND2
+                            '''
+                            sh "ssh -o StrictHostKeyChecking=no -l ${SHIPPER_USERNAME} ${SHIPPER_TARGET} 'helm uninstall ${SERVER_APP} -n ${OC_PROJECT}'"
+                        }
+                    }  
+                }
+            }
+            stage('fluentd_rsyslog') {
+                when {
+                    expression {
+                        'fluentd_rsyslog' in values
+                    }
+                }
+                steps {
+                    sshagent (credentials: ['run-oc-client']) {
+                        script{
+                            def fluentd=['deploy':'fluentd-rsys','cm':'fluentd-rsys-conf']
+                            sh '''
+                                COMMAND1="oc login --token=${OC_TOKEN} --server=${OC_CLIENT_URL} --insecure-skip-tls-verify"
+                                ssh -o StrictHostKeyChecking=no -l ${SHIPPER_USERNAME} ${SHIPPER_TARGET} $COMMAND1
+
+                                COMMAND2="oc project ${OC_PROJECT}"
+                                ssh -o StrictHostKeyChecking=no -l ${SHIPPER_USERNAME} ${SHIPPER_TARGET} $COMMAND2
+
+                                COMMAND3="oc delete secret ${ARTIFACTORY_TYPE}-fluentd-rsyslog-secret"
+                                ssh -o StrictHostKeyChecking=no -l ${SHIPPER_USERNAME} ${SHIPPER_TARGET} $COMMAND3
+
+                            '''
+                            fluentd.each{k,v->
+                                        sh "ssh -o StrictHostKeyChecking=no -l ${SHIPPER_USERNAME} ${SHIPPER_TARGET} oc delete ${k} ${v}"
+                            }
+                        }
+                    }
+                    
+                }
+            }
+
+            stage('fluentd_elastic') {
+                when {
+                    expression {
+                        'fluentd_elastic' in values
+                    }
+                }
+                steps {
+                    sshagent (credentials: ['run-oc-client']) {
+                        script{
+                            sh '''
+                                COMMAND1="oc login --token=${OC_TOKEN} --server=${OC_CLIENT_URL} --insecure-skip-tls-verify"
+                                ssh -o StrictHostKeyChecking=no -l ${SHIPPER_USERNAME} ${SHIPPER_TARGET} $COMMAND1
+
+                                COMMAND2="oc project ${OC_PROJECT}"
+                                ssh -o StrictHostKeyChecking=no -l ${SHIPPER_USERNAME} ${SHIPPER_TARGET} $COMMAND2
+
+                                COMMAND3="helm uninstall fluentd-elasticsearch"
+                                ssh -o StrictHostKeyChecking=no -l ${SHIPPER_USERNAME} ${SHIPPER_TARGET} $COMMAND3
+                            '''
+                        }
+                    }
+                    
+                }
+            }
+            stage('fluentbit') {
+                when {
+                    expression {
+                        'fluentbit' in values
+                    }
+                }
+                steps {
+                    sshagent (credentials: ['run-oc-client']) {
+                        script{
+                            sh '''
+                                COMMAND1="oc login --token=${OC_TOKEN} --server=${OC_CLIENT_URL} --insecure-skip-tls-verify"
+                                ssh -o StrictHostKeyChecking=no -l ${SHIPPER_USERNAME} ${SHIPPER_TARGET} $COMMAND1
+
+                                COMMAND2="oc project ${OC_PROJECT}"
+                                ssh -o StrictHostKeyChecking=no -l ${SHIPPER_USERNAME} ${SHIPPER_TARGET} $COMMAND2
+
+                                COMMAND3="helm uninstall fluentbit"
+                                ssh -o StrictHostKeyChecking=no -l ${SHIPPER_USERNAME} ${SHIPPER_TARGET} $COMMAND3
+                            '''
+                        }
+                    }
+                    
+                }
+            }
+            stage('prometheus'){
+                when {
+                    expression {
+                        'prometheus' in values
+                    }
+                }
+                steps{
+                    sshagent (credentials: ['run-oc-client']) {
+                        script{
+                            sh '''
+                                COMMAND1="oc login --token=${OC_TOKEN} --server=${OC_CLIENT_URL} --insecure-skip-tls-verify"
+                                ssh -o StrictHostKeyChecking=no -l ${SHIPPER_USERNAME} ${SHIPPER_TARGET} $COMMAND1
+
+                                COMMAND2="oc project ${OC_PROJECT}"
+                                ssh -o StrictHostKeyChecking=no -l ${SHIPPER_USERNAME} ${SHIPPER_TARGET} $COMMAND2
+
+                                COMMAND3="helm uninstall prometheus"
+                                ssh -o StrictHostKeyChecking=no -l ${SHIPPER_USERNAME} ${SHIPPER_TARGET} $COMMAND3
+                            '''
+                        }
+                    }
+                }
+            }
+            stage('grafana'){
+                when {
+                    expression {
+                        'grafana' in values
+                    }
+                }
+                steps{
+                    sshagent (credentials: ['run-oc-client']) {
+                        script{
+                            sh '''
+                                COMMAND1="oc login --token=${OC_TOKEN} --server=${OC_CLIENT_URL} --insecure-skip-tls-verify"
+                                ssh -o StrictHostKeyChecking=no -l ${SHIPPER_USERNAME} ${SHIPPER_TARGET} $COMMAND1
+
+                                COMMAND2="oc project ${OC_PROJECT}"
+                                ssh -o StrictHostKeyChecking=no -l ${SHIPPER_USERNAME} ${SHIPPER_TARGET} $COMMAND2
+
+                                COMMAND3="helm uninstall grafana"
+                                ssh -o StrictHostKeyChecking=no -l ${SHIPPER_USERNAME} ${SHIPPER_TARGET} $COMMAND3
+                            '''
+                        }
+                    }
+                }
+            }
+        }
+    post { 
+        always { 
+            cleanWs()
+        }
+    }
+}

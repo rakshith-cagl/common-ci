@@ -1,0 +1,1 @@
+{"typeclass":"STYLESHEET","name":"SortCode","type":"STYLESHEET","cssfiletype":"CUSTOMCSS","csstype":"CSS","content":".hrow.sortcode > li {\n    padding-left: 0.4em;\n}\n.sort-code {\n  width: 3em;\n  text-align: center;\n}\n.account-number {\n    max-width: 14.9em;\n    /*margin-left: 1em;*/\n}"}

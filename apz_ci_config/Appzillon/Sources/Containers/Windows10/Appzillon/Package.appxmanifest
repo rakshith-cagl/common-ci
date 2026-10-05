@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp">
+  <Identity Name="i-exceed.AppzlionApp" Publisher="CN=anand.k" Version="1.0.0.0" />
+  <mp:PhoneIdentity PhoneProductId="2D24CBC5-E93D-E93D-8AB3-63569DF4ADD7" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
+  <Properties>
+    <DisplayName>AppzlionApp</DisplayName>
+    <PublisherDisplayName>i-exceed technology solutions private limited</PublisherDisplayName>
+    <Logo>Assets\StoreLogo.png</Logo>
+  </Properties>
+  <Dependencies>
+    <TargetDeviceFamily MaxVersionTested="10.0.0.0" MinVersion="10.0.0.0" Name="Windows.Universal" />
+  </Dependencies>
+  <Resources>
+    <Resource Language="x-generate" />
+  </Resources>
+  <Applications>
+    <Application EntryPoint="Appzillon.App" Executable="$targetnametoken$.exe" Id="App">
+      <uap:VisualElements BackgroundColor="transparent" Description="AppzlionApp" DisplayName="AppzlionApp" Square150x150Logo="Assets\Square150x150.png" Square44x44Logo="Assets\Square44x44.png">
+        <uap:LockScreen BadgeLogo="Assets\BadgeLogo.png" Notification="badge" />
+        <uap:DefaultTile Square310x310Logo="Assets\Square310x310Logo.png" Square71x71Logo="Assets\Square71x71.png" Wide310x150Logo="Assets\Wide310x150.png">
+        </uap:DefaultTile>
+        <uap:SplashScreen Image="Assets\SplashLandscape.png" />
+      </uap:VisualElements>
+      <Extensions>
+        <uap:Extension Category="windows.protocol">
+          <uap:Protocol Name="apz-latestcontainerapp">
+            <uap:Logo>Assests/StoreLogo.png</uap:Logo>
+            <uap:DisplayName>AppzlionApp</uap:DisplayName>
+          </uap:Protocol>
+        </uap:Extension>
+      </Extensions>
+    </Application>
+  </Applications>
+  <Capabilities>
+    <Capability Name="internetClient" />
+    <Capability Name="privateNetworkClientServer" />
+    <Capability Name="internetClientServer" />
+    <uap:Capability Name="phoneCall" />
+    <uap:Capability Name="chat" />
+    <uap:Capability Name="appointments" />
+    <uap:Capability Name="picturesLibrary" />
+    <uap:Capability Name="contacts" />
+    <uap:Capability Name="musicLibrary" />
+    <uap:Capability Name="videosLibrary" />
+    <DeviceCapability Name="webcam" />
+    <DeviceCapability Name="bluetooth" />
+    <DeviceCapability Name="microphone" />
+    <DeviceCapability Name="location" />
+    <DeviceCapability Name="proximity" />
+  </Capabilities>
+</Package>

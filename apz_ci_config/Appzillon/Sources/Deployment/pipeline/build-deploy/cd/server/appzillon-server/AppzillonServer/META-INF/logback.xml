@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<configuration debug="false">
+    <!-- Stop output INFO at start -->
+    <statusListener class="ch.qos.logback.core.status.NopStatusListener"/>
+
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+            <layout class="com.iexceed.appzillon.logging.MaskingPatternLayout">
+                <maskPattern>\"password\"\s*:\s*\"(.*?)\"</maskPattern>
+                <maskPattern>\"pwd\"\s*:\s*\"(.*?)\"</maskPattern>
+                <maskPattern>\"pin\"\s*:\s*\"(.*?)\"</maskPattern>
+                <maskPattern>\"oldPassword\"\s*:\s*\"(.*?)\"</maskPattern>
+                <maskPattern>\"newPassword\"\s*:\s*\"(.*?)\"</maskPattern>
+                <maskPattern>\"confirmPassword\"\s*:\s*\"(.*?)\"</maskPattern>
+                <maskPattern>\"hashKey1\"\s*:\s*\"(.*?)\"</maskPattern>
+                <maskPattern>\"hashKey2\"\s*:\s*\"(.*?)\"</maskPattern>
+                <maskPattern>(\d+\.\d+\.\d+\.\d+)</maskPattern>
+                <Pattern>%d %p %-40c{1.} [%X{APPID}] [%X{OSTYPE}] [%X{TXNREF}] [%X{USERID}] %m%n</Pattern>
+            </layout>
+        </encoder>
+    </appender>
+
+    
+    <logger additivity="false" level="OFF" name="org.springframework">
+        <appender-ref ref="CONSOLE" />
+    </logger>
+    
+    <logger additivity="false" level="OFF" name="org.hibernate">
+       <appender-ref ref="CONSOLE" />
+    </logger>
+    
+    <logger additivity="false" level="OFF" name="org.jboss">
+        <appender-ref ref="CONSOLE" />
+    </logger>
+    
+    <logger additivity="false" level="OFF" name="org.apache">
+        <appender-ref ref="CONSOLE" />
+    </logger>
+    
+    <appender class="ch.qos.logback.classic.AsyncAppender" name="ASYNC">
+        <appender-ref ref="CONSOLE" />
+    </appender>
+
+    <logger level="DEBUG" name="com.iexceed.appzillon.rest">
+        <appender-ref level="DEBUG" ref="ASYNC"/>
+    </logger>
+
+    <appender class="ch.qos.logback.classic.AsyncAppender" name="ERROR_ASYNC">
+        <appender-ref ref="CONSOLE" />
+    </appender>
+
+    <Logger level="ALL" name="com.iexceed.appzillon.errorLogging">
+        <appender-ref level="ALL" ref="ERROR_ASYNC"/>
+    </Logger>
+
+    <root level="DEBUG">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="AppzillonServerLogFile"/>
+    </root>
+
+</configuration>

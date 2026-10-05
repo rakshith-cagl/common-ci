@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="windows-1252"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+
+
+<jboss-web
+    xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+    xmlns='http://www.jboss.com/xml/ns/javaee'
+    xsi:schemaLocation='http://www.jboss.com/xml/ns/javaee jboss-web.xsd'>
+
+   
+</jboss-web>

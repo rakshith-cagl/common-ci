@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title></title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style type="text/css" media="screen">
+.sno{display:none !important}
+.ssp{visibility:hidden !important}
+</style>
+APPZILLONCSSFILES
+
+</head>
+<body APPZILLONANGULARTAGS>
+APPZILLONSVGCONTENT
+APPZILLONMSGCONTENT
+APPZILLONLOVCONTENT
+	<div id="apzloader" class="sno"
+		style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; background-color: #fff; z-index: 99999; opacity: 0.2">
+		<div id="status" class="fa fa-spin-sp"
+			style="width: 200px; height: 200px; position: absolute; left: 50%; top: 50%; background-image: url(APPZILLONLOADERIMG); background-repeat: no-repeat; background-position: center; margin: -100px 0 0 -100px;">
+			&nbsp;</div>
+	</div>
+
+	<div id="pt-main">
+		<div id="page_1"></div>
+		<div id="page_2"></div>
+		APPZILLONQUNITTAGS
+	</div>
+	<!---->
+	APPZILLONJSFILES
+
+	<script language="javascript">
+		$(document).ready(function() {
+		   //Expose Global Instance
+		   apz = new Apz();
+			apz.appId = "APPZILLONAPPID";
+			apz.deviceOs = "APPZILLONDEVICEOS";
+			apz.ns.refreshServerNonce({});
+		   apz.loadProject();
+		});
+	</script>
+
+</body>
+
+</html>

@@ -1,0 +1,21 @@
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  annotations:
+    sealedsecrets.bitnami.com/namespace-wide: "true"
+  creationTimestamp: null
+  name: fluentd-elastic-tls
+  namespace: {{ .Values.nameSpace }}
+spec:
+  encryptedData:
+    appzillon-ca.crt:  {{ .Values.appzilloncaCrt }}
+    appzillon.crt:  {{ .Values.appzillonCrt }}
+    appzillon.key:  {{ .Values.appzillonKey }}
+  template:
+    metadata:
+      annotations:
+        sealedsecrets.bitnami.com/namespace-wide: "true"
+      creationTimestamp: null
+      name: fluentd-elastic-tls
+      namespace: {{ .Values.nameSpace }}
+

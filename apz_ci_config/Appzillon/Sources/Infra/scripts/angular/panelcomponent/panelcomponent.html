@@ -1,0 +1,94 @@
+<ng-container *ngIf="ifCheckForPanelType(); then panelTemplate else tabTemplate">
+</ng-container>
+
+<ng-template #tabTemplate>
+	<ng-container *ngIf="props.panelType == 'TAB'">
+		<ng-container *ngIf="props.responsive=='Y'">
+			<div  class={{props.tabPanelWrapper.direct.className}} [ngStyle]="props.tabPanel.direct.style">
+				<div id={{props.id}}_div class={{props.tabPanel.direct.className}}>
+					<ng-container  [ngTemplateOutlet]="responsiveContent">
+					</ng-container>
+					<div class="tabs-ctr">
+						<ng-container [ngTemplateOutlet]="ngcontent">
+						</ng-container>
+					</div>
+				</div>
+			</div>
+		</ng-container>
+		<ng-container *ngIf="props.responsive=='N'">
+				<div id={{props.id}}_div class={{props.tabPanel.direct.className}}>
+					<ng-container  [ngTemplateOutlet]="responsiveContent">
+					</ng-container>
+					<ng-container [ngTemplateOutlet]="ngcontent">
+					</ng-container>
+				</div>
+		</ng-container>
+	</ng-container>
+</ng-template>
+ <ng-template #panelTemplate>
+	<div id={{props.id}} class={{props.className}} [ngStyle]="props.panelStyleWrapper.style">
+			<ng-container *ngIf="props.panelType=='SIMPLE'">
+					<ng-container [ngTemplateOutlet]="ngcontent">
+					</ng-container>
+			</ng-container>
+			<ng-container *ngIf="props.panelType=='CAROUSEL'">
+				<div class={{props.class}} [ngStyle]="props.panelStyleWrapper.style">
+					<div id={{props.id}}_div class="swiper-container" attr.data-loop="n">
+						<ul id={{props.id}}_ul class=" swiper-wrapper">
+							<ng-container [ngTemplateOutlet]="ngcontent">
+							</ng-container>
+						</ul>
+						<div id={{props.id}}_pagination class="swiper-pagination"></div>
+						<div id={{props.id}}_next class="swiper-button-next">
+							<button class="ett-bttn tsp med" aria-labelledby="Next">
+								<svg class="ett-icon icon-arrow-right px24" aria-hidden="true">
+									<use xlink:href="#icon-arrow-right">
+									</use>
+								</svg>
+							</button>
+						</div>
+						<div id={{props.id}}_prev class="swiper-button-prev">
+							<button class="ett-bttn tsp med" aria-labelledby="Previous">
+								<svg class="ett-icon icon-arrow-left px24" aria-hidden="true">
+									<use xlink:href="#icon-arrow-left">
+									</use>
+								</svg>
+							</button>
+						</div>
+					</div>
+				</div>
+			</ng-container>
+			<ng-container *ngIf="props.panelType=='COLLAPSIBLE'">
+				<ng-container [ngTemplateOutlet]="ngcontent">
+				</ng-container>
+			</ng-container>
+			<ng-container *ngIf="props.panelType=='ACCORDION'">
+					<ng-container [ngTemplateOutlet]="ngcontent">
+					</ng-container>
+				</ng-container>
+	</div>
+</ng-template> 
+<ng-template #ngcontent>
+	<ng-content></ng-content>
+</ng-template>
+
+<ng-template #responsiveContent>
+	<ul id={{props.id}}_ul class="tabs" role="tablist">
+		<ng-container *ngFor="let tab of props.tabContents;let index = index">
+			<ng-container *ngIf="index==0">
+					<li id={{tab.id}}_li class="current" aria-selected=true aria-expanded=true attr.aria-controls={{tab.id}}_li role="tab" (click)="apz.tabAction($event.currentTarget,this);">
+							<span>
+								<a href="javascript:;">{{tab.title}}</a>
+							</span>
+						</li>
+			</ng-container>
+			<ng-container *ngIf="index!=0">
+					<li id={{tab.id}}_li  aria-selected=true aria-expanded=true attr.aria-controls={{tab.id}}_li role="tab" (click)="apz.tabAction($event.currentTarget,this);">
+							<span>
+								<a href="javascript:;">{{tab.title}}</a>
+							</span>
+						</li>
+			</ng-container>
+		</ng-container>
+	</ul>
+</ng-template>

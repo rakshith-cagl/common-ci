@@ -1,0 +1,22 @@
+{{- if .Values.dbsslMode.enabled }}
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  annotations:
+    sealedsecrets.bitnami.com/namespace-wide: "true"
+  creationTimestamp: null
+  name: {{ lower .Values.secretAppTag }}-psql-cli-cert
+  namespace: {{ .Values.nameSpace }}
+spec:
+  encryptedData:
+    postgres_client.crt: {{ index (index .Values .Values.serverWarName) "postgres_clientCrt" }}
+    rootCA.crt: {{ index (index .Values .Values.serverWarName) "rootCACrt" }}
+  template:
+    metadata:
+      annotations:
+        sealedsecrets.bitnami.com/namespace-wide: "true"
+      creationTimestamp: null
+      name: {{ lower .Values.secretAppTag }}-psql-cli-cert
+      namespace: {{ .Values.nameSpace }}
+{{- end }}
+

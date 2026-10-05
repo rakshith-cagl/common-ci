@@ -1,0 +1,119 @@
+pipeline {
+    parameters {
+      choice(name: 'DEPLOY_TYPE', choices: ['fresh', 'incremental'], description: 'Fresh and Incremental pipeline options')
+      choice(name:'ARTIFACTORY_TYPE', choices: ['jfrog', 'harbor'], description: 'Select Artifactory  Type')
+      string defaultValue: 'Admin', description: '', name: 'APP_ID', trim: false
+      string defaultValue: 'develop', description: '', name: 'STAGE', trim: false
+      string defaultValue: 'appzillon-develop', description: '', name: 'NAMESPACE', trim: false
+      string defaultValue: 'AppzillonServer', description: '', name: 'SERVER_WAR_NAME', trim: false
+      string defaultValue: 'appzillon-admin-server', description: '', name: 'DOCKER_APP_SERVER_NAME', trim: false
+      string defaultValue: 'v1', description: '', name: 'BUILD_TAG', trim: false
+      string defaultValue: 'sha256~aW7khl35APbmumcnNNFHZE3hcxEo6n5EO26hr_XxEvA', description: '', name: 'OC_TOKEN', trim: false
+      string defaultValue: 'https://api.iexceed-platform.apzplatforms.com:6443', description: '', name: 'OC_CLIENT_URL', trim: false
+      string defaultValue: 'ec2-user', description: '', name: 'SHIPPER_USERNAME', trim: false
+      string defaultValue: 'appzillon', description: '', name: 'SERVICE_ACCOUNT', trim: false
+      string defaultValue: '3.16.220.228', description: '', name: 'SHIPPER_TARGET', trim: false
+      string defaultValue: 'appzillon-admin-server.apzplatforms.com', description: '', name: 'APP_SERVER_DOMAIN', trim: false
+      string defaultValue: '/AppzillonServer/Appzillon', description: '', name: 'CONTEXT_PATH', trim: false
+      string defaultValue: '/var/app_volume/uploads', description: '', name: 'UPLOAD_PATH', trim: false
+      string defaultValue: '/var/app_volume/reports', description: '', name: 'REPORTS_PATH', trim: false
+      extendedChoice defaultValue: '', description: '', multiSelectDelimiter: ',', name: 'DB_SSL_MODE', quoteValue: false, saveJSONParameterToFile: false, type: 'PT_CHECKBOX', value: 'enable ssl for database', visibleItemCount: 1
+      extendedChoice defaultValue: '', description: '', multiSelectDelimiter: ',', name: 'ENABLE_REPORTS', quoteValue: false, saveJSONParameterToFile: false, type: 'PT_CHECKBOX', value: 'enable reports', visibleItemCount: 1
+      choice(name: 'DB_TYPE', choices: ['mysql', 'postgresql'], description: 'Select the DB type')
+      string defaultValue: 'mytestdb', description: '', name: 'DB_NAME', trim: false
+      string defaultValue: 'nfs-reportspvc', description: '', name: 'PVC_REPORT_NAME', trim: false
+      string defaultValue: 'nfs-uploadpvc', description: '', name: 'PVC_UPLOAD_NAME', trim: false
+      string defaultValue: '172.31.40.40', description: '', name: 'DB_IP', trim: false
+      string defaultValue: '5432', description: '', name: 'DB_PORT', trim: false
+      string defaultValue: '1', description: '', name: 'REPLICAS', trim: false
+   }
+
+    environment {
+        REGISTRY= "${env.ARTIFACTORY_TYPE == 'jfrog' ? 'artifactory.appzillon.com:443/docker-dev-local' : 'harbor-platform.apzplatforms.com/appzillon-develop'}"
+    }
+
+    agent any
+
+    stages {
+        stage('Create config maps and secrets') {
+            steps {
+                sshagent (credentials: ['run-oc-client']) {
+                    script{
+                        // variables
+                        def sourcepath="/dataext/home/"+SHIPPER_USERNAME+"/projects/ship-openshift/"+STAGE+"/server/" // Server helm chart path
+                        def APP_ID = APP_ID.split(",")
+                        def mount_ID = APP_ID
+                        def asString = mount_ID.join("\\,")
+                        def ch="{"+asString+"}"
+                        def SECRET_APP_TAG=APP_ID[0].toLowerCase()
+                        def env_mount_path="/opt/apache-tomcat-9.0.46/lib"
+                        def dbsslMode=false
+                        def reports=false
+                        def host=""
+                        def driverClassName=""
+
+                        if(APP_ID.size()>1){
+                            SECRET_APP_TAG="common"                 // Variable used when server is common
+                        }
+
+                        if ('enable reports' in ENABLE_REPORTS){    // Enable reports
+                            reports=true
+                        }                  
+
+                        // DB with SSL enabled  
+                        if ('enable ssl for database' in DB_SSL_MODE){
+                            if(DB_TYPE == "mysql"){
+                                dbsslMode=true
+                                host="jdbc:mysql://${DB_IP}:${DB_PORT}/${DB_NAME}"
+                                driverClassName="com.mysql.jdbc.Driver"
+                            }
+                            else{
+                                dbsslMode=true
+                                host="jdbc:postgresql://${DB_IP}:${DB_PORT}/${DB_NAME}\"?sslmode=verify-full&sslcert=${env_mount_path}/${SERVER_WAR_NAME}/certs/psql-cli-cert/postgres_client.crt&sslkey=/opt/postgres_client.key.pk8&sslrootcert=${env_mount_path}/${SERVER_WAR_NAME}/certs/psql-cli-cert/rootCA.crt\""
+                                driverClassName="org.postgresql.Driver"
+                            }
+                        }
+                        //DB without SSL enabled  
+                        else{
+                            if(DB_TYPE == "mysql"){
+                                host="jdbc:mysql://${DB_IP}:${DB_PORT}/${DB_NAME}"
+                                driverClassName="com.mysql.jdbc.Driver"
+                            }
+                            else{
+                                host="jdbc:postgresql://${DB_IP}:${DB_PORT}/${DB_NAME}"
+                                driverClassName="org.postgresql.Driver"
+                            }
+                        }
+
+                        // openshift login
+                        sh '''
+                            COMMAND0="oc login --token=${OC_TOKEN} --server=${OC_CLIENT_URL} --insecure-skip-tls-verify"
+                            ssh -o StrictHostKeyChecking=no -l ${SHIPPER_USERNAME} ${SHIPPER_TARGET} $COMMAND0
+
+                            COMMAND1="oc project ${NAMESPACE}"
+                            ssh -o StrictHostKeyChecking=no -l ${SHIPPER_USERNAME} ${SHIPPER_TARGET} $COMMAND1
+                        '''
+
+                        if (DEPLOY_TYPE == "fresh"){  
+                            // In platforms such as kubernetes and OpenShift this will be the equivalent as allowing UID 0, or root user, both inside and outside the container                         
+                            sh '''
+                                COMMAND2="oc adm policy add-scc-to-user anyuid -z ${SERVICE_ACCOUNT} -n ${NAMESPACE}"
+                                ssh -o StrictHostKeyChecking=no -l ${SHIPPER_USERNAME} ${SHIPPER_TARGET} $COMMAND2
+                            '''
+                            sh "ssh -o StrictHostKeyChecking=no -l ${SHIPPER_USERNAME} ${SHIPPER_TARGET} 'helm upgrade  --install ${DOCKER_APP_SERVER_NAME} ${sourcepath}/appzillon-server/ --set imagePullSecrets[0].name=${SECRET_APP_TAG}-registry-secret-server  --set fullnameOverride=${DOCKER_APP_SERVER_NAME} --set reports.enabled=${reports} --set dbsslMode.enabled=${dbsslMode}  --set contextPath=${CONTEXT_PATH} --set replicaCount=${REPLICAS} --set secretAppTag=${SECRET_APP_TAG} --set serverWarName=${SERVER_WAR_NAME} --set appID=${APP_ID[0]}   --set reports.path=${REPORTS_PATH} --set uploadPath=${UPLOAD_PATH}  --set reports.pvcReportsName=${PVC_REPORT_NAME}  --set pvcUploadName=${PVC_UPLOAD_NAME} --set image.repository=$REGISTRY/${DOCKER_APP_SERVER_NAME} --set image.tag=${BUILD_TAG} --set serviceAccount.name=${SERVICE_ACCOUNT} --set 'ingress.hosts[0].host=${APP_SERVER_DOMAIN},ingress.hosts[0].paths[0]=${CONTEXT_PATH},ingress.tls[0].secretName=${SECRET_APP_TAG}-tls-secret-server,ingress.tls[0].hosts[0]=${APP_SERVER_DOMAIN}' --set mounts[0].appid=${ch} --set mounts[0].appid=${ch} --set host=${host} --set driverClassName=${driverClassName}  --set dbsslMode.enabled=${dbsslMode} --set openshift.cluster=true --set nameSpace=${NAMESPACE} -f ${sourcepath}/appzillon-server/values-openshift.yaml  -n ${NAMESPACE}'"
+                        }
+                        else{
+                            // Incremental deployment of configmap and secrets
+                            sh "ssh -o StrictHostKeyChecking=no -l ${SHIPPER_USERNAME} ${SHIPPER_TARGET} 'helm upgrade ${DOCKER_APP_SERVER_NAME} ${sourcepath}/appzillon-server/ --set imagePullSecrets[0].name=${SECRET_APP_TAG}-registry-secret-server --set fullnameOverride=${DOCKER_APP_SERVER_NAME} --set reports.enabled=${reports} --set dbsslMode.enabled=${dbsslMode}  --set contextPath=${CONTEXT_PATH} --set replicaCount=${REPLICAS} --set secretAppTag=${SECRET_APP_TAG} --set serverWarName=${SERVER_WAR_NAME} --set appID=${APP_ID[0]}   --set reports.path=${REPORTS_PATH} --set uploadPath=${UPLOAD_PATH}  --set reports.pvcReportsName=${PVC_REPORT_NAME}  --set pvcUploadName=${PVC_UPLOAD_NAME} --set image.repository=$REGISTRY/${DOCKER_APP_SERVER_NAME} --set image.tag=${BUILD_TAG} --set serviceAccount.name=${SERVICE_ACCOUNT} --set 'ingress.hosts[0].host=${APP_SERVER_DOMAIN},ingress.hosts[0].paths[0]=${CONTEXT_PATH},ingress.tls[0].secretName=${SECRET_APP_TAG}-tls-secret-server,ingress.tls[0].hosts[0]=${APP_SERVER_DOMAIN}' --set mounts[0].appid=${ch} --set mounts[0].appid=${ch} --set host=${host} --set driverClassName=${driverClassName}  --set dbsslMode.enabled=${dbsslMode} --set openshift.cluster=true --set nameSpace=${NAMESPACE} -f  ${sourcepath}/appzillon-server/values-openshift.yaml  -n ${NAMESPACE}'"
+                        }
+                    }
+                }
+            }
+        }
+    }
+    post { 
+        always { 
+            cleanWs()
+        }
+    }
+}

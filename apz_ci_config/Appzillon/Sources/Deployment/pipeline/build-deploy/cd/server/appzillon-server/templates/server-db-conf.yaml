@@ -1,0 +1,14 @@
+{{- $host  := .Values.host -}}
+{{- $driverClassName  := .Values.driverClassName -}}
+{{- range $configmap := .Values.mounts }}
+{{- range $appid := $configmap.appid }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ lower $appid }}-server-db-conf
+data:
+  driverClassName: {{ $driverClassName }}
+  host: {{ $host }}
+---  
+{{- end }}
+{{- end }}

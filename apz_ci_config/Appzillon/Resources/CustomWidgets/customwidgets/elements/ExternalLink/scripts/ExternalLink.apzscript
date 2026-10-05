@@ -1,0 +1,7 @@
+apz.ExternalLink = {};
+apz.ExternalLink.getObjValue = function(obj){
+    return obj.getAttribute("href");
+}
+apz.ExternalLink.setObjValue = function(obj, value){
+    obj.setAttribute("href",value);
+}

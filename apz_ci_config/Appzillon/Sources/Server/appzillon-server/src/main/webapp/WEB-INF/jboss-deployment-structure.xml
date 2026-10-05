@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jboss-deployment-structure
+	xmlns="urn:jboss:deployment-structure:1.2">
+	<deployment>
+		<exclude-subsystems>
+
+			<subsystem name="jpa" />
+		</exclude-subsystems>
+		<exclusions>
+			<module name="javaee.api" />
+			<module name="org.slf4j" />
+			<module name="org.slf4j.impl" />
+			<module name="org.jboss.as.jpa" />
+		</exclusions>
+		<dependencies>
+		    <module name="org.jboss.remote-naming" />
+			<module name="org.bouncycastle" slot="main" export="true" />
+			<module name="javaee.api">
+				<imports>
+					<exclude-set>
+						<path name="javax/ws/rs" />
+						<path name="javax/ws/rs/core" />
+						<path name="javax/ws/rs/ext" />
+					</exclude-set>
+				</imports>
+			</module>
+		</dependencies>
+	</deployment>
+</jboss-deployment-structure>

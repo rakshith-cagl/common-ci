@@ -1,0 +1,67 @@
+pipeline {
+    parameters {
+      choice(name:'DEPLOY_TYPE', choices: ['fresh', 'incremental'], description: 'Fresh and Incremental pipeline options') 
+      choice(name:'ARTIFACTORY_TYPE', choices: ['jfrog', 'harbor'], description: 'Select Artifactory  Type')
+      string defaultValue: 'Admin', description: '', name: 'APP_ID', trim: false
+      string defaultValue: 'develop', description: '', name: 'STAGE', trim: false
+      string defaultValue: 'appzillon-develop', description: '', name: 'NAMESPACE', trim: false
+      string defaultValue: 'appzillon-admin', description: '', name: 'DOCKER_APP_NAME', trim: false
+      string defaultValue: 'v1', description: '', name: 'BUILD_TAG', trim: false
+      string defaultValue: 'sha256~aW7khl35APbmumcnNNFHZE3hcxEo6n5EO26hr_XxEvA', description: '', name: 'OC_TOKEN', trim: false
+      string defaultValue: 'https://api.iexceed-platform.apzplatforms.com:6443', description: '', name: 'OC_CLIENT_URL', trim: false
+      string defaultValue: 'ec2-user', description: '', name: 'SHIPPER_USERNAME', trim: false
+      string defaultValue: 'appzillon', description: '', name: 'SERVICE_ACCOUNT', trim: false
+      string defaultValue: '3.16.220.228', description: '', name: 'SHIPPER_TARGET', trim: false
+      string defaultValue: 'appzillon-admin.apzplatforms.com', description: '', name: 'APP_WEB_DOMAIN', trim: false
+      string defaultValue: '/AppzillonAdmin', description: '', name: 'CONTEXT_PATH', trim: false
+      string defaultValue: '1', description: '', name: 'REPLICAS', trim: false
+   }
+
+    environment {
+        REGISTRY= "${env.ARTIFACTORY_TYPE == 'jfrog' ? 'artifactory.appzillon.com:443/docker-dev-local' : 'harbor-platform.apzplatforms.com/appzillon-develop'}"
+        APP_TYPE= APP_ID.toLowerCase()
+    }
+
+    agent any
+
+    stages {
+        stage('Deploy Web') {
+            steps {
+                sshagent (credentials: ['run-oc-client']) {
+                    script {
+                        // Variables
+                        def sourcepath="/dataext/home/"+SHIPPER_USERNAME+"/projects/ship-openshift/"+STAGE+"/web/" //web helm chart path
+                        
+                        // OC login
+                        sh '''
+                            COMMAND1="oc login --token=${OC_TOKEN} --server=${OC_CLIENT_URL} --insecure-skip-tls-verify"
+                            ssh -o StrictHostKeyChecking=no -l ${SHIPPER_USERNAME} ${SHIPPER_TARGET} $COMMAND1
+
+                            COMMAND2="oc project ${NAMESPACE}"
+                            ssh -o StrictHostKeyChecking=no -l ${SHIPPER_USERNAME} ${SHIPPER_TARGET} $COMMAND2
+                        '''
+
+                        // Fresh deployment of Web
+                        if (DEPLOY_TYPE == "fresh" ) {
+                            // In platforms such as kubernetes and OpenShift this will be the equivalent as allowing UID 0, or root user, both inside and outside the container                         
+                            sh'''
+                                COMMAND3="oc adm policy add-scc-to-user anyuid -z ${SERVICE_ACCOUNT} -n ${NAMESPACE}"
+                                ssh -o StrictHostKeyChecking=no -l ${SHIPPER_USERNAME} ${SHIPPER_TARGET} $COMMAND3
+                            '''
+                            sh "ssh -o StrictHostKeyChecking=no -l ${SHIPPER_USERNAME} ${SHIPPER_TARGET} 'helm upgrade  --install ${DOCKER_APP_NAME} ${sourcepath}/appzillon-web/ --set imagePullSecrets[0].name=${APP_TYPE}-registry-secret-web --set fullnameOverride=${DOCKER_APP_NAME}    --set path=${CONTEXT_PATH} --set appId=${APP_ID} --set replicaCount=${REPLICAS} --set image.repository=$REGISTRY/${DOCKER_APP_NAME} --set image.tag=${BUILD_TAG} --set serviceAccount.name=${SERVICE_ACCOUNT} --set 'ingress.hosts[0].host=${APP_WEB_DOMAIN},ingress.hosts[0].paths[0]=${CONTEXT_PATH},ingress.tls[0].secretName=${APP_TYPE}-tls-secret-web,ingress.tls[0].hosts[0]=${APP_WEB_DOMAIN}' --set contextPath=${CONTEXT_PATH} --set openshift.cluster=true --set nameSpace=${NAMESPACE} -f ${sourcepath}/appzillon-web/values-openshift.yaml -n ${NAMESPACE}'"
+                        }                     
+                        else {
+                            // Incremental deployment of Web
+                            sh "ssh -o StrictHostKeyChecking=no -l ${SHIPPER_USERNAME} ${SHIPPER_TARGET} 'helm upgrade ${DOCKER_APP_NAME} ${sourcepath}/appzillon-web/ --set imagePullSecrets[0].name=${APP_TYPE}-registry-secret-web --set fullnameOverride=${DOCKER_APP_NAME}    --set path=${CONTEXT_PATH} --set appId=${APP_ID} --set replicaCount=${REPLICAS} --set image.repository=$REGISTRY/${DOCKER_APP_NAME} --set image.tag=${BUILD_TAG} --set serviceAccount.name=${SERVICE_ACCOUNT} --set 'ingress.hosts[0].host=${APP_WEB_DOMAIN},ingress.hosts[0].paths[0]=${CONTEXT_PATH},ingress.tls[0].secretName=${APP_TYPE}-tls-secret-web,ingress.tls[0].hosts[0]=${APP_WEB_DOMAIN}' --set contextPath=${CONTEXT_PATH} --set openshift.cluster=true --set nameSpace=${NAMESPACE} -f ${sourcepath}/appzillon-web/values-openshift.yaml -n ${NAMESPACE}'"
+                        }
+                    }
+                }
+            }
+        }
+    }
+    post { 
+        always { 
+            cleanWs()
+        }
+    }
+}

@@ -1,0 +1,259 @@
+template.Payment.createLayout = function() {
+	template.addHeader(null, "HEADER");
+    template.addRow("headerGridRow", "HEADER", null, "GRIDROW");
+    template.addColumn("headerGridCol", "headerGridRow", null, "GRIDCOLHEADER");
+    template.addPanel("headerPanel", "headerGridCol", "SIMPLE", null, "SIMPLEPANEL");
+    template.addPanelSection("headerPanelSection", "headerPanel", null, "PANELSECTION");
+    template.addContainer("headerNavbar", "headerPanelSection", "NAVBAR", null, "NAVBAR");
+    template.addRow("headerNavbarSecRow", "headerNavbar", null, "SECTIONROW");
+    template.addColumn("headerBackButtonSecCol", "headerNavbarSecRow", null, "SECTIONCOL1");
+    main.pointers["headerBackButtonSecCol"].width = "25";
+     main.pointers["headerBackButtonSecCol"].contentalignment = "CENTER";
+      main.pointers["headerBackButtonSecCol"].verticalalignment = "MIDDLE";
+    template.addElement("headerBackButton", "headerBackButtonSecCol", "BUTTON", null, "BUTTON");
+    main.pointers["headerBackButton"].title = "";
+    main.pointers["headerBackButton"].semantics = "INHERIT";
+    main.pointers["headerBackButton"].icon = "icon-circle-arrow-left";
+    main.pointers["headerBackButton"].buttonasicon = "Y";
+    main.pointers["headerBackButton"].events = [{
+        "name": "ONCLICK",
+        "function": "apz.launchScreen('LandingPage');"
+    }];
+   template.addColumn("headerLabelSecCol", "headerNavbarSecRow", null, "SECTIONCOL2");
+    main.pointers["headerLabelSecCol"].width = "50";
+    template.addElement("headerLabel", "headerLabelSecCol", "TEXT", null, "TEXT");
+    main.pointers["headerLabel"].defaultvalue = "Payment";
+	main.pointers["headerLabel"].elementtype = "HEADING4";
+    template.addColumn("headerLogCol", "headerNavbarSecRow", null, "SECTIONCOL3");
+    main.pointers["headerLogCol"].width = "25";
+    template.addElement("headerLogIcon", "headerLogCol", "BUTTON", null, "BUTTON");
+    main.pointers["headerLogIcon"].title = "";
+    main.pointers["headerLogIcon"].semantics = "INHERIT";
+    main.pointers["headerLogIcon"].icon = "icon-signout";
+    main.pointers["headerLogIcon"].buttonasicon = "Y";
+      main.pointers["headerLogCol"].contentalignment = "CENTER";
+      main.pointers["headerLogCol"].verticalalignment = "MIDDLE";
+    main.pointers["headerLogIcon"].events = [{
+        "name": "ONCLICK",
+        "function": "apz.app.logOut();"
+    }];
+    template.addBody(null, "BODY");
+    var lnoofifaces = datamodel.interfaces.length;
+    lcount = 0;
+    if(lnoofifaces>0){
+        for(var iface = 0; iface < lnoofifaces; iface++){
+            lifaceobj = datamodel.interfaces[iface];
+            var lnoofnodes = 0;
+            var ldmlobj = {};
+            var lnodeobj = {};
+            var lnoofdmls = lifaceobj.dmls.length;
+            if (lnoofdmls > 0) {
+                for (var d = 0; d < lnoofdmls; d++) {
+                    ldmlobj = lifaceobj.dmls[d];
+                    if (ldmlobj.type == "REQUESTDATAMODEL" && ldmlobj.nodes != undefined) {
+                        lnoofnodes = ldmlobj.nodes.length;
+                        for (var lnode = 0; lnode < lnoofnodes; lnode++) {
+                            dmtype = "REQUESTDATAMODEL";
+                            lgobtnrequird = true;
+                            lnodeobj = ldmlobj.nodes[lnode];
+                            createNodeWidgets(lnodeobj);
+                        }
+                    }
+                }
+                
+            }
+            
+        }
+ 
+    }
+}
+
+function createNodeWidgets(pnodeobj){
+	var lnoofelms = pnodeobj.elements.length;
+	var lnodename = pnodeobj.name;
+	if(lnoofelms > 0){
+		lcount = lcount + 1;
+		var lcommonid = pnodeobj.name + "__" + lcount;
+		var lgcid = "GC__" + lcommonid;
+        var lpanel = "P__" + lcommonid;
+        var lpanelsec = "BillPay__i__FundTransferReq__planelsection";
+        template.addRow("BillPay__i__FundTransferReq__grid_row", "BODY", null, "GRIDROW");
+        template.addColumn(lgcid, "BillPay__i__FundTransferReq__grid_row", null, "GRIDCOL");
+        template.addPanel(lpanel, lgcid, "SIMPLE", null, "SIMPLEPANEL");
+        template.addPanelSection(lpanelsec, lpanel, null, "PANELSECTION");
+        var lcontainerId = "CON__" + lcommonid;
+        template.addContainer(lcontainerId, lpanelsec, "FORM", null, "FORM");
+        var lsrid = "SR__" + lcommonid;
+		var lscid = "SC__" + lcommonid;
+		template.addRow(lsrid, lcontainerId, null, "SECTIONROW");
+		template.addColumn(lscid, lsrid, null, "SECTIONCOL");
+		main.pointers[lscid].width = "50";
+		var elmObj = pnodeobj.elementsmap["fromAccount"];
+		lelmid = utils.getNameforWidget(lifaceobj.name,dmtype,lnodename,"fromAccount");
+    	template.addElement(lelmid, lscid, "DROPDOWN", null, "DROPDOWN", lifaceobj.name, dmtype, lnodename, "fromAccount");
+    	main.pointers[lelmid].title = "From Account";
+    	main.pointers[lelmid].state = "ENABLED";
+    	
+    	template.addColumn(lscid+"_1", lsrid, null, "SECTIONCOL");
+    	main.pointers[lscid+"_1"].width = "50";
+    	var elmObj = pnodeobj.elementsmap["beneficiaryId"];
+		lelmid = utils.getNameforWidget(lifaceobj.name,dmtype,lnodename,"beneficiaryId");
+    	template.addElement(lelmid, lscid+"_1", "INPUTBOX", null, "INPUTBOX", lifaceobj.name, dmtype, lnodename, "beneficiaryId");
+		main.pointers[lelmid].title = "Beneficiary ID";
+		main.pointers[lelmid].state = "ENABLED";
+		var lcontainerId1 = lcontainerId + "_2";
+    	var lsrid1 = lsrid + "_2";
+    	var lscid1 = lscid + "_2";
+		template.addContainer(lcontainerId1, lpanelsec, "FORM", null, "FORM");
+		template.addRow(lsrid1, lcontainerId1, null, "SECTIONROW");
+		template.addColumn(lscid1, lsrid1, null, "SECTIONCOL");
+		main.pointers[lscid1].width = "50";
+    	template.addElement("Payment_PayNow", lscid1, "CHECKBOX", null, "CHECKBOX");
+    	main.pointers["Payment_PayNow"].title = "Pay Now";
+    	main.pointers[lelmid].state = "ENABLED";
+    	var lscid1 = lscid1 + "_1";
+    	template.addColumn(lscid1, lsrid1, null, "SECTIONCOL");
+    	main.pointers[lscid1].width = "50";
+    	var elmObj = pnodeobj.elementsmap["transaction"];
+		lelmid = utils.getNameforWidget(lifaceobj.name,dmtype,lnodename,"transactionDate");
+    	template.addElement(lelmid, lscid1, "INPUTBOX", null, "INPUTBOX", lifaceobj.name, dmtype, lnodename, "transactionDate");
+    	main.pointers[lelmid].title = "Transaction Date";
+    	main.pointers[lelmid].datatype = "DATE";
+    	main.pointers[lelmid].width = "";
+    	main.pointers[lelmid].state = "ENABLED";
+
+    	var lcontainerId1 = lcontainerId + "_3";
+    	var lsrid1 = lsrid + "_3";
+    	var lscid1 = lscid + "_3";
+    	template.addContainer(lcontainerId1, lpanelsec, "FORM", null, "FORM");
+    	template.addRow(lsrid1, lcontainerId1, null, "SECTIONROW");
+		template.addColumn(lscid1, lsrid1, null, "SECTIONCOL");
+		main.pointers[lscid1].width = "50";
+		var elmObj = pnodeobj.elementsmap["transferAmount"];
+		lelmid = utils.getNameforWidget(lifaceobj.name,dmtype,lnodename,"transferAmount");
+		template.addElement(lelmid, lscid1, "INPUTBOX", null, "INPUTBOX", lifaceobj.name, dmtype, lnodename, "transferAmount");
+		main.pointers[lelmid].title = "Transaction Amount";
+		main.pointers[lelmid].state = "ENABLED";
+    	var lscid1 = lscid + "_4";
+		template.addColumn(lscid1, lsrid1, null, "SECTIONCOL");
+		main.pointers[lscid1].width = "50";
+		var elmObj = pnodeobj.elementsmap["remarks"];
+		lelmid = utils.getNameforWidget(lifaceobj.name,dmtype,lnodename,"remarks");
+		template.addElement(lelmid, lscid1, "INPUTBOX", null, "INPUTBOX", lifaceobj.name, dmtype, lnodename, "remarks");
+		main.pointers[lelmid].title = "Remarks";
+		main.pointers[lelmid].state = "ENABLED";
+
+		var elmObj = pnodeobj.elementsmap["currency"];
+		lelmid = utils.getNameforWidget(lifaceobj.name,dmtype,lnodename,"currency");
+		template.addElement(lelmid, lscid1, "INPUTBOX", null, "INPUTBOX", lifaceobj.name, dmtype, lnodename, "currency");
+		main.pointers[lelmid].defaultvalue = "inr";
+		main.pointers[lelmid].options = "N";
+
+		var lgcid = "GC__Payment_Col";
+        var lpanel = "P__Payment_Panel";
+        var lpanelsec = "P__Payment_PanelSec";
+		template.addRow("AppzillonWSButtons_grid_row", "BODY", null, "GRIDROW");
+        template.addColumn(lgcid, "AppzillonWSButtons_grid_row", null, "GRIDCOL");
+        template.addPanel(lpanel, lgcid, "SIMPLE", null, "SIMPLEPANEL");
+        template.addPanelSection(lpanelsec, lpanel, null, "PANELSECTION");
+        template.addContainer("Payment_Proceed_Container", lpanelsec, "NAVBAR", null, "NAVBAR");
+        template.addRow("Payment_Proceed_Sec_Row1", "Payment_Proceed_Container", null, "SECTIONROW");
+        template.addColumn("Payment_Proceed_Sec1", "Payment_Proceed_Sec_Row1", null, "SECTIONCOL");
+        main.pointers['Payment_Proceed_Sec1'].width = "50";
+        template.addColumn("Payment_Proceed_Sec2", "Payment_Proceed_Sec_Row1", null, "SECTIONCOL");
+		main.pointers['Payment_Proceed_Sec2'].width = "50";
+		template.addElement("Payment_Proceed_Btn", "Payment_Proceed_Sec2", "BUTTON", null, "INPUTBOX");
+		main.pointers['Payment_Proceed_Btn'].title = "Proceed";
+		main.pointers['Payment_Proceed_Btn'].events = [{
+        	"name": "ONCLICK",
+        	"function": "apz.app.payment_proceed();"
+    	}]
+    	main.pointers["Payment_Proceed_Sec2"].contentalignment = "RIGHT";
+		
+		var lgrid = "Confirmation_Pay_Row";
+		var lgcid = "Confirmation_Pay_Col";
+        var lpanel = "P__Confirmation_Panel";
+        var lpanelsec = "P__Confirmation_PanelSec";
+		template.addRow(lgrid, "BODY", null, "GRIDROW");
+		main.pointers[lgrid].options = "N";
+        template.addColumn(lgcid, lgrid, null, "GRIDCOL");
+        template.addPanel(lpanel, lgcid, "SIMPLE", null, "SIMPLEPANEL");
+        template.addPanelSection(lpanelsec, lpanel, null, "PANELSECTION");
+
+        var lcontainerId1 = "confirmation_pay_cont";
+    	var lsrid1 = lcontainerId1 + "_row_3";
+    	var lscid1 = lcontainerId1 + "_col_3";
+    	template.addContainer(lcontainerId1, lpanelsec, "FORM", null, "FORM");
+    	main.pointers[lcontainerId1].readonly = "Y";
+    	template.addRow(lsrid1, lcontainerId1, null, "SECTIONROW");
+		template.addColumn(lscid1, lsrid1, null, "SECTIONCOL");
+		main.pointers[lscid1].width = "50";
+		template.addElement("Confirm_FromAccount", lscid1, "INPUTBOX", null, "INPUTBOX");
+		main.pointers["Confirm_FromAccount"].title = "From Account";
+		var lscid1 = lcontainerId1 + "_col_3_1";
+		template.addColumn(lscid1, lsrid1, null, "SECTIONCOL");
+		main.pointers[lscid1].width = "50";
+		template.addElement("Confirm_ToAccount", lscid1, "INPUTBOX", null, "INPUTBOX");
+		main.pointers["Confirm_ToAccount"].title = "Beneficiary Account";
+
+        var lcontainerId1 = "confirmation_pay_cont_1";
+    	var lsrid1 = lcontainerId1 + "_row_4";
+    	var lscid1 = lcontainerId1 + "_col_4";
+    	template.addContainer(lcontainerId1, lpanelsec, "FORM", null, "FORM");
+    	main.pointers[lcontainerId1].readonly = "Y";
+    	template.addRow(lsrid1, lcontainerId1, null, "SECTIONROW");
+		template.addColumn(lscid1, lsrid1, null, "SECTIONCOL");
+		main.pointers[lscid1].width = "50";
+		template.addElement("Confirm_TransactionDate", lscid1, "INPUTBOX", null, "INPUTBOX");
+		main.pointers["Confirm_TransactionDate"].title = "Transaction Date";
+		var lscid1 = lcontainerId1 + "_col_4_1";
+		template.addColumn(lscid1, lsrid1, null, "SECTIONCOL");
+		main.pointers[lscid1].width = "50";
+		template.addElement("Confirm_TransferAmount", lscid1, "INPUTBOX", null, "INPUTBOX");
+		main.pointers["Confirm_TransferAmount"].title = "Transfer Amount";
+
+		var lcontainerId1 = "confirmation_pay_cont_2";
+    	var lsrid1 = lcontainerId1 + "_row_5";
+    	var lscid1 = lcontainerId1 + "_col_5";
+    	template.addContainer(lcontainerId1, lpanelsec, "FORM", null, "FORM");
+    	main.pointers[lcontainerId1].readonly = "Y";
+    	template.addRow(lsrid1, lcontainerId1, null, "SECTIONROW");
+		template.addColumn(lscid1, lsrid1, null, "SECTIONCOL");
+		main.pointers[lscid1].width = "50";
+		template.addElement("Confirm_TransactionRemarks", lscid1, "INPUTBOX", null, "INPUTBOX");
+		main.pointers["Confirm_TransactionRemarks"].title = "Remarks";
+
+
+		var lgrid = "Confirmation_Proceed";
+		var lgcid = "GC__Confirmation_Col_1";
+        var lpanel = "P__Confirmation_Panel_1";
+        var lpanelsec = "P__Confirmation_PanelSec_1";
+		template.addRow(lgrid, "BODY", null, "GRIDROW");
+		main.pointers[lgrid].options = "N";
+        template.addColumn(lgcid, lgrid, null, "GRIDCOL");
+        template.addPanel(lpanel, lgcid, "SIMPLE", null, "SIMPLEPANEL");
+        template.addPanelSection(lpanelsec, lpanel, null, "PANELSECTION");
+        template.addContainer("Confirmation_Proceed_Container", lpanelsec, "NAVBAR", null, "NAVBAR");
+        template.addRow("Confirmation_Proceed_Sec_Row1", "Confirmation_Proceed_Container", null, "SECTIONROW");
+        template.addColumn("Confirmation_Proceed_Sec1", "Confirmation_Proceed_Sec_Row1", null, "SECTIONCOL");
+        main.pointers['Confirmation_Proceed_Sec1'].width = "50";
+        main.pointers['Confirmation_Proceed_Sec1'].contentalignment = "RIGHT";
+        template.addElement("Confirm_Back", "Confirmation_Proceed_Sec1", "BUTTON", null, "INPUTBOX");
+		main.pointers['Confirm_Back'].title = "Back";
+		main.pointers['Confirm_Back'].events = [{
+        	"name": "ONCLICK",
+        	"function": "apz.app.Confirm_Back();"
+    	}]
+
+        template.addColumn("Confirmation_Proceed_Sec_2", "Confirmation_Proceed_Sec_Row1", null, "SECTIONCOL");
+		main.pointers['Confirmation_Proceed_Sec_2'].width = "50";
+		main.pointers['Confirmation_Proceed_Sec_2'].contentalignment = "LEFT";
+		template.addElement("Confirm_Pay", "Confirmation_Proceed_Sec_2", "BUTTON", null, "INPUTBOX");
+		main.pointers['Confirm_Pay'].title = "Confirm";
+		main.pointers['Confirm_Pay'].events = [{
+        	"name": "ONCLICK",
+        	"function": "apz.app.payment_confirm();"
+    	}]
+	}
+
+}

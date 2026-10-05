@@ -1,0 +1,95 @@
+<ng-container *ngIf="props.cntrType=='FORM'">
+        <ul id="{{props.id}}_ul" #wrapperClasses clickstoppropagation>
+            <li #labelWrapper >
+                <label #labelProps [innerHTML]="props.labelProps.title">
+                </label>
+            </li>
+            <li #contentWrapper>
+				<button [id]="id" [attr.rowno]="index" type="button" delegateEvent [blurEvent]="blur" [focusEvent]="focus" #content>
+					<ng-container [ngTemplateOutlet]="ButtonContent"></ng-container>
+					
+				</button>
+				
+			</li>
+		</ul>
+</ng-container>
+
+<ng-container *ngIf= "props.cntrType=='TABLE'">
+    <td [attr.id]="(rowIndex != undefined) ?('td_'+ props.id + '_' + rowIndex):('td_'+ props.id)" class="{{props.tdClasses}}">
+		<button [id]="id" [attr.rowno]="index" type="button" delegateEvent [blurEvent]="blur" [focusEvent]="focus" #content>
+			<ng-container [ngTemplateOutlet]="ButtonContent"></ng-container>
+			
+		</button>
+	</td>
+</ng-container>
+
+<ng-container *ngIf="props.cntrType == 'NAVBAR' || props.cntrType == 'LIST'">
+		<button [id]="id" [attr.rowno]="index" type="button" delegateEvent [blurEvent]="blur" [focusEvent]="focus" #content>
+			<ng-container [ngTemplateOutlet]="ButtonContent"></ng-container>
+			
+		</button>
+</ng-container>
+
+<ng-template #getLabelIcon>
+	<ng-container *ngIf="props.hasLabelIcon == 'Y'">
+		<svg #labelIconProps><!-- {...props.labelIconProps.direct} -->
+			<use [attr.xlink.href]="'#'+ props.labelIconProps.name"></use>
+		</svg>
+	</ng-container>
+</ng-template>
+
+<ng-template #ButtonContent>
+	<ng-container *ngIf="props.hasButtonIcon == 'Y';else btnContent">
+		<ng-container *ngIf="props.iconPosition == 'RIGHT'">
+				<ng-container [ngTemplateOutlet]="buttonbody"></ng-container>
+			<svg aria-hidden="true" role="presentation" [attr.class]="props.buttonIcon.direct.className" > <!-- {...props.buttonIcon.direct} -->
+				<use [attr.xlink:href]="'#'+props.buttonIcon.direct.name"></use>
+			</svg>
+		</ng-container>
+		<ng-container *ngIf="props.iconPosition == 'TOP'">
+			<svg aria-hidden="true" role="presentation" [attr.class]="props.buttonIcon.direct.className"> <!-- {...props.buttonIcon.direct} -->
+				<use [attr.xlink:href]="'#'+props.buttonIcon.direct.name"></use>
+			</svg>
+			<ng-container [ngTemplateOutlet]="buttonBody"></ng-container>
+		</ng-container>
+		<ng-container *ngIf="props.iconPosition == 'BOTTOM'">
+				<ng-container [ngTemplateOutlet]="buttonBody"></ng-container>
+			<svg aria-hidden="true" role="presentation" [attr.class]="props.buttonIcon.direct.className" > <!-- {...props.buttonIcon.direct} -->
+				<use [attr.xlink:href]="'#'+props.buttonIcon.direct.name"></use>
+			</svg>
+		</ng-container>
+		<ng-container *ngIf="props.iconPosition == 'LEFT'">
+			<svg aria-hidden="true" role="presentation" attr.class="{{props.buttonIcon.direct.className}}" > <!--#buttonIcon {...props.buttonIcon.direct} -->
+				<use [attr.xlink:href]="'#'+props.buttonIcon.direct.name"></use>
+			</svg>
+			<ng-container [ngTemplateOutlet]="buttonbody"></ng-container>
+		</ng-container>
+	</ng-container>
+</ng-template>
+
+<ng-template #btnContent>
+		<ng-container *ngIf="isUiElm()">
+			<span [id]="id+'_txtcnt'" [attr.rowno]="index" #buttonTitle [innerHtml]="value"></span>
+		</ng-container>
+		<ng-container *ngIf="!isUiElm()">
+				<span [id]="id+'_txtcnt'" [attr.rowno]="index" [innerHtml]="values[elm]" #buttonTitle></span>
+		</ng-container>
+</ng-template>
+
+<ng-template #buttonbody>
+		<ng-container *ngIf="isUiElm()">
+				<span  [id]="id+'_txtcnt'" [attr.rowno]="index" [innerHtml]="value" #buttonTitle></span>
+			</ng-container>
+			<ng-container *ngIf="!isUiElm()">
+				<span [id]="id+'_txtcnt'" [attr.rowno]="index" [innerHtml]="values[elm]" #buttonTitle></span>
+			</ng-container>
+</ng-template>
+<ng-template #buttonBody>
+		<ng-container *ngIf="isUiElm()">
+				<div [attr.rowno]="index" [innerHtml]="value" id={{props.id}}_txtcnt></div>
+			</ng-container>
+			<ng-container *ngIf="!isUiElm()">
+					<div id={{props.id}}_txtcnt [attr.rowno]="index" [innerHtml]="values[elm]"></div>
+			</ng-container>
+</ng-template>
+

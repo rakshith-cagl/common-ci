@@ -1,0 +1,292 @@
+<div id={{props.id}} class={{props.tableWrapperClass}}>
+  <ng-container  [ngTemplateOutlet]="tableTitle"></ng-container>
+  <div #tableWrapper>
+    <!-- //NOSONAR --> <table class={{props.className}} id="{{props.id}}_table" >
+      <thead>
+        <tr><ng-container  [ngTemplateOutlet]="tableHeader"></ng-container></tr>
+      </thead>
+      <ng-container [ngTemplateOutlet]="tableBody"></ng-container>
+    </table>
+  </div>
+  <ng-container *ngIf="props.paginationStyle!='PAGE1'">
+      <ng-container [ngTemplateOutlet]="paginationTemplate"></ng-container>
+  </ng-container>
+</div>
+
+<ng-template #tableTitle>
+  <ul id={{props.id}}ul_ttl class="ttl" >
+      <li class="ttl-ctr">
+        <ul class="ttv">
+            <ng-container *ngIf="props.titleIcon">
+                  <li class="icn">
+                      <svg aria-hidden="true" 
+                      [attr.class]="'ett-icon '+props.titleIcon + props.titleIconSize">
+                         <use [attr.xlink:href]="'#'+props.titleIcon"></use>                          
+                      </svg>
+                  </li>
+            </ng-container>
+            <ng-container *ngIf="props.titleValue">
+                  <li class="lbl">
+                      <h4>{{props.titleValue}}</h4>
+                  </li>
+            </ng-container>
+        </ul>
+      </li>
+      <ng-container *ngIf="props.searchable=='Y'">
+          <li id={{props.id}}_li_search class="srh-ctr" >
+              <span id={{props.is}}_span_search class="srh" >
+                  <span>
+                      <input id={{props.id}}_input_search class="srh-inp" type="search" (keyup)="apz.searchRecords(props.id,$event.currentTarget.value)"  placeholder="Search....." /> <!-- onKeyUp={(event) => apz.searchRecords(this.containerId, event.currentTarget.value)} -->
+                  </span>
+                  <span class="srh-icn">
+                  <svg aria-hidden="true" role="presentation" class="icon icon-search px24">
+                      <use xlink:href="#icon-search"></use>
+                  </svg>
+                  </span>
+              </span>
+          </li>
+      </ng-container>
+      <ng-container *ngIf="props.paginationStyle == 'PAGE1' || props.tableState !== 'READONLY'">
+        <li class="pgn-ctr">
+          <ng-container *ngIf="props.paginationStyle == 'PAGE1'">
+            <ng-container  [ngTemplateOutlet]="paginationTemplate"></ng-container>
+          </ng-container>
+          <ng-container *ngIf="props.tableState !== 'READONLY'">
+            <ul class="adr-ctr">
+              <li class="add">
+                <span>
+                  <button class="ett-bttn tsp med" id={{props.id}}_add_btn href="javascript:;" aria-label="Add Record" 
+                  (click)="apz.data.createRow(props.id,$event)">
+                    <svg aria-hidden="true" class="icon icon-plus px16">
+                      <use xlink:href="#icon-plus"></use>
+                    </svg>
+                  </button>
+                </span>
+              </li>
+              <li class="rmv">
+                <span>
+                  <button class="ett-bttn tsp med" id={{props.id}}_rem_btn href="javascript:;" aria-label="Remove Record" 
+                  (click)="apz.data.removeRows(props.id,$event)">
+                    <svg aria-hidden="true" class="icon icon-minus px16">
+                      <use xlink:href="#icon-minus"></use>
+                    </svg>
+                  </button>
+                </span>
+              </li>
+            </ul>
+          </ng-container>
+        </li>
+      </ng-container>
+  </ul>
+</ng-template>
+
+<ng-template #paginationTemplate>
+    <ng-container *ngIf="props.paginationStyle =='PAGE1'">
+      <ng-container *ngIf="props.dynamicpagesize=='Y'">
+        <ng-container [ngTemplateOutlet]="genDynamicPageSize">
+        </ng-container>
+      </ng-container>
+      <ul class="pgn">
+        <li class="pnx">
+          <button id={{props.id}}_prev_btn class="ett-bttn tsp med" href="javascript:;" title="Previous" (click)="apz.data.changePage(props.id, 'P','')" aria-label="Previous page">
+                  <svg aria-hidden="true" class="icon icon-chevron-left px16">
+                    <use xlink:href="#icon-chevron-left" >
+                    </use>
+                  </svg>
+            </button>
+        </li>
+        <li class="pcl">
+          <input id={{props.id}}_cp type="text" class="pageno"
+           (change)="apz.data.changePage(props.id,'S','')" 
+           value={{metadata.currPage}} />
+        </li>
+        <li class="ptx">
+          <span>/</span><span id={{props.id}}_tp>{{metadata.totalPages}}</span>
+        </li>
+        <li class="pnx">
+          <button class="ett-bttn tsp med" id={{props.id}}_next_btn 
+          href="javascript:;"
+          aria-label="Next Page" (click)="apz.data.changePage(props.id,'N','')">
+            <svg aria-hidden="true" class="icon icon-chevron-right px16">
+              <use xlink:href="#icon-chevron-right">
+              </use>
+            </svg>
+          </button>
+        </li>
+      </ul>
+    </ng-container>
+    <ng-container *ngIf="props.paginationStyle == 'APPEND' && props.tableState === 'READONLY'">
+        <ul id={{props.id}}_footer class="plml">
+            <li id={{props.id}}footer_li>
+              <a id={{props.id}_loadmore_btn class="loadmore" (click)="apz.data.changePage(props.id,'P','')" href="javascript:;">Load More</a><!--  onClick={() => apz.data.changePage(this.containerId, "P", "")} -->
+              <a id={{props.id}}_loadless_btn class="loadless" (click)="apz.data.changePage(props.id,'N','')" href="javascript:;">Load Less</a> <!--  onClick={() => apz.data.changePage(this.containerId, "N", "")} -->
+            </li>
+            <ng-container [ngTemplateOutlet]="genDynamicPageSize"></ng-container>
+          </ul> 
+    </ng-container>
+    <ng-container *ngIf="props.paginationStyle == 'PAGE2'">
+        <ul id={{props.id}}_pagination_ul class="pbtn">
+            <ng-container [ngTemplateOutlet]="genDynamicPageSize"></ng-container>
+            <li id={{props.id}}_pagination_li class="">
+              <a id={{props.id}}_first_btn aria-label="First Page" role="button" class="ett-bttn tsp sml" href="javascript:;" title="First" (click)="apz.data.changePage(props.id, 'F', '')"><!-- onClick={() => apz.data.changePage(this.containerId, "F", "")} -->
+                <svg aria-hidden="true" class="ett-icon icon-arrow-prev px18">
+                  <use xlink:href="#icon-arrow-prev"></use>
+                </svg>
+                </a>
+              <a id={{props.id}}_prev_btn aria-label="Previous Page" role="button" class="ett-bttn tsp sml" href="javascript:;" title="Previous" (click)="apz.data.changePage(props.id, 'P', '')" ><!-- onClick={() => apz.data.changePage(this.containerId, "P", "")} -->
+                <svg aria-hidden="true" class="ett-icon icon-arrow-left px18">
+                  <use xlink:href="#icon-arrow-left"></use>
+                </svg>
+              </a>
+              <ng-container [ngTemplateOutlet]="pageNumbers"></ng-container>
+              <a id={{props.id}}_next_btn aria-label="Next Page" role="button" class="ett-bttn tsp sml" href="javascript:;" title="Next" (click)="apz.data.changePage(props.id, 'N', '')"><!-- onClick={() => apz.data.changePage(this.containerId, "N", "")} -->
+                <svg aria-hidden="true" class="ett-icon icon-arrow-right px18">
+                  <use xlink:href="#icon-arrow-right"></use>
+                </svg>
+              </a>
+              <a id={{props.id}}_last_btn aria-label="Last Page" role="button" class="ett-bttn tsp sml" href="javascript:;" title="Last" (click)="apz.data.changePage(props.id,'L','')"> <!-- onClick={() => apz.data.changePage(this.containerId, "L", "")} -->
+                <svg aria-hidden="true" class="ett-icon icon-arrow-next px18">
+                  <use xlink:href="#icon-arrow-next">
+                  </use>
+                </svg>
+              </a>
+            </li>
+          </ul>
+    </ng-container>
+    <ng-container *ngIf="props.paginationStyle == 'PAGE3'">
+        <ul id={{props.id}}_pagination_ul class="plbl">
+            <ng-container [ngTemplateOutlet]="genDynamicPageSize"></ng-container>
+            <li id={{props.id}}_pagination_li class="scb-col100 rht">
+              <span id={{props.is}}_info [innerHtml]="'Showing '+(startRec+1)+' to '+ endRec+' of '+ metadata.totalRecs +' entries' "> </span> 
+              <a id={{props.id}}_prev_btn class="ett-bttn sml tsp" (click)="apz.data.changePage(props.id, 'P', '')" aria-label="Previous page" role="button">
+                <svg aria-hidden="true" class="ett-icon icon-arrow-left px14">
+                  <use xlink:href="#icon-arrow-left">
+                  </use>
+                </svg>
+              </a>
+              <!-- {{pageNumber}} -->
+              <ng-container [ngTemplateOutlet]="pageNumbers"></ng-container>
+              <a id={{props.id}}_next_btn class="ett-bttn sml tsp" (click)="apz.data.changePage(props.id, 'N', '')" aria-label="Next page" role="button">
+                <svg aria-hidden="true" class="ett-icon icon-arrow-right px14">
+                  <use xlink:href="#icon-arrow-right"></use>
+                </svg>
+              </a>
+            </li>
+          </ul>
+    </ng-container>
+</ng-template>
+
+<ng-template #pageNumbers>
+  <ng-container *ngIf="pageNumber">
+    <ng-container *ngFor="let page of pageNumber;let index = index">
+      <ng-container *ngIf="page == metadata.currPage">
+        <a [attr.id]="props.id + '_'+(index+1)+'_btn'" class=" ett-bttn tsp sml active" (click)="apz.data.changePage(props.id,'S',$event)">{{page}}</a>
+      </ng-container>
+      <ng-container *ngIf="page != metadata.currPage">
+        <a [attr.id]="props.id + '_'+(index+1)+'_btn'" class=" ett-bttn tsp sml" (click)="apz.data.changePage(props.id,'S',$event)">{{page}}</a>
+      </ng-container>
+    </ng-container>
+  </ng-container>
+</ng-template>
+
+<ng-template #genDynamicPageSize>
+  <ng-container *ngIf="props.dynamicpagesize == 'Y'">
+  <ng-container *ngIf="props.paginationStyle != 'PAGE1'">
+    <!-- //NOSONAR --> <li id={{props.id}}_dps_ext_li>
+        <ng-container [ngTemplateOutlet]="dynamicpagesizeContent"></ng-container>
+        <!-- {this.dynamicpagesizeContent(props)} -->
+      </li>
+  </ng-container>
+  <ng-container *ngIf="props.paginationStyle == 'PAGE1'">
+      <ng-container [ngTemplateOutlet]="dynamicpagesizeContent"></ng-container>
+  </ng-container>
+  </ng-container>
+</ng-template>
+
+<ng-template #dynamicpagesizeContent>
+    <ul id={{props.id}}_dps_ul class={{pagCls}}>
+        <li id={{props.id}}_dps_label>
+          <p>Items Per Page</p>
+        </li>
+        <li id={{props.id}}_dps_li>
+          <select id={{props.id}}_dps [attr.class]="'ett-slcn'+apprCls" (change)="apz.updatePaginationRecords(props.id)">
+            <!-- {listOptions} -->
+            <ng-container *ngFor="let option of staticOptions;let rowIndex = index">
+                <option [attr.id]="props.id + '_option_' + option.description" value={{option.value}} >{{option.description}}</option>
+            </ng-container>
+          </select>
+        </li>
+      </ul>
+</ng-template>
+
+<ng-template #tableHeader>
+  <ng-container *ngIf="props.rowSelector=='Y'">
+    <th id={{props.id}}_0_th class="cen">
+      <span [attr.class]="'etb-chek ett-chek '+ props.appearance">
+        <input id={{props.id}}_0 type={{props.rowSelectorType}} name={{props.rowSelectorName}}
+          (click)="apz.toggleRowSelection(props.id)" class={{props.rowSelectorClass}} />
+        <label class="flb" htmlFor={{props.id}}_0></label>
+      </span><div class="fht-cell"></div>
+    </th>
+  </ng-container>
+  <ng-container *ngIf="props.tableState == 'READONLY' && props.responsive == 'Y' && props.expandablePosition == 'LEFT'">
+    <th id={{props.id}}_0__exp_th class={{props.advancedTabClass}}>
+      <!-- //NOSONAR --> <i class="icon"></i>
+    </th>
+  </ng-container>
+  <ng-container *ngFor="let elm of props.headerWrappers">
+      <th [attr.lovid]="elm.headerWrapper.direct.lovid" [attr.class]="elm.headerWrapper.direct.className+ elm.tdClasses" [attr.aria-controls]="elm.headerWrapper.direct['aria-controls']"
+      [attr.aria-label]="elm.headerWrapper.direct['aria-label']" [ngStyle]="elm.headerWrapper.direct.style" 
+      (click)="apz.sortAction(props.id,elm.headerWrapper.direct.lovid+'_0',$event.target)">{{elm.headerTitle}}</th>
+  </ng-container>
+  <ng-container *ngIf="props.tableState == 'READONLY' && props.responsive == 'Y' && props.expandablePosition == 'RIGHT'">
+      <th id={{props.id}}_0__exp_th class={{props.advancedTabClass}}>
+      <!-- //NOSONAR --> <i class="icon"></i>
+      </th>
+  </ng-container>
+</ng-template>
+
+<ng-template #tableBody>
+  <ng-container *ngIf="dataRows">
+      <tbody id={{props.id}}_tbody>
+          <ng-container *ngFor="let row of dataRows;let rowIndex = index">
+              <tr [attr.rowno]="rowIndex" [attr.id]="props.id +'_row_' + rowIndex" class= {{props.trClasses}} (click)="apz.data.rowClicked($event.currentTarget,$event,this)">
+                <ng-container *ngIf="props.rowSelector == 'Y'">
+                    <td [attr.id]="props.id + '_0_th'" class="cen" dTyp="Boolean" tabIndex="0">
+                      <ng-container *ngIf="props.rowSelectorType == 'RADIO'">
+                          <span [attr.class]="'ett-rdio etb-rdio ' + props.appearance">
+                              <input [attr.id]="props.id + '_selcb_' + rowIndex" [attr.rowno]="rowIndex" class="group-checkable" type={{props.rowSelectorType}} name={{props.rowSelectorName}} />
+                              <label [attr.htmlFor]="props.id + '_selcb_' + rowIndex" class="rlabel"></label>
+                            </span>
+                      </ng-container>
+                      <ng-container *ngIf="props.rowSelectorType != 'RADIO'">
+                          <span [attr.class]="'ett-chek etb-chek ' + props.appearance">
+                              <input [attr.id]="props.id + '_selcb_' + rowIndex" [attr.rowno]="rowIndex" class="group-checkable" type={{props.rowSelectorType}} name={{props.rowSelectorName}} />
+                              <label class="flb"></label>
+                            </span>
+                      </ng-container>  
+                    </td>
+                    <ng-container  [ngTemplateOutlet]="expandableIcon" [ngTemplateOutletContext]="{position:'LEFT',rowIndex:rowIndex}"></ng-container>
+                </ng-container>
+                <ng-template [ngTemplateOutlet]="templateRef" [ngTemplateOutletContext]="{rowIndex:rowIndex,row:row}"></ng-template>
+                <ng-container  [ngTemplateOutlet]="expandableIcon" [ngTemplateOutletContext]="{position:'RIGHT',rowIndex:rowIndex}"></ng-container>
+              </tr>
+            </ng-container>
+      </tbody>
+  </ng-container>
+  <ng-container *ngIf="dataRows==null">
+      <tbody></tbody>
+  </ng-container>
+</ng-template>
+
+<ng-template #expandableIcon let-position='position' let-rowIndex='rowIndex'>
+    <ng-container *ngIf="props.tableState == 'READONLY' && props.responsive == 'Y' && props.expandablePosition == position">
+        <td [attr.id]="props.id +'_exp_' + rowIndex" class={props.advancedTabClass} targetClass={props.collapsibleIcon} dTyp="Boolean">
+            <ng-container *ngIf="props.expandableIcon && props.collapsibleIcon">
+                <svg aria-hidden="true" role="presentation" [attr.class]="'icon'+ props.expandableIcon + ' px24'">
+                    <use [attr.xlink:href]="'#'+props.expandableIcon"></use>
+                  </svg>
+            </ng-container>
+        </td>
+    </ng-container>
+</ng-template>

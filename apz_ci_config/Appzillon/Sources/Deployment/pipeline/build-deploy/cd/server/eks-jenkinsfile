@@ -1,0 +1,126 @@
+pipeline {
+    parameters {
+      string defaultValue: 'eks-cluster-dev', description: '', name: 'CLUSTER_NAME', trim: false
+      string defaultValue: 'us-east-1', description: '', name: 'CLUSTER_REGION', trim: false
+      choice(name: 'DEPLOY_TYPE', choices: ['fresh', 'incremental'], description: 'Fresh and Incremental pipeline options') 
+      string defaultValue: '325617413693', description: '', name: 'AWS_ACCOUNT_ID', trim: false
+      string defaultValue: 'appzillon-develop', description: '', name: 'NAMESPACE', trim: false
+      string defaultValue: 'Admin', description: '', name: 'APP_ID', trim: false
+      string defaultValue: 'develop', description: '', name: 'STAGE', trim: false
+      string defaultValue: 'AppzillonServer', description: '', name: 'SERVER_WAR_NAME', trim: false
+      string defaultValue: 'staging-eks-appzillon-adminserver', description: '', name: 'DOCKER_APP_SERVER_NAME', trim: false
+      string defaultValue: 'v1', description: '', name: 'BUILD_TAG', trim: false
+      string defaultValue: 'ubuntu', description: '', name: 'SHIPPER_USERNAME', trim: false
+      string defaultValue: '18.210.183.63', description: '', name: 'SHIPPER_TARGET', trim: false
+      string defaultValue: 'appzillon', description: '', name: 'SERVICE_ACCOUNT', trim: false
+      string defaultValue: 'eks-adminserver.apzplatforms.com', description: '', name: 'APP_SERVER_DOMAIN', trim: false
+      string defaultValue: 'arn:aws:acm:us-east-1:325617413693:certificate/86fc6620-7c3f-4a00-b237-3a6f12bc71d1', description: 'For aws loadbalancer', name: 'AWS_CERTICATE_ARN', trim: false
+      string defaultValue: '/AppzillonServer/Appzillon', description: '', name: 'CONTEXT_PATH', trim: false
+      string defaultValue: '/var/app_volume/uploads', description: '', name: 'UPLOAD_PATH', trim: false
+      string defaultValue: '/var/app_volume/reports', description: '', name: 'REPORTS_PATH', trim: false
+      extendedChoice defaultValue: '', description: '', multiSelectDelimiter: ',', name: 'DB_SSL_MODE', quoteValue: false, saveJSONParameterToFile: false, type: 'PT_CHECKBOX', value: 'enable ssl for database', visibleItemCount: 1
+      extendedChoice defaultValue: '', description: '', multiSelectDelimiter: ',', name: 'ENABLE_REPORTS', quoteValue: false, saveJSONParameterToFile: false, type: 'PT_CHECKBOX', value: 'enable reports', visibleItemCount: 1
+      extendedChoice defaultValue: '', description: '', multiSelectDelimiter: ',', name: 'KONG', quoteValue: false, saveJSONParameterToFile: false, type: 'PT_CHECKBOX', value: 'Use Kong Gateway', visibleItemCount: 1
+      choice(name: 'DB_TYPE', choices: ['postgresql','mysql'], description: 'Select the DB type')
+      string defaultValue: 'mytestdb', description: '', name: 'DB_NAME', trim: false
+      string defaultValue: 'nfs-uploadpvc', description: '', name: 'PVC_UPLOAD_NAME', trim: false
+      string defaultValue: 'nfs-reportpvc', description: '', name: 'PVC_REPORT_NAME', trim: false
+      string defaultValue: '172.31.40.40', description: '', name: 'DB_IP', trim: false
+      string defaultValue: '5432', description: '', name: 'DB_PORT', trim: false
+      string defaultValue: '1', description: '', name: 'REPLICAS', trim: false
+   }
+
+    environment {
+        REGISTRY= getRegistry(env.AWS_ACCOUNT_ID,env.CLUSTER_REGION,env.DOCKER_APP_SERVER_NAME)
+    }
+
+    agent any
+
+    stages {
+        stage('Deploy Server') {
+            steps {
+                sshagent (credentials: ['run-eks-client']) {
+                    script{
+                        // Variables
+                        def sourcepath="/home/"+SHIPPER_USERNAME+"/projects/ship-eks/"+STAGE+"/server" // Server helm chart path
+                        def APP_ID = APP_ID.split(",")
+                        def mount_ID = APP_ID
+                        def asString = mount_ID.join("\\,")
+                        def ch="{"+asString+"}"
+                        def SECRET_APP_TAG=APP_ID[0].toLowerCase()
+                        def env_mount_path="/opt/apache-tomcat-9.0.46/lib"
+                        def dbsslMode=false
+                        def reports=false
+                        def host=""
+                        def driverClassName=""
+
+                        if(APP_ID.size()>1){
+                            SECRET_APP_TAG="common"         // Variable used when server is common
+                        }
+
+                        if ('enable reports' in ENABLE_REPORTS){   // Enable reports
+                            reports=true
+                        }
+
+                        // If kong gateway is enabled in the EKS Cluster
+                        def flag=false
+                        if('Use Kong Gateway' in KONG){
+                            flag=true
+                        }
+
+                        // DB with SSL enabled  
+                        if ('enable ssl for database' in DB_SSL_MODE){
+                            if(DB_TYPE == "mysql"){
+                                dbsslMode=true
+                                host="jdbc:mysql://${DB_IP}:${DB_PORT}/${DB_NAME}"
+                                driverClassName="com.mysql.jdbc.Driver"
+                            }
+                            else{
+                                dbsslMode=true
+                                host="jdbc:postgresql://${DB_IP}:${DB_PORT}/${DB_NAME}\"?sslmode=verify-full&sslcert=${env_mount_path}/${SERVER_WAR_NAME}/certs/psql-cli-cert/postgres_client.crt&sslkey=/opt/postgres_client.key.pk8&sslrootcert=${env_mount_path}/${SERVER_WAR_NAME}/certs/psql-cli-cert/rootCA.crt\""
+                                driverClassName="org.postgresql.Driver"
+                            }
+                        }
+                        //DB without SSL enabled  
+                        else{
+                            if(DB_TYPE == "mysql"){
+                                host="jdbc:mysql://${DB_IP}:${DB_PORT}/${DB_NAME}"
+                                driverClassName="com.mysql.jdbc.Driver"
+                            }
+                            else{
+                                host="jdbc:postgresql://${DB_IP}:${DB_PORT}/${DB_NAME}"
+                                driverClassName="org.postgresql.Driver"
+                            }
+                        }
+
+                        // eks cluster login 
+                        sh '''
+                            COMMAND0="aws eks update-kubeconfig --name ${CLUSTER_NAME}  --region ${CLUSTER_REGION}"
+                            ssh -o StrictHostKeyChecking=no -l ${SHIPPER_USERNAME} ${SHIPPER_TARGET} $COMMAND0
+                        '''
+
+                        // Fresh deployment of Server
+                        if (DEPLOY_TYPE == "fresh"){
+                            sh "ssh -o StrictHostKeyChecking=no -l ${SHIPPER_USERNAME} ${SHIPPER_TARGET} 'helm upgrade  --install ${DOCKER_APP_SERVER_NAME} ${sourcepath}/appzillon-server/ --set fullnameOverride=${DOCKER_APP_SERVER_NAME} --set ingress.annotations.\"alb\\.ingress\\.kubernetes\\.io/certificate-arn\"=${AWS_CERTICATE_ARN}  --set reports.enabled=${reports} --set kong=${flag} --set dbsslMode.enabled=${dbsslMode}  --set contextPath=${CONTEXT_PATH} --set replicaCount=${REPLICAS} --set secretAppTag=${SECRET_APP_TAG} --set serverWarName=${SERVER_WAR_NAME} --set appID=${APP_ID[0]} --set reports.path=${REPORTS_PATH} --set uploadPath=${UPLOAD_PATH} --set reports.pvcReportsName=${PVC_REPORT_NAME}  --set pvcUploadName=${PVC_UPLOAD_NAME} --set image.repository=$REGISTRY --set image.tag=${BUILD_TAG} --set serviceAccount.name=${SERVICE_ACCOUNT} --set 'ingress.hosts[0].host=${APP_SERVER_DOMAIN},ingress.hosts[0].paths[0]=${CONTEXT_PATH}' --set mounts[0].appid=${ch} --set host=${host} --set driverClassName=${driverClassName} --set dbsslMode.enabled=${dbsslMode} --set nameSpace=${NAMESPACE} -f ${sourcepath}/appzillon-server/values-eks.yaml  -n ${NAMESPACE}'"
+                        }
+                        // Incremental deployment of Server
+                        else{
+                            sh "ssh -o StrictHostKeyChecking=no -l ${SHIPPER_USERNAME} ${SHIPPER_TARGET} 'helm upgrade ${DOCKER_APP_SERVER_NAME} ${sourcepath}/appzillon-server/ --set fullnameOverride=${DOCKER_APP_SERVER_NAME} --set ingress.annotations.\"alb\\.ingress\\.kubernetes\\.io/certificate-arn\"=${AWS_CERTICATE_ARN}  --set reports.enabled=${reports} --set kong=${flag} --set dbsslMode.enabled=${dbsslMode}  --set contextPath=${CONTEXT_PATH} --set replicaCount=${REPLICAS} --set secretAppTag=${SECRET_APP_TAG} --set serverWarName=${SERVER_WAR_NAME} --set appID=${APP_ID[0]} --set reports.path=${REPORTS_PATH} --set uploadPath=${UPLOAD_PATH} --set reports.pvcReportsName=${PVC_REPORT_NAME}  --set pvcUploadName=${PVC_UPLOAD_NAME} --set image.repository=$REGISTRY --set image.tag=${BUILD_TAG} --set serviceAccount.name=${SERVICE_ACCOUNT} --set 'ingress.hosts[0].host=${APP_SERVER_DOMAIN},ingress.hosts[0].paths[0]=${CONTEXT_PATH}' --set mounts[0].appid=${ch} --set host=${host} --set driverClassName=${driverClassName} --set dbsslMode.enabled=${dbsslMode} --set nameSpace=${NAMESPACE} -f ${sourcepath}/appzillon-server/values-eks.yaml -n ${NAMESPACE}'"
+                        }
+                    }
+                }
+            }
+        }
+    }
+    post { 
+        always { 
+            cleanWs()
+        }
+    }
+}
+def getRegistry(accessid,region,dockerappserver){
+    return accessid+".dkr.ecr."+region+".amazonaws.com/"+dockerappserver
+}
+def initContainer(accessid,region){
+    return accessid+".dkr.ecr."+region+".amazonaws.com/init-container:v1"
+}

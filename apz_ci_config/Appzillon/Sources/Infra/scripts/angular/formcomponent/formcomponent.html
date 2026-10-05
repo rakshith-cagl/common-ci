@@ -1,0 +1,79 @@
+<div id={{props.id}} class={{props.className}}  #formEvents>
+    <ng-container [ngTemplateOutlet]="formTitle"></ng-container>
+    <ng-content></ng-content>
+</div>
+
+
+<ng-template #formTitle>
+    <ng-container *ngIf="props.titleValue || props.titleIcon || (props.paginationReq === 'Y' && props.multiRec)">
+        <ul id={{props.id}}_title class="ttl">
+            <li class="ttl-ctr">
+                <ul class="ttv">
+                  <ng-container *ngIf="props.titleIcon">
+                      <li class="icn">
+                          <svg aria-hidden="true" [attr.class]="'ett-icon '+ props.titleIcon + props.titleIconSize">
+                            <use [attr.xlink:href]="'#' +props.titleIcon"></use>
+                          </svg>
+                      </li>
+                  </ng-container>
+                  <ng-container *ngIf="props.titleValue">
+                      <li class="lbl">
+                          <h4>{{props.titleValue}}</h4>
+                      </li>
+                  </ng-container>
+                </ul>
+            </li>
+            <ng-container *ngIf="props.paginationReq=='Y' && props.multiRec=='Y'">
+                <li class="pgn-ctr">
+                  <ng-container *ngIf="props.paginationReq=='Y'">
+                    <ul class="pgn">
+                      <li class="pnx">
+                        <button id={{props.id}}_prev_btn class="ett-bttn tsp med" href="javascript:;" title="Previous" (click)="apz.data.changeRow(props.id, 'P','')" aria-label="Previous page">
+                          <svg aria-hidden="true" class="icon icon-chevron-left px16">
+                            <use xlink:href="#icon-chevron-left" ></use>
+                          </svg>
+                        </button>
+                      </li>
+                      <li class="pcl">
+                        <input id={{props.id}}_cp type="text" class="pageno" value={{metadata.currRec+1}} (change)="apz.data.changePage(props.id, 'S', '')"/>
+                      </li>
+                      <li class="ptx">
+                        <span>/&nbsp;</span>
+                        <span id={{props.id}}_tr [innerHtml]='metadata.totalRecs'></span>
+                      </li>
+                      <li class="pnx">
+                        <button id={{props.id}}_next_btn class="ett-bttn tsp med" href="javascript:;" title="Next" (click)="apz.data.changeRow(props.id,'N', '')" aria-label="Next page">
+                          <svg aria-hidden="true" class="icon icon-chevron-right px16">
+                              <use xlink:href="#icon-chevron-right"></use>
+                          </svg>
+                        </button>
+                      </li>
+                    </ul>
+                  </ng-container>
+                  <ng-container *ngIf="props.formState!='READONLY'">
+                      <ul class="adr-ctr">
+                          <li class="add">
+                            <span>
+                              <button id={{props.id}}_add_btn class="ett-bttn tsp med" href="javascript:;" title="Add Record" (click)="apz.data.createRow(props.id)" aria-label="Add Record">
+                                <svg aria-hidden="true" class="icon icon-plus px16">
+                                  <use xlink:href="#icon-plus"></use>
+                                </svg>
+                              </button>
+                            </span>
+                          </li>
+                          <li class="rmv">
+                            <span>
+                              <button id={{props.id}}_rem_btn class="ett-bttn tsp med" href="javascript:;" title="Remove Record" (click)="apz.data.removeRows(props.id)" aria-label="Remove Record">
+                                <svg aria-hidden="true" class="icon icon-minus px16">
+                                  <use xlink:href="#icon-minus"></use>
+                                </svg>
+                              </button>
+                            </span>
+                          </li>
+                        </ul>
+                  </ng-container>
+                </li>
+              </ng-container>
+        </ul>
+    </ng-container>
+</ng-template>

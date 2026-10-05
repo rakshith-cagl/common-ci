@@ -1,0 +1,67 @@
+<ng-container *ngIf="props.cntrType=='FORM'">
+    <ul id="{{props.id}} + '_ul'" #wrapperClasses clickstoppropagation>
+        <li #labelWrapper>
+            <label #labelProps [innerHtml]="props.labelProps.title">
+            </label>
+        </li>
+        <li #contentWrapper>
+        	<span #spanWrapper class="span wrapper">
+        		<ng-container *ngTemplateOutlet="sortContent"></ng-container>
+        	</span>
+        </li>
+    </ul>
+</ng-container> 
+
+<ng-container *ngIf="props.cntrType == 'NAVBAR'">
+    <span #spanWrapper class="span wrapper">
+        <ng-container *ngTemplateOutlet="sortContent"></ng-container>  
+    </span>
+</ng-container>
+
+<ng-template #sortContent>
+    <ng-container *ngIf="props.attrs.state=='READONLY';else sort">
+        <span [id]="id" [attr.class]="spanClasses" attr.rowno="{{rowNo}}">
+                <ul>
+                    <li>
+                        <p type="text" [id]="id+'_00'+rowNo" [attr.class]="contentAllignCls">{{value1}}</p>
+                    </li>
+                    <li style="width:'10px'" class="cen"> - </li>
+                    <li>
+                        <p type="text" [id]="id+'_11'+rowNo" [attr.class]="contentAllignCls">{{value2}}</p>
+                    </li>
+                    <li style="width:'10px'" class="cen"> - </li>
+                    <li>
+                        <p type="text" [id]="id+'_22'+rowNo" [attr.class]="contentAllignCls">{{value3}}</p>
+                    </li>
+                </ul>
+        </span>
+    </ng-container>
+</ng-template>
+
+<ng-template #sort>
+        <span [id]="id" [attr.class]="spanClasses" [attr.rowno]="attrs.rowno">
+    <ul>
+        <li>
+            <input [id]="id+'_00'+rowNo" [attr.class]="inputClasses"  type="text" [value]="value1"
+            (change)="saveValue(props,$event.currentTarget)" 
+            (keydown)="apz.SortCode.validateInput($event.currentTarget,$event)" delegateEvent [blurEvent]="blur" [focusEvent]="focus"/>
+        </li>
+        <li style="width:'10px'" class="cen"> - </li>
+        <li>
+            <input [id]="id+'_11'+rowNo" [attr.class]="inputClasses"  type="text" [value]="value2"
+            (change)="saveValue(props,$event.currentTarget)" 
+            (keydown)="apz.SortCode.validateInput($event.currentTarget,$event)" delegateEvent [blurEvent]="blur" [focusEvent]="focus"/>
+        </li>
+        <li style="width:'10px'" class="cen"> - </li>
+        <li>
+            <input [id]="id+'_22'+rowNo" [attr.class]="inputClasses+accCls" 
+            type="text" [value]="value3"  
+            (change)="saveValue(props,$event.currentTarget)"
+            (keydown)="apz.SortCode.validateInput($event.currentTarget,$event)"
+            (keyup)="apz.app.enableFindBranchButton" delegateEvent [blurEvent]="blur" [focusEvent]="focus"/>
+        </li>
+
+    </ul>
+</span>
+</ng-template>
+

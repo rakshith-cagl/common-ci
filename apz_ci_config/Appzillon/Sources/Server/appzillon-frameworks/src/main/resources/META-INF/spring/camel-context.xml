@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:camel="http://camel.apache.org/schema/spring"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/util         http://www.springframework.org/schema/util/spring-util.xsd         http://www.springframework.org/schema/beans           http://www.springframework.org/schema/beans/spring-beans.xsd        http://camel.apache.org/schema/spring           http://camel.apache.org/schema/spring/camel-spring.xsd        http://activemq.apache.org/schema/core           http://activemq.apache.org/schema/core/activemq-core.xsd">
+
+	<bean id="LOVService"
+		class="com.iexceed.appzillon.services.LOVService" scope="request" />
+
+	<bean id="LOVServiceImpl"
+		class="com.iexceed.appzillon.impl.LOVServicesImpl" scope="request" />
+
+	<bean id="OTPValidateNProcessImpl"
+		class="com.iexceed.appzillon.services.otp.OTPValidateNProcessImpl"
+		scope="request" />
+
+	<bean
+		class="com.iexceed.appzillon.impl.ProperyPlaceHolderBeanPostProcessor" />
+
+	<bean id="http"
+		class="org.apache.camel.component.http.HttpComponent">
+		<property name="camelContext" ref="appzillonframeworks" />
+		<property name="connectTimeout" value="5000" />
+		<property name="connectionRequestTimeout" value="5000" />
+		<property name="clientConnectionManager"
+			ref="ASHttpConnectionManager" />
+	</bean>
+
+	<bean class="org.apache.camel.component.http.HttpComponent"
+		id="https">
+		<property name="camelContext" ref="appzillonframeworks" />
+		<property name="connectTimeout" value="5000" />
+		<property name="connectionRequestTimeout" value="5000" />
+		<property name="clientConnectionManager"
+			ref="ASHttpConnectionManager" />
+	</bean>
+
+	<bean id="ASHttpConnectionManager"
+		class="org.apache.http.impl.conn.PoolingHttpClientConnectionManager">
+		<!-- The maximum number of connections in the connection pool -->
+		<property name="maxTotal" value="1000" />
+		<!--The maximum number of connections per route -->
+		<property name="defaultMaxPerRoute" value="500" />
+	</bean>
+
+	<bean id="appzillonHttpHeaderFilterStrategy"
+		class="com.iexceed.appzillon.utils.AppzillonHttpHeaderFilterStrategy" />
+
+	<camelContext
+		xmlns="http://camel.apache.org/schema/spring" id="appzillonframeworks">
+		<template id="producerTemplate" />
+	</camelContext>
+
+</beans>

@@ -1,0 +1,181 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "appzillon-server.fullname" . }}
+  labels:
+    {{- include "appzillon-server.labels" . | nindent 4 }}
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "appzillon-server.selectorLabels" . | nindent 6 }}
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+    type: RollingUpdate
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "appzillon-server.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ .Values.serviceAccount.name }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.ports.containerPort }}
+              protocol: {{ .Values.ports.protocol }}
+          lifecycle:
+            preStop:
+              exec:
+                command: ["sleep", "30"]
+          livenessProbe:
+            httpGet:
+              path: {{ .Values.contextPath }}/health
+              port: {{ .Values.liveness.port }}
+            initialDelaySeconds: {{ .Values.liveness.initialDelaySeconds }}
+            periodSeconds: {{ .Values.liveness.periodSeconds }}
+          readinessProbe:
+            httpGet:
+              path: {{ .Values.contextPath }}/health
+              port: {{ .Values.readiness.port }}
+            initialDelaySeconds: {{ .Values.readiness.initialDelaySeconds }}
+            periodSeconds: {{ .Values.readiness.periodSeconds }}
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+          env:
+          - name: JAVA_AGENT_PORT
+            value: "8871"
+          - name: EXT_SVC_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                key: password
+                name: {{ .Values.secretAppTag }}-ext-service-secret
+          - name: JAVA_OPTS
+            value: "-Djavax.net.ssl.trustStore={{ .Values.envMountPath }}/{{ .Values.serverWarName }}/certs/ext_client_cert.jks -Djavax.net.ssl.trustStorePassword=$EXT_SVC_PASSWORD"
+          - name: DB_URL  
+            valueFrom: 
+              configMapKeyRef:
+                name: {{ lower .Values.appID }}-server-db-conf
+                key: host
+          - name: DB_DRIVER 
+            valueFrom:
+              configMapKeyRef:
+                name: {{ lower .Values.appID }}-server-db-conf
+                key: driverClassName
+          - name: DB_USER
+            valueFrom:
+              secretKeyRef:
+                key: username
+                name: {{ .Values.secretAppTag }}-db-secret
+          - name: DB_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                key: passwd
+                name: {{ .Values.secretAppTag }}-db-secret
+                
+               
+          volumeMounts:
+            {{- $envMountPath  := .Values.envMountPath -}}
+            {{- $serverWarName  := .Values.serverWarName -}}
+            {{- range $mounts := .Values.mounts -}}
+            {{- range $appid := $mounts.appid }}
+            - name: {{ lower $appid }}-app
+              mountPath: {{ $envMountPath }}/{{ $serverWarName }}/{{ title $appid }}
+              readOnly: true
+            - name: {{ lower $appid }}-app-spring
+              mountPath: {{ $envMountPath }}/{{ $serverWarName }}/{{ title $appid }}/META-INF/spring
+              readOnly: true
+            {{- end }}
+            {{- end }}
+            - name: app-commons
+              mountPath: {{ .Values.envMountPath }}/{{ .Values.serverWarName }}/commons
+              readOnly: true  
+            - name: meta-data
+              mountPath: {{ .Values.envMountPath }}/{{ .Values.serverWarName }}/META-INF
+              readOnly: true
+            - name: meta-spring
+              mountPath: {{ .Values.envMountPath }}/{{ .Values.serverWarName }}/META-INF/spring
+              readOnly: true
+            - name: app-commons-ext-service-cert
+              mountPath: {{ .Values.envMountPath }}/{{ .Values.serverWarName }}/certs
+              readOnly: true
+            - name: upload-path
+              mountPath: {{ .Values.uploadPath }}
+            {{- if .Values.dbsslMode.enabled }}
+            - name: psql-cli
+              mountPath: {{ .Values.envMountPath }}/{{ .Values.serverWarName }}/certs/psql-cli-cert
+            {{- end }}
+            {{- if .Values.reports.enabled }}
+            - name: report-path
+              mountPath: {{ .Values.reports.path }}
+            {{- end }}
+
+
+        
+      terminationGracePeriodSeconds: {{ .Values.terminationGracePeriodSeconds }}
+      volumes:
+        {{- range $mounts := .Values.mounts -}}
+        {{- range $appid := $mounts.appid }}
+        - name: {{ lower $appid }}-app
+          configMap:
+            name: {{ lower $appid }}-server-app
+        - name: {{ lower $appid }}-app-spring
+          configMap:
+            name: {{ lower $appid }}-server-app-spring
+        {{- end }}
+        {{- end }}
+        - name: app-commons
+          secret:
+            secretName: {{ .Values.secretAppTag }}-private-pem
+        - name: meta-data
+          configMap:
+            name: {{ lower .Values.appID }}-server-meta
+        - name: meta-spring
+          configMap:
+            name: {{ lower .Values.appID }}-server-meta-spring
+        - name: app-commons-ext-service-cert
+          secret:
+            secretName: {{ .Values.secretAppTag }}-ext-service-jks-cert
+        - name: upload-path
+          persistentVolumeClaim:
+            claimName: {{ .Values.pvcUploadName }}
+        {{- if .Values.reports.enabled }}
+        - name: report-path
+          persistentVolumeClaim:
+            claimName: {{ .Values.reports.pvcReportsName }}
+        {{- end }}
+        {{- if .Values.dbsslMode.enabled }}
+        - name: psql-cli
+          secret:
+            secretName: {{ .Values.secretAppTag }}-psql-cli-cert
+        {{- end }}

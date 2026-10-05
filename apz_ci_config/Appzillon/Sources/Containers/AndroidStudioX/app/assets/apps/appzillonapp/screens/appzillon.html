@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title></title>
+		<style type="text/css" media="screen"> 
+		.sno{display:none !important}
+		.ssp{visibility:hidden !important} 
+		</style> 
+
+		<meta charset="utf-8"/>
+		<meta name="viewport" content="user-scalable=no , width=device-width">
+		APPZILLONPRELOADS
+		APPZILLONCSSFILES
+
+	</head>
+	<body APPZILLONANGULARTAGS>
+	APPZILLONSVGCONTENT
+	APPZILLONMSGCONTENT
+	APPZILLONLOVCONTENT
+
+		<div id="apzloader" class="sno" style="position:fixed; top:0; left:0; right:0; bottom:0; background-color:#fff; z-index:99999; opacity:0.2">
+			<div id="status" style="width:200px; height:200px; position:absolute; left:50%; top:50%; background-image:url(APPZILLONLOADERIMG); background-repeat:no-repeat; background-position:center; margin:-100px 0 0 -100px;">
+				&nbsp;
+			</div>
+		</div>
+
+
+		APPZILLONJSFILES
+
+		<script language="javascript" >
+		apz = new Apz();
+            $(document).ready(function() {
+				//appzillon.start(); // 3.2 changes
+				
+				
+				apz.appId = "APPZILLONAPPID";
+				APPZILLONBOOTSTRAP
+			    apz.loadProject();
+			    //NativeBridge.executePlugin("Test");
+			
+				//appzillon.plugin.initializeStorage();
+            });
+
+            /*
+            $(window).on('load resize', function() {
+                loader.scrSize();
+            });
+            */
+            
+
+		</script>
+		<div id="pt-main">
+		<div id="page_1">APPZILLONTAGANGULAR</div>
+		<div id="page_2"></div>
+		APPZILLONQUNITTAGS
+	</div>
+	APPZILLONJSANGULAR
+	</body>
+
+</html>

@@ -1,0 +1,48 @@
+$(document).ready(function() {
+   /* $('.etb-drdn').off('click').on( 'click', function(e) {
+			e.preventDefault();
+			e.stopPropagation();
+			elmId = $(this).children('button').attr("id");
+			var obj = $("#"+elmId)[0];
+    		var iconObj = $(obj).parents("#"+obj.id+"_ext:first").children('span');
+    		$(".is-open").not($(obj).parents("#"+obj.id+"_ext:first")).each(function(){
+    			if($(this).hasClass('is-open')){
+    				iconObj = $(this).children('span');
+    				$(iconObj).children('svg').remove();
+    				$(iconObj).append('<svg class="ett-icon icon-down px34"><use xlink:href="#icon-down"></use></svg>');
+    				$(this).removeClass('is-open');
+    			}
+    		});
+    		var disabled = document.getElementById(obj.id).hasAttribute("disabled");
+    		if(!disabled){
+    			if($(obj).parent().hasClass('is-open')){
+    				$(obj).parent().removeClass('is-open');
+    			} else {
+    				$(obj).parent().addClass('is-open');
+    			}
+    		}
+    		// Hide on click outside
+    		$('html').on('click', function(event) {
+    			if ($(event.target).parents('#'+obj.id+'_ext').length==0 && event.target.id !== obj.id+'_ext') {
+    				$(obj).parents("#"+obj.id+"_ext:first").removeClass('is-open');
+    				var iconObj = $(obj).parents("#"+obj.id+"_ext:first").children('span');
+    				$(iconObj).children('svg').remove();
+    				$(iconObj).append('<svg class="ett-icon icon-down px34"><use xlink:href="#icon-down"></use></svg>');
+    			}
+    		});
+	  		$("#"+elmId+'_ext').find('li:not(.is-disabled)').off('click').on( 'click', function(e) {
+	  		    e.stopPropagation();
+	  		    $(this).find('a').click();
+			});
+		});*/
+}); 
+
+
+function handleClick (pobj, event) {
+    console.log("Hi");
+    
+    // event.preventDefault() is required to prevent the default behaviour of anchor tag
+    event.preventDefault();
+    // event.stopImmediatePropagation() is required to stop the Infinite Loop
+    event.stopImmediatePropagation();
+}

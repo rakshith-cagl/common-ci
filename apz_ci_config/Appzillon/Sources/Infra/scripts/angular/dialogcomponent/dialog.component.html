@@ -1,0 +1,24 @@
+<ng-container>
+    <div id="{{props.id}}" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" class="{{props.className}}">
+        <div id="{props.id+'_dialog'}}" #dialogWrapper><!-- {...props.dialogWrapper.direct} -->
+            <h3> {{props.title}}</h3>
+            <div>
+                <ng-content></ng-content>
+            </div>
+            <div id="{{props.id+'_footer'}}" class="modal-footer">
+                <ng-container *ngTemplateOutlet="DialogFooter"></ng-container><!-- {DialogFooter(props)} -->
+            </div>
+        </div>
+    </div>
+</ng-container>
+
+<ng-template #DialogFooter>
+    <ng-container *ngIf="props.footerType == 'OKCANCEL'">
+            <button id="{{props.id+'_footer_ok'}}"  type="button" class="ett-bttn pri med" data-dismiss="modal">{{props.okTitle}}</button>
+            <button id="{{props.id+'_footer_cancel'}}"  type="button" class="ett-bttn pri med" data-dismiss="modal">{{props.cancelTitle}}</button>         
+    </ng-container>
+    <ng-container *ngIf="props.footerType == 'OK'">
+            <button id="{{props.id+'_footer_ok'}}"  type="button" class="ett-bttn pri med" data-dismiss="modal">{{props.okTitle}}</button>
+    </ng-container>
+</ng-template>
+

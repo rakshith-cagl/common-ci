@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>UIStatusBarStyle</key>
+	<string>APZIOSSTATUSBARSTYLE</string>
+	<key>UIViewControllerBasedStatusBarAppearance</key>
+	<false/>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>en</string>
+	<key>CFBundleDisplayName</key>
+	<string>APPZILLONDISPLAY_NAME</string>
+	<key>CFBundleExecutable</key>
+	<string>$(EXECUTABLE_NAME)</string>
+	<key>CFBundleGetInfoString</key>
+	<string></string>
+	<key>CFBundleIdentifier</key>
+	<string>APPZILLONBUNDLEID</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>$(PRODUCT_NAME)</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleShortVersionString</key>
+	<string>IOSVERSION_NO</string>
+	<key>CFBundleSignature</key>
+	<string>????</string>
+	<key>CFBundleVersion</key>
+	<string>IOSBUILD_NO</string>
+	<key>LSApplicationCategoryType</key>
+	<string></string>
+	<key>LSRequiresIPhoneOS</key>
+	<true/>
+        <key>NSFaceIDUsageDescription</key>
+	<string>This will allow us to Access FaceID for Authentication</string>
+	<key>NSCameraUsageDescription</key>
+	<string>This will allow us to use Device Camera for Photos and Barcode</string>
+	<key>NSBluetoothPeripheralUsageDescription</key>
+	<string>This will allow us to Access Devices Bluetooth</string>
+	<key>NSCalendarsUsageDescription</key>
+	<string>This will allow us to Access Calender Events</string>
+	<key>NSLocalNetworkUsageDescription</key>
+	<string>This app will be able to discover and connect to devices on the networks you use.</string>
+	<key>NSContactsUsageDescription</key>
+	<string>This will allow us to Access Deivce Contacts</string>
+	<key>NSLocationUsageDescription</key>
+	<string>This will allow us to Access Device Location</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>This will allow us to Access Device Photo Library</string>
+	<key>NSRemindersUsageDescription</key>
+	<string>This will allow us to Access Reminder of Device</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>This will allow us to Access Device Location</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>This will allow us to always Access Device Location</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+         <string>This will allow us to Access Device Location</string>
+	<key>NSAppleMusicUsageDescription</key>
+	<string>This will allow us to Access Device Media Library</string>
+	<key>NSMotionUsageDescription</key>
+	<string>This will allow us to Access Device Accelerometer</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>This will allow us to Access Device Microphone </string>
+        <key>NSSpeechRecognitionUsageDescription</key>
+	<string>This will allow us to Access Device Mircophone for Speech Recognition</string>
+	<key>UIPrerenderedIcon</key>
+	<true/>
+	<key>UIRequiredDeviceCapabilities</key>
+	<array>
+		<string>armv7</string>
+	</array>
+	<key>UISupportedInterfaceOrientations~ipad</key>
+	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+		<string>UIInterfaceOrientationPortraitUpsideDown</string>
+		<string>UIInterfaceOrientationLandscapeLeft</string>
+		<string>UIInterfaceOrientationLandscapeRight</string>
+	</array>
+	<key>UISupportedInterfaceOrientations~iphone</key>
+	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+		<string>UIInterfaceOrientationPortraitUpsideDown</string>
+		<string>UIInterfaceOrientationLandscapeLeft</string>
+		<string>UIInterfaceOrientationLandscapeRight</string>
+	</array>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>cydia</string>
+		<string>undecimus</string>
+		<string>sileo</string>
+		<string>zbra</string>
+		<string>skype</string>
+		<string>youtube</string>
+		<string>whatsapp</string>
+                 APZIOSDEEPLINKING
+	</array>
+	<key>CFBundleURLTypes</key>
+	<array>
+             <dict>
+   <key>CFBundleTypeRole</key>
+   <string>Editor</string>
+   <key>CFBundleURLName</key>
+   <string>APPZILLONBUNDLEID</string>
+    <key>CFBundleURLSchemes</key>
+   <array>
+	<string>APZGOOGLEREVERSECLEINTID</string>
+  </array>
+</dict> 
+	</array>
+	<key>UIRequiresFullScreen</key>
+	<true/>
+	
+	<key>WKAppBoundDomains</key>
+	<array/>
+	
+</dict>
+</plist>

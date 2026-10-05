@@ -1,0 +1,134 @@
+<resources>
+    <string name="app_name">ContainerAppKotlin</string>
+    <string name="progress_loading_msg">Loading...</string>
+    <string name="allow_geolocation">Allow</string>
+    <string name="not_allow_geolocation">Don\'t Allow</string>
+    <string name="share_geoloc_msg">Would like to use your Current Location </string>
+    <string name="geolocation_title">Locations</string>
+
+    <!--Newly added dynamic string by Pravas Date-20/09/21-->
+
+    <string name="grantaccess_location_storage">Grant access to Location,Storage for Application to run normally.</string>
+    <string name="grantaccess_location">Grant access to Location for Application to run normally.</string>
+    <string name="grantaccess_storage">Grant access to Storage for Application to run normally.</string>
+    <string name="permission_required">Permission Required</string>
+    <string name="allow">Allow</string>
+    <string name="exit">Exit</string>
+    <string name="change_device_settingpermission_loc_storage">Change permissions in your device\'s app settings.Grant access to Location,Storage.</string>
+    <string name="change_device_settingpermission_storage">Change permissions in your device\'s app settings. Grant access to Storage to try again.</string>
+    <string name="grant_access">Grant Access</string>
+    <string name="change_permission_appsetting">Change permissions in your device\'s app settings for application to run smoothly</string>
+    <string name="app_not_support_emulator">App is not supported on Emulator.</string>
+    <string name="rooted_device_no_applunch">Rooted device, can not Launch App.</string>
+    <string name="server_error">Server Error</string>
+    <string name="unable_connect_server">Unable to connect to the server.</string>
+    <string name="ok">OK</string>
+    <string name="network_error">Network Error</string>
+    <string name="no_internet">No internet connection found.</string>
+
+    <!--Newly added dynamic string by Pravas Date-21/09/21-->
+
+    <string name="cancel">Cancel</string>
+    <string name="certificate_untrusted">Certificate is untrusted.</string>
+    <string name="certificate_expired">Certificate has expired.</string>
+    <string name="certificate_id_mismatch">Certificate ID is mismatched.</string>
+    <string name="invalid_certificate">Certificate is not yet valid.</string>
+    <string name="ssl_errorr">SSL Certificate Error</string>
+    <string name="user_oprn_cancel">User has cancelled the operation</string>
+
+    <!-- Application Expiry Message -->
+    <string name="appExpiryMsg">Application Expired.</string>
+    <string name="appExpiryMsgOK">OK</string>
+    <string name="expiryDateFormat">dd/MM/yyyy</string>
+    <string name="application_not_found">Application Not Found</string>
+    <string name="already_registered">Device is already registered.</string>
+
+    <string name="server_registering">Trying (attempt %1$d/%2$d) to register device on Demo Server.</string>
+    <string name="server_registered">From Demo Server: successfully added device!</string>
+    <string name="server_unregistered">From Demo Server: successfully removed device!</string>
+    <string name="server_register_error">Could not register device on Demo Server after %1$d attempts.</string>
+    <string name="server_unregister_error">Could not unregister device on Demo Server (%1$s).</string>
+    <string name="options_register">Register</string>
+    <string name="options_unregister">Unregister</string>
+    <!-- Application Expiry Message End -->
+
+ <!--   <string name="shortcut_short_label_1">title share</string>
+    <string name="shortcut_long_label_1">desc share</string>
+    <string name="shortcut_short_label_2">title home</string>
+    <string name="shortcut_long_label_2">desc home</string>-->
+
+    <!--Biometric-->
+    <string name="biotitle">Authentication</string>
+    <string name="biosubtitle">Please authenticate using Biometric!</string>
+    <string name="biodescription">Biometric authentication for secure access</string>
+    <string name="bionegative">OK</string>
+    <string name="notes_ref_id">Reference id : </string>
+    <string name="save">Save</string>
+    <string name="delete">Delete</string>
+    <string name="file_not_found">File Not Found.</string>
+    <string name="cannot_read_file">Can not read file.</string>
+    <string name="download_json_error">Error : Invalid JSON.</string>
+    <string name="sdcard_unavailable">Mount SD Card</string>
+    <string name="invalid_search">Invalid Search Criteria</string>
+    <string name="internet_connection_error">Check Internet Connection</string>
+    <string name="download_error">Error in Downloading.</string>
+
+    <!-- NFC plugin START -->
+    <string name="start_nfc_receiver">Please start NFC receiver activity, to receive.</string>
+    <string name="device_nfc_receive">Please bring the devices closer in order to receive.</string>
+    <string name="device_nfc_send">Please bring the devices closer in order to send.</string>
+    <string name="tag_read_ndef_not">NDEF is not supported by this Tag.</string>
+    <string name="tag_write_not_writable">Error: tag not writable.</string>
+    <string name="tag_write_small">Error: tag too small.</string>
+    <string name="tag_refused_format">Error: tag refused to format.</string>
+    <string name="tag_refused_connect">Error: tag refused to connect.</string>
+    <string name="tag_cant_format">Error: tag cannot be formatted.</string>
+    <string name="tag_bring_closer">Please bring the tag close to send messages.</string>
+    <string name="tag_bring_closer_receive">Please bring the tag close to receive messages.</string>
+    <string name="pref_key_camerax_rear_camera_target_resolution">camera_rear</string>
+    <string name="pref_key_camerax_front_camera_target_resolution">camera_front</string>
+    <string name="pref_key_camera_live_viewport">camera_live</string>
+    <!-- NFC plugin END -->
+
+
+    <!-- Bar code-->
+    <string name="start_scanning">Start Scanning</string>
+    <string name="turn_flash_on_off">Turn Flash On/Off</string>
+    <string name="scanning_with">Scan your QR code </string>
+    <string name="barcode_scan_permission_message">To scan barcode,allow app to access by granting requested permissions</string>
+    <string name="Permission_denied">Permission Denied</string>
+
+    <!-- VideoCapture Activity -->
+    <string name="video_rec_stop">STOP</string>
+    <string name="video_save_success">Saved Successfully</string>
+    <string name="video_filename_empty">Enter File Name</string>
+    <string name="video_rec_cancel">Cancel</string>
+    <string name="video_rec_start">Start</string>
+    <string name="tracklocaction_notification_message">Your location is being tracked.</string>
+    <string name="tracklocation_notification_title">Track Location Service</string>
+    <string name="notification_stop_sharing_action_text">Stop sharing</string>
+
+    <!-- Signature plugin START -->
+    <string name="no_signature">No Signature captured.</string>
+    <string name="signature_save">Save</string>
+    <string name="signature_clear">Clear</string>
+    <string name="signature_cancel">Cancel</string>
+    <!-- Signature plugin END -->
+
+	 <!--<string name="shortcut_short_label_1">title share</string>
+	<string name="shortcut_long_label_1">desc share</string>
+	<string name="shortcut_short_label_2">title home</string>
+	<string name="shortcut_long_label_2">desc home</string> -->
+
+    // for new kotlin
+    <string name="network_connection_error">Internet connection lost, please retry again</string>
+    <string name="network_default_error">Something wrong happened, please retry again</string>
+    <string name="network_internal_error">Our systems got an error, please retry again</string>
+    <string name="network_server_not_available">Our services are under maintenance, please retry after some time
+    </string>
+    <string name="server_connection_error">Not able to connect, please retry again</string>
+    <string name="permission_denied">Permission Denied</string>
+    <string name="network_login_again">Please log in again</string>
+	<string name="audio_recording_started">Audio Recording Started</string>
+    <string name="audio_stopped_and_saved">Audio Stopped and saved</string>
+</resources>

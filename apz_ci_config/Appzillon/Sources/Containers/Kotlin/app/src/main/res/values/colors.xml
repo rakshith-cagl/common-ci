@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="word_bar">#FF0000</color>
+    <color name="number_bar">#00FF00</color>
+    <color name="black">#000</color>
+    <color name="white">#FFF</color>
+    <color name="lightgrey">#F7F7F7</color>
+    <color name="navy">#003366</color>
+    <color name="blue">#449def</color>
+    <color name="splashbackgroundcolor">#138D75</color>
+    <color name="statusbar_color">#239B56</color>
+    <!--Auto capture-->
+    <color name="transparent">#00000000</color>
+    <color name="reticle_ripple">#9AFFFFFF</color>
+    <color name="bounding_box_gradient_start">#00FFFFFF</color>
+    <color name="bounding_box_gradient_end">#FFF</color>
+    <color name="object_detected_bg_gradient_start">#00000000</color>
+    <color name="object_detected_bg_gradient_end">#66000000</color>
+    <color name="object_confirmed_bg_gradient_start">#40000000</color>
+    <color name="object_confirmed_bg_gradient_end">#A0000000</color>
+    <color name="object_reticle_outer_ring_fill">#1F000000</color>
+    <color name="object_reticle_outer_ring_stroke">#9AFFFFFF</color>
+    <color name="barcode_reticle_background">#99000000</color>
+
+</resources>

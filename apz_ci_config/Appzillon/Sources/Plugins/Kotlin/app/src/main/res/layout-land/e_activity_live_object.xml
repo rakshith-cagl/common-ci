@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/transparent"
+    android:keepScreenOn="true">
+
+    <com.iexceed.plugins.autocapturedocument.CameraSourcePreview
+        android:id="@+id/camera_preview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.iexceed.plugins.autocapturedocument.FrameGraphicOverlay
+            android:id="@+id/frame_preview_graphic_overlay"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <com.iexceed.plugins.autocapturedocument.GraphicOverlay
+            android:id="@+id/camera_preview_graphic_overlay"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            />
+
+
+        <FrameLayout
+            android:id="@+id/static_overlay_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintP"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ToggleButton
+                    android:id="@+id/captureMode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/transparent"
+                    android:checked="false"
+                    android:textAllCaps="false"
+                    android:textOff="Manual"
+                    android:textOn="Auto"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/pagetitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text=""
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    app:layout_constraintBottom_toTopOf="@id/edge_frame"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <!--<ProgressBar
+                    android:id="@+id/search_progress_bar"
+                    android:layout_width="@dimen/search_progress_bar_size"
+                    android:layout_height="@dimen/search_progress_bar_size"
+                    android:layout_gravity="center"
+                    android:indeterminate="true"
+                    android:indeterminateTint="@color/white"
+                    android:indeterminateTintMode="src_in"
+                    android:visibility="gone" />-->
+
+                <FrameLayout
+                    android:id="@+id/edge_frame"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:background="@drawable/edge_frame"
+                    app:layout_constraintBottom_toTopOf="@id/landguide"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/pagetitle"
+                    app:layout_constraintVertical_chainStyle="spread">
+
+                </FrameLayout>
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/landguide"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintGuide_percent="0.65"></androidx.constraintlayout.widget.Guideline>
+
+                <TextView
+                    android:id="@+id/msgTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textColor="@color/white"
+                    android:textSize="30sp"
+                    app:layout_constraintBottom_toTopOf="@id/messages"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/landguide"
+                    app:layout_constraintVertical_chainStyle="spread" />
+
+                <TextView
+                    android:id="@+id/messages"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text=""
+                    android:textColor="@color/white"
+                    android:textSize="22sp"
+                    app:layout_constraintBottom_toTopOf="@id/scanningTextMsg"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/msgTitle" />
+
+                <TextView
+                    android:id="@+id/scanningTextMsg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/messages"
+                    app:layout_constraintVertical_chainStyle="spread" />
+
+                <ImageButton
+                    android:id="@+id/captureButton"
+                    android:layout_width="65dp"
+                    android:layout_height="65dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/lens"
+                    android:onClick="takePicture"
+                    android:scaleType="fitXY"
+                    android:visibility="invisible"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintHorizontal_bias="0.8"
+                    app:layout_constraintLeft_toRightOf="@id/edge_frame"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </FrameLayout>
+
+    </com.iexceed.plugins.autocapturedocument.CameraSourcePreview>
+
+    <!--<include
+        layout="@layout/top_action_bar_in_live_camera"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top"/>-->
+
+    <!--<com.iexceed.android.objdetectorml.java.productsearch.BottomSheetScrimView
+        android:id="@+id/bottom_sheet_scrim_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"/>
+  -->
+    <!-- <include
+         android:id="@+id/bottom_sheet"
+         layout="@layout/product_bottom_sheet"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         app:behavior_hideable="true"
+         app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"/>-->
+
+</androidx.constraintlayout.widget.ConstraintLayout>

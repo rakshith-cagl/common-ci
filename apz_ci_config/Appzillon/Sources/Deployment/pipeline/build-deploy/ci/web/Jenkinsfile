@@ -1,0 +1,323 @@
+def values=[]
+node {
+    values = params["VERACODE"].split(",")
+}
+pipeline {
+    parameters {
+      choice(name: 'CLUSTER_TYPE', choices: ['openshift', 'aws-eks'], description: 'openshift and aws-eks cluster options')
+      choice(name: 'BUILD_TYPE', choices: ['fresh', 'incremental'], description: 'Fresh and Incremental pipeline options') 
+      choice(name: 'ARTIFACTORY_TYPE', choices: ['aws-ecr', 'harbor','jfrog'], description: 'Select Artifactory  Type')
+      string defaultValue: '325617413693', description: '', name: 'AWS_ACCOUNT_ID', trim: false
+      string defaultValue: 'us-east-1', description: '', name: 'CLUSTER_REGION', trim: false
+      string defaultValue: 'AppzillonAdmin', description: '', name: 'BASE_APP_NAME', trim: false
+      string defaultValue: 'Admin', description: '', name: 'APP_ID', trim: false
+      string defaultValue: 'N', description: '', name: 'INCLUDE_MICRO_APP', trim: false
+      string defaultValue: 'N', description: '', name: 'CODE_COVERAGE', trim: false
+      string defaultValue: 'Env', description: '', name: 'ENVIRONMENT', trim: false
+      string defaultValue: 'RELEASE', description: '', name: 'BUILD_MODE', trim: false
+      string defaultValue: 'WEB', description: '', name: 'APPLICATION', trim: false
+      string defaultValue: 'N', description: '', name: 'DISABLE_SESSSION_STICKYNESS', trim: false
+      string defaultValue: 'appzillon-admin', description: '', name: 'DOCKER_APP_NAME', trim: false
+      string defaultValue: 'v1', description: '', name: 'BUILD_TAG', trim: false
+      string defaultValue: 'https://gitlab.apzplatforms.com/aws-eks', description: '', name: 'GIT_BASE_URL', trim: false
+      extendedChoice defaultValue: '', description: 'Check this to enable Nexus', multiSelectDelimiter: ',', name: 'NEXUS', quoteValue: false, saveJSONParameterToFile: false, type: 'PT_CHECKBOX', value: 'enable nexus', visibleItemCount: 1
+      string defaultValue: 'apz-apps', description: '', name: 'REPO_NAME', trim: false
+      string defaultValue: 'develop', description: '', name: 'BRANCH', trim: false
+      string defaultValue: 'ec2-user', description: '', name: 'SHIPPER_USERNAME', trim: false
+      string defaultValue: '3.16.220.228', description: '', name: 'SHIPPER_TARGET', trim: false
+   }
+
+    environment {
+        REGISTRY_URL=getRegistryUrl(env.ARTIFACTORY_TYPE,env.AWS_ACCOUNT_ID,env.CLUSTER_REGION)
+        REGISTRY=getRegistry(env.ARTIFACTORY_TYPE,env.AWS_ACCOUNT_ID,env.CLUSTER_REGION)
+        REGISTRY_CRED=getRegistryCred(env.ARTIFACTORY_TYPE,env.CLUSTER_REGION)
+        DOCKER_IMAGE = ''
+        DOCKER_NEXUS_URL='https://nexus.apzplatforms.com'
+        NEXUS_VERSION='nexus3'
+        NEXUS_PROTOCOL='http'
+        NEXUS_URL='nexus.apzplatforms.com:8081'
+        NEXUS_REPOSITORY='nexus-maven-releases'
+        NEXUS_CREDENTIAL_ID='nexus_id'
+    }
+
+    agent any
+
+    tools {
+        jdk "JDK17"
+        maven "Maven3.8.5"
+    }
+    
+    stages {    
+        stage('Checkout') {
+            steps {
+                echo 'Checkout Application project code from the GitLab repo'
+                checkout([$class: 'GitSCM', branches: [[name: '*/${BRANCH}']], extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'application_sources']], userRemoteConfigs: [[credentialsId: 'ae36ea63-634e-42a3-a251-3a6f8ec671ee', url: '${GIT_BASE_URL}/${REPO_NAME}']]])
+                
+                echo 'Checkout Appzillon common sources code from the GitLab repo'
+                checkout([$class: 'GitSCM', branches: [[name: '*/${BRANCH}']], extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'common_sources']], userRemoteConfigs: [[credentialsId: 'ae36ea63-634e-42a3-a251-3a6f8ec671ee', url: '${GIT_BASE_URL}/common-ci']]])
+            }
+        }
+        stage('Build Web war') {
+            steps {
+                echo 'update theme' 
+                sh label: 'Update theme', script: '''cp -dRf $WORKSPACE/application_sources/apz_app_sources/${BASE_APP_NAME}/Theme/* $WORKSPACE/common_sources/apz_ci_config/Appzillon/Resources/ThemeManager/thememanager/themes'''
+            
+                /*  sh label: 'Update fonts', script: '''cp -dRf $WORKSPACE/application_sources/apz_app_sources/${BASE_APP_NAME}/Fonts/* $WORKSPACE/common_sources/apz_ci_config/Appzillon/Resources/ThemeManager/thememanager/fonts'''            
+                */
+
+                sh '''      
+                    BASE_APP_NAME="${BASE_APP_NAME}"
+                    APZILLON_BUILD_PATH="$WORKSPACE/projects/App"
+                    BUILD_APP_PATH="$WORKSPACE/common_sources/apz_ci_config/Appzillon/Bin/Preferences/BuildParams_Apps.json"
+                    DISABLE_SESSSION_STICKYNESS="${DISABLE_SESSSION_STICKYNESS}"
+                    INCLUDE_MICRO_APP="${INCLUDE_MICRO_APP}"
+                    CODE_COVERAGE="${CODE_COVERAGE}"
+
+                    JSON_GEN_FILE=$WORKSPACE/application_sources/apz_app_sources/Properties.json
+
+                    echo "Before updation of the file content :"
+                    cat $JSON_GEN_FILE
+
+                    if [ -e "$JSON_GEN_FILE" ]
+                    then
+                        echo "Updating azure App config details"
+                        sed -i \'s#"BaseAppName": "[^"]*"#"BaseAppName": "\'$BASE_APP_NAME\'"#\' $JSON_GEN_FILE
+                        sed -i \'s#"AppzillonBuildPath": "[^"]*"#"AppzillonBuildPath": "\'$APZILLON_BUILD_PATH\'"#\' $JSON_GEN_FILE
+                        sed -i \'s#"BuildAppPath": "[^"]*"#"BuildAppPath": "\'$BUILD_APP_PATH\'"#\' $JSON_GEN_FILE
+                        sed -i \'s#"DisableSessionStickyness": "[^"]*"#"DisableSessionStickyness": "\'$DISABLE_SESSSION_STICKYNESS\'"#\' $JSON_GEN_FILE
+                        sed -i \'s#"IncludeMicroApp": "[^"]*"#"IncludeMicroApp": "\'$INCLUDE_MICRO_APP\'"#\' $JSON_GEN_FILE
+                        sed -i \'s#"codecoverage": "[^"]*"#"codecoverage": "\'$CODE_COVERAGE\'"#\' $JSON_GEN_FILE
+
+
+                        echo "Updated File content:"
+                        cat $JSON_GEN_FILE
+                    fi
+                '''
+
+                sh '''              
+                    echo "Generate App and Server json property files"
+                    cd $WORKSPACE/common_sources/apz_ci_config/Appzillon/lib
+                    java -jar jsonGenerator-0.0.1.jar $WORKSPACE/application_sources/apz_app_sources ${ENVIRONMENT} ${BUILD_MODE} ${APPLICATION} "" ""
+                    echo "listing available Preferences"
+                    cd $WORKSPACE/common_sources/apz_ci_config/Appzillon/Bin/Preferences
+                    ls -l
+                    cat BuildParams_Apps.json
+                '''
+
+                sh '''              
+                    echo "Updating BuildParams_CI.json"
+                    CUSTOM_WIDGET_PATH="$WORKSPACE/common_sources/apz_ci_config/Appzillon/Resources"
+                    THEME_MANAGER_PATH="$WORKSPACE/common_sources/apz_ci_config/Appzillon/Resources"
+
+                    JSON_GEN_FILE=$WORKSPACE/common_sources/apz_ci_config/Appzillon/Bin/Preferences/BuildParams_CI.json
+
+                    echo "Before updation of the BuildParams_CI.json file content : "
+                    cat $JSON_GEN_FILE
+
+                    if [ -e "$JSON_GEN_FILE" ]
+                    then
+                        sed -i \'s#"customwidgetspath": "[^"]*"#"customwidgetspath": "\'$CUSTOM_WIDGET_PATH\'"#\' $JSON_GEN_FILE
+                        sed -i \'s#"thememanagerpath": "[^"]*"#"thememanagerpath": "\'$THEME_MANAGER_PATH\'"#\' $JSON_GEN_FILE
+
+                        echo "Updated BuildParamas_CI.json file content:"
+                        #cat $JSON_GEN_FILE
+                    fi
+                '''
+
+                sh '''              
+                    echo "Run Appzillon CI Build to build Web and Server wars"
+                    cd $WORKSPACE/common_sources/apz_ci_config/Appzillon/lib
+                    java -jar appzillonstudio-commandbuild-ci.jar $WORKSPACE/common_sources/apz_ci_config/Appzillon/Bin/Preferences
+                    echo "Build Over, Please check log for more details..."
+                '''   
+            }
+        }
+        stage('VeraCode Scan') {
+            when {
+                allOf{
+                    expression{'Enable VeraCode Scanning' in values}
+                }
+            }
+            steps {
+               script {
+                   echo 'Veracode scanning'
+                    withCredentials([ usernamePassword (
+                        credentialsId: 'veracode-credentials', usernameVariable: 'VERACODE_API_ID', passwordVariable: 'VERACODE_API_KEY') ]) {
+
+                        if ('Wait for Scan to Complete' in values){
+                            // wait for scan to complete (includes timeout parameter)
+                            def FLAG=false
+                            if ('Can fail jenkins job' in values){
+                                FLAG=true
+                            }
+                            veracode applicationName: "Appzillon Digital Banking Platform", debug: true, timeout: 60, canFailJob: "${FLAG}", fileNamePattern: '', pHost: '', pPassword: '', pUser: '', replacementPattern: '', sandboxName: 'aws-eks-web', scanExcludesPattern: '', scanIncludesPattern: '', scanName: "jenkins:${BUILD_NUMBER}", uploadExcludesPattern: '', uploadIncludesPattern: 'projects/App/bin/Web/*.war', vid: "${VERACODE_API_ID}", vkey: "${VERACODE_API_KEY}"
+                        }
+                        else{
+                            // fire-and-forget
+                            veracode applicationName: "Appzillon Digital Banking Platform", debug: true, fileNamePattern: '', pHost: '', pPassword: '', pUser: '', replacementPattern: '', sandboxName: 'aws-eks-web', scanExcludesPattern: '', scanIncludesPattern: '', scanName: "jenkins:${BUILD_NUMBER}", uploadExcludesPattern: '', uploadIncludesPattern: 'projects/App/bin/Web/*.war', vid: "${VERACODE_API_ID}", vkey: "${VERACODE_API_KEY}"
+                        }
+                    }
+                }
+            }
+        }
+        stage("Publish Artifacts to Nexus") {
+            when {
+                allOf{
+                    expression{'enable nexus' in NEXUS} 
+                }
+            }
+            steps {
+                script {
+                    pom = readMavenPom file: "$WORKSPACE/projects/App/build/Web/pom.xml";
+                    filesByGlob = findFiles(glob: "projects/App/bin/Web/*.${pom.packaging}");
+                    echo "${filesByGlob[0].name} ${filesByGlob[0].path} ${filesByGlob[0].directory} ${filesByGlob[0].length} ${filesByGlob[0].lastModified}"
+                    artifactPath = filesByGlob[0].path;
+                    artifactExists = fileExists artifactPath;
+                    if(artifactExists) {
+                        echo "*** File: ${artifactPath}, group: ${pom.groupId}, packaging: ${pom.packaging}, version ${pom.version}";
+                        nexusArtifactUploader(
+                            nexusVersion: NEXUS_VERSION,
+                            protocol: NEXUS_PROTOCOL,
+                            nexusUrl: NEXUS_URL,
+                            groupId: pom.groupId,
+                            version: pom.version,
+                            repository: NEXUS_REPOSITORY,
+                            credentialsId: NEXUS_CREDENTIAL_ID,
+                            artifacts: [
+                                [
+                                    artifactId: pom.artifactId,
+                                    classifier: '',
+                                    file: artifactPath,
+                                    type: pom.packaging
+                                ]
+                            ]
+                        );
+                    } 
+                    else {
+                        error "*** File: ${artifactPath}, could not be found";
+                    }
+                }
+            }
+        }
+        stage('Build Docker Web Image') {
+            environment {
+                NEXUS_CREDS = credentials("nexus_id")
+            }
+            steps {
+
+                echo 'Copy required web files to the web build path'
+                sh '''
+                    cp -f $WORKSPACE/application_sources/software_config_files/tomcat/apache-tomcat-9.0.46.tar.gz $WORKSPACE/projects/App/bin/Web
+                    cp -f $WORKSPACE/application_sources/software_config_files/tomcat/clair-scanner $WORKSPACE/projects/App/bin/Web
+                '''
+
+                sh 'cp -dRf $WORKSPACE/application_sources/software_config_files/web/** $WORKSPACE/projects/App/bin/Web'
+                sh 'cp -f $WORKSPACE/application_sources/software_config_files/tomcat/jmx_prometheus_javaagent-0.16.1.jar $WORKSPACE/projects/App/bin/Web'
+                sh 'cp -f $WORKSPACE/application_sources/software_config_files/tomcat/config.yaml $WORKSPACE/projects/App/bin/Web'
+
+               script {
+                    def flag=" " // flag to enable/disable nexus
+                    if ('enable nexus' in NEXUS){
+                        sh 'docker login -u ${NEXUS_CREDS_USR} -p ${NEXUS_CREDS_PSW} $DOCKER_NEXUS_URL'
+                        flag="_Nexus"
+                    }
+                    APZILLON_BUILD_PATH="$WORKSPACE/projects/App/bin/Web"
+                    DOCKER_IMAGE = docker.build(REGISTRY+"/"+"${DOCKER_APP_NAME}:${BUILD_TAG}", "-f $APZILLON_BUILD_PATH/Dockerfile_${APP_ID}_java17${flag} $APZILLON_BUILD_PATH")
+                }
+            }
+        }
+        stage("Scan Web Image"){
+            steps {
+                sh '''
+                    cd $WORKSPACE/projects/App/bin/Web
+
+                    BUILD=$REGISTRY/${DOCKER_APP_NAME}:${BUILD_TAG}
+                    #docker run -d --name db arminc/clair-db
+                    #sleep 15 # wait for db to come up
+                    #docker run -p 6060:6060 --link db:postgres -d --name clair arminc/clair-local-scan
+                    #sleep 1
+                    DOCKER_GATEWAY=$(docker network inspect bridge --format "{{range .IPAM.Config}}{{.Gateway}}{{end}}")
+                    chmod +x clair-scanner
+                    ./clair-scanner --ip="$DOCKER_GATEWAY" $BUILD
+                '''           
+            }
+        }
+        stage('Push Web Image') {
+            steps{
+                script {
+                    docker.withRegistry(REGISTRY_URL, REGISTRY_CRED ) {
+                        DOCKER_IMAGE.push()
+                    }
+                }
+            }
+        }
+        stage('SSH & SCP to OCP Bastion') {
+            when {
+                    expression {
+                        'openshift' in CLUSTER_TYPE
+                    }
+                }
+            steps {
+                sshagent (credentials: ['run-oc-client']) {
+                    script{
+                        SOURCE_PATH="$WORKSPACE/build-deploy/cd/web/appzillon-web"
+                        DESTINATION_PATH="/dataext/home/${SHIPPER_USERNAME}/projects/ship-openshift/${BRANCH}/web/"
+                        sh "ssh -o StrictHostKeyChecking=no -l ${SHIPPER_USERNAME} ${SHIPPER_TARGET} 'mkdir -p ${DESTINATION_PATH}; rm -rf ${DESTINATION_PATH}/*'"
+                        sh "scp -o StrictHostKeyChecking=no -r $SOURCE_PATH ${SHIPPER_USERNAME}@${SHIPPER_TARGET}:$DESTINATION_PATH"
+                    }
+                }
+            }
+        }
+        stage('SSH & SCP to EKS Bastion') {
+            when {
+                    expression {
+                        'aws-eks' in CLUSTER_TYPE
+                    }
+                }
+            steps {
+                sshagent (credentials: ['run-eks-client']) {
+                    script{
+                        SOURCE_PATH="$WORKSPACE/build-deploy/cd/web/appzillon-web"
+                        DESTINATION_PATH="/home/${SHIPPER_USERNAME}/projects/ship-eks/${BRANCH}/web/"
+                        sh "ssh -o StrictHostKeyChecking=no -l ${SHIPPER_USERNAME} ${SHIPPER_TARGET} 'mkdir -p ${DESTINATION_PATH}; rm -rf ${DESTINATION_PATH}/*'"
+                        sh "scp -o StrictHostKeyChecking=no -r $SOURCE_PATH ${SHIPPER_USERNAME}@${SHIPPER_TARGET}:$DESTINATION_PATH"
+                    }
+                }
+            }
+        }
+    }
+    post { 
+        always { 
+            cleanWs()
+        }
+    }
+}
+def getRegistryUrl(artifactory,accessid,region) {
+    if("aws-ecr".equals(artifactory)) {
+        return "https://"+accessid+".dkr.ecr."+region+".amazonaws.com";
+    } else if ("harbor".equals(artifactory)) {
+        return "https://harbor-platform.apzplatforms.com";
+    } else {
+        return "https://artifactory.appzillon.com:443";
+    }
+}
+
+def getRegistry(artifactory,accessid,region) {
+    if("aws-ecr".equals(artifactory)) {
+        return accessid+".dkr.ecr."+region+".amazonaws.com";
+    } else if ("harbor".equals(artifactory)) {
+        return "harbor-platform.apzplatforms.com/appzillon-develop";
+    } else {
+        return "artifactory.appzillon.com:443/docker-dev-local";
+    }
+}
+
+def getRegistryCred(artifactory,region) {
+    if("aws-ecr".equals(artifactory)) {
+        return "ecr:"+region+":aws.creds";
+    } else if ("harbor".equals(artifactory)) {
+        return "harbor-creds";
+    } else {
+        return "jfrog-creds";
+    }
+}
